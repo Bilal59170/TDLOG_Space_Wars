@@ -1,0 +1,63 @@
+﻿Projet :
+* En Python (graphique : Pyglet)
+* Code / identifiants (noms) : EN
+* Documentation FR
+* Jeu FR (option bilingue ?)
+* Integration continue
+
+
+
+
+Cahier des charges:
+
+- boucle principale du jeu :
+
+
+- Perso Joueur (pj): vaisseau spatial
+- Caractéristiques de départ: 
+* PV
+* Expérience
+* Armure
+* dégâts vitesse de vaisseau/projectile, taux de regen
+* Pénétration de projectiles
+* Freinage progressif
+- Mode de tir: clic (1. Mode auto, 2.maintenir ou pas)
+- direction des tirs donnée par la position de la souris
+- touches : contrôle de la mobilité (accélération -> Vmax si maintenue, décélération -> 0 si relâchée)
+- gain d’XP en détruisant d’autres entités
+
+
+
+- Autres entités:
+-> Ennemis : vaisseaux adverses (cf. Joueur), IA
+-> Astéroïdes :
+* Vie 
+* Apparence
+* Points /ressource
+
+
+
+
+Forme : Que des cercles au début (simplifie les collisions)
+
+
+Map :
+* Taille limitée (?) Infinie
+* Topologie: bords connectés ?(à voir, peut-être plus simple pour les IA, éviter effet de bord)
+* Contenu : Astéroïdes, ennemis (proba d'apparition dépendante de la difficulté du jeu, du temps de jeu…)
+
+
+Progression :
+* Même map, changement des probas d'apparition (densité de spawn)
+
+
+
+
+
+
+Features optionnelles :
+* Classes (type d’attaque, …, débloquées après un seuil d’XP)
+* Mode automatique ou au clic
+* Joueur auto (IA, deepL), sidekick
+* Miniboss
+* Sound effects
