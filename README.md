@@ -3,6 +3,8 @@
 **Caractéristique du jeu**
 
 Synopsis:
+
+Cahier des charges:
 Il s'agirait d'un jeu dans lequel le joueur contrôle un vaisseau spatial et doit survivre le plus longtemps possible à des vagues d'ennemis d'intensité croissante en collectant des ressources et en éliminant des ennemis afin d'accéder à de nouvelles fonctionnalités et renforcer son vaisseau.
 
 
