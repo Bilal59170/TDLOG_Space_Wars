@@ -4,7 +4,6 @@
 
 ***Synopsis:***
 
-Cahier des charges:
 Il s'agirait d'un jeu dans lequel le joueur contrôle un vaisseau spatial et doit survivre le plus longtemps possible à des vagues d'ennemis d'intensité croissante en collectant des ressources et en éliminant des ennemis afin d'accéder à de nouvelles fonctionnalités et renforcer son vaisseau.
 
 Dans un premier temps, on se concentrera sur l'implémentation de ce jeu en temps réel, qui requiert une interface graphique. Une fois les mécaniques de base efficacement implémentées, on s'attachera à développer un arbre de fonctionnalités (armes, attaques spéciales, protections, détecteurs de ressources) originales et intéressantes conférant à chaque partie un aspect unique, mais aussi stratégique sur le long-terme. 
@@ -15,6 +14,9 @@ En fonction de l’avancement du projet, on pourra être amenés à explorer que
 - implémenter une mode de jeu en multijoueur, si possible en ligne
 - rendre le jeu accessible depuis un site internet, notamment pour permettre aux joueurs d’enregistrer leur partie sur un leaderboard
 - implémenter une IA contrôlant dynamiquement la faction adverse (type / mouvement des entités ennemies) en fonction de ses ressources et des choix du joueur pour mieux contrer son vaisseau et anticiper ses déplacements
+
+
+
 
 
 
