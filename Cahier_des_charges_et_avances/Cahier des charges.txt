@@ -1,24 +1,14 @@
-﻿Synopsis:
-
-
-Voir mail
-
-
-Projet :
+﻿Projet :
 * En Python (graphique : Pyglet)
+* Code / identifiants (noms) : EN
+* Documentation FR
+* Jeu FR (option bilingue ?)
 * Integration continue
 
 
 
 
-
-
 Cahier des charges:
-
-
-  
-
-
 
 - boucle principale du jeu :
 
@@ -35,9 +25,6 @@ Cahier des charges:
 - direction des tirs donnée par la position de la souris
 - touches : contrôle de la mobilité (accélération -> Vmax si maintenue, décélération -> 0 si relâchée)
 - gain d’XP en détruisant d’autres entités
-
-
-
 
 
 
@@ -72,13 +59,5 @@ Features optionnelles :
 * Classes (type d’attaque, …, débloquées après un seuil d’XP)
 * Mode automatique ou au clic
 * Joueur auto (IA, deepL), sidekick
-
-
-
-
-1ère étape:
-* Vaisseau (triangle): coder les mvt 
-* mvt  avec zqsd (départ et freinage instantanés)
-* visée avec souris : Enzo
-* projectiles : petits cercles (pour l’instant, 1 clic = 1 projectile)
-* Map bornée et si trk, on fait un tore
+* Miniboss
+* Sound effects
