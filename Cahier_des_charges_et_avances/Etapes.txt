@@ -1,0 +1,6 @@
+**1ère étape:**
+Vaisseau (triangle): coder les mvt 
+mvt  avec zqsd (départ et freinage instantanés)
+visée avec souris : Enzo
+projectiles : petits cercles (pour l’instant, 1 clic = 1 projectile)
+Map bornée et si trk, on fait un tore
