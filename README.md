@@ -2,8 +2,10 @@
 
 **Caractéristique du jeu**
 
-
+Synopsis:
 Il s'agirait d'un jeu dans lequel le joueur contrôle un vaisseau spatial et doit survivre le plus longtemps possible à des vagues d'ennemis d'intensité croissante en collectant des ressources et en éliminant des ennemis afin d'accéder à de nouvelles fonctionnalités et renforcer son vaisseau.
+
+
 
 Dans un premier temps, on se concentrera sur l'implémentation de ce jeu en temps réel, qui requiert une interface graphique. Une fois les mécaniques de base efficacement implémentées, on s'attachera à développer un arbre de fonctionnalités (armes, attaques spéciales, protections, détecteurs de ressources) originales et intéressantes conférant à chaque partie un aspect unique, mais aussi stratégique sur le long-terme. Le code du jeu de base devrait permettre de jouer à un jeu équilibre et fluide malgré un grand nombre d’entités (vaisseaux, missiles, astéroïdes) contrôlées de façon plus ou moins complexe. Son architecture devrait également permettre une implémentation facile de nouveau contenu (nouvelles fonctionnalités, nouveaux types d’ennemis, nouvelles ressources) dans l’esprit d’une application en développement continu.
 
