@@ -19,11 +19,11 @@ Méthodes d'un projectile :
 
 """
 
+
 class Projectile:
     """classe projectiles : projectiles circulaires"""
 
-
-    def __init__(self, x_init, y_init, speed_x_init, speed_y_init, radius, color) :
+    def __init__(self, x_init, y_init, speed_x_init, speed_y_init, radius, color):
         self.x = x_init
         self.y = y_init
         self.vx = speed_x_init

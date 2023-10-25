@@ -6,37 +6,45 @@ Interface Graphique du jeu
 - Sprites
 
 """
+import pyglet
+import ship
+
 
 class EventManager:
     pass
 
+
 class Sprites:
     pass
+
 
 class GameUI:
     pass
 
+
 class Menu:
     pass
+
 
 class DiscoverGamesMenu(Menu):
     pass
 
+
 class LaunchGameMenu(Menu):
     pass
+
 
 class GameMenu(Menu):
     pass
 
+
 class PauseMenu(Menu):
     pass
+
 
 class GameOverMenu(Menu):
     pass
 
-"""
-import pyglet
-import ship
 
 class GameWindow(pyglet.window.Window):
     def __init__(self):
@@ -51,6 +59,7 @@ class GameWindow(pyglet.window.Window):
     def on_draw(self):
         self.clear()
         self.ship.draw()
+
 
 if __name__ == "__main__":
     window = GameWindow()

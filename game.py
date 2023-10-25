@@ -5,13 +5,10 @@ L'instance de jeu est nommée game_state
 
 """
 
+
 class Game:
 
-    """
-    
-    
-    
-    """
+    """ """
 
     def remove(self, object):
         pass
