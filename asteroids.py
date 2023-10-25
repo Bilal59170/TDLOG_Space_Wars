@@ -29,7 +29,7 @@ class Asteroid(Entity):
             1 : moyen astéroïde
             2 : grand astéroïde
             3 : giga  astéroïde
-    
+
     Méthodes
     --------
     get_polygon(self) : tuple[array]
@@ -41,7 +41,7 @@ class Asteroid(Entity):
     tick :
         pour gérer les déplacements / la régénération des PVs
     ===========
-    Hérite de : 
+    Hérite de :
     """
         + Entity.__doc__
     )
@@ -130,4 +130,4 @@ def get_random_asteroid():
     # Classe d'astéroïde => De 0 à 3
     asteroid_class = np.random.choice(range(4), p=ASTEROID_CLASS_PROBABILITIES)
     # Les statistiques qui correspondent
-    stats = ASTEROID_STATS[asteroid_class]
+    hp, resources = ASTEROID_STATS[asteroid_class]
