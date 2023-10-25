@@ -5,7 +5,6 @@ Implémentera Entity
 """
 import numpy as np
 import entity
-import pyglet
 
 class Ship(entity.Entity):
     def __init__(self, pos, speed, game_state=None):
@@ -19,9 +18,6 @@ class Ship(entity.Entity):
         delta_y = y - self.pos[1]
         return np.arctan2(delta_y, delta_x)
     
-    """On appelle la fonction précédente à chaque mouvement de la souris"""
-
-    @window.event
-    def on_mouse_motion(self, x, y, dx, dy):
-        self.angle = self.get_angle(x, y)
-
+    """A faire : fonction qui dessine le vaisseau avec une forme qu'on choisira"""
+    def draw(self):
+        pass
