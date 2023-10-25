@@ -24,10 +24,18 @@ import numpy as np
 from config import *
 
 class NoGameStateError(Exception):
+    """ Exception levée lorsqu'un objet n'a pas d'attribut game_state"""
     def __init__(self, object):
-        super().__init__("No game state attributed to : {object}")
+        super().__init__("No game state attributed to : {}".format(object))
 
 class Entity:
+    """
+    Classe 
+    
+    
+    
+    
+    """
 
     def __init__(self, pos, speed, game_state = None):
         self._pos = np.array(pos)
@@ -72,8 +80,10 @@ class Entity:
         return np.array([x, y]).astype(int)
     
     @pos.setter
+    def pos(self, pos):
+        self._pos = pos
     @map_pos.setter
-    def set_pos(self, pos):
+    def map_pos(self, pos):
         self._pos = pos
 
     """ Vitesse """
@@ -83,7 +93,7 @@ class Entity:
         return self._speed
     
     @speed.setter
-    def set_speed(self, speed):
+    def speed(self, speed):
         self._speed = speed
     
     """ Propriétés de positions x/y"""
@@ -108,25 +118,25 @@ class Entity:
     
     @x.setter
     @map_x.setter
-    def set_x(self, x):
+    def x(self, x):
         self._pos[0] = x
 
     @y.setter
     @map_y.setter
-    def set_y(self, y):
+    def y(self, y):
         self._pos[1] = y
 
     @property
     def game_state(self):
         if self.has_game_state:
             return self._game_state
-        return NoGameStateError(self)
+        raise NoGameStateError(self)
     
     @property
     def map(self):
         if self.has_game_state:
             return self._map
-        return NoGameStateError(self)
+        raise NoGameStateError(self)
 
     """ ==== METHODES ==== """
 
@@ -140,3 +150,6 @@ class Entity:
         self._map = self._game_state._map
 
     
+entity = Entity([0, 0], [0, 0])
+entity.map_pos = [1, 2]
+print(entity.pos)
