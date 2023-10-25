@@ -1,0 +1,2 @@
+Le lien vers le sujet du Hackathon : bonnes pratiques de programmation Python (.venv,requirements.txt)
+https://m33.notion.site/TP1-Application-Flask-8beed9e44cd24b57aa3083fdd9935e5f
