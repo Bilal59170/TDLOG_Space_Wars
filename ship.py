@@ -5,12 +5,18 @@ Implémentera Entity
 """
 import numpy as np
 import entity
+from pyglet.shapes import Polygon
 
 
 class Ship(entity.Entity):
-    def __init__(self, pos, speed, game_state=None):
+    def __init__(self, pos, speed, shape, game_state=None):
         super().__init__(pos, speed, game_state)
         self.angle = 0
+
+    """Fonction qui met à jour la position en fonction de la vitesse"""
+
+    def update_pos(self):
+        self.tick(self)
 
     """Fonction qui donne l'angle entre la position du vaisseau et celle d'un point (x,y)"""
 
@@ -19,7 +25,20 @@ class Ship(entity.Entity):
         delta_y = y - self.pos[1]
         return np.arctan2(delta_y, delta_x)
 
-    """A faire : fonction qui dessine le vaisseau avec une forme qu'on choisira"""
+    """Fonction qui dessine un triangle equilatéral et l'oriente en fonction de l'angle.
+       le parametre shape est la distance entre le centre et un des 3 points. """
 
-    def draw(self):
-        pass
+    def draw(self, x, y):
+        # On prend les coordonnées des sommets quand le triangle pointe vers le haut puis on les 
+        # tourne de -(pi/2 - theta) l'angle fait avec la souris
+
+        theta = self.get_angle(self, x, y)
+        Rot = np.array([[np.cos(np.pi/2 - theta), np.sin(np.pi/2 - theta)],
+                        [-np.sin(np.pi/2 - theta), np.cos(np.pi/2 - theta)]])
+        V1 = self.pos + np.dot(Rot, np.array([0, self.shape]))
+        V2 = self.pos + np.dot(Rot, -self.shape * np.array([np.cos(np.pi/6), np.sin(np.pi/6)]))
+        V3 = self.pos + np.dot(Rot, self.shape * np.array([np.cos(np.pi/6), np.sin(np.pi/6)]))
+
+        Vertices = [V1[0], V1[1], V2[0], V2[1], V3[0], V3[1]]
+        triangle = Polygon(Vertices, color=(255, 0, 0))
+        triangle.draw()

@@ -56,9 +56,9 @@ class GameWindow(pyglet.window.Window):
     def on_mouse_motion(self, x, y, dx, dy):
         self.ship.angle = self.ship.get_angle(x, y)
 
-    def on_draw(self):
+    def on_draw(self, x, y):
         self.clear()
-        self.ship.draw()
+        self.ship.draw(x, y)
 
 
 if __name__ == "__main__":
