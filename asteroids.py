@@ -47,30 +47,6 @@ class Asteroid(Entity):
     )
 
     def __init__(self, pos, speed, orientation, size, HP, ressources, asteroid_class):
-        """
-        Initialisation d'un astéroïde
-
-        Paramètres
-        ----------
-            pos : array
-                position de l'astéroïde
-            speed : array
-                vitesse de l'astéroïde
-            orientation : float
-                angle de l'astéroïde
-            size : float
-                taille de l'astéroïde
-            HP : float
-                points de vie
-            ressources : float
-                nombres de ressources que l'astéroïde apporte au joueur
-            asteroid_class : int dans [0, 3]
-                classe de l'astéroïde
-                  0 : petit astéroïde
-                  1 : moyen astéroïde
-                  2 : grand astéroïde
-                  3 : giga  astéroïde
-        """
 
         super().__init__(pos, speed)
         self.orientation = orientation

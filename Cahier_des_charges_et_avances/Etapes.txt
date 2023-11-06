@@ -15,3 +15,68 @@ Interface graphique : 1 fichier "display" qui appelle Pyglet pour afficher les o
 Upgrades : Lesquelles choisir ?
 Armes : Cutter : Rayon à courte portée, dégâts à chaque frame
 
+
+- Etape N°1 : Preuve de concept
+
+Cahier des charges :
+ - Un vaisseau qui se déplace
+ - La caméra est fixée sur le vaisseau
+ - On peut tirer sur des "astéroïdes" qui peuvent mourrir
+
+- Etape N°2 : Quelques fonctionnalités en plus
+
+Cahier des charges :
+ - Quand on tue un astéroïde, on gagne des points
+ - On peut lvl up
+ - A chaque niveau, on peut acheter des améliorations de stats (HP, ...)
+ - Les améliorations et les points s'affichent
+ - Les astéroïdes spawnent avec le temps
+
+- Fonctionnalité 1 : Les classes
+
+Cahier des charges : 
+ - Ajout des classes
+   => Tous les 10 lvls
+   => Change les tirs
+   => Change possiblement l'apparence
+
+- Fonctionnalité 2 : Les ennemis
+
+Cahier des charges :
+ - IA de l'ennemi
+    => Selon quelles données ?
+    => Selon quel algo ?
+ - Spawn des IAs par vagues
+    => Alterner temps farm / temps mobs
+ - Boss
+ - Diverses IAs
+    => Qui tirent
+    => Kamikaze
+
+- Fonctionnalité 3 : Le multi
+
+ - Host de parties
+ - Découvrir les parties en ligne
+
+- Fonctionnalité 4 : La super IA
+
+ - IA Neuroévolutive
+ - cf. Mari/o Sethbling
+
+
+- Fonctionnalité 5 : Les cartes custom
+
+ - Rajout d'obstacles
+ - Rajout de modes de jeu
+    => Points de spawn
+    => CTM
+    => Save the Monument
+ - Points d'apparition d'astéroïdes
+ - Paramétrisation des spawns d'astéroïdes / mobs
+
+- Fonctionnalité 6 : Les mods
+
+ - Rendre les textures modables
+ - Rendre les ennemis modables
+
+- Fonctionnalité 7 : L'éditeur de cartes
