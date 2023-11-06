@@ -44,6 +44,7 @@ class Entity:
         self._pos = np.array(pos)
         self._speed = np.array(speed)
 
+        # Peut-être trop générique
         self.has_game_state = False
         if game_state is not None:
             self._game_state = game_state
@@ -79,6 +80,8 @@ class Entity:
 
         """
 
+        # Empêcher le cas où l'écran est plus grand que la map
+
         pos_0 = (self.pos - self.map.center).astype(
             int
         )  # Position 1 : Position normale
@@ -104,6 +107,7 @@ class Entity:
 
     @map_pos.setter
     def map_pos(self, pos):
+        # Contrôle d'accès
         self._pos = pos
 
     """ Vitesse """

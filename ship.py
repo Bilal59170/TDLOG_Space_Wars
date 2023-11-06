@@ -9,7 +9,7 @@ from pyglet.shapes import Polygon
 
 
 class Ship(entity.Entity):
-    def __init__(self, pos, speed, shape, game_state=None):
+    def __init__(self, pos, speed, size, game_state=None):
         super().__init__(pos, speed, game_state)
         self.angle = 0
 
@@ -26,18 +26,26 @@ class Ship(entity.Entity):
         return np.arctan2(delta_y, delta_x)
 
     """Fonction qui dessine un triangle equilatéral et l'oriente en fonction de l'angle.
-       le parametre shape est la distance entre le centre et un des 3 points. """
+       le parametre size est la distance entre le centre et un des 3 points. """
 
     def draw(self, x, y):
-        # On prend les coordonnées des sommets quand le triangle pointe vers le haut puis on les 
+        # On prend les coordonnées des sommets quand le triangle pointe vers le haut puis on les
         # tourne de -(pi/2 - theta) l'angle fait avec la souris
 
         theta = self.get_angle(self, x, y)
-        Rot = np.array([[np.cos(np.pi/2 - theta), np.sin(np.pi/2 - theta)],
-                        [-np.sin(np.pi/2 - theta), np.cos(np.pi/2 - theta)]])
-        V1 = self.pos + np.dot(Rot, np.array([0, self.shape]))
-        V2 = self.pos + np.dot(Rot, -self.shape * np.array([np.cos(np.pi/6), np.sin(np.pi/6)]))
-        V3 = self.pos + np.dot(Rot, self.shape * np.array([np.cos(np.pi/6), np.sin(np.pi/6)]))
+        Rot = np.array(
+            [
+                [np.cos(np.pi / 2 - theta), np.sin(np.pi / 2 - theta)],
+                [-np.sin(np.pi / 2 - theta), np.cos(np.pi / 2 - theta)],
+            ]
+        )
+        V1 = self.pos + np.dot(Rot, np.array([0, self.size]))
+        V2 = self.pos + np.dot(
+            Rot, -self.size * np.array([np.cos(np.pi / 6), np.sin(np.pi / 6)])
+        )
+        V3 = self.pos + np.dot(
+            Rot, self.size * np.array([np.cos(np.pi / 6), np.sin(np.pi / 6)])
+        )
 
         Vertices = [V1[0], V1[1], V2[0], V2[1], V3[0], V3[1]]
         triangle = Polygon(Vertices, color=(255, 0, 0))

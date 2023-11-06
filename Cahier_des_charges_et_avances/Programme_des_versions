@@ -1,0 +1,22 @@
+Version 1 :
+Fenêtre = écran, bords solides. Vaisseau, projectiles.
+
+Version 2 :
+Astéroïdes, collisions. Affichage des PV, mort (sans effet)
+
+Version 2.1 : Progressions du vaisseau
+Loot, Progression (XP), Level-ups (Une ressource pour tout usages, nouvelles classes...)
+Vestion 2.2 : Astéroïdes
+Différentes ressources pour différentes upgrades; modèle gaussien pour le spawn
+
+Version 3 : Progression du jeu
+Ennemis : IA simple (player tracking, tir de base, arbre de compétences ?)
+
+Version 4 :
+Miniboss-spawnpoints (indication à l'écran, loot, spawn rates)
+IA Complexe (Modèle joueur : farming de ressources, combat)
+
+Version 5 (et au-delà) :
+IA adversarielles neuro-évolutives (farming, combat mutuel)
+Evolution génétique (entraînement => difficulté % score)
+Un jeu deux systèmes (Joueur // IA)

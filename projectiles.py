@@ -18,9 +18,10 @@ Méthodes d'un projectile :
     => Retourne : Une liste d'ennemis avec lequel l'astéroïde est en collision (vide s'il ne touche rien)
 
 """
+from entity import Entity
 
 
-class Projectile:
+class Projectile(Entity):
     """classe projectiles : projectiles circulaires"""
 
     def __init__(self, x_init, y_init, speed_x_init, speed_y_init, radius, color):

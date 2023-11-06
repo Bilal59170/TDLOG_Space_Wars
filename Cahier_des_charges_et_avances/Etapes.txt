@@ -3,15 +3,19 @@ Vaisseau (triangle):
 coder les mvt (Bilal)
 mvt  avec zqsd (départ et freinage instantanés)
 visée avec souris : Enzo
-projectiles : petits cercles (pour l’instant, 1 clic = 1 projectile)
-Map bornée et si trk, on fait un tore
+map bornée 
+
+
+
+**2ème étape:** (Proposition d'Alex):
 
 **Collisions**
 Cas de base : que des cercles (comparer les rayons)
 Objectif : hitboxes polygonales
 Un tutoriel pour ce deuxième cas : http://www.metanetsoftware.com/technique/tutorialA.html
 
-**2ème étape:** (Proposition d'Alex)
+téléportation quand on arrive aux bords
+projectiles : petits cercles (pour l’instant, 1 clic = 1 projectile)
 Interface graphique : 1 fichier "display" qui appelle Pyglet pour afficher les objets (cf. Fonctions et arguments génériques) + 1 fonction "display_args" dans chaque objet qui renvoie ces arguments
 Upgrades : Lesquelles choisir ?
 Armes : Cutter : Rayon à courte portée, dégâts à chaque frame
