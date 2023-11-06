@@ -33,20 +33,20 @@ class Ship(entity.Entity):
         # tourne de -(pi/2 - theta) l'angle fait avec la souris
 
         theta = self.get_angle(self, x, y)
-        Rot = np.array(
+        rot = np.array(
             [
                 [np.cos(np.pi / 2 - theta), np.sin(np.pi / 2 - theta)],
                 [-np.sin(np.pi / 2 - theta), np.cos(np.pi / 2 - theta)],
             ]
         )
-        V1 = self.pos + np.dot(Rot, np.array([0, self.size]))
+        V1 = self.pos + np.dot(rot, np.array([0, self.size]))
         V2 = self.pos + np.dot(
-            Rot, -self.size * np.array([np.cos(np.pi / 6), np.sin(np.pi / 6)])
+            rot, -self.size * np.array([np.cos(np.pi / 6), np.sin(np.pi / 6)])
         )
         V3 = self.pos + np.dot(
-            Rot, self.size * np.array([np.cos(np.pi / 6), np.sin(np.pi / 6)])
+            rot, self.size * np.array([np.cos(np.pi / 6), np.sin(np.pi / 6)])
         )
 
-        Vertices = [V1[0], V1[1], V2[0], V2[1], V3[0], V3[1]]
-        triangle = Polygon(Vertices, color=(255, 0, 0))
+        vertices = [V1[0], V1[1], V2[0], V2[1], V3[0], V3[1]]
+        triangle = Polygon(vertices, color=(255, 0, 0))
         triangle.draw()

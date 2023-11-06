@@ -25,10 +25,10 @@ class Asteroid(Entity):
         nombres de ressources que l'astéroïde apporte au joueur
     asteroid_class : int dans [0, 3]
         classe de l'astéroïde
-            0 : petit astéroïde
-            1 : moyen astéroïde
-            2 : grand astéroïde
-            3 : giga  astéroïde
+            0 : petit astéroïde, en forme de triangle
+            1 : moyen astéroïde, en forme de carré
+            2 : grand astéroïde, en forme de pentagone
+            3 : giga  astéroïde, en forme d'hexagone
 
     Méthodes
     --------
@@ -56,6 +56,7 @@ class Asteroid(Entity):
         self.asteroid_class = asteroid_class
 
     def create_polygon(self):
+        # Crée deux listes, x et y, des coordonnées sur l'écran du polygone à afficher
         polygon_order = (
             self.asteroid_class + 3
         )  # Nombre de points du polygone => Un petit astéroide est un triangle, moyen un carré, ...
