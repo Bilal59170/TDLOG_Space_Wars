@@ -84,17 +84,17 @@ import ship
 
 class GameWindow(pyglet.window.Window):
     def __init__(self):
-        super().__init__(800, 600)
-        self.ship = ship.Ship([400, 300])
+        super().__init__(800, 600)  # pos, speed, shape, game_state=None
+        self.ship = ship.Ship([400, 300], [10, 10], 1, self)
 
     """Fonction qui calcule l'angle de visée à chaque déplacement de la souris"""
 
     def on_mouse_motion(self, x, y, dx, dy):
         self.ship.angle = self.ship.get_angle(x, y)
 
-    def on_draw(self):
+    def on_draw(self, x, y):
         self.clear()
-        self.ship.draw()
+        self.ship.draw(x, y)
 
 
 if __name__ == "__main__":

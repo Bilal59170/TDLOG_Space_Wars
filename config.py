@@ -12,7 +12,7 @@ TICK_TIME = 1 / FPS
 SPEED_FACTOR = 1
 
 WIN_SIZE = [1280, 720]
-MAP_SIZE = [12800, 7200]
+MAP_SIZE = [1280, 720]
 
 
 # ----- Partie Astéroïdes -----

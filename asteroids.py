@@ -47,7 +47,6 @@ class Asteroid(Entity):
     )
 
     def __init__(self, pos, speed, orientation, size, HP, ressources, asteroid_class):
-
         super().__init__(pos, speed)
         self.orientation = orientation
         self.size = size
@@ -56,7 +55,7 @@ class Asteroid(Entity):
         self.ressources = ressources
         self.asteroid_class = asteroid_class
 
-    def get_polygon(self):
+    def create_polygon(self):
         polygon_order = (
             self.asteroid_class + 3
         )  # Nombre de points du polygone => Un petit astéroide est un triangle, moyen un carré, ...
@@ -68,7 +67,7 @@ class Asteroid(Entity):
 
         return x_coordinates, y_coordinates
 
-    def get_map_polygon(self):
+    def create_map_polygon(self):
         polygon_order = (
             self.asteroid_class + 3
         )  # Nombre de points du polygone => Un petit astéroide est un triangle, moyen un carré, ...
@@ -97,7 +96,7 @@ class Asteroid(Entity):
 
     @HP.setter
     def HP(self, value):
-        if value < 0:
+        if value <= 0:
             self.die()
         self._value = value
 
