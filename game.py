@@ -12,9 +12,14 @@ import config
 class Game:
 
     """ """
+
     def __init__(self):
         self.endgame = False
-        self.player = ship([config.MAP_SIZE[0] / 2, config.MAP_SIZE[1] / 2], config.SPEED_FACTOR, config.SIZE_SHIP)
+        self.player = ship(
+            [config.MAP_SIZE[0] / 2, config.MAP_SIZE[1] / 2],
+            config.SPEED_FACTOR,
+            config.SIZE_SHIP,
+        )
         self.asteroids = []
         self.ennemies = []
         self.time = 0
@@ -23,5 +28,4 @@ class Game:
         pass
 
     def update(self):
-        self.time += 
-
+        self.time += config.TICK_TIME
