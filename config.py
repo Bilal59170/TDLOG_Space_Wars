@@ -7,7 +7,9 @@ Fichier de configuration - Contient toutes les constantes d'exécution du progra
 # ----- Constantes de jeu -----
 
 FPS = 60
-TICK_TIME = 1 / FPS
+FRAME_TIME = 1 / FPS
+# define TICK_TIMESTEP
+
 
 SPEED_FACTOR = 1
 
