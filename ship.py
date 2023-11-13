@@ -12,6 +12,7 @@ class Ship(entity.Entity):
     def __init__(self, pos, speed, size, game_state=None):
         super().__init__(pos, speed, game_state)
         self.angle = 0
+        self.size = size
 
     """Fonction qui met à jour la position en fonction de la vitesse"""
 
