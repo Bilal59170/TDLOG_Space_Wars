@@ -8,6 +8,7 @@ import pyglet
 import ship
 import config
 import numpy as np
+from pyglet.window import key
 
 class Game:
 
@@ -27,6 +28,18 @@ class Game:
 
     def remove(self, object):
         pass
+
+    def update_speed(self):
+        keys = key.KeyStateHandler()
+        self.window.push_handlers(keys)
+        if keys[key.Z] or keys[key.UP]:
+            self.player.speed = np.array([0, -1])
+        elif keys[key.Q] or keys[key.LEFT]:
+            self.player.speed = np.array([-1, 0])
+        elif keys[key.S] or keys[key.DOWN]:
+            self.player.speed = np.array([0, 1])
+        elif keys[key.D] or keys[key.RIGHT]:
+            self.player.speed = np.array([1, 0])
 
     def display(self):
         self.window.clear()
