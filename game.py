@@ -22,6 +22,16 @@ class Game:
     def remove(self, object):
         pass
 
+    def display(self):
+        pass
+
     def update(self):
-        self.time += 
+        self.time += config.TICK_TIME
+        self.player.tick()
+        for a in self.asteroids:
+            a.tick()
+        for e in self.ennemies:
+            e.tick()
+        if self.time % config.FRAME_TIME:
+            self.display()
 
