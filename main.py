@@ -13,7 +13,7 @@
         affichage
 """
 import pyglet
-from pyglet.window import key
+from pyglet.window import key, mouse
 
 
 # Create a window
@@ -22,6 +22,7 @@ window = pyglet.window.Window()
 
 @window.event
 def on_key_press(symbol, modifiers):
+    # Move ship
     if symbol == key.Z or symbol == key.UP:
         print("Moving up.")
     elif symbol == key.Q or symbol == key.LEFT:
@@ -30,6 +31,13 @@ def on_key_press(symbol, modifiers):
         print("Moving down.")
     elif symbol == key.D or symbol == key.RIGHT:
         print("Moving right.")
+
+
+@window.event
+def on_mouse_press(x, y, button, modifiers):
+    if button == mouse.LEFT:
+        # Ship.shoot()
+        print("The left mouse button was pressed.")
 
 
 @window.event
