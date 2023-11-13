@@ -18,9 +18,9 @@ def center_image(image):
     image.anchor_x = image.width // 2
     image.anchor_y = image.height // 2
 
-class Sprites:
 
-    def __init__(self, chemin_image = None, polygone=None):
+class Sprites:
+    def __init__(self, chemin_image=None, polygone=None):
         """
         Classe d'un sprite
         => Implémente les collisions entre sprites
@@ -37,7 +37,7 @@ class Sprites:
             self.type = "polygon"
         else:
             raise ValueError("Il faut un chemin d'image ou un polygone")
-    
+
     def intersects(self, other):
         match (self.type, other.type):
             case ("image", "image"):
@@ -47,9 +47,8 @@ class Sprites:
             case ("polygon", "image"):
                 return self.sprite.intersects(other.sprite)
             case ("polygon", "polygon"):
-                return self.sprite.intersects(other.sprite
+                return self.sprite.intersects(other.sprite)
         """Fonction qui calcule si deux sprites se touchent"""
-        
 
 
 class GameUI:
@@ -79,8 +78,10 @@ class PauseMenu(Menu):
 class GameOverMenu(Menu):
     pass
 
-import pyglet
-import ship
+
+# import pyglet
+# import ship
+
 
 class GameWindow(pyglet.window.Window):
     def __init__(self):
