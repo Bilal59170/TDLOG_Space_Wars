@@ -12,3 +12,23 @@
     si game_time % FRAME_TIME == 0:
         affichage
 """
+import pyglet
+
+# Create a window
+window = pyglet.window.Window()
+
+@window.event
+def on_draw():
+    # Clear the window
+    window.clear()
+
+    # Create a batch to hold our graphics
+    batch = pyglet.graphics.Batch()
+
+    # Draw a red rectangle
+    x, y, width, height = 100, 100, 200, 150
+    radius = 25
+    pyglet.shapes.Circle(x, y, radius, color=(255, 0, 0), batch=batch).draw()
+
+# Start the main event loop
+pyglet.app.run()
