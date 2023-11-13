@@ -33,7 +33,7 @@ class Ship(entity.Entity):
 
     def draw(self, x, y):
         # On prend les coordonnées des sommets quand le triangle pointe vers
-        # le haut puis on les tourne de -(pi/2 - theta) l'angle fait 
+        # le haut puis on les tourne de -(pi/2 - theta) l'angle fait
         # avec la souris
 
         theta = self.get_angle(self, x, y)

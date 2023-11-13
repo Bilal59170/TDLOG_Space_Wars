@@ -17,6 +17,7 @@ import pyglet
 # Create a window
 window = pyglet.window.Window()
 
+
 @window.event
 def on_draw():
     # Clear the window
@@ -29,6 +30,7 @@ def on_draw():
     x, y, width, height = 100, 100, 200, 150
     radius = 25
     pyglet.shapes.Circle(x, y, radius, color=(255, 0, 0), batch=batch).draw()
+
 
 # Start the main event loop
 pyglet.app.run()

@@ -1,10 +1,8 @@
-
-
-
 """
 
 Objectif de ce fichier :
- - Créer une classe qui permet d'utiliser des variables synchronisées entre le serveur et le client, sans même avoir besoin de la distinguer d'une variable réelle
+ - Créer une classe qui permet d'utiliser des variables synchronisées entre le serveur et le client,
+    sans même avoir besoin de la distinguer d'une variable réelle
     => Exemple :
         => Server :
             
@@ -31,6 +29,9 @@ Objectif de ce fichier :
 
 
 """
+import socket
+import pickle
+
 
 class dataChangesHandler:
     """
@@ -40,14 +41,18 @@ class dataChangesHandler:
 
     def __init__(self, object):
         pass
+
     def add(self, object):
         pass
+
 
 class gameDataChangesHandler:
     pass
 
+
 class socketDataChangesHandler:
     pass
+
 
 class sharedDataStructure:
     def __init__(self, socketInstance):
@@ -63,13 +68,13 @@ class sharedDataStructure:
             # Send the new value to the server inside the setter
             self.send_data_to_server(value)
             self._shared_data = value
-    
+
     def __set__(self, instance, value):
-    
+        pass
+
     def send_data_to_server(self, data):
         client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        client_socket.connect(('127.0.0.1', 12345))
+        client_socket.connect(("127.0.0.1", 12345))
         serialized_data = pickle.dumps(data)
         client_socket.send(serialized_data)
         client_socket.close()
-

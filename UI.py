@@ -106,6 +106,7 @@ if __name__ == "__main__":
 # Crée une fenêtre
 window = pyglet.window.Window()
 
+
 @window.event
 def on_draw():
     # Clear la fenêtre
@@ -117,6 +118,7 @@ def on_draw():
     x, y = 100, 100
     radius = 25
     pyglet.shapes.Circle(x, y, radius, color=(255, 0, 0), batch=batch).draw()
+
 
 # Start the main event loop
 pyglet.app.run()
