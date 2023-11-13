@@ -25,18 +25,18 @@ class Ship(entity.Entity):
     def get_angle(self, x, y):
         delta_x = x - self.pos[0]
         delta_y = y - self.pos[1]
-        return np.arctan2(delta_y, delta_x)
+        self.angle =  np.arctan2(delta_y, delta_x)
 
     """Fonction qui dessine un triangle equilatéral et l'oriente en fonction
     de l'angle. le parametre size est la distance entre le centre et un des
     3 points. """
 
-    def draw(self, x, y):
+    def draw(self):
         # On prend les coordonnées des sommets quand le triangle pointe vers
         # le haut puis on les tourne de -(pi/2 - theta) l'angle fait
         # avec la souris
 
-        theta = self.get_angle(self, x, y)
+        theta = self.angle
         rot = np.array(
             [
                 [np.cos(np.pi / 2 - theta), np.sin(np.pi / 2 - theta)],

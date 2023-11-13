@@ -4,10 +4,10 @@ Fait appel à l'UI pour l'affichage
 L'instance de jeu est nommée game_state
 
 """
-
+import pyglet
 import ship
 import config
-
+import numpy as np
 
 class Game:
 
@@ -16,19 +16,25 @@ class Game:
     def __init__(self):
         self.endgame = False
         self.player = ship(
-            [config.MAP_SIZE[0] / 2, config.MAP_SIZE[1] / 2],
-            config.SPEED_FACTOR,
+            np.arrey([config.MAP_SIZE[0] / 2, config.MAP_SIZE[1] / 2]),
+            np.array([0, 0]),
             config.SIZE_SHIP,
         )
         self.asteroids = []
         self.ennemies = []
         self.time = 0
+        self.window = pyglet.window.Window()
 
     def remove(self, object):
         pass
 
     def display(self):
-        pass
+        self.window.clear()
+        self.player.draw()
+        for a in self.asteroids:
+            a.draw()
+        for e in self.ennemies:
+            e.draw()
 
     def update(self):
         self.time += config.TICK_TIME

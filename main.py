@@ -27,13 +27,18 @@ music.play()
 def on_key_press(symbol, modifiers):
     # Move ship
     if symbol == key.Z or symbol == key.UP:
+        speed_vect = [0, -1]
         print("Moving up.")
     elif symbol == key.Q or symbol == key.LEFT:
+        speed_vect = [-1, 0]
         print("Moving left.")
     elif symbol == key.S or symbol == key.DOWN:
+        speed_vect = [0, 1]
         print("Moving down.")
     elif symbol == key.D or symbol == key.RIGHT:
+        speed_vect = [1, 0]
         print("Moving right.")
+    
 
 
 @window.event
