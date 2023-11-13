@@ -8,7 +8,7 @@ Fichier de configuration - Contient toutes les constantes d'exécution du progra
 
 FPS = 60
 FRAME_TIME = 1 / FPS
-# define TICK_TIMESTEP
+TICK_TIME = FRAME_TIME / 1
 
 
 SPEED_FACTOR = 1

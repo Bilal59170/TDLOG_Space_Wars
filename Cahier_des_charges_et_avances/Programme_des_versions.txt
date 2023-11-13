@@ -1,13 +1,15 @@
 Version 1 :
-Fenêtre = écran, bords solides. Vaisseau, projectiles.
+Fenêtre = écran, bords solides. Vaisseau, projectiles. 1 itération par frame
 
 Version 2 :
-Astéroïdes, collisions. Affichage des PV, mort (sans effet)
+Astéroïdes, collisions. Affichage des PV + gestion des PVs, mort (sans effet)
 
 Version 2.1 : Progressions du vaisseau
 Loot, Progression (XP), Level-ups (Une ressource pour tout usages, nouvelles classes...)
 Vestion 2.2 : Astéroïdes
 Différentes ressources pour différentes upgrades; modèle gaussien pour le spawn
+Version 2.3 : Affichage
+N itérations par frame (meilleure prise en compte de la physique du jeu)
 
 Version 3 : Progression du jeu
 Ennemis : IA simple (player tracking, tir de base, arbre de compétences ?)
