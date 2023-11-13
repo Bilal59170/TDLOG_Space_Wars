@@ -5,7 +5,7 @@ Objectif de ce fichier :
     sans même avoir besoin de la distinguer d'une variable réelle
     => Exemple :
         => Server :
-            
+
             socket_handler = socketDataChangesHandler(socket)       # Crée un objet qui gère les changements de variables
             socket_handler.await()                                  # Synchronise l'exécution du code avec le client
 
@@ -24,8 +24,8 @@ Objectif de ce fichier :
             print(ma_variable) # Affiche 5                          # Affiche 5
 
             ma_variable = 10                                        # Change la valeur de la variable
-            
-    
+
+
 
 
 """

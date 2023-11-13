@@ -13,9 +13,23 @@
         affichage
 """
 import pyglet
+from pyglet.window import key
+
 
 # Create a window
 window = pyglet.window.Window()
+
+
+@window.event
+def on_key_press(symbol, modifiers):
+    if symbol == key.Z or symbol == key.UP:
+        print("Moving up.")
+    elif symbol == key.Q or symbol == key.LEFT:
+        print("Moving left.")
+    elif symbol == key.S or symbol == key.DOWN:
+        print("Moving down.")
+    elif symbol == key.D or symbol == key.RIGHT:
+        print("Moving right.")
 
 
 @window.event
