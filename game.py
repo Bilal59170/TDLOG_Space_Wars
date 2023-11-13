@@ -13,8 +13,8 @@ class Game:
 
     """ """
     def __init__(self):
-        Game.endgame = False
-        Game.player = ship([config.MAP_SIZE[0] / 2, config.MAP_SIZE[1] / 2], config.SPEED_FACTOR, config.SIZE_SHIP)
+        self.endgame = False
+        self.player = ship([config.MAP_SIZE[0] / 2, config.MAP_SIZE[1] / 2], config.SPEED_FACTOR, config.SIZE_SHIP)
 
 
     def remove(self, object):
