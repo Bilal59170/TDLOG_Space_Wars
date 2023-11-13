@@ -25,7 +25,7 @@ class Ship(entity.Entity):
     def get_angle(self, x, y):
         delta_x = x - self.pos[0]
         delta_y = y - self.pos[1]
-        self.angle =  np.arctan2(delta_y, delta_x)
+        self.angle = np.arctan2(delta_y, delta_x)
 
     """Fonction qui dessine un triangle equilatéral et l'oriente en fonction
     de l'angle. le parametre size est la distance entre le centre et un des

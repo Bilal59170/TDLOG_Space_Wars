@@ -7,8 +7,9 @@ Fichier de configuration - Contient toutes les constantes d'exécution du progra
 # ----- Constantes de jeu -----
 
 FPS = 60
+TPS = 2 * FPS
 FRAME_TIME = 1 / FPS
-TICK_TIME = FRAME_TIME / 1
+TICK_TIME = 1 / TPS
 
 SHIP_SIZE = 20
 

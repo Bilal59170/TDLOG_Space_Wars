@@ -38,7 +38,7 @@ def on_key_press(symbol, modifiers):
     elif symbol == key.D or symbol == key.RIGHT:
         speed_vect = [1, 0]
         print("Moving right.")
-    
+    # ship.move(speed_vect)
 
 
 @window.event
@@ -46,6 +46,12 @@ def on_mouse_press(x, y, button, modifiers):
     if button == mouse.LEFT:
         # Ship.shoot()
         print("The left mouse button was pressed.")
+
+
+@window.event
+def on_mouse_drag(x, y, dx, dy, buttons, modifiers):
+    # Modify ship orientation
+    print(f"Mouse moved. Current coordinates : {x}, {y}")
 
 
 @window.event
@@ -62,5 +68,6 @@ def on_draw():
     pyglet.shapes.Circle(x, y, radius, color=(255, 0, 0), batch=batch).draw()
 
 
-# Start the main event loop
+# Start the main event loop (+define the tick duration in seconds for update functions)
+# pyglet.clock.schedule_interval(update, TICK_TIME)
 pyglet.app.run()

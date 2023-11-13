@@ -37,7 +37,7 @@ class Sprites:
             self.type = "polygon"
         else:
             raise ValueError("Il faut un chemin d'image ou un polygone")
-    
+
     def intersects(self, other):
         match (self.type, other.type):
             case ("image", "image"):
@@ -49,7 +49,6 @@ class Sprites:
             case ("polygon", "polygon"):
                 return self.sprite.intersects(other.sprite)
         """Fonction qui calcule si deux sprites se touchent"""
-        
 
 
 class GameUI:
@@ -79,8 +78,6 @@ class PauseMenu(Menu):
 class GameOverMenu(Menu):
     pass
 
-import pyglet
-import ship
 
 class GameWindow(pyglet.window.Window):
     def __init__(self):

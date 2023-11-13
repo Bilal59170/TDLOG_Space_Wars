@@ -10,6 +10,7 @@ import config
 import numpy as np
 from pyglet.window import key
 
+
 class Game:
 
     """ """
@@ -23,6 +24,7 @@ class Game:
         )
         self.asteroids = []
         self.ennemies = []
+        self.entities = [self.player] + self.asteroids + self.ennemies
         self.time = 0
         self.window = pyglet.window.Window()
 
@@ -43,20 +45,12 @@ class Game:
 
     def display(self):
         self.window.clear()
-        self.player.draw()
-        for a in self.asteroids:
-            a.draw()
-        for e in self.ennemies:
+        for e in self.entities:
             e.draw()
 
     def update(self):
         self.time += config.TICK_TIME
-        self.player.tick()
-        for a in self.asteroids:
-            a.tick()
-        for e in self.ennemies:
+        for e in self.entities:
             e.tick()
         if self.time % config.FRAME_TIME:
             self.display()
-
-
