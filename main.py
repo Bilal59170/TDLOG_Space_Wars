@@ -19,6 +19,9 @@ from pyglet.window import key, mouse
 # Create a window
 window = pyglet.window.Window()
 
+music = pyglet.resource.media("ost/bgm_forever.mp3")
+music.play()
+
 
 @window.event
 def on_key_press(symbol, modifiers):
