@@ -37,7 +37,7 @@ class Sprites:
             self.type = "polygon"
         else:
             raise ValueError("Il faut un chemin d'image ou un polygone")
-
+    
     def intersects(self, other):
         match (self.type, other.type):
             case ("image", "image"):
@@ -49,6 +49,7 @@ class Sprites:
             case ("polygon", "polygon"):
                 return self.sprite.intersects(other.sprite)
         """Fonction qui calcule si deux sprites se touchent"""
+        
 
 
 class GameUI:
@@ -78,10 +79,8 @@ class PauseMenu(Menu):
 class GameOverMenu(Menu):
     pass
 
-
-# import pyglet
-# import ship
-
+import pyglet
+import ship
 
 class GameWindow(pyglet.window.Window):
     def __init__(self):
@@ -101,24 +100,3 @@ class GameWindow(pyglet.window.Window):
 if __name__ == "__main__":
     window = GameWindow()
     pyglet.app.run()
-
-# test d'ouverture d'une fenêtre
-# Crée une fenêtre
-window = pyglet.window.Window()
-
-
-@window.event
-def on_draw():
-    # Clear la fenêtre
-    window.clear()
-
-    # Create a batch to hold our graphics
-    batch = pyglet.graphics.Batch()
-
-    x, y = 100, 100
-    radius = 25
-    pyglet.shapes.Circle(x, y, radius, color=(255, 0, 0), batch=batch).draw()
-
-
-# Start the main event loop
-pyglet.app.run()
