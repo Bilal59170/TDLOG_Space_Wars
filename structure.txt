@@ -1,0 +1,10 @@
+Structure du projet : Fichier précisant à quoi ressemble le projet pour que tout le monde dans l'équipe de dev s'y retrouve
+
+- .gitignore
+- README : présentation du projet à destination des correcteurs / autres utilisateurs
+- Python code files (should be stored in a 'src' file)
+- devlogs : Fichiers utiles pour l'encadrement du projet. Amenés à évoluer en fonction de l'avancement du projet (retrait de fonctionnalités qui ne seront pas prêtes à temps / ajout de fonctionnalités d'approfondissement)
+  - Cahier des charges : Description du résultat final attendu du point de vue utilisateur (fonctionnalités, gameplay).
+  - Etapes / Programme des versions : Ordonnancement de fonctionnalités à implémenter dans le projet (potentiel recouvrement / développement en parallèle possible aux stades les plus avancés)
+  - Ressources : liens vers tout site Web susceptible de nous aider à développer plus efficacement le projet et à mieux comprendre les implémentations des autres
+- drafts : Code non déployé dans le projet, mais susceptible de l'être à terme, ou d'aider les autres développeurs (module inachevé, fonctionnalité dont le développement est en pause...)
