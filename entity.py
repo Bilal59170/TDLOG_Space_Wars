@@ -20,8 +20,9 @@ Méthodes:
 """
 
 import numpy as np
-
+from shapely.geometry import Polygon as Poly
 from config import *
+from pyglet.gl import *
 
 
 class NoGameStateError(Exception):
@@ -167,19 +168,107 @@ class Entity:
         if self.has_game_state:
             return self._map
         raise NoGameStateError(self)
-
-    """ ==== METHODES ==== """
-
+    
     def tick(self):
-        self.pos += self.speed * TICK_TIME * SPEED_FACTOR
+        self.pos += self.speed
 
-    @game_state.setter
-    def set_game_state(self, game_state):
-        self.has_game_state = True
-        self._game_state = game_state
-        self._map = self._game_state._map
+import pyglet
+
+class Sprites(Entity, pyglet.sprite.Sprite):
+    def __init__(self, chemin_image=None, polygone=None):
+        """
+        Classe d'un sprite
+        => Implémente les collisions entre sprites
+        => Implémente l'affichage sur l'écran
+        => Peut être une image ou un polygone
+        args : - Nom de fichier
+               - Polygone sous forme de liste de points (x, y)
+        """
+        super(Entity).__init__()
+        super(pyglet.sprite.Sprite).__init__()
+
+    def intersects(self, other):
+        """ Détermine si deux sprites sont en collision """
+        pass
+
+class BitmapSprite(Entity):
+    def __init__(self, pos, speed, image, theta=None, game_state=None):
+        super().__init__(pos, speed, game_state=game_state)
+        if game_state is not None:
+            self.sprite = pyglet.sprite(image, x=Entity.screen_x, y=Entity.screen_y, batch=game_state.batch)
+            self.inBatch = True
+        else:
+            self.sprite = pyglet.sprite(image, x=Entity.screen_x, y=Entity.screen_y)
+            self.inBatch = False
+        self._theta = 0 if theta is None else theta
+        self.sprite.update()
+
+    @property
+    def theta(self):
+        return self._theta
+    
+    @theta.setter
+    def set_theta(self, theta):
+        self._theta = theta
+        self.sprite.update(rotation=theta)
+
+    def draw(self):
+        x, y = self.screen_pos
+        self.sprite.update(x, y)
+        if not self.inBatch:
+            self.draw()
+
+    def intersects(self, other):
 
 
-entity = Entity([0, 0], [0, 0])
-entity.map_pos = [1, 2]
-print(entity.pos)
+
+
+
+
+class PolygonSprite(Entity):
+    def __init__(self, pos, speed, vertices, color, game_state=None, theta=None):
+        Entity.__init__(pos, speed, game_state=game_state)
+        self._vertices = np.array(vertices)
+        self.color = color
+        if theta is not None:
+            self._theta = theta
+            self.rotation_matrix = np.array([
+                [np.cos(np.pi / 2 - theta), np.sin(np.pi / 2 - theta)],
+                [-np.sin(np.pi / 2 - theta), np.cos(np.pi / 2 - theta)],
+            ])
+    
+    @property
+    def theta(self):
+        return self._theta
+    @theta.setter
+    def set_theta(self, theta):
+        self._theta = theta
+        self.rotation_matrix = np.array([
+                [np.cos(np.pi / 2 - theta), np.sin(np.pi / 2 - theta)],
+                [-np.sin(np.pi / 2 - theta), np.cos(np.pi / 2 - theta)],
+            ])
+    
+
+    @property
+    def vertices(self):
+        if hasattr(self, 'theta'):
+            return self.screen_pos + self.rotation_matrix @ self._vertices
+        return self.screen_pos + self._vertices
+
+    @property
+    def polygon(self):
+        return Poly(self.pos + self.vertices)
+    
+    def intersects(self, other):
+        if isinstance(other, PolygonSprite):
+            return self.polygon.intersects(other.polygon)    
+        else:
+            raise ValueError("Collision not implemented")
+    
+    def draw(self):
+        pyglet.gl.glColor3ub(*self.color)
+        vertices = self.vertices
+        pyglet.graphics.draw(len(vertices),
+                             pyglet.gl.GL_POLYGON,
+                             ('v2f', (self.screen_pos + vertices).reshape(-1)),
+                             ('c3B', self.color * len(vertices)))

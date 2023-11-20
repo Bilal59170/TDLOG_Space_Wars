@@ -7,42 +7,48 @@ import numpy as np
 import entity
 from pyglet.shapes import Polygon
 
+from collections.abc import Iterable
+import pyglet
 
-class Ship(entity.Entity):
+class Ship(entity.Entity, pyglet.event.EventDispatcher):
     def __init__(self, pos, speed, size, game_state=None):
-        super().__init__(pos, speed, game_state)
+        entity.Entity.__init__(self, pos, speed, game_state=game_state)
+        pyglet.event.EventDispatcher.__init__(self)
         self.angle = 0
         self.size = size
 
-    """Fonction qui met à jour la position en fonction de la vitesse"""
-
-    def update_pos(self):
-        self.tick(self)
-
-    """Fonction qui donne l'angle entre la position du vaisseau et celle d'un
-      point (x,y)"""
+    def tick(self):
+        """Fonction qui met à jour la position en fonction de la vitesse"""
+        entity.Entity.tick(self)
 
     def get_angle(self, x, y):
-        delta_x = x - self.pos[0]
-        delta_y = y - self.pos[1]
+        """Fonction qui donne l'angle entre la position du vaisseau et celle d'un
+        point (x,y)"""
+        delta_x = x - self.screen_x
+        delta_y = y - self.screen_y
         self.angle = np.arctan2(delta_y, delta_x)
+    
+    @property
+    def rotation_matrix(self):
+        theta = self.angle
+        rot = np.array([
+                [np.cos(np.pi / 2 - theta), np.sin(np.pi / 2 - theta)],
+                [-np.sin(np.pi / 2 - theta), np.cos(np.pi / 2 - theta)],
+            ])
+        return rot
+    
 
-    """Fonction qui dessine un triangle equilatéral et l'oriente en fonction
-    de l'angle. le parametre size est la distance entre le centre et un des
-    3 points. """
 
     def draw(self):
+        """Fonction qui dessine un triangle equilatéral et l'oriente en fonction
+        de l'angle. le parametre size est la distance entre le centre et un des
+        3 points. """
         # On prend les coordonnées des sommets quand le triangle pointe vers
         # le haut puis on les tourne de -(pi/2 - theta) l'angle fait
         # avec la souris
 
-        theta = self.angle
-        rot = np.array(
-            [
-                [np.cos(np.pi / 2 - theta), np.sin(np.pi / 2 - theta)],
-                [-np.sin(np.pi / 2 - theta), np.cos(np.pi / 2 - theta)],
-            ]
-        )
+        rot = self.rotation_matrix
+
         V1 = self.pos + np.dot(rot, np.array([0, self.size]))
         V2 = self.pos + np.dot(
             rot, -self.size * np.array([np.cos(np.pi / 6), np.sin(np.pi / 6)])
@@ -51,6 +57,9 @@ class Ship(entity.Entity):
             rot, self.size * np.array([np.cos(np.pi / 6), np.sin(np.pi / 6)])
         )
 
-        vertices = [V1[0], V1[1], V2[0], V2[1], V3[0], V3[1]]
-        triangle = Polygon(vertices, color=(255, 0, 0))
+        vertices = np.array([V1, V2, V3]).astype(int)
+        triangle = Polygon(*vertices, color=(255, 0, 0))
         triangle.draw()
+
+    def on_mouse_motion(self, x, y, dx, dy):
+        self.get_angle(x, y)
