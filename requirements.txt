@@ -3,3 +3,4 @@ pyglet
 socket
 pickle
 shapely
+collections
