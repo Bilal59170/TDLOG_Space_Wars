@@ -6,3 +6,6 @@ https://pyglet.readthedocs.io/en/latest/programming_guide/examplegame.html
 
 Un tuto express sur YAML :
 https://www.ambient-it.net/tout-savoir-fichiers-yaml/
+
+Tuto tests CI Python
+https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-python
