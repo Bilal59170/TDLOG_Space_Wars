@@ -19,10 +19,22 @@ Méthodes:
 
 """
 
-import numpy as np
-from shapely.geometry import Polygon as Poly
 from config import *
+from utils import *
+
+from typing import Any
+from abc import ABC, abstractmethod
+
+from shapely.geometry import Polygon as Poly
+
 from pyglet.gl import *
+import pyglet
+
+import numpy as np
+try:
+    from numba import njit
+except:
+    njit = lambda x:x
 
 
 class NoGameStateError(Exception):
@@ -31,30 +43,25 @@ class NoGameStateError(Exception):
     def __init__(self, object):
         super().__init__("No game state attributed to : {}".format(object))
 
+class NullMap:
+    def __init__(self):
+        self.size = (0,0)
+        self.center = (0,0)
 
 class Entity:
-    """
-    Classe
-
-
-
-
-    """
 
     def __init__(self, pos, speed, game_state=None):
         self._pos = np.array(pos)
-        self._speed = np.array(speed)
+        self.speed = np.array(speed)
 
         # Peut-être trop générique
         self.has_game_state = False
         if game_state is not None:
             self._game_state = game_state
-            self._map = game_state.map
+            self.map = game_state.map
             self.has_game_state = True
-
-    """ ==== PROPRIETES === """
-
-    """ Propriétés sur la position des objets """
+        else:
+            self.map = NullMap()
 
     @property
     def pos(self):
@@ -62,9 +69,9 @@ class Entity:
             [self._pos[0] % self.map.size[0], self._pos[1] % self.map.size[1]]
         )
 
-    @property
-    def map_pos(self):
-        return self.pos
+    @pos.setter
+    def pos(self, pos):
+        self._pos = pos
 
     @property
     def screen_pos(self):
@@ -102,25 +109,6 @@ class Entity:
 
         return np.array([x, y]).astype(int)
 
-    @pos.setter
-    def pos(self, pos):
-        self._pos = pos
-
-    @map_pos.setter
-    def map_pos(self, pos):
-        # Contrôle d'accès
-        self._pos = pos
-
-    """ Vitesse """
-
-    @property
-    def speed(self):
-        return self._speed
-
-    @speed.setter
-    def speed(self, speed):
-        self._speed = speed
-
     """ Propriétés de positions x/y"""
 
     @property
@@ -132,30 +120,12 @@ class Entity:
         return self.screen_pos[1]
 
     @property
-    def map_x(self):
+    def x(self):
         return self.pos[0]
 
     @property
-    def map_y(self):
-        return self.pos[1]
-
-    @property
-    def x(self):
-        return self.map_x
-
-    @property
     def y(self):
-        return self.map_y
-
-    @x.setter
-    @map_x.setter
-    def x(self, x):
-        self._pos[0] = x
-
-    @y.setter
-    @map_y.setter
-    def y(self, y):
-        self._pos[1] = y
+        return self.pos[1]
 
     @property
     def game_state(self):
@@ -163,45 +133,69 @@ class Entity:
             return self._game_state
         raise NoGameStateError(self)
 
-    @property
-    def map(self):
-        if self.has_game_state:
-            return self._map
-        raise NoGameStateError(self)
-    
     def tick(self):
         self.pos += self.speed
 
-import pyglet
-
-class Sprites(Entity, pyglet.sprite.Sprite):
-    def __init__(self, chemin_image=None, polygone=None):
-        """
-        Classe d'un sprite
-        => Implémente les collisions entre sprites
-        => Implémente l'affichage sur l'écran
-        => Peut être une image ou un polygone
-        args : - Nom de fichier
-               - Polygone sous forme de liste de points (x, y)
-        """
-        super(Entity).__init__()
-        super(pyglet.sprite.Sprite).__init__()
-
+class Sprites(ABC):
+    """ Interface pour les sprites """
+    @abstractmethod
+    def draw(self):
+        pass
+    @abstractmethod
     def intersects(self, other):
-        """ Détermine si deux sprites sont en collision """
         pass
 
-class BitmapSprite(Entity):
-    def __init__(self, pos, speed, image, theta=None, game_state=None):
+# On utilise numba pour gagner en rapidité
+@njit
+def check_overlap(mask1, mask2, dx, dy):
+    """Fonction qui teste si deux masques se superposent avec un décalage dx, dy"""
+    height, width = mask1.shape
+
+    for i in range(height):
+        for j in range(width):
+            new_i = i + dy # pixel correspondant dans l'autre image
+            new_j = j + dx
+
+            if 0 <= new_i < height and 0 <= new_j < width:
+                if mask1[i, j] and mask2[new_i, new_j]:
+                    return True
+
+    return False
+
+def get_sprite_mask(sprite):
+    img_data = sprite.image.get_image_data()
+    if img_data.format == "RGBA":
+        i = img_data.get_data('RGBA', sprite.width*4)
+        alpha = np.frombuffer(i, dtype=np.uint8)[::4].astype(bool).reshape(sprite.height, sprite.width)[::BITMAP_RATIO, ::BITMAP_RATIO]
+    else:
+        dims = np.ceil([sprite.width/5, sprite.height/5])
+        return np.ones(dims, dtype=bool)
+    return alpha
+
+class BitmapSprite(Entity, Sprites):
+    def __init__(self, pos, speed,
+                 image,
+                 theta=None,
+                 game_state=None,
+                 use_mask=True,
+                 rotates_often=True):
+        
         super().__init__(pos, speed, game_state=game_state)
+        
         if game_state is not None:
             self.sprite = pyglet.sprite(image, x=Entity.screen_x, y=Entity.screen_y, batch=game_state.batch)
             self.inBatch = True
         else:
             self.sprite = pyglet.sprite(image, x=Entity.screen_x, y=Entity.screen_y)
             self.inBatch = False
+
         self._theta = 0 if theta is None else theta
-        self.sprite.update()
+        self.sprite.update(rotation=self._theta)
+        self.rotates_often = rotates_often
+
+        if self.use_mask:
+            self.mask = get_sprite_mask(self.sprite)
+ 
 
     @property
     def theta(self):
@@ -211,6 +205,8 @@ class BitmapSprite(Entity):
     def set_theta(self, theta):
         self._theta = theta
         self.sprite.update(rotation=theta)
+        if self.use_mask and not self.rotates_often:
+            self.mask = get_sprite_mask(self.sprite)
 
     def draw(self):
         x, y = self.screen_pos
@@ -220,14 +216,27 @@ class BitmapSprite(Entity):
 
     def intersects(self, other):
 
+        if not (self.screen_x < other.screen_x + other.sprite.width and
+            self.screen_x + self.sprite.width > other.screen_x and
+            self.screen_y < other.screen_y + other.sprite.height and
+            self.screen_y + self.sprite.height > other.screen_y):
+            return False  # Bounding boxes do not overlap
+        
+        if not self.use_mask:
+            return True
+        
+        if self.use_mask and self.rotates_often:
+            self.mask = get_sprite_mask(self.sprite)
+        
+        dx = int((self.screen_x - other.screen_x)/BITMAP_RATIO)
+        dy = int((self.screen_y - other.screen_y)/BITMAP_RATIO)
+
+        return check_overlap(self.mask, other.mask, dx, dy)
 
 
-
-
-
-class PolygonSprite(Entity):
+class PolygonSprite(Entity, Sprites):
     def __init__(self, pos, speed, vertices, color, game_state=None, theta=None):
-        Entity.__init__(pos, speed, game_state=game_state)
+        Entity.__init__(self, pos, speed, game_state=game_state)
         self._vertices = np.array(vertices)
         self.color = color
         if theta is not None:
@@ -253,11 +262,11 @@ class PolygonSprite(Entity):
     def vertices(self):
         if hasattr(self, 'theta'):
             return self.screen_pos + self.rotation_matrix @ self._vertices
-        return self.screen_pos + self._vertices
+        return self.screen_pos[:, np.newaxis] + self._vertices
 
     @property
     def polygon(self):
-        return Poly(self.pos + self.vertices)
+        return Poly((self.pos[:, np.newaxis] + self.vertices).transpose)
     
     def intersects(self, other):
         if isinstance(other, PolygonSprite):
@@ -272,3 +281,12 @@ class PolygonSprite(Entity):
                              pyglet.gl.GL_POLYGON,
                              ('v2f', (self.screen_pos + vertices).reshape(-1)),
                              ('c3B', self.color * len(vertices)))
+
+def nagonSprite(n, scale, color, theta=0):
+    pos = [0, 0]
+    speed = [0, 0]
+    vertices = create_nagon_vertices(n, scale, theta = theta)
+    
+    return PolygonSprite(pos, speed, vertices, color)
+
+nagonSprite(4, 1, (255, 0, 0)).intersects(nagonSprite(3, 1, (255, 0, 0)))

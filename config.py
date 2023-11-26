@@ -19,7 +19,7 @@ WIN_SIZE = [1280, 720]
 MAP_SIZE = [1280, 720]
 BACKGROUND_COLOR = (1,1,1)
 
-
+BITMAP_RATIO = 5
 # ----- Partie Astéroïdes -----
 
 
