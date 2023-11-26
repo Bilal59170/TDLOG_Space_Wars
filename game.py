@@ -5,7 +5,7 @@ L'instance de jeu est nommée game_state
 
 """
 import pyglet
-import ship
+from ship import *
 import config
 import numpy as np
 from pyglet.window import key
@@ -17,10 +17,10 @@ class Game:
 
     def __init__(self):
         self.endgame = False
-        self.player = ship(
-            np.arrey([config.MAP_SIZE[0] / 2, config.MAP_SIZE[1] / 2]),
+        self.player = Ship(
+            np.array([config.MAP_SIZE[0] / 2, config.MAP_SIZE[1] / 2]),
             np.array([0, 0]),
-            config.SIZE_SHIP,
+            config.SHIP_SIZE,
         )
         self.asteroids = []
         self.ennemies = []
