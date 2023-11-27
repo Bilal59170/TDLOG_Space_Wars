@@ -51,6 +51,6 @@ class Ship(entity.Entity):
             rot, self.size * np.array([np.cos(np.pi / 6), np.sin(np.pi / 6)])
         )
 
-        vertices = [V1[0], V1[1], V2[0], V2[1], V3[0], V3[1]]
-        triangle = Polygon(vertices, color=(255, 0, 0))
+        vertices = np.array([V1, V2, V3]).astype(int)
+        triangle = Polygon(*vertices, color=(0, 255, 0)) #opérateur *: unpack
         triangle.draw()
