@@ -1,3 +1,16 @@
+import pyglet
+from pyglet.window import key, mouse
+from ship import Ship
+import numpy as np
+
+# from game import *
+
+"""@package docstring
+Fichier d'application (sert pour l'instant à tester le code produit)
+
+
+"""
+
 """
     Scénario d'une partie :
     Génération initiale de terrain (skip for v1)
@@ -12,12 +25,6 @@
     si game_time % FRAME_TIME == 0:
         affichage
 """
-import pyglet
-from pyglet.window import key, mouse
-from ship import Ship
-import numpy as np
-
-# from game import *
 
 
 # Create a window

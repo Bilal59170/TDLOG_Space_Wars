@@ -1,5 +1,4 @@
-"""
-
+"""@package docstring
 Fichier de configuration - Contient toutes les constantes d'exécution du programme
 
 """

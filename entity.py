@@ -1,4 +1,4 @@
-"""
+"""@package docstring
 Classe entité, dont hérite les projectiles, astéroïdes, le vaisseau, et les ennemis
 
 Les différentes classes héritant de celle-ci ont toutes diverses méthodes :
