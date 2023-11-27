@@ -1,7 +1,7 @@
-"""
+"""@package docstring
 Implémentation du vaisseau
-Implémentera Entity
 
+Implémente Entity
 """
 import numpy as np
 import entity

@@ -1,5 +1,6 @@
-"""
+"""@package docstring
 Fichier où l'on intègre la boucle de jeu
+
 Fait appel à l'UI pour l'affichage
 L'instance de jeu est nommée game_state
 
@@ -27,24 +28,26 @@ class Game:
         self.entities = [self.player] + self.asteroids + self.ennemies
         self.time = 0
         self.window = pyglet.window.Window()
+        self.keys = key.KeyStateHandler()
+        self.window.push_handlers(self.keys)
 
     def remove(self, object):
         pass
 
     def update_speed(self):
-        keys = key.KeyStateHandler()
-        self.window.push_handlers(keys)
-        if keys[key.Z] or keys[key.UP]:
+        self.keys = key.KeyStateHandler()
+        self.window.push_handlers(self.keys)
+        if self.keys[key.Z] or self.keys[key.UP]:
             self.player.speed = np.array([0, -1])
-        elif keys[key.Q] or keys[key.LEFT]:
+        elif self.keys[key.Q] or self.keys[key.LEFT]:
             self.player.speed = np.array([-1, 0])
-        elif keys[key.S] or keys[key.DOWN]:
+        elif self.keys[key.S] or self.keys[key.DOWN]:
             self.player.speed = np.array([0, 1])
-        elif keys[key.D] or keys[key.RIGHT]:
+        elif self.keys[key.D] or self.keys[key.RIGHT]:
             self.player.speed = np.array([1, 0])
 
-    def update_angle(self,x,y):
-        self.player.get_angle(x,y)
+    def update_angle(self, x, y):
+        self.player.get_angle(x, y)
 
     def display(self):
         self.window.clear()
@@ -61,12 +64,12 @@ class Game:
         if self.time % config.FRAME_TIME:
             self.display()
 
+    # fonction boucle principale
     def run(self):
         self.display()
-        while(self.endgame == False):
+        while self.endgame is False:
             self.update()
             keys = key.KeyStateHandler()
             self.window.push_handlers(keys)
             if keys[key.O]:
                 self.endgame = True
-        

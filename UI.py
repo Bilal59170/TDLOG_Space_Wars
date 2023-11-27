@@ -1,4 +1,4 @@
-"""
+"""@package docstring
 Interface Graphique du jeu
 
 - Classe intégrant l'interface graphique du jeu
