@@ -44,8 +44,8 @@ class Game:
         elif keys[key.D] or keys[key.RIGHT]:
             self.player.speed = np.array([1, 0])
 
-    def update_angle(self,x,y):
-        self.player.get_angle(x,y)
+    def update_angle(self, x, y):
+        self.player.get_angle(x, y)
 
     def display(self):
         self.window.clear()
@@ -64,10 +64,9 @@ class Game:
 
     def run(self):
         self.display()
-        while(self.endgame == False):
+        while self.endgame == False:
             self.update()
             keys = key.KeyStateHandler()
             self.window.push_handlers(keys)
             if keys[key.O]:
                 self.endgame = True
-        
