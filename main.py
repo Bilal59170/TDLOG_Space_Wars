@@ -33,36 +33,17 @@ window = pyglet.window.Window()
 # music = pyglet.resource.media("ost/bgm_forever.mp3")
 # music.play()
 
-
-@window.event
-def on_key_press(symbol, modifiers):
-    # Move ship
-    if symbol == key.Z or symbol == key.UP:
-        speed_vect = [0, -1]
-        print("Moving up.")
-    elif symbol == key.Q or symbol == key.LEFT:
-        speed_vect = [-1, 0]
-        print("Moving left.")
-    elif symbol == key.S or symbol == key.DOWN:
-        speed_vect = [0, 1]
-        print("Moving down.")
-    elif symbol == key.D or symbol == key.RIGHT:
-        speed_vect = [1, 0]
-        print("Moving right.")
-    # ship.move(speed_vect)
+# @window.event
+# def on_mouse_press(x, y, button, modifiers):
+#     if button == mouse.LEFT:
+#         # Ship.shoot()
+#         print("The left mouse button was pressed.")
 
 
-@window.event
-def on_mouse_press(x, y, button, modifiers):
-    if button == mouse.LEFT:
-        # Ship.shoot()
-        print("The left mouse button was pressed.")
-
-
-@window.event
-def on_mouse_drag(x, y, dx, dy, buttons, modifiers):
-    # Modify ship orientation
-    print(f"Mouse moved. Current coordinates : {x}, {y}")
+# @window.event
+# def on_mouse_drag(x, y, dx, dy, buttons, modifiers):
+#     # Modify ship orientation
+#     print(f"Mouse moved. Current coordinates : {x}, {y}")
 
 
 @window.event
@@ -70,16 +51,6 @@ def on_draw():
     # Clear the window
     window.clear()
 
-    # Create a batch to hold our graphics
-    # batch = pyglet.graphics.Batch()
-
-    # Draw a red rectangle
-    # x, y, width, height = 100, 100, 200, 150
-    # radius = 25
-    # pyglet.shapes.Circle(x, y, radius, color=(255, 0, 0), batch=batch).draw()
-
-    # Create the ship
-    # current_game = Game()
     ship_test = Ship(np.array([100, 100]), np.array([0, 0]), 50)
     ship_test.draw()
 
