@@ -3,6 +3,11 @@ import numpy as np
 from entity import Entity
 from config import *
 
+"""@package docstring
+Module contenant le code permettant de faire fonctionner les astéroïdes
+
+"""
+
 
 class Asteroid(Entity):
     (

@@ -1,5 +1,6 @@
-"""
+"""@package docstring
 Implémentation d'un projectile, tiré par le vaisseau
+
 Hérite de la classe Entity pour la gestion de la position
 
 Propriétés d'un projectile :

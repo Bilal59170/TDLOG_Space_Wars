@@ -1,3 +1,10 @@
+"""@package docstring
+Fichier de sprites pour les entités
+
+Classes encapsulant les entités permettant leur affichage
+et leur contrôle éventuel par le joueur.
+"""
+
 # from typing import Any
 from abc import ABC, abstractmethod
 
