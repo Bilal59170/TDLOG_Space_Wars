@@ -28,13 +28,13 @@ class Game:
         self.entities = [self.player] + self.asteroids + self.ennemies
         self.time = 0
         self.window = pyglet.window.Window()
+        keys = key.KeyStateHandler()
+        self.window.push_handlers(keys)
 
     def remove(self, object):
         pass
 
     def update_speed(self):
-        keys = key.KeyStateHandler()
-        self.window.push_handlers(keys)
         if keys[key.Z] or keys[key.UP]:
             self.player.speed = np.array([0, -1])
         elif keys[key.Q] or keys[key.LEFT]:
@@ -62,10 +62,10 @@ class Game:
         if self.time % config.FRAME_TIME:
             self.display()
 
-    #fonction boucle principale
+    # fonction boucle principale
     def run(self):
         self.display()
-        while self.endgame == False:
+        while self.endgame is False:
             self.update()
             keys = key.KeyStateHandler()
             self.window.push_handlers(keys)
