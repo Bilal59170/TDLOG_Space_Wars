@@ -15,15 +15,16 @@
 import pyglet
 from pyglet.window import key, mouse
 from ship import Ship
-from game import *
 import numpy as np
+
+# from game import *
 
 
 # Create a window
 window = pyglet.window.Window()
 
-#music = pyglet.resource.media("ost/bgm_forever.mp3")
-#music.play()
+# music = pyglet.resource.media("ost/bgm_forever.mp3")
+# music.play()
 
 
 @window.event
@@ -63,18 +64,17 @@ def on_draw():
     window.clear()
 
     # Create a batch to hold our graphics
-    batch = pyglet.graphics.Batch()
+    # batch = pyglet.graphics.Batch()
 
     # Draw a red rectangle
-    #x, y, width, height = 100, 100, 200, 150
-    #radius = 25
-    #pyglet.shapes.Circle(x, y, radius, color=(255, 0, 0), batch=batch).draw()
+    # x, y, width, height = 100, 100, 200, 150
+    # radius = 25
+    # pyglet.shapes.Circle(x, y, radius, color=(255, 0, 0), batch=batch).draw()
 
-    #Create the ship
-    #current_game = Game()
-    ship_test = Ship(np.array([100,100]), np.array([0, 0]), 50)
+    # Create the ship
+    # current_game = Game()
+    ship_test = Ship(np.array([100, 100]), np.array([0, 0]), 50)
     ship_test.draw()
-
 
 
 # Start the main event loop (+define the tick duration in seconds for update functions)

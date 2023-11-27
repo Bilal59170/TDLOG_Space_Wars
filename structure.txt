@@ -7,4 +7,6 @@ Structure du projet : Fichier précisant à quoi ressemble le projet pour que to
   - Cahier des charges : Description du résultat final attendu du point de vue utilisateur (fonctionnalités, gameplay).
   - Etapes / Programme des versions : Ordonnancement de fonctionnalités à implémenter dans le projet (potentiel recouvrement / développement en parallèle possible aux stades les plus avancés)
   - Ressources : liens vers tout site Web susceptible de nous aider à développer plus efficacement le projet et à mieux comprendre les implémentations des autres
-- drafts : Code non déployé dans le projet, mais susceptible de l'être à terme, ou d'aider les autres développeurs (module inachevé, fonctionnalité dont le développement est en pause...)
+
+Pour publier du code non déployé dans le projet, mais susceptible de l'être à terme, ou d'aider les autres développeurs (module inachevé, fonctionnalité dont le développement est en pause...)
+=> forker !
