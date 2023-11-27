@@ -43,6 +43,9 @@ class Game:
         elif keys[key.D] or keys[key.RIGHT]:
             self.player.speed = np.array([1, 0])
 
+    def update_angle(self,x,y):
+        self.player.get_angle(x,y)
+
     def display(self):
         self.window.clear()
         for e in self.entities:
@@ -53,5 +56,7 @@ class Game:
         self.time += config.TICK_TIME
         for e in self.entities:
             e.tick()
+        x, y = pyglet.window.mouse.get_pos()
+        self.update_angle(x, y)
         if self.time % config.FRAME_TIME:
             self.display()
