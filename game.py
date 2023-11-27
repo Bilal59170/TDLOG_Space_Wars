@@ -62,6 +62,7 @@ class Game:
         if self.time % config.FRAME_TIME:
             self.display()
 
+    #fonction boucle principale
     def run(self):
         self.display()
         while self.endgame == False:
