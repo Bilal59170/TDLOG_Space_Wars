@@ -60,3 +60,13 @@ class Game:
         self.update_angle(x, y)
         if self.time % config.FRAME_TIME:
             self.display()
+
+    def run(self):
+        self.display()
+        while(self.endgame == False):
+            self.update()
+            keys = key.KeyStateHandler()
+            self.window.push_handlers(keys)
+            if keys[key.O]:
+                self.endgame = True
+        
