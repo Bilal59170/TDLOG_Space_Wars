@@ -2,6 +2,8 @@ import pyglet
 from pyglet.window import key, mouse
 from ship import Ship
 import numpy as np
+import game
+import config
 
 # from game import *
 
@@ -29,6 +31,24 @@ Fichier d'application (sert pour l'instant à tester le code produit)
 
 # Create a window
 window = pyglet.window.Window()
+game_test = game.Game()
+
+if __name__ ==  '__main__':
+    #initialisation  du vaisseau test
+
+
+    @window.event
+    def on_draw():
+        # Clear the window
+        window.clear()
+        game.player.draw()
+
+    
+    # Start the main event loop (+define the tick duration in seconds for update functions)
+    pyglet.clock.schedule_interval(game_test.update, config.TICK_TIME)
+    pyglet.app.run()
+
+
 
 # music = pyglet.resource.media("ost/bgm_forever.mp3")
 # music.play()
@@ -46,15 +66,4 @@ window = pyglet.window.Window()
 #     print(f"Mouse moved. Current coordinates : {x}, {y}")
 
 
-@window.event
-def on_draw():
-    # Clear the window
-    window.clear()
 
-    ship_test = Ship(np.array([100, 100]), np.array([0, 0]), 50)
-    ship_test.draw()
-
-
-# Start the main event loop (+define the tick duration in seconds for update functions)
-# pyglet.clock.schedule_interval(update, TICK_TIME)
-pyglet.app.run()
