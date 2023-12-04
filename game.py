@@ -20,7 +20,7 @@ class Game:
         self.endgame = False
         self.player = Ship(
             np.array([config.MAP_SIZE[0] / 2, config.MAP_SIZE[1] / 2]),
-            np.array([0, 0]),
+            np.array([0., 0.]),
             config.SHIP_SIZE,
         )
         self.asteroids = []
@@ -44,14 +44,19 @@ class Game:
     def update_speed(self):
         #self.keys = key.KeyStateHandler()
         #self.window.push_handlers(self.keys)
+        
+        
         if self.keys[key.Z] or self.keys[key.UP]:
-            self.player.speed = np.array([0, 1])
-        elif self.keys[key.Q] or self.keys[key.LEFT]:
-            self.player.speed = np.array([-1, 0])
-        elif self.keys[key.S] or self.keys[key.DOWN]:
-            self.player.speed = np.array([0, -1])
-        elif self.keys[key.D] or self.keys[key.RIGHT]:
-            self.player.speed = np.array([1, 0])
+            self.player.speed += np.array([0., 1.])
+        if self.keys[key.Q] or self.keys[key.LEFT]:
+            self.player.speed += np.array([-1., 0.])
+        if self.keys[key.S] or self.keys[key.DOWN]:
+            self.player.speed += np.array([0., -1.])
+        if self.keys[key.D] or self.keys[key.RIGHT]:
+            self.player.speed += np.array([1., 0.])
+
+        norme = np.linalg.norm(self.player.speed) + 0.0001
+        self.player.speed /= norme
 
     def update_angle(self, x, y):
         self.player.get_angle(x, y)
