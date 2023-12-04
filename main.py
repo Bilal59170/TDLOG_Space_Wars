@@ -41,7 +41,7 @@ if __name__ ==  '__main__':
     def on_draw():
         # Clear the window
         window.clear()
-        game.player.draw()
+        game_test.player.draw()
 
     
     # Start the main event loop (+define the tick duration in seconds for update functions)

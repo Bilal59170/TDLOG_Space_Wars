@@ -61,7 +61,7 @@ class Game:
         for e in self.entities:
             e.draw()
 
-    def update(self):
+    def update(self, *other):
         self.update_speed()
         self.time += config.TICK_TIME
         for e in self.entities:
