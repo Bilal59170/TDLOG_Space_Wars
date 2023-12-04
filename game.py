@@ -70,6 +70,7 @@ class Game:
         if self.time % config.FRAME_TIME:
             self.display()
 
+    #dedi a broni
     # fonction boucle principale
     def run(self):
         self.display()
