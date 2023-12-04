@@ -7,9 +7,11 @@ L'instance de jeu est nommée game_state
 """
 import pyglet
 from ship import *
+from projectiles import *
 import config
 import numpy as np
 from pyglet.window import key
+from pyglet.window import mouse
 
 
 class Game:
@@ -17,7 +19,7 @@ class Game:
     """ """
 
     def __init__(self):
-        self.endgame = False
+        self.bool = False
         self.player = Ship(
             np.array([config.MAP_SIZE[0] / 2, config.MAP_SIZE[1] / 2]),
             np.array([0., 0.]),
@@ -30,6 +32,8 @@ class Game:
         self.window = pyglet.window.Window()
         self.keys = key.KeyStateHandler()
         self.window.push_handlers(self.keys)
+        self.mousebuttons = mouse.MouseStateHandler()
+        self.window.push_handlers(self.mousebuttons)
         self.mouse_x = 0
         self.mouse_y = 0
 
@@ -66,6 +70,17 @@ class Game:
         for e in self.entities:
             e.draw()
 
+    def endgame(self):
+        if self.keys[key.O]:
+            self.bool = True
+
+    def new_projectile(self):
+        print("a")
+        print(self.mousebuttons[mouse.RIGHT])
+        if self.mousebuttons[mouse.RIGHT]:
+                self.entities.append(self.player.throw_projectile())
+                print("monstre")
+
     def update(self, *other):
         self.update_speed()
         self.time += config.TICK_TIME
@@ -75,13 +90,10 @@ class Game:
         if self.time % config.FRAME_TIME:
             self.display()
 
-    #dedi a broni
     # fonction boucle principale
     def run(self):
         self.display()
-        while self.endgame is False:
+        while self.bool is False:
             self.update()
-            keys = key.KeyStateHandler()
-            self.window.push_handlers(keys)
-            if keys[key.O]:
-                self.endgame = True
+            self.new_projectile()
+            print("monstre")
