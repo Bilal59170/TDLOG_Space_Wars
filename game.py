@@ -45,11 +45,11 @@ class Game:
         #self.keys = key.KeyStateHandler()
         #self.window.push_handlers(self.keys)
         if self.keys[key.Z] or self.keys[key.UP]:
-            self.player.speed = np.array([0, -1])
+            self.player.speed = np.array([0, 1])
         elif self.keys[key.Q] or self.keys[key.LEFT]:
             self.player.speed = np.array([-1, 0])
         elif self.keys[key.S] or self.keys[key.DOWN]:
-            self.player.speed = np.array([0, 1])
+            self.player.speed = np.array([0, -1])
         elif self.keys[key.D] or self.keys[key.RIGHT]:
             self.player.speed = np.array([1, 0])
 

@@ -30,17 +30,19 @@ Fichier d'application (sert pour l'instant à tester le code produit)
 
 
 # Create a window
-window = pyglet.window.Window()
+# window = pyglet.window.Window()
 game_test = game.Game()
+game_window = game_test.window
+
 
 if __name__ ==  '__main__':
     #initialisation  du vaisseau test
 
 
-    @window.event
-    def on_draw():
+    @game_window.event
+    def on_draw(): 
         # Clear the window
-        window.clear()
+        game_window.clear()
         game_test.player.draw()
 
     
