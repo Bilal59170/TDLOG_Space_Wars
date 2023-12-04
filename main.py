@@ -87,3 +87,4 @@ def on_draw():
 # Start the main event loop (+define the tick duration in seconds for update functions)
 # pyglet.clock.schedule_interval(update, TICK_TIME)
 pyglet.app.run()
+
