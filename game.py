@@ -63,7 +63,9 @@ class Game(pyglet.event.EventDispatcher):
         self.batch = []
         self.time = 0
         self.window = pyglet.window.Window(*config.WIN_SIZE)
-        self.window.push_handlers(self.player)
+        #push handler permet de ne pas utiliser de décorateur @windows.evnt. la fonction qui est appelée 
+        # est on_key_press. Lorsqu'on décide de fermer la fenêtre, la fonction on_close s'execute
+        self.window.push_handlers(self.player) 
         self.window.push_handlers(self)
 
     def remove(self, object):
@@ -99,11 +101,11 @@ class Game(pyglet.event.EventDispatcher):
     
     def on_key_press(self, symbol, modifiers):
         if symbol == key.Z or symbol == key.UP:
-            self.player.speed = np.array([0, -1])
+            self.player.speed = np.array([0, 1])
         elif symbol == key.Q or symbol == key.LEFT:
             self.player.speed = np.array([-1, 0])
         elif symbol == key.S or symbol == key.DOWN:
-            self.player.speed = np.array([0, 1])
+            self.player.speed = np.array([0, -1])
         elif symbol == key.D or symbol == key.RIGHT:
             self.player.speed = np.array([1, 0])
     

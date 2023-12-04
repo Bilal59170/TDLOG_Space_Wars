@@ -183,10 +183,10 @@ class BitmapSprite(Entity, Sprites):
         super().__init__(pos, speed, game_state=game_state)
         
         if game_state is not None:
-            self.sprite = pyglet.sprite(image, x=Entity.screen_x, y=Entity.screen_y, batch=game_state.batch)
+            self.sprite = pyglet.sprite.Sprite(img=image, x=Entity.screen_x, y=Entity.screen_y, batch=game_state.batch)
             self.inBatch = True
         else:
-            self.sprite = pyglet.sprite(image, x=Entity.screen_x, y=Entity.screen_y)
+            self.sprite = pyglet.sprite.Sprite(img=image, x=Entity.screen_x, y=Entity.screen_y)
             self.inBatch = False
 
         self._theta = 0 if theta is None else theta
@@ -235,6 +235,7 @@ class BitmapSprite(Entity, Sprites):
 
 
 class PolygonSprite(Entity, Sprites):
+    #Forme des Polygones en sprite
     def __init__(self, pos, speed, vertices, color, game_state=None, theta=None):
         Entity.__init__(self, pos, speed, game_state=game_state)
         self._vertices = np.array(vertices)
@@ -275,7 +276,7 @@ class PolygonSprite(Entity, Sprites):
             raise ValueError("Collision not implemented")
     
     def draw(self):
-        pyglet.gl.glColor3ub(*self.color)
+        # pyglet.gl.glColor3ub(*self.color)
         vertices = self.vertices
         pyglet.graphics.draw(len(vertices),
                              pyglet.gl.GL_POLYGON,

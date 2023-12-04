@@ -13,16 +13,33 @@
         affichage
 """
 import pyglet
-from pyglet.window import key, mouse
-from game import Game
-from entity import *
+# from pyglet.window import key, mouse
+# from game import Game
+# from entity import *
+# import config
 
 
-if __name__ == "__main__":
-    game = Game()
+img_caca = pyglet.image.load("Sprites/caca.png")
+sprite_caca = pyglet.sprite.Sprite(img_caca, x=0, y=0)
 
-    sprite = nagonSprite(8, 10, (255, 0, 0))
-    game.asteroids.append(sprite)
-    game.entities.append(sprite)
+# if __name__ == "__main__":
+game_window = pyglet.window.Window()
 
-    game.run()
+@game_window.event
+def on_draw():
+    # game_window.clear()
+    sprite_caca.draw()
+
+pyglet.app.run()
+    
+
+
+    # game = Game()
+
+    # sprite = nagonSprite(8, 10, (255, 0, 0))
+    # game.asteroids.append(sprite)
+    # game.entities.append(sprite)
+
+        # caca = BitmapSprite(np.array([config.MAP_SIZE[0] / 2, config.MAP_SIZE[1] / 2]),
+    #         np.array([0, 0]), img_caca)
+    #game.run()
