@@ -69,3 +69,26 @@ if __name__ ==  '__main__':
 
 
 
+
+@window.event
+def on_draw():
+    # Clear the window
+    window.clear()
+
+    # Create a batch to hold our graphics
+    # batch = pyglet.graphics.Batch()
+
+    # Draw a red rectangle
+    # x, y, width, height = 100, 100, 200, 150
+    # radius = 25
+    # pyglet.shapes.Circle(x, y, radius, color=(255, 0, 0), batch=batch).draw()
+
+    # Create the ship
+    # current_game = Game()
+    ship_test = Ship(np.array([100, 100]), np.array([0, 0]), 50)
+    ship_test.draw()
+
+
+# Start the main event loop (+define the tick duration in seconds for update functions)
+# pyglet.clock.schedule_interval(update, TICK_TIME)
+pyglet.app.run()
