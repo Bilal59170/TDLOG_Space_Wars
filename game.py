@@ -30,6 +30,13 @@ class Game:
         self.window = pyglet.window.Window()
         self.keys = key.KeyStateHandler()
         self.window.push_handlers(self.keys)
+        self.mouse_x = 0
+        self.mouse_y = 0
+
+        @self.window.event
+        def on_mouse_motion(x, y, dx, dy):
+            self.mouse_x, self.mouse_y = x, y
+
 
     def remove(self, object):
         pass
@@ -59,8 +66,7 @@ class Game:
         self.time += config.TICK_TIME
         for e in self.entities:
             e.tick()
-        x, y = pyglet.window.mouse.get_pos()
-        self.update_angle(x, y)
+        self.update_angle(self.mouse_x, self.mouse_y)
         if self.time % config.FRAME_TIME:
             self.display()
 
