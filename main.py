@@ -2,6 +2,8 @@ import pyglet
 from pyglet.window import key, mouse
 from ship import Ship
 import numpy as np
+import game
+import config
 
 # from game import *
 
@@ -29,40 +31,41 @@ Fichier d'application (sert pour l'instant à tester le code produit)
 
 # Create a window
 window = pyglet.window.Window()
+game_test = game.Game()
+
+if __name__ ==  '__main__':
+    #initialisation  du vaisseau test
+
+
+    @window.event
+    def on_draw():
+        # Clear the window
+        window.clear()
+        game.player.draw()
+
+    
+    # Start the main event loop (+define the tick duration in seconds for update functions)
+    pyglet.clock.schedule_interval(game_test.update, config.TICK_TIME)
+    pyglet.app.run()
+
+
 
 # music = pyglet.resource.media("ost/bgm_forever.mp3")
 # music.play()
 
-
-@window.event
-def on_key_press(symbol, modifiers):
-    # Move ship
-    if symbol == key.Z or symbol == key.UP:
-        speed_vect = [0, -1]
-        print("Moving up.")
-    elif symbol == key.Q or symbol == key.LEFT:
-        speed_vect = [-1, 0]
-        print("Moving left.")
-    elif symbol == key.S or symbol == key.DOWN:
-        speed_vect = [0, 1]
-        print("Moving down.")
-    elif symbol == key.D or symbol == key.RIGHT:
-        speed_vect = [1, 0]
-        print("Moving right.")
-    # ship.move(speed_vect)
+# @window.event
+# def on_mouse_press(x, y, button, modifiers):
+#     if button == mouse.LEFT:
+#         # Ship.shoot()
+#         print("The left mouse button was pressed.")
 
 
-@window.event
-def on_mouse_press(x, y, button, modifiers):
-    if button == mouse.LEFT:
-        # Ship.shoot()
-        print("The left mouse button was pressed.")
+# @window.event
+# def on_mouse_drag(x, y, dx, dy, buttons, modifiers):
+#     # Modify ship orientation
+#     print(f"Mouse moved. Current coordinates : {x}, {y}")
 
 
-@window.event
-def on_mouse_drag(x, y, dx, dy, buttons, modifiers):
-    # Modify ship orientation
-    print(f"Mouse moved. Current coordinates : {x}, {y}")
 
 
 @window.event

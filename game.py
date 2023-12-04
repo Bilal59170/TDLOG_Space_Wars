@@ -35,8 +35,8 @@ class Game:
         pass
 
     def update_speed(self):
-        self.keys = key.KeyStateHandler()
-        self.window.push_handlers(self.keys)
+        #self.keys = key.KeyStateHandler()
+        #self.window.push_handlers(self.keys)
         if self.keys[key.Z] or self.keys[key.UP]:
             self.player.speed = np.array([0, -1])
         elif self.keys[key.Q] or self.keys[key.LEFT]:
