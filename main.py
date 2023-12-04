@@ -30,17 +30,19 @@ Fichier d'application (sert pour l'instant à tester le code produit)
 
 
 # Create a window
-window = pyglet.window.Window()
+# window = pyglet.window.Window()
 game_test = game.Game()
+game_window = game_test.window
+
 
 if __name__ ==  '__main__':
     #initialisation  du vaisseau test
 
 
-    @window.event
-    def on_draw():
+    @game_window.event
+    def on_draw(): 
         # Clear the window
-        window.clear()
+        game_window.clear()
         game_test.player.draw()
 
     
@@ -66,28 +68,4 @@ if __name__ ==  '__main__':
 #     print(f"Mouse moved. Current coordinates : {x}, {y}")
 
 
-
-
-@window.event
-def on_draw():
-    # Clear the window
-    window.clear()
-
-    # Create a batch to hold our graphics
-    # batch = pyglet.graphics.Batch()
-
-    # Draw a red rectangle
-    # x, y, width, height = 100, 100, 200, 150
-    # radius = 25
-    # pyglet.shapes.Circle(x, y, radius, color=(255, 0, 0), batch=batch).draw()
-
-    # Create the ship
-    # current_game = Game()
-    ship_test = Ship(np.array([100, 100]), np.array([0, 0]), 50)
-    ship_test.draw()
-
-
-# Start the main event loop (+define the tick duration in seconds for update functions)
-# pyglet.clock.schedule_interval(update, TICK_TIME)
-pyglet.app.run()
 
