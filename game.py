@@ -15,9 +15,35 @@ class Map:
         self.size = config.MAP_SIZE
         self.center = [0,0]
 
+
 class Game(pyglet.event.EventDispatcher):
 
-    """ """
+    """ 
+    Classe principale du jeu
+
+    Attributs : 
+    - endgame : booléen qui indique si la partie est terminée
+    - map : instance de la classe Map
+    - player : instance de la classe Ship
+    - asteroids : liste d'instances de la classe Asteroid
+    - ennemies : liste d'instances de la classe Ennemy
+    - entities : liste d'instances de la classe Entity
+    - batch : batch d'objets
+    - time : ticks de jeu
+    - window : fenêtre pyglet
+
+    Méthodes :
+    - remove : supprime un objet de la liste d'entités
+    - display : affiche la fenêtre de jeu
+    - update : met à jour les entités
+    - run : lance la boucle de jeu
+
+    Méthodes de gestion des événements :
+    - on_close : ferme la fenêtre de jeu
+    - on_key_press : gère les événements liés aux touches du clavier
+    
+    
+    """
 
     def __init__(self):
         super().__init__()
@@ -30,6 +56,7 @@ class Game(pyglet.event.EventDispatcher):
             config.SHIP_SIZE,
             game_state=self
         )
+
         self.asteroids = []
         self.ennemies = []
         self.entities = [self.player] + self.asteroids + self.ennemies
@@ -43,7 +70,7 @@ class Game(pyglet.event.EventDispatcher):
         pass
 
     def display(self):
-        pyglet.gl.glClearColor(*config.BACKGROUND_COLOR, 1)
+        pyglet.gl.glClearColor(*config.BACKGROUND_COLOR, 1) # Set the background color
         for e in self.entities:
             e.draw()
 
@@ -51,8 +78,8 @@ class Game(pyglet.event.EventDispatcher):
         self.time += config.TICK_TIME
         for e in self.entities:
             e.tick()
-        self.window.clear()
         if self.time % config.FRAME_TIME:
+            self.window.clear()
             self.display()
     
     
@@ -63,10 +90,12 @@ class Game(pyglet.event.EventDispatcher):
             self.window.flip()
             if self.endgame:
                 break
+            
 
     def on_close(self):
         self.endgame = True
         pyglet.app.exit()
+
     
     def on_key_press(self, symbol, modifiers):
         if symbol == key.Z or symbol == key.UP:
@@ -79,5 +108,3 @@ class Game(pyglet.event.EventDispatcher):
             self.player.speed = np.array([1, 0])
     
 
-game = Game()
-game.run()

@@ -289,4 +289,3 @@ def nagonSprite(n, scale, color, theta=0):
     
     return PolygonSprite(pos, speed, vertices, color)
 
-nagonSprite(4, 1, (255, 0, 0)).intersects(nagonSprite(3, 1, (255, 0, 0)))
