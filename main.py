@@ -17,12 +17,23 @@ from pyglet.window import key, mouse
 from game import Game
 from entity import *
 
+from asteroids.asteroids import *
 
-if __name__ == "__main__":
+if __name__ == "__main__":  
     game = Game()
 
-    sprite = nagonSprite(8, 10, (255, 0, 0))
+    pos = [0, 0]
+    speed = [0, 0]
+    vertices = create_nagon_vertices(5, 100)
+    
+    
+    sprite = PolygonSprite(pos, speed, vertices, (255,255,0))
+    sprite.game_state = game
     game.asteroids.append(sprite)
     game.entities.append(sprite)
+
+    asteroid = BigAsteroid([100, 100], [0, 0], game)
+    game.asteroids.append(asteroid)
+    game.entities.append(asteroid)
 
     game.run()

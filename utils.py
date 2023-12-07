@@ -1,4 +1,5 @@
 import numpy as np
+import pyglet
 
 def rotate_coordinates(rotation_matrix, coordinates):
     return rotation_matrix @ coordinates
@@ -16,3 +17,15 @@ def create_nagon_vertices(n, scale, theta = 0):
         y_coordinates = scale * np.sin(angles)
 
         return x_coordinates, y_coordinates
+
+def draw_bar(center, width, height, color):
+    """ Affiche une barre à l'écran. Voir le schéma bar.drawio """
+    x, y = center
+    r = height/2
+    rectangle = pyglet.shapes.Rectangle(x-width/2+r, y-r, width/2-2*r, r, color=color)
+    circle_left = pyglet.shapes.Circle(x-width/2+r, y, r, color=color)
+    circle_right = pyglet.shapes.Circle(x+width/2-r, y, r, color=color)
+
+    rectangle.draw()
+    circle_left.draw()
+    circle_right.draw()

@@ -9,11 +9,12 @@ from ship import Ship
 import config
 import numpy as np
 from pyglet.window import key
+import random
 
 class Map:
     def __init__(self) -> None:
         self.size = config.MAP_SIZE
-        self.center = [0,0]
+        self.center = [config.MAP_SIZE[0]/2, config.MAP_SIZE[1]/2]
 
 
 class Game(pyglet.event.EventDispatcher):
@@ -60,11 +61,12 @@ class Game(pyglet.event.EventDispatcher):
         self.asteroids = []
         self.ennemies = []
         self.entities = [self.player] + self.asteroids + self.ennemies
-        self.batch = []
+        self.batch = pyglet.graphics.Batch()
         self.time = 0
         self.window = pyglet.window.Window(*config.WIN_SIZE)
         self.window.push_handlers(self.player)
         self.window.push_handlers(self)
+
 
     def remove(self, object):
         pass
@@ -73,6 +75,7 @@ class Game(pyglet.event.EventDispatcher):
         pyglet.gl.glClearColor(*config.BACKGROUND_COLOR, 1) # Set the background color
         for e in self.entities:
             e.draw()
+        self.batch.draw()
 
     def update(self):
         self.time += config.TICK_TIME
@@ -90,7 +93,7 @@ class Game(pyglet.event.EventDispatcher):
             self.window.flip()
             if self.endgame:
                 break
-            
+
 
     def on_close(self):
         self.endgame = True

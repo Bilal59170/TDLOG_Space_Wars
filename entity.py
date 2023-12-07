@@ -45,8 +45,8 @@ class NoGameStateError(Exception):
 
 class NullMap:
     def __init__(self):
-        self.size = (0,0)
-        self.center = (0,0)
+        self.size = MAP_SIZE
+        self.center = (MAP_SIZE[0]/2,MAP_SIZE[1]/2)
 
 class Entity:
 
@@ -132,6 +132,12 @@ class Entity:
         if self.has_game_state:
             return self._game_state
         raise NoGameStateError(self)
+    
+    @game_state.setter
+    def game_state(self, game_state):
+        self._game_state = game_state
+        self.has_game_state = True
+        self.map = game_state.map
 
     def tick(self):
         self.pos += self.speed
@@ -174,11 +180,11 @@ def get_sprite_mask(sprite):
 
 class BitmapSprite(Entity, Sprites):
     def __init__(self, pos, speed,
-                 image,
-                 theta=None,
-                 game_state=None,
-                 use_mask=True,
-                 rotates_often=True):
+                image,
+                theta=None,
+                game_state=None,
+                use_mask=True,
+                rotates_often=True):
         
         super().__init__(pos, speed, game_state=game_state)
         
@@ -195,14 +201,14 @@ class BitmapSprite(Entity, Sprites):
 
         if self.use_mask:
             self.mask = get_sprite_mask(self.sprite)
- 
+
 
     @property
     def theta(self):
         return self._theta
     
     @theta.setter
-    def set_theta(self, theta):
+    def theta(self, theta):
         self._theta = theta
         self.sprite.update(rotation=theta)
         if self.use_mask and not self.rotates_often:
@@ -235,10 +241,11 @@ class BitmapSprite(Entity, Sprites):
 
 
 class PolygonSprite(Entity, Sprites):
-    def __init__(self, pos, speed, vertices, color, game_state=None, theta=None):
+    def __init__(self, pos, speed, vertices, color, lineWidth=1, game_state=None, theta=None):
         Entity.__init__(self, pos, speed, game_state=game_state)
         self._vertices = np.array(vertices)
         self.color = color
+        self.lineWidth = lineWidth
         if theta is not None:
             self._theta = theta
             self.rotation_matrix = np.array([
@@ -249,6 +256,7 @@ class PolygonSprite(Entity, Sprites):
     @property
     def theta(self):
         return self._theta
+    
     @theta.setter
     def set_theta(self, theta):
         self._theta = theta
@@ -275,17 +283,11 @@ class PolygonSprite(Entity, Sprites):
             raise ValueError("Collision not implemented")
     
     def draw(self):
-        pyglet.gl.glColor3ub(*self.color)
-        vertices = self.vertices
-        pyglet.graphics.draw(len(vertices),
-                             pyglet.gl.GL_POLYGON,
-                             ('v2f', (self.screen_pos + vertices).reshape(-1)),
-                             ('c3B', self.color * len(vertices)))
-
-def nagonSprite(n, scale, color, theta=0):
-    pos = [0, 0]
-    speed = [0, 0]
-    vertices = create_nagon_vertices(n, scale, theta = theta)
-    
-    return PolygonSprite(pos, speed, vertices, color)
+        #pyglet.gl.glColor3ub(*self.color)
+        vertices = self.vertices.transpose()
+        n = len(vertices)
+        for i in range(n):
+            line = pyglet.shapes.Line(vertices[i][0], vertices[i][1], vertices[(i+1)%n][0], vertices[(i+1)%n][1], width=self.lineWidth, color=self.color)
+            line.draw()
+        
 
