@@ -189,10 +189,10 @@ class BitmapSprite(Entity, Sprites):
         super().__init__(pos, speed, game_state=game_state)
         
         if game_state is not None:
-            self.sprite = pyglet.sprite(image, x=Entity.screen_x, y=Entity.screen_y, batch=game_state.batch)
+            self.sprite = pyglet.sprite.Sprite(img=image, x=Entity.screen_x, y=Entity.screen_y, batch=game_state.batch)
             self.inBatch = True
         else:
-            self.sprite = pyglet.sprite(image, x=Entity.screen_x, y=Entity.screen_y)
+            self.sprite = pyglet.sprite.Sprite(img=image, x=Entity.screen_x, y=Entity.screen_y)
             self.inBatch = False
 
         self._theta = 0 if theta is None else theta
@@ -241,7 +241,12 @@ class BitmapSprite(Entity, Sprites):
 
 
 class PolygonSprite(Entity, Sprites):
+<<<<<<< HEAD
     def __init__(self, pos, speed, vertices, color, lineWidth=1, game_state=None, theta=None):
+=======
+    #Forme des Polygones en sprite
+    def __init__(self, pos, speed, vertices, color, game_state=None, theta=None):
+>>>>>>> e2919ece0fa2e20bd53c87161bb382098800f546
         Entity.__init__(self, pos, speed, game_state=game_state)
         self._vertices = np.array(vertices)
         self.color = color
@@ -283,6 +288,7 @@ class PolygonSprite(Entity, Sprites):
             raise ValueError("Collision not implemented")
     
     def draw(self):
+<<<<<<< HEAD
         #pyglet.gl.glColor3ub(*self.color)
         vertices = self.vertices.transpose()
         n = len(vertices)
@@ -290,4 +296,19 @@ class PolygonSprite(Entity, Sprites):
             line = pyglet.shapes.Line(vertices[i][0], vertices[i][1], vertices[(i+1)%n][0], vertices[(i+1)%n][1], width=self.lineWidth, color=self.color)
             line.draw()
         
+=======
+        # pyglet.gl.glColor3ub(*self.color)
+        vertices = self.vertices
+        pyglet.graphics.draw(len(vertices),
+                             pyglet.gl.GL_POLYGON,
+                             ('v2f', (self.screen_pos + vertices).reshape(-1)),
+                             ('c3B', self.color * len(vertices)))
+
+def nagonSprite(n, scale, color, theta=0):
+    pos = [0, 0]
+    speed = [0, 0]
+    vertices = create_nagon_vertices(n, scale, theta = theta)
+    
+    return PolygonSprite(pos, speed, vertices, color)
+>>>>>>> e2919ece0fa2e20bd53c87161bb382098800f546
 
