@@ -31,11 +31,16 @@ class Projectile(Entity):
         self.r = radius
         self.color = color
 
-    def draw(self):
-        C = pyglet.shapes.Circle(self.x, self.y, self.r, color=(255, 0, 0, 0))
+    def draw(self, batch):
+        C = pyglet.shapes.Circle(self.x, self.y, self.r, color = (255, 255, 0), batch=batch)
         C.draw()
 
     def collision_test():
         """teste si le projectile est en collision à l'instant présent.
         renvoi True s'il y a collision et False sinon"""
         pass
+
+    def is_out(self, x_min, x_max, y_min, y_max):
+        if self.x < x_min or self.x > x_max or self.y < y_min or self.y > y_max:
+            return True
+        return False

@@ -36,6 +36,7 @@ class Game:
         self.window.push_handlers(self.mousebuttons)
         self.mouse_x = 0
         self.mouse_y = 0
+        self.batch = pyglet.graphics.Batch()
 
         @self.window.event
         def on_mouse_motion(x, y, dx, dy):
@@ -68,21 +69,20 @@ class Game:
     def display(self):
         self.window.clear()
         for e in self.entities:
-            e.draw()
+            e.draw(self.batch)
 
     def endgame(self):
         if self.keys[key.O]:
             self.bool = True
 
     def new_projectile(self):
+        C = pyglet.shapes.Circle(500, 500, 12, color = (255, 255, 0), batch=self.batch)
+        C.draw()
         if self.mousebuttons[mouse.RIGHT]:
-                x = self.player.x
-                y = self.player.y
-                alpha = self.player.angle
-                self.entities.append(Projectile(x, y, 3*np.cos(alpha), 3*np.sin(alpha), 1, color = "r"))
-                print("monstre")
+                self.entities.append(self.player.throw_projectile())
 
     def update(self, *other):
+        self.new_projectile()
         self.update_speed()
         self.time += config.TICK_TIME
         for e in self.entities:

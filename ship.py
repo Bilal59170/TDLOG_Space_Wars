@@ -6,6 +6,7 @@ Implémente Entity
 import numpy as np
 import entity
 from pyglet.shapes import Polygon
+import projectiles
 
 
 class Ship(entity.Entity):
@@ -31,7 +32,7 @@ class Ship(entity.Entity):
     de l'angle. le parametre size est la distance entre le centre et un des
     3 points. """
 
-    def draw(self):
+    def draw(self, batch):
         # On prend les coordonnées des sommets quand le triangle pointe vers
         # le haut puis on les tourne de -(pi/2 - theta) l'angle fait
         # avec la souris
@@ -52,5 +53,10 @@ class Ship(entity.Entity):
         )
 
         vertices = np.array([V1, V2, V3]).astype(int)
-        triangle = Polygon(*vertices, color=(0, 255, 0)) #opérateur *: unpack
+        triangle = Polygon(*vertices, color=(0, 255, 0), batch=batch) #opérateur *: unpack
         triangle.draw()
+
+    def throw_projectile(self):
+        p = projectiles.Projectile(self.x, self.y, 20*np.cos(self.angle), 20*np.sin(self.angle), 4, color = "r")
+        return p
+    

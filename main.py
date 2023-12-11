@@ -43,8 +43,9 @@ if __name__ ==  '__main__':
     def on_draw(): 
         # Clear the window
         game_window.clear()
-        game_test.player.draw()
-
+        #game_test.player.draw(game_test.batch)
+        for e in game_test.entities:
+            e.draw(game_test.batch)
     
     # Start the main event loop (+define the tick duration in seconds for update functions)
     pyglet.clock.schedule_interval(game_test.update, config.TICK_TIME)
