@@ -1,6 +1,5 @@
 import numpy as np
 
-import yaml
 import sys
  
 # setting path

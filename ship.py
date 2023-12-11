@@ -49,11 +49,11 @@ class Ship(entity.Entity, pyglet.event.EventDispatcher):
 
         rot = self.rotation_matrix
 
-        V1 = self.pos + np.dot(rot, np.array([0, self.size]))
-        V2 = self.pos + np.dot(
+        V1 = self.screen_pos + np.dot(rot, np.array([0, self.size]))
+        V2 = self.screen_pos + np.dot(
             rot, -self.size * np.array([np.cos(np.pi / 6), np.sin(np.pi / 6)])
         )
-        V3 = self.pos + np.dot(
+        V3 = self.screen_pos + np.dot(
             rot, self.size * np.array([np.cos(np.pi / 6), np.sin(np.pi / 6)])
         )
 
@@ -63,7 +63,7 @@ class Ship(entity.Entity, pyglet.event.EventDispatcher):
             Polygon(*vertices, color=(255, 0, 0)).draw()
         else:
             triangle = pyglet.shapes.Polygon(*vertices, color=(255, 0, 0), batch=batch)
-
+            triangle.draw()
 
     def on_mouse_motion(self, x, y, dx, dy):
         self.get_angle(x, y)

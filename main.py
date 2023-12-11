@@ -28,7 +28,7 @@ if __name__ == "__main__":
     vertices = create_nagon_vertices(5, 100)
     
     
-    sprite = PolygonSprite(pos, speed, vertices, (255,255,0))
+    sprite = PolygonSprite(pos, speed, vertices, (255,255,0), game)
     sprite.game_state = game
     game.asteroids.append(sprite)
     game.entities.append(sprite)

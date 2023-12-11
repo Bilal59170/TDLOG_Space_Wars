@@ -43,30 +43,23 @@ class NoGameStateError(Exception):
     def __init__(self, object):
         super().__init__("No game state attributed to : {}".format(object))
 
-class NullMap:
-    def __init__(self):
-        self.size = MAP_SIZE
-        self.center = (MAP_SIZE[0]/2,MAP_SIZE[1]/2)
 
 class Entity:
 
-    def __init__(self, pos, speed, game_state=None):
+    def __init__(self, pos, speed, game_state):
         self._pos = np.array(pos)
         self.speed = np.array(speed)
 
-        # Peut-être trop générique
-        self.has_game_state = False
-        if game_state is not None:
-            self._game_state = game_state
-            self.map = game_state.map
-            self.has_game_state = True
-        else:
-            self.map = NullMap()
+        # Peut-être trop génériqu
+        self._game_state = game_state
+        self.map = game_state.map
+        self.camera = game_state.camera
+        self.has_game_state = True
 
     @property
     def pos(self):
         return np.array(
-            [self._pos[0] % self.map.size[0], self._pos[1] % self.map.size[1]]
+            [self._pos[0] % self.map.size[0], self._pos[1] % self.map.size[1]] #sorte de tore
         )
 
     @pos.setter
@@ -90,10 +83,10 @@ class Entity:
 
         # Empêcher le cas où l'écran est plus grand que la map
 
-        pos_0 = (self.pos - self.map.center).astype(
+        pos_0 = (self.pos - self.camera.center).astype(
             int
         )  # Position 1 : Position normale
-        pos_1 = (self.pos - self.map.center + self.map.size).astype(
+        pos_1 = (self.pos - self.camera.center + self.camera.size).astype(
             int
         )  # Position 2 : A gauche ou en bas
         x = (
@@ -241,7 +234,7 @@ class BitmapSprite(Entity, Sprites):
 
 
 class PolygonSprite(Entity, Sprites):
-    def __init__(self, pos, speed, vertices, color, lineWidth=1, game_state=None, theta=None):
+    def __init__(self, pos, speed, vertices, color, game_state, lineWidth=1,  theta=None):
         Entity.__init__(self, pos, speed, game_state=game_state)
         self._vertices = np.array(vertices)
         self.color = color
