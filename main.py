@@ -4,6 +4,7 @@ from ship import Ship
 import numpy as np
 import game
 import config
+from time import time
 
 # from game import *
 

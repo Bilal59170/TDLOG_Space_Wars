@@ -12,6 +12,9 @@ import config
 import numpy as np
 from pyglet.window import key
 from pyglet.window import mouse
+from time import time
+
+
 
 
 class Game:
@@ -22,13 +25,14 @@ class Game:
         self.bool = False
         self.player = Ship(
             np.array([config.MAP_SIZE[0] / 2, config.MAP_SIZE[1] / 2]),
-            np.array([0., 0.]),
+            np.array([0., 0.]), 20, 4, 10,
             config.SHIP_SIZE,
         )
         self.asteroids = []
         self.ennemies = []
         self.entities = [self.player] + self.asteroids + self.ennemies
         self.time = 0
+        self.old_time = time()
         self.window = pyglet.window.Window()
         self.keys = key.KeyStateHandler()
         self.window.push_handlers(self.keys)
@@ -49,19 +53,30 @@ class Game:
     def update_speed(self):
         #self.keys = key.KeyStateHandler()
         #self.window.push_handlers(self.keys)
+        t = time() - self.old_time
+        self.old_time = time()
+        #norme = np.linalg.norm(self.player.speed) + 0.0001
         
-        
-        if self.keys[key.Z] or self.keys[key.UP]:
-            self.player.speed += np.array([0., 1.])
-        if self.keys[key.Q] or self.keys[key.LEFT]:
-            self.player.speed += np.array([-1., 0.])
-        if self.keys[key.S] or self.keys[key.DOWN]:
-            self.player.speed += np.array([0., -1.])
-        if self.keys[key.D] or self.keys[key.RIGHT]:
-            self.player.speed += np.array([1., 0.])
+        if (self.keys[key.Z] or self.keys[key.UP]) and (abs(self.player.speed[1]) < self.player.max_speed):
+            self.player.speed += t*self.player.acceleration*np.array([0., 1.])
+        if (self.keys[key.Q] or self.keys[key.LEFT]) and (abs(self.player.speed[0]) < self.player.max_speed):
+            self.player.speed += t*self.player.acceleration*np.array([-1., 0.])
+        if (self.keys[key.S] or self.keys[key.DOWN]) and (abs(self.player.speed[1]) < self.player.max_speed):
+            self.player.speed += t*self.player.acceleration*np.array([0., -1.])
+        if (self.keys[key.D] or self.keys[key.RIGHT]) and (abs(self.player.speed[0]) < self.player.max_speed):
+            self.player.speed += t*self.player.acceleration*np.array([1., 0.])
 
-        norme = np.linalg.norm(self.player.speed) + 0.0001
-        self.player.speed /= norme
+        # if self.keys[key.Z] or self.keys[key.UP]:
+        #     self.player.speed += np.array([0., 1.])
+        # if self.keys[key.Q] or self.keys[key.LEFT]:
+        #     self.player.speed += np.array([-1., 0.])
+        # if self.keys[key.S] or self.keys[key.DOWN]:
+        #     self.player.speed += np.array([0., -1.])
+        # if self.keys[key.D] or self.keys[key.RIGHT]:
+        #     self.player.speed += np.array([1., 0.])
+
+        #norme = np.linalg.norm(self.player.speed) + 0.0001
+        #self.player.speed /= norme
 
     def update_angle(self, x, y):
         self.player.get_angle(x, y)
