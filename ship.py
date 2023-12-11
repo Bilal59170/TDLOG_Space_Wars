@@ -56,7 +56,7 @@ class Ship(entity.Entity):
         triangle = Polygon(*vertices, color=(0, 255, 0), batch=batch) #opérateur *: unpack
         triangle.draw()
 
-    def throw_projectile(self):
-        p = projectiles.Projectile(self.x, self.y, 20*np.cos(self.angle), 20*np.sin(self.angle), 4, color = "r")
+    def throw_projectile(self, speed):
+        p = projectiles.Projectile(self.x, self.y, speed*np.cos(self.angle), speed*np.sin(self.angle), 4, color = "r")
         return p
     

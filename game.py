@@ -77,7 +77,7 @@ class Game:
 
     def new_projectile(self):
         if self.mousebuttons[mouse.RIGHT]:
-                self.entities.append(self.player.throw_projectile())
+                self.entities.append(self.player.throw_projectile(20))
 
     def update_projectiles(self):
         if len(self.entities) > 1:

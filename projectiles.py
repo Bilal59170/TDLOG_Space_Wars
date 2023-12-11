@@ -32,7 +32,8 @@ class Projectile(Entity):
         self.color = color
 
     def draw(self, batch):
-        C = pyglet.shapes.Circle(self.x, self.y, self.r, color = (255, 255, 0), batch=batch)
+        #C = pyglet.shapes.Circle(self.x, self.y, self.r, color = (0, 0, 255), batch=batch)
+        C = pyglet.shapes.Star(self.x, self.y, self.r, self.r/2, 5, 0 , color=(255, 255,0), batch=batch)
         C.draw()
 
     def collision_test():
