@@ -53,7 +53,7 @@ class Game(pyglet.event.EventDispatcher):
 
         self.player = Ship(
             np.array([config.MAP_SIZE[0] / 2, config.MAP_SIZE[1] / 2]),
-            np.array([0, 0]),
+            np.array([100, 100]),
             config.SHIP_SIZE,
             game_state=self
         )

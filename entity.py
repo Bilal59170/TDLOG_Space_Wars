@@ -241,11 +241,13 @@ class BitmapSprite(Entity, Sprites):
 
 
 class PolygonSprite(Entity, Sprites):
-    def __init__(self, pos, speed, vertices, color, lineWidth=1, game_state=None, theta=None):
+    def __init__(self, pos, speed, vertices, lineWidth=1, game_state=None, theta=None, fillColor=None, edgeColor=None):
+        if fillColor is None and edgeColor is None:
+            raise ValueError("Either fillColor or edgeColor must be specified")
+        
         Entity.__init__(self, pos, speed, game_state=game_state)
         self._vertices = np.array(vertices)
-        self.color = color
-        self.lineWidth = lineWidth
+
         if theta is not None:
             self._theta = theta
             self.rotation_matrix = np.array([
@@ -253,24 +255,30 @@ class PolygonSprite(Entity, Sprites):
                 [-np.sin(np.pi / 2 - theta), np.cos(np.pi / 2 - theta)],
             ])
     
+    
+        self.fillColor = fillColor
+        self.edgeColor = edgeColor
+        self.lineWidth = lineWidth
+
+
     @property
     def theta(self):
         return self._theta
     
     @theta.setter
-    def set_theta(self, theta):
+    def theta(self, theta):
         self._theta = theta
         self.rotation_matrix = np.array([
-                [np.cos(np.pi / 2 - theta), np.sin(np.pi / 2 - theta)],
-                [-np.sin(np.pi / 2 - theta), np.cos(np.pi / 2 - theta)],
+                [np.cos(theta), np.sin(theta)],
+                [-np.sin(theta), np.cos(theta)],
             ])
     
 
     @property
     def vertices(self):
         if hasattr(self, 'theta'):
-            return self.screen_pos + self.rotation_matrix @ self._vertices
-        return self.screen_pos[:, np.newaxis] + self._vertices
+            return self.screen_pos + self._vertices @ self.rotation_matrix
+        return self.screen_pos + self._vertices
 
     @property
     def polygon(self):
@@ -283,8 +291,8 @@ class PolygonSprite(Entity, Sprites):
             raise ValueError("Collision not implemented")
     
     def draw(self, batch = None):
-        #pyglet.gl.glColor3ub(*self.color)
-        vertices = self.vertices.transpose()
+        batch = None
+        vertices = self.vertices.astype(int)
 
         useBatch = batch is None
 
@@ -293,8 +301,17 @@ class PolygonSprite(Entity, Sprites):
 
         n = len(vertices)
 
-        for i in range(n):
-            pyglet.shapes.Line(vertices[i][0], vertices[i][1], vertices[(i+1)%n][0], vertices[(i+1)%n][1], width=self.lineWidth, color=self.color, batch=batch).draw()
+        # Crée un polygone qui est rempli à l'intérieur
+        if self.fillColor is not None:
+            batch.add(n, pyglet.gl.GL_POLYGON, None,
+                            ('v2f', vertices.reshape(-1)),
+                            ('c3B', self.fillColor * n))
+            
+        if self.edgeColor is not None:
+             glLineWidth(self.lineWidth)
+             batch.add(n, pyglet.gl.GL_LINE_LOOP, None,
+                             ('v2f', vertices.reshape(-1)),
+                             ('c3B', self.edgeColor * n))
 
         if useBatch:
             batch.draw()

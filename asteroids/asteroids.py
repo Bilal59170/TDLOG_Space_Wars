@@ -1,6 +1,4 @@
 import numpy as np
-
-import yaml
 import sys
  
 # setting path
@@ -57,14 +55,16 @@ class Asteroid(PolygonSprite):
 
     size = 100
     n_vertices = 8
-    color = (255, 255, 0)
+    fillColor = (128, 128, 0)
+    edgeColor = (0, 0, 0)
+    lineWidth = 5
     ressources = 10
     HP = 100
 
     def __init__(self, pos, speed, game_state, theta=0):
 
         vertices = create_nagon_vertices(self.n_vertices, self.size)
-        super().__init__(pos, speed, vertices, self.color, game_state=game_state)
+        super().__init__(pos, speed, vertices, fillColor=self.fillColor, edgeColor=self.edgeColor, lineWidth=self.lineWidth, game_state=game_state)
         self.orientation = theta
 
         self._HP = self.HP
@@ -99,10 +99,15 @@ class Asteroid(PolygonSprite):
         print(time.time() - t)
 
 
+
+
 class BigAsteroid(Asteroid):
     size = 100
     n_vertices = 8
-    color = (128, 128, 0)
+    fillColor = (128, 128, 0)
+    edgeColor = (0, 128, 0)
+    lineWidth = 5
+
     HP = 100
     ressources = 100
 

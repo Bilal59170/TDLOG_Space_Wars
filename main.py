@@ -26,9 +26,10 @@ if __name__ == "__main__":
     pos = [0, 0]
     speed = [0, 0]
     vertices = create_nagon_vertices(5, 100)
+    print(vertices.shape)
     
     
-    sprite = PolygonSprite(pos, speed, vertices, (255,255,0))
+    sprite = PolygonSprite(pos, speed, vertices, fillColor=(255,255,0))
     sprite.game_state = game
     game.asteroids.append(sprite)
     game.entities.append(sprite)

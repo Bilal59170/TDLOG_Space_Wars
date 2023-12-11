@@ -16,7 +16,7 @@ def create_nagon_vertices(n, scale, theta = 0):
         x_coordinates = scale * np.cos(angles)
         y_coordinates = scale * np.sin(angles)
 
-        return x_coordinates, y_coordinates
+        return np.array([x_coordinates, y_coordinates]).transpose()
 
 def draw_bar(center, width, height, color, batch = None):
     """ Affiche une barre à l'écran. Voir le schéma bar.drawio """
