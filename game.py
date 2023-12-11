@@ -76,13 +76,18 @@ class Game:
             self.bool = True
 
     def new_projectile(self):
-        C = pyglet.shapes.Circle(500, 500, 12, color = (255, 255, 0), batch=self.batch)
-        C.draw()
         if self.mousebuttons[mouse.RIGHT]:
                 self.entities.append(self.player.throw_projectile())
 
+    def update_projectiles(self):
+        if len(self.entities) > 1:
+            for e in self.entities[1:]:
+                if(e.is_out(0, config.MAP_SIZE[0], 0, config.MAP_SIZE[1])):
+                    self.entities.remove(e)
+
     def update(self, *other):
         self.new_projectile()
+        self.update_projectiles()
         self.update_speed()
         self.time += config.TICK_TIME
         for e in self.entities:
