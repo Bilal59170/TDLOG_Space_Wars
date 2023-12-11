@@ -8,6 +8,7 @@ L'instance de jeu est nommée game_state
 import pyglet
 from ship import *
 from projectiles import *
+from enemies import *
 import config
 import numpy as np
 from pyglet.window import key
@@ -25,12 +26,13 @@ class Game:
         self.bool = False
         self.player = Ship(
             np.array([config.MAP_SIZE[0] / 2, config.MAP_SIZE[1] / 2]),
-            np.array([0., 0.]), 20, 4, 7,
+            np.array([0., 0.]), 20, 4, 3,
             config.SHIP_SIZE,
         )
         self.asteroids = []
-        self.ennemies = []
-        self.entities = [self.player] + self.asteroids + self.ennemies
+        self.enemies = [Enemy(np.array([config.MAP_SIZE[0] / 4, config.MAP_SIZE[1] / 4]),
+                               np.array([0.,0.]),30., 2., 2., time(), 300., 200.)]
+        self.entities = [self.player] + self.asteroids + self.enemies
         self.time = 0
         self.old_time = time()
         self.window = pyglet.window.Window()
@@ -61,13 +63,13 @@ class Game:
         self.old_time = time()
         #norme = np.linalg.norm(self.player.speed) + 0.0001
         
-        if (self.keys[key.Z] or self.keys[key.UP]) and (abs(self.player.speed[1]) < self.player.max_speed):
+        if (self.keys[key.Z] or self.keys[key.UP]) and (abs(self.player.speed[1]) < self.player.max_speed or self.player.speed[1] < 0):
             self.player.speed += t*self.player.acceleration*np.array([0., 1.])
-        if (self.keys[key.Q] or self.keys[key.LEFT]) and (abs(self.player.speed[0]) < self.player.max_speed):
+        if (self.keys[key.Q] or self.keys[key.LEFT]) and (abs(self.player.speed[0]) < self.player.max_speed or self.player.speed[0] > 0):
             self.player.speed += t*self.player.acceleration*np.array([-1., 0.])
-        if (self.keys[key.S] or self.keys[key.DOWN]) and (abs(self.player.speed[1]) < self.player.max_speed):
+        if (self.keys[key.S] or self.keys[key.DOWN]) and (abs(self.player.speed[1]) < self.player.max_speed or self.player.speed[1] > 0):
             self.player.speed += t*self.player.acceleration*np.array([0., -1.])
-        if (self.keys[key.D] or self.keys[key.RIGHT]) and (abs(self.player.speed[0]) < self.player.max_speed):
+        if (self.keys[key.D] or self.keys[key.RIGHT]) and (abs(self.player.speed[0]) < self.player.max_speed or self.player.speed[0] < 0):
             self.player.speed += t*self.player.acceleration*np.array([1., 0.])
 
         # if self.keys[key.Z] or self.keys[key.UP]:
@@ -104,10 +106,15 @@ class Game:
                 if(e.is_out(0, config.MAP_SIZE[0], 0, config.MAP_SIZE[1])):
                     self.entities.remove(e)
 
+    def update_enemies(self, player) :
+        for e in self.enemies :
+            e.close_in_and_out(player)
+
     def update(self, *other):
         self.new_projectile()
         self.update_projectiles()
         self.update_speed()
+        self.update_enemies(self.player)
         self.time += config.TICK_TIME
         for e in self.entities:
             e.tick()

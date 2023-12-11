@@ -10,13 +10,12 @@ import projectiles
 
 
 class Ship(entity.Entity):
-    def __init__(self, pos, speed, size, acceleration, max_speed, old_time, game_state=None):
+    def __init__(self, pos, speed, size, acceleration, max_speed, game_state=None):
         super().__init__(pos, speed, game_state)
         self.angle = 0
         self.size = size
         self.acceleration = acceleration
         self.max_speed = max_speed
-        self.old_time = old_time
 
     """Fonction qui met à jour la position en fonction de la vitesse"""
 
