@@ -75,10 +75,11 @@ class Game:
             self.bool = True
 
     def new_projectile(self):
-        print("a")
-        print(self.mousebuttons[mouse.RIGHT])
         if self.mousebuttons[mouse.RIGHT]:
-                self.entities.append(self.player.throw_projectile())
+                x = self.player.x
+                y = self.player.y
+                alpha = self.player.angle
+                self.entities.append(Projectile(x, y, 3*np.cos(alpha), 3*np.sin(alpha), 1, color = "r"))
                 print("monstre")
 
     def update(self, *other):
@@ -95,5 +96,3 @@ class Game:
         self.display()
         while self.bool is False:
             self.update()
-            self.new_projectile()
-            print("monstre")
