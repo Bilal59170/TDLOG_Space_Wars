@@ -39,7 +39,7 @@ class Ship(entity.Entity, pyglet.event.EventDispatcher):
     
 
 
-    def draw(self):
+    def draw(self, batch=None):
         """Fonction qui dessine un triangle equilatéral et l'oriente en fonction
         de l'angle. le parametre size est la distance entre le centre et un des
         3 points. """
@@ -58,8 +58,12 @@ class Ship(entity.Entity, pyglet.event.EventDispatcher):
         )
 
         vertices = np.array([V1, V2, V3]).astype(int)
-        triangle = Polygon(*vertices, color=(255, 0, 0))
-        triangle.draw()
+        
+        if batch is None:
+            Polygon(*vertices, color=(255, 0, 0)).draw()
+        else:
+            triangle = pyglet.shapes.Polygon(*vertices, color=(255, 0, 0), batch=batch)
+
 
     def on_mouse_motion(self, x, y, dx, dy):
         self.get_angle(x, y)

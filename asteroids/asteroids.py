@@ -90,12 +90,12 @@ class Asteroid(PolygonSprite):
             self.die()
         self._value = value
 
-    def draw(self):
+    def draw(self, batch=None):
         """Dessine l'astéroïde"""
         t = time.time()
-        super().draw()
-        draw_bar((self.screen_pos[0], self.screen_pos[1]+self.size+ 20), self.size, 20, BAR_GREY)
-        draw_bar((self.screen_pos[0], self.screen_pos[1]+self.size+ 20), self.size, 16, BAR_COLOR)
+        super().draw(batch=batch)
+        draw_bar((self.screen_pos[0], self.screen_pos[1]+self.size+ 20), self.size, 20, BAR_GREY, batch=batch)
+        draw_bar((self.screen_pos[0], self.screen_pos[1]+self.size+ 20), self.size, 16, BAR_COLOR, batch=batch)
         print(time.time() - t)
 
 

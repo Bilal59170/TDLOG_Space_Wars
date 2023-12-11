@@ -74,9 +74,15 @@ class Game(pyglet.event.EventDispatcher):
         pass
 
     def display(self):
+        batch = pyglet.graphics.Batch()
         pyglet.gl.glClearColor(*config.BACKGROUND_COLOR, 1) # Set the background color
         for e in self.entities:
-            e.draw()
+            try:
+                e.draw(batch=batch)
+            except:
+                print("Error drawing : ", e.__class__.__name__)
+                raise
+
         self.batch.draw()
 
     def update(self):

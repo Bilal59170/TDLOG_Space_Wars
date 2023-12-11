@@ -13,14 +13,13 @@
         affichage
 """
 import pyglet
-# from pyglet.window import key, mouse
-# from game import Game
-# from entity import *
-# import config
+from pyglet.window import key, mouse
+from game import Game
+from entity import *
+import config
 
 from asteroids.asteroids import *
 
-<<<<<<< HEAD
 if __name__ == "__main__":  
     game = Game()
 
@@ -39,19 +38,23 @@ if __name__ == "__main__":
     game.entities.append(asteroid)
 
     game.run()
-=======
-img_caca = pyglet.image.load("Sprites/caca.png")
-sprite_caca = pyglet.sprite.Sprite(img_caca, x=0, y=0)
 
-# if __name__ == "__main__":
-game_window = pyglet.window.Window()
 
-@game_window.event
-def on_draw():
-    # game_window.clear()
-    sprite_caca.draw()
+""" LES TESTS DE BIL """
 
-pyglet.app.run()
+
+# img_caca = pyglet.image.load("Sprites/caca.png")
+# sprite_caca = pyglet.sprite.Sprite(img_caca, x=0, y=0)
+
+# # if __name__ == "__main__":
+# game_window = pyglet.window.Window()
+
+# @game_window.event
+# def on_draw():
+#     # game_window.clear()
+#     sprite_caca.draw()
+
+# pyglet.app.run()
     
 
 
@@ -64,4 +67,3 @@ pyglet.app.run()
         # caca = BitmapSprite(np.array([config.MAP_SIZE[0] / 2, config.MAP_SIZE[1] / 2]),
     #         np.array([0, 0]), img_caca)
     #game.run()
->>>>>>> e2919ece0fa2e20bd53c87161bb382098800f546

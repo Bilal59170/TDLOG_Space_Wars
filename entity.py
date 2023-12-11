@@ -241,12 +241,7 @@ class BitmapSprite(Entity, Sprites):
 
 
 class PolygonSprite(Entity, Sprites):
-<<<<<<< HEAD
     def __init__(self, pos, speed, vertices, color, lineWidth=1, game_state=None, theta=None):
-=======
-    #Forme des Polygones en sprite
-    def __init__(self, pos, speed, vertices, color, game_state=None, theta=None):
->>>>>>> e2919ece0fa2e20bd53c87161bb382098800f546
         Entity.__init__(self, pos, speed, game_state=game_state)
         self._vertices = np.array(vertices)
         self.color = color
@@ -287,28 +282,22 @@ class PolygonSprite(Entity, Sprites):
         else:
             raise ValueError("Collision not implemented")
     
-    def draw(self):
-<<<<<<< HEAD
+    def draw(self, batch = None):
         #pyglet.gl.glColor3ub(*self.color)
         vertices = self.vertices.transpose()
-        n = len(vertices)
-        for i in range(n):
-            line = pyglet.shapes.Line(vertices[i][0], vertices[i][1], vertices[(i+1)%n][0], vertices[(i+1)%n][1], width=self.lineWidth, color=self.color)
-            line.draw()
-        
-=======
-        # pyglet.gl.glColor3ub(*self.color)
-        vertices = self.vertices
-        pyglet.graphics.draw(len(vertices),
-                             pyglet.gl.GL_POLYGON,
-                             ('v2f', (self.screen_pos + vertices).reshape(-1)),
-                             ('c3B', self.color * len(vertices)))
 
-def nagonSprite(n, scale, color, theta=0):
-    pos = [0, 0]
-    speed = [0, 0]
-    vertices = create_nagon_vertices(n, scale, theta = theta)
-    
-    return PolygonSprite(pos, speed, vertices, color)
->>>>>>> e2919ece0fa2e20bd53c87161bb382098800f546
+        useBatch = batch is None
+
+        if batch is None:
+            batch = pyglet.graphics.Batch()
+
+        n = len(vertices)
+
+        for i in range(n):
+            pyglet.shapes.Line(vertices[i][0], vertices[i][1], vertices[(i+1)%n][0], vertices[(i+1)%n][1], width=self.lineWidth, color=self.color, batch=batch).draw()
+
+        if useBatch:
+            batch.draw()
+
+        
 
