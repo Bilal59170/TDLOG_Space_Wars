@@ -25,7 +25,7 @@ class Game:
         self.bool = False
         self.player = Ship(
             np.array([config.MAP_SIZE[0] / 2, config.MAP_SIZE[1] / 2]),
-            np.array([0., 0.]), 20, 4, 10,
+            np.array([0., 0.]), 20, 4, 7,
             config.SHIP_SIZE,
         )
         self.asteroids = []
@@ -46,6 +46,10 @@ class Game:
         def on_mouse_motion(x, y, dx, dy):
             self.mouse_x, self.mouse_y = x, y
 
+        @self.window.event
+        def on_mouse_drag(x, y, dx, dy, buttons, modifiers):
+            if self.mousebuttons[mouse.RIGHT]:
+                self.mouse_x, self.mouse_y = x, y
 
     def remove(self, object):
         pass
