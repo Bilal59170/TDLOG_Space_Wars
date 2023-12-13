@@ -1,19 +1,20 @@
 import numpy as np
+
 import sys
  
 # setting path
 sys.path.append('../TDLOG_Space_Wars')
 
-from entity import *
+import sprites
 from config import *
 from utils import *
 
 import time
 
-BAR_GREY = (128, 128, 128)
-BAR_COLOR = (0,128,0)
 
-class Asteroid(PolygonSprite):
+
+
+class Asteroid(sprites.Polygon):
 
     """
     Asteroid(Entity) :
@@ -55,19 +56,27 @@ class Asteroid(PolygonSprite):
 
     size = 100
     n_vertices = 8
+
     fillColor = (128, 128, 0)
     edgeColor = (0, 0, 0)
     lineWidth = 5
-    ressources = 10
-    HP = 100
 
-    def __init__(self, pos, speed, game_state, theta=0):
+    bar_grey = (128, 128, 128)
+    bar_color = (0,128,0)
+    barWidthFactor = .8
+    barHeight = 16
+    barSpacing = 5
+
+    ressources = 10
+    max_HP = 100
+
+    def __init__(self, pos, game_state, theta=0, speed=np.array([0,0])):
 
         vertices = create_nagon_vertices(self.n_vertices, self.size)
-        super().__init__(pos, speed, vertices, fillColor=self.fillColor, edgeColor=self.edgeColor, lineWidth=self.lineWidth, game_state=game_state)
+        super().__init__(pos, vertices, game_state, fillColor=self.fillColor, edgeColor=self.edgeColor, lineWidth=self.lineWidth, speed=speed)
         self.orientation = theta
 
-        self._HP = self.HP
+        self._HP = self.max_HP
 
     def tick(self):
         """
@@ -85,42 +94,73 @@ class Asteroid(PolygonSprite):
         return self._HP
 
     @HP.setter
-    def HP(self, value):
-        if value <= 0:
+    def HP(self, HP):
+        if HP <= 0:
             self.die()
-        self._value = value
+        self._HP = min(self.max_HP, HP)
+
 
     def draw(self, batch=None):
         """Dessine l'astéroïde"""
-        t = time.time()
         super().draw(batch=batch)
-        draw_bar((self.screen_pos[0], self.screen_pos[1]+self.size+ 20), self.size, 20, BAR_GREY, batch=batch)
-        draw_bar((self.screen_pos[0], self.screen_pos[1]+self.size+ 20), self.size, 16, BAR_COLOR, batch=batch)
-        print(time.time() - t)
 
+        draw_bar(
+            center = (self.screen_pos[0], self.screen_pos[1]-self.size-self.barHeight),
+            width = self.size*2*self.barWidthFactor,
+            height = self.barHeight,
+            color = self.bar_grey,
+            batch=batch
+        )
 
-
+        width = int(self.size * 2 * self.barWidthFactor - self.barSpacing * 2)
+        
+        draw_bar(
+            center = (self.screen_pos[0]- width * (1 - self._HP/self.max_HP)/2, self.screen_pos[1]-self.size-self.barHeight),
+            width = width * self._HP/self.max_HP,
+            height = self.barHeight - self.barSpacing,
+            color = self.bar_color,
+            batch=batch
+        )
+        
+       
 
 class BigAsteroid(Asteroid):
-    size = 100
-    n_vertices = 8
-    fillColor = (128, 128, 0)
-    edgeColor = (0, 128, 0)
+    size = 60
+    n_vertices = 5
+    fillColor = (118,141,252)
+    edgeColor = (88,105,189)
     lineWidth = 5
+
+    bar_color = (118,141,252)
 
     HP = 100
     ressources = 100
 
 class MediumAsteroid(Asteroid):
-    size = 50
-    n_vertices = 6
-    color = (0, 128, 0)
-    HP = 50
-    ressources = 50
+    # Astéroïde Triangle !
+    size = 30                   # Taille
+    n_vertices = 3              # C'est un triangle => 3 côtés
+    fillColor = (252,118,119)   # Couleur de remplissage
+    edgeColor = (189,88,89)     # Couleur des bords
+    lineWidth = 4               # Épaisseur du bord
+
+    bar_grey = (128, 128, 128)  # Fond gris de la barre de vie
+    bar_color = (252,118,119)   # Couleur de la barre de vie
+    barWidthFactor = .8         # La longueur de la barre de vie (en % de la taille de l'astéroïde)
+    barHeight = 16              # La largeur de la barre de vie (en px)
+    barSpacing = 3              # Taille de la bordure
+
+    #max_HP = 50                 # PVs de l'astéroïde 
+    ressources = 50             # Les ressources qu'il donne quand tué
+
 
 class SmallAsteroid(Asteroid):
     size = 30
     n_vertices = 4
-    color = (0, 0, 128)
+    fillColor = (255,232,105)
+    edgeColor = (191,174,78)
+
+    bar_color = (255,232,105)
+
     HP = 10
     ressources = 10

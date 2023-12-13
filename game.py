@@ -10,12 +10,17 @@ import config
 import numpy as np
 from pyglet.window import key
 import random
+import time
 
 class Map:
     def __init__(self) -> None:
         self.size = config.MAP_SIZE
         self.center = [config.MAP_SIZE[0]/2, config.MAP_SIZE[1]/2]
 
+class Camera():
+    def __init__(self) -> None:
+        self.size = config.WIN_SIZE
+        self.center = [config.MAP_SIZE[0]/2, config.MAP_SIZE[1]/2]
 
 class Game(pyglet.event.EventDispatcher):
 
@@ -50,19 +55,21 @@ class Game(pyglet.event.EventDispatcher):
         super().__init__()
         self.endgame = False
         self.map = Map()
+        self.camera = Camera()
+
 
         self.player = Ship(
             np.array([config.MAP_SIZE[0] / 2, config.MAP_SIZE[1] / 2]),
-            np.array([100, 100]),
             config.SHIP_SIZE,
             game_state=self
         )
-
+        
         self.asteroids = []
         self.ennemies = []
         self.entities = [self.player] + self.asteroids + self.ennemies
         self.batch = pyglet.graphics.Batch()
         self.time = 0
+        
         self.window = pyglet.window.Window(*config.WIN_SIZE)
         #push handler permet de ne pas utiliser de décorateur @windows.evnt. la fonction qui est appelée 
         # est on_key_press. Lorsqu'on décide de fermer la fenêtre, la fonction on_close s'execute
@@ -72,6 +79,10 @@ class Game(pyglet.event.EventDispatcher):
 
     def remove(self, object):
         pass
+
+    t = time.time()
+    frame_counter = 0
+    FPS = 0
 
     def display(self):
         batch = pyglet.graphics.Batch()
@@ -83,10 +94,26 @@ class Game(pyglet.event.EventDispatcher):
                 print("Error drawing : ", e.__class__.__name__)
                 raise
 
-        self.batch.draw()
+        pyglet.text.Label('FPS : ' + str(self.FPS),
+                                font_name='Times New Roman',
+                                font_size=36,
+                                color=(255,0,0,255),
+                                x=10, y=10, batch=batch)
+
+        batch.draw()
+
+        self.frame_counter += 1
+        dt = time.time()-self.t
+        if dt > 1:
+            self.FPS =  int(self.frame_counter / dt)
+            self.frame_counter = 0
+            self.t = time.time()
+        
 
     def update(self):
         self.time += config.TICK_TIME
+        #Rajouter condition où la cam ne doit pas bouger: cas on est à la bordure
+        self.camera.center = self.player.pos
         for e in self.entities:
             e.tick()
         if self.time % config.FRAME_TIME:
@@ -110,12 +137,12 @@ class Game(pyglet.event.EventDispatcher):
     
     def on_key_press(self, symbol, modifiers):
         if symbol == key.Z or symbol == key.UP:
-            self.player.speed = np.array([0, 1])
+            self.player.speed = np.array([0, 1])*3
         elif symbol == key.Q or symbol == key.LEFT:
-            self.player.speed = np.array([-1, 0])
+            self.player.speed = np.array([-1, 0])*3
         elif symbol == key.S or symbol == key.DOWN:
-            self.player.speed = np.array([0, -1])
+            self.player.speed = np.array([0, -1])*3
         elif symbol == key.D or symbol == key.RIGHT:
-            self.player.speed = np.array([1, 0])
+            self.player.speed = np.array([1, 0])*3
     
 

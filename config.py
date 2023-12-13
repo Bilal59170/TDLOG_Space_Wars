@@ -3,7 +3,7 @@
 Fichier de configuration - Contient toutes les constantes d'exécution du programme
 
 """
-
+import numpy as np
 # ----- Constantes de jeu -----
 
 FPS = 60
@@ -15,8 +15,8 @@ SHIP_SIZE = 20
 
 SPEED_FACTOR = 1
 
-WIN_SIZE = [1280, 720]
-MAP_SIZE = [1280, 720]
+WIN_SIZE = np.array([1280, 720])
+MAP_SIZE = WIN_SIZE*1
 BACKGROUND_COLOR = (1,1,1)
 
 BITMAP_RATIO = 5
