@@ -12,30 +12,35 @@
     si game_time % FRAME_TIME == 0:
         affichage
 """
-import pyglet
-from pyglet.window import key, mouse
-from game import Game
-from entity import *
+
 import config
+
+from entity import Entity
+import sprites
+from game import Game
+
 
 from asteroids.asteroids import *
 
 if __name__ == "__main__":  
+
     game = Game()
 
     pos = [0, 0]
     speed = [0, 0]
     vertices = create_nagon_vertices(5, 100)
-    
-    
-    sprite = PolygonSprite(pos, speed, vertices, (255,255,0), game)
-    sprite.game_state = game
-    game.asteroids.append(sprite)
-    game.entities.append(sprite)
 
-    asteroid = BigAsteroid([100, 100], [0, 0], game)
+    asteroid = BigAsteroid([100, 100], game, theta=np.pi/6)
     game.asteroids.append(asteroid)
     game.entities.append(asteroid)
+
+    asteroid = SmallAsteroid([400, 400], game, theta=np.pi/6)
+    game.asteroids.append(asteroid)
+    game.   entities.append(asteroid)
+
+    asteroideTiangle = MediumAsteroid([0, 400], game, theta=np.pi/6)
+    game.asteroids.append(asteroideTiangle)
+    game.entities.append(asteroideTiangle)
 
     game.run()
 

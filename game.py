@@ -10,6 +10,7 @@ import config
 import numpy as np
 from pyglet.window import key
 import random
+import time
 
 class Map:
     def __init__(self) -> None:
@@ -59,7 +60,6 @@ class Game(pyglet.event.EventDispatcher):
 
         self.player = Ship(
             np.array([config.MAP_SIZE[0] / 2, config.MAP_SIZE[1] / 2]),
-            np.array([0, 0]),
             config.SHIP_SIZE,
             game_state=self
         )
@@ -80,6 +80,10 @@ class Game(pyglet.event.EventDispatcher):
     def remove(self, object):
         pass
 
+    t = time.time()
+    frame_counter = 0
+    FPS = 0
+
     def display(self):
         batch = pyglet.graphics.Batch()
         pyglet.gl.glClearColor(*config.BACKGROUND_COLOR, 1) # Set the background color
@@ -90,7 +94,21 @@ class Game(pyglet.event.EventDispatcher):
                 print("Error drawing : ", e.__class__.__name__)
                 raise
 
-        self.batch.draw()
+        pyglet.text.Label('FPS : ' + str(self.FPS),
+                                font_name='Times New Roman',
+                                font_size=36,
+                                color=(255,0,0,255),
+                                x=10, y=10, batch=batch)
+
+        batch.draw()
+
+        self.frame_counter += 1
+        dt = time.time()-self.t
+        if dt > 1:
+            self.FPS =  int(self.frame_counter / dt)
+            self.frame_counter = 0
+            self.t = time.time()
+        
 
     def update(self):
         self.time += config.TICK_TIME

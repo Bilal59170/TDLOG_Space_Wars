@@ -16,7 +16,7 @@ def create_nagon_vertices(n, scale, theta = 0):
         x_coordinates = scale * np.cos(angles)
         y_coordinates = scale * np.sin(angles)
 
-        return x_coordinates, y_coordinates
+        return np.array([x_coordinates, y_coordinates]).transpose()
 
 def draw_bar(center, width, height, color, batch = None):
     """ Affiche une barre à l'écran. Voir le schéma bar.drawio """
@@ -26,7 +26,7 @@ def draw_bar(center, width, height, color, batch = None):
     if batch is None:
         batch = pyglet.graphics.Batch()
     
-    rectangle = pyglet.shapes.Rectangle(x-width/2+r, y-r, width/2-2*r, r, color=color, batch=batch)
+    rectangle = pyglet.shapes.Rectangle(x-width/2+r, y-r, width-2*r, 2*r, color=color, batch=batch)
     circle_left = pyglet.shapes.Circle(x-width/2+r, y, r, color=color, batch=batch)
     circle_right = pyglet.shapes.Circle(x+width/2-r, y, r, color=color, batch=batch)
 
