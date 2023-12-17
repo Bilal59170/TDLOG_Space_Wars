@@ -24,18 +24,33 @@ if __name__ == "__main__":
     game = Game()
 
     pos = [0, 0]
+    pos_2 = [MAP_SIZE[0]-100, 0]
+    pos_3 = [0, MAP_SIZE[1]]
+    pos_4 = MAP_SIZE
+
     speed = [0, 0]
     vertices = create_nagon_vertices(5, 100)
     
     
-    sprite = PolygonSprite(pos, speed, vertices, (255,255,0), game)
+    sprite = PolygonSprite(pos, speed, vertices, (0,0,0), game)
     sprite.game_state = game
     game.asteroids.append(sprite)
     game.entities.append(sprite)
 
-    asteroid = BigAsteroid([100, 100], [0, 0], game)
+    asteroid = BigAsteroid([0, 0], [0, 0], game)
     game.asteroids.append(asteroid)
     game.entities.append(asteroid)
+
+    sprite_2 = PolygonSprite(pos_2, speed, vertices, (0, 0, 0), game)
+    sprite_2.game_state = game
+    game.asteroids.append(sprite_2)
+    game.entities.append(sprite_2)
+
+    asteroid_2 = BigAsteroid(pos_2, [0, 0], game)
+    game.asteroids.append(asteroid_2)
+    game.entities.append(asteroid_2)
+
+
 
     game.run()
 
