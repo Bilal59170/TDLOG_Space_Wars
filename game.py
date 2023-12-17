@@ -20,7 +20,6 @@ class Camera():
     def __init__(self) -> None:
         self.size = config.WIN_SIZE
         self.center = [config.MAP_SIZE[0]/2, config.MAP_SIZE[1]/2]
-
 class Game(pyglet.event.EventDispatcher):
 
     """ 
@@ -94,8 +93,18 @@ class Game(pyglet.event.EventDispatcher):
 
     def update(self):
         self.time += config.TICK_TIME
-        #Rajouter condition où la cam ne doit pas bouger: cas on est à la bordure
+
         self.camera.center = self.player.pos
+        #Cas de bordure où la caméra ne doit pas bouger 
+        if self.player.border['UP']:
+            self.camera.center[1] =  config.WIN_SIZE[1]/2
+        if self.player.border['DOWN']:
+            self.camera.center[1] =  config.MAP_SIZE[1]- config.WIN_SIZE[1]/2
+        if self.player.border['LEFT']:
+            self.camera.center[0] =  config.WIN_SIZE[0]/2
+        if self.player.border['RIGHT']:
+            self.camera.center[0] =  config.MAP_SIZE[0]- config.WIN_SIZE[0]/2
+
         for e in self.entities:
             e.tick()
         if self.time % config.FRAME_TIME:
