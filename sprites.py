@@ -2,10 +2,12 @@ from shapely.geometry import Polygon as Poly
 
 from entity import Entity
 from pyglet.gl import *
+glEnable(GL_BLEND)
 import pyglet
 
 import numpy as np
 from config import *
+from collisions import *
 
 try:
     from numba import njit
@@ -69,21 +71,36 @@ class Image(Entity, Sprites):
      => theta : angle de rotation de l'image
 
     """
-    def __init__(self, pos,
+    def __init__(self,
+                pos,
                 image,
                 game_state,
                 theta=None,
                 speed = [0, 0],
                 use_mask=True,
-                rotates_often=True):
+                rotates_often=False):
         
-        super().__init__(pos, speed, game_state)
+        super().__init__(pos, game_state, speed)
 
-        self.sprite = pyglet.sprite.Sprite(img=image, x=Entity.screen_x, y=Entity.screen_y, batch=game_state.batch)
+        if isinstance(image, pyglet.sprite.Sprite):
+            self.sprite = image
+            image.x = self.screen_x
+            image.y = self.screen_y
+            image.batch = game_state.batch
+        
+        elif isinstance(image, pyglet.image.AbstractImage):
+            self.sprite = pyglet.sprite.Sprite(img=image, x=self.screen_x, y=self.screen_y, batch=game_state.batch)
+        
+        elif type(image) == str:
+            self.sprite = pyglet.sprite.Sprite(img=pyglet.image.load(image), x=self.screen_x, y=self.screen_y, batch=game_state.batch)
+        
+        else:
+            raise ValueError("image must be a pyglet.sprite.Sprite, a pyglet.image.AbstractImage or a path to an image")
 
         self._theta = 0 if theta is None else theta
         self.sprite.update(rotation=self._theta)
         self.rotates_often = rotates_often
+        self.use_mask = use_mask
 
         if self.use_mask:
             self.mask = get_sprite_mask(self.sprite)
@@ -100,13 +117,17 @@ class Image(Entity, Sprites):
         if self.use_mask and not self.rotates_often:
             self.mask = get_sprite_mask(self.sprite)
 
-    def draw(self):
+    def draw(self, batch=None):
         x, y = self.screen_pos
         self.sprite.update(x, y)
+        self.sprite.draw()
+
+    @property
+    def bounds(self):
+        return self.screen_x, self.screen_y, self.screen_x + self.sprite.width, self.screen_y + self.sprite.height
 
 
     def intersects(self, other):
-
         if not (self.screen_x < other.screen_x + other.sprite.width and
             self.screen_x + self.sprite.width > other.screen_x and
             self.screen_y < other.screen_y + other.sprite.height and
@@ -137,6 +158,7 @@ class Polygon(Entity, Sprites):
         => theta : angle de rotation du polygone
 
     """
+
     def __init__(self, pos, vertices, game_state, lineWidth=1, theta=None, fillColor=None, edgeColor=None, speed=[0, 0]):
         
         if fillColor is None and edgeColor is None:
@@ -157,6 +179,8 @@ class Polygon(Entity, Sprites):
         self.edgeColor = edgeColor
         self.lineWidth = lineWidth
 
+        self.boundingRadius = np.max(np.linalg.norm(self._vertices, axis=1))
+
 
     @property
     def theta(self):
@@ -175,15 +199,21 @@ class Polygon(Entity, Sprites):
         if hasattr(self, 'theta'):
             return self.screen_pos + self._vertices @ self.rotation_matrix
         return self.screen_pos + self._vertices
-
-    def polygon(self):
-        return Poly((self.pos[:, np.newaxis] + self.vertices).transpose())
+    
+    @property
+    def bounds(self):
+        return np.min(self.vertices, axis=0)[0], np.min(self.vertices, axis=0)[1], np.max(self.vertices, axis=0)[0], np.max(self.vertices, axis=0)[1]
     
     def intersects(self, other):
         if isinstance(other, Polygon):
-            return self.polygon().intersects(other.polygon())    
-        else:
-            raise ValueError("Collision not implemented")
+            if self.boundingRadius + other.boundingRadius < np.linalg.norm(self.pos - other.pos):
+                return False
+            return polygonPolygonCollisionOptimized(self.vertices, other.vertices)
+        elif isinstance(other, Circle):
+            return polygonCircleCollision(self.vertices, other.pos, other.radius)
+        elif isinstance(other, Image):
+            return other.intersects(self)
+        raise ValueError("Collision not implemented")
     
     def draw(self, batch = None):
         batch = None
@@ -196,17 +226,65 @@ class Polygon(Entity, Sprites):
 
         n = len(vertices)
 
-        # Crée un polygone qui est rempli à l'intérieur
+
         if self.fillColor is not None:
+            colorType = 'c3B' if len(self.fillColor) == 3 else 'c4B'
             batch.add(n, pyglet.gl.GL_POLYGON, None,
                             ('v2f', vertices.reshape(-1)),
-                            ('c3B', self.fillColor * n))
+                            (colorType, self.fillColor * n))
             
+        
         if self.edgeColor is not None:
+             colorType = 'c3B' if len(self.edgeColor) == 3 else 'c4B'
              glLineWidth(self.lineWidth)
              batch.add(n, pyglet.gl.GL_LINE_LOOP, None,
                              ('v2f', vertices.reshape(-1)),
-                             ('c3B', self.edgeColor * n))
+                             (colorType, self.edgeColor * n))
+
+        if useBatch:
+            batch.draw()
+
+class Circle(Entity, Sprites):
+    """
+    Sprite pour afficher un cercle
+
+    Implémentations :
+        => draw : affiche le cercle
+        => intersects : teste si le cercle se superpose à un autre sprite
+
+    """
+    def __init__(self, pos, radius, game_state, fillColor=None, edgeColor=None, lineWidth=1, speed=[0, 0]):
+        Entity.__init__(self, pos, game_state, speed=speed)
+        self.radius = radius
+        self.fillColor = fillColor
+        self.edgeColor = edgeColor
+        self.lineWidth = lineWidth
+
+    def intersects(self, other):
+        if isinstance(other, Polygon):
+            return polygonCircleCollision(other.vertices, self.pos, self.radius)
+        elif isinstance(other, Circle):
+            return np.linalg.norm(self.pos - other.pos) < self.radius + other.radius
+        elif isinstance(other, Image):
+            return other.intersects(self)
+        raise ValueError("Collision not implemented")
+    
+    def bounds(self):
+        return self.screen_x - self.radius, self.screen_y - self.radius, self.screen_x + self.radius, self.screen_y + self.radius
+
+    def draw(self, batch=None):
+        useBatch = batch is None
+
+        if batch is None:
+            batch = pyglet.graphics.Batch()
+
+        if self.fillColor is not None:
+            circle =  pyglet.shapes.Circle(self.screen_x, self.screen_y, self.radius, color=self.fillColor, batch = batch)
+
+        
+        if self.edgeColor is not None:
+            pyglet.gl.glLineWidth(self.lineWidth)
+            arc = pyglet.shapes.Arc(self.screen_x, self.screen_y, self.radius, color=self.edgeColor, batch = batch)
 
         if useBatch:
             batch.draw()

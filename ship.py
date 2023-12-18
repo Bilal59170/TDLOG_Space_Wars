@@ -15,7 +15,7 @@ class Ship(sprites.Polygon, pyglet.event.EventDispatcher):
         V3 = Ship.size * np.array([np.cos(np.pi / 6), np.sin(np.pi / 6)])
 
         vertices = np.array([V1, V2, V3]).astype(int)
-        print(game_state)
+
         sprites.Polygon.__init__(self, pos, vertices, game_state, fillColor=(255,0,0))
         pyglet.event.EventDispatcher.__init__(self)
         self.angle = 0
@@ -34,12 +34,6 @@ class Ship(sprites.Polygon, pyglet.event.EventDispatcher):
 
 
     def draw(self, batch=None):
-        """Fonction qui dessine un triangle equilatéral et l'oriente en fonction
-        de l'angle. le parametre size est la distance entre le centre et un des
-        3 points. """
-        # On prend les coordonnées des sommets quand le triangle pointe vers
-        # le haut puis on les tourne de -(pi/2 - theta) l'angle fait
-        # avec la souris
 
         super().draw(batch)
 

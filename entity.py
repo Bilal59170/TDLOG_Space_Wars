@@ -41,8 +41,8 @@ class Entity:
 
     def __init__(self, pos, game_state, speed = np.array([0, 0])):
 
-        self._pos = np.array(pos)
-        self.speed = np.array(speed)
+        self._pos = np.array(pos).astype(float)
+        self.speed = np.array(speed).astype(float)
 
         self._game_state = game_state
         self.camera = game_state.camera
