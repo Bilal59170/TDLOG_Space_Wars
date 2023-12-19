@@ -19,6 +19,7 @@ from entity import Entity
 import sprites
 from game import Game
 
+import game_logic
 
 from asteroids.asteroids import *
 
@@ -46,8 +47,7 @@ from asteroids.asteroids import *
 #     game.asteroids.append(masterAsteroid)
 #     game.entities.append(masterAsteroid)
 
-#     circle = sprites.Circle([0, 0], 100, game, fillColor=(255, 0, 0), edgeColor=(0, 0, 0), lineWidth=5)
-#     game.entities.append(circle)
+
 
 #     game.run()
 
@@ -58,84 +58,46 @@ from asteroids.asteroids import *
 img_caca = pyglet.image.load("Sprites/caca.png")
 
 if __name__ == "__main__":
-    # game_window = pyglet.window.Window()
-
-    # @game_window.event
-    # def on_draw():
-    #     # game_window.clear()
-    #     sprite_caca.draw()        
 
     game = Game()
 
-    caca = sprites.Image(np.array([config.MAP_SIZE[0] / 2, config.MAP_SIZE[1] / 2]), img_caca, game)
-    caca2 = sprites.Image(np.array([config.MAP_SIZE[0] / 2 + 500, config.MAP_SIZE[1] / 2]), img_caca, game, speed=[-10, 0], theta=np.pi/6)
+    spacing = 50
+
+    asteroid = MasterAsteroid([spacing, 0], game)             # Position (0, 0) sur la carte => Au milieu de l'écran quand le vaisseau est en (0, 0) !
+    game.add_entity(asteroid)
+    asteroid = BigAsteroid([MAP_SIZE[0]-spacing, 0], game)
+    game.add_entity(asteroid)
+    asteroid = SmallAsteroid([0, MAP_SIZE[1]-spacing], game)
+    game.add_entity(asteroid)
+    asteroid = MediumAsteroid([MAP_SIZE[0]-spacing, MAP_SIZE[1]-spacing], game)
+    game.add_entity(asteroid)
+
+    n = 5
+    for x in range(0, MAP_SIZE[0], MAP_SIZE[0] // n):
+        for y in range(0, MAP_SIZE[1], MAP_SIZE[1] // n):
+            text = sprites.Label([x, y], f"{x}, {y}", game, color=(0,0,0,255))
+            game.add_entity(text)
+
+
+
+
+    # Deux cacas. Le deuxième va plus vite et est incliné (normalement) (ne fonctionne pas !)
+    caca = sprites.Image(np.array([-500, 0]), img_caca, game)
+    caca2 = sprites.Image(np.array([500, 0]), img_caca, game, speed=[-10, 0], theta=np.pi/6)
 
     game.add_entity(caca)
     game.add_entity(caca2)
 
-    # @game.each(1)
-    # def e(game):
-    #     print('='*16)
-
-    import random
-    @game.each(5)
-    def spawn_asteroids(game):
-        if len(game.asteroids) > 20:
-            return
-
-        weights = [10, 20, 50]
-        probabilities = [w/sum(weights) for w in weights]
-
-        if random.random() < .2:
-            for i in range(np.random.geometric(p=.6)):
-                params = {
-                    'pos' : np.array([random.randint(0, config.MAP_SIZE[0]), random.randint(0, config.MAP_SIZE[1])]),
-                    'game_state' : game,
-                    'theta' : random.random()*2*np.pi,
-                    'speed' : np.array([random.random()*2-1, random.random()*2-1])
-                }
-                asteroid = np.random.choice([BigAsteroid, MediumAsteroid, SmallAsteroid], p=probabilities)(**params)
-                game.add_entity(asteroid)
+    # Animation de l'ogre !
+    images = [pyglet.image.load(f'Sprites/animation/an_{i}.png') for i in range(1, 6)]
+    animation = pyglet.image.Animation.from_image_sequence(images, .5)
+    img = sprites.Image(np.array([0, 0]), animation, game)
+    game.add_entity(img)
 
 
-    @game.on_collide(Asteroid, Asteroid, sym = True)
-    def collide(game, ast1, ast2):
-        # Fonction de collision entre deux astéroïdes
-        # Les astéroïdes vont rebondir l'un sur l'autre
 
-        # On calcule la vitesse relative des deux astéroïdes
-        v1 = ast1.speed
-        v2 = ast2.speed
-        v_rel = v1 - v2
-
-        # On calcule la normale à la collision
-        n = ast1.pos - ast2.pos
-        n = n / np.linalg.norm(n)
-
-        # On calcule la vitesse de chaque astéroïde dans la direction de la normale
-        v1n = np.dot(v1, n)
-        v2n = np.dot(v2, n)
-
-        # On calcule la vitesse de chaque astéroïde dans la direction tangentielle
-        v1t = v1 - v1n * n
-        v2t = v2 - v2n * n
-
-        # On calcule les nouvelles vitesses dans la direction normale
-        v1n_new = (v1n * (ast1.mass - ast2.mass) + 2 * ast2.mass * v2n) / (ast1.mass + ast2.mass)
-        v2n_new = (v2n * (ast2.mass - ast1.mass) + 2 * ast1.mass * v1n) / (ast1.mass + ast2.mass)
-
-        # On calcule les nouvelles vitesses
-        v1_new = v1n_new * n + v1t
-        v2_new = v2n_new * n + v2t
-
-        # On applique les nouvelles vitesses
-        ast1.speed = v1_new
-        ast2.speed = v2_new
-
-        while ast1.intersects(ast2):
-            ast1.pos += ast1.speed * config.TICK_TIME
-            ast2.pos += ast2.speed * config.TICK_TIME
-
-
+    # Game Logic => Collision et spawn d'astéroïdes
+    game_logic.activate_collision(game)
+    # game_logic.activate_asteroid_spawn(game)
 
     game.run()

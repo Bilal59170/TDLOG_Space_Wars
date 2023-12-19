@@ -61,41 +61,31 @@ class Entity:
     @property
     def screen_pos(self):
         """
-
-        Dans cette fonction on adresse un problème aux bords. En effet, on pourrait penser que les coordonnées
-        à l'écran, c'est juste les coordonnées sur la carte desquelles on retire le point sur lequel est centré
-        la caméra. Mais en fait, ça dépend.
-
-        Par exemple, si on imagine un point sur une carte qui est exactement 4 fois plus petite que l'écran latéralement
-        et de la même longueur, le point va apparaître 4 fois si on veut une carte parfaitement torique ...
-
-        On part sur le principe que la fenêtre est plus petite que la carte
-
+        Position à l'écran de l'entité. La carte étant torique, on doit prendre en compte les cas où l'entité est en dehors de l'écran.
         """
 
-        # Empêcher le cas où l'écran est plus grand que la map
+        # Position de l'entité sur la carte
+        pos = self.pos + self.camera.size / 2
 
-        pos_0 = (self.pos - self.camera.center).astype(
-            int
-        )  # Position 1 : Position normale
-        pos_1 = (self.pos - self.camera.center + self.camera.size).astype(
-            int
-        )  # Position 2 : A gauche ou en bas
-        x = (
-            pos_0[0]
-            if abs(pos_0[0] - WIN_SIZE[0] / 2) < abs(pos_1[0] - WIN_SIZE[0] / 2)
-            else pos_1[0]
-        )
-        y = (
-            pos_0[1]
-            if abs(pos_0[1] - WIN_SIZE[1] / 2) < abs(pos_1[1] - WIN_SIZE[1] / 2)
-            else pos_1[1]
-        )
+        # Position de la caméra
+        camera_pos = self.camera.center
 
-        return np.array([x, y]).astype(int)
+        # Taille de la caméra
+        camera_size = self.camera.size
+
+        # Position de l'entité par rapport à la caméra
+        screen_pos = pos - camera_pos
+
+        # Si l'entité est en dehors de l'écran
+        map_size = self.map.size
+        camera_width, camera_height = camera_size
+        screen_pos[0] = (screen_pos[0] + map_size[0]) % map_size[0]
+        screen_pos[1] = (screen_pos[1] + map_size[1]) % map_size[1]
+
+        return screen_pos
     
     def tick(self):
-        self.pos += self.speed
+        self._pos += self.speed
 
     """ Propriétés de positions x/y"""
 

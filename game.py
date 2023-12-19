@@ -101,12 +101,11 @@ class GameEvents:
 class Map:
     def __init__(self) -> None:
         self.size = config.MAP_SIZE
-        self.center = [config.MAP_SIZE[0]/2, config.MAP_SIZE[1]/2]
 
-class Camera():
+class Camera:
     def __init__(self) -> None:
         self.size = config.WIN_SIZE
-        self.center = [config.MAP_SIZE[0]/2, config.MAP_SIZE[1]/2]
+        self.center = [0, 0]
 
 class Game(pyglet.event.EventDispatcher, GameEvents):
 
@@ -146,7 +145,7 @@ class Game(pyglet.event.EventDispatcher, GameEvents):
         self.camera = Camera()
 
         self.player = Ship(
-            np.array([config.MAP_SIZE[0] / 2, config.MAP_SIZE[1] / 2]),
+            np.array([0, 0]),
             config.SHIP_SIZE,
             game_state=self
         )
@@ -219,7 +218,7 @@ class Game(pyglet.event.EventDispatcher, GameEvents):
         self.time += config.TICK_TIME
         self.ticks += 1
         #Rajouter condition où la cam ne doit pas bouger: cas on est à la bordure
-        self.camera.center = self.player.pos
+        self.camera.center = self.player._pos
         for e in self.entities:
             e.tick()
         #if self.ticks % config.FRAME_TICKS == 0:

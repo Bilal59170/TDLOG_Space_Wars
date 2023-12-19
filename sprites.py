@@ -82,6 +82,8 @@ class Image(Entity, Sprites):
         
         super().__init__(pos, game_state, speed)
 
+        self.isAnimated = False
+
         if isinstance(image, pyglet.sprite.Sprite):
             self.sprite = image
             image.x = self.screen_x
@@ -91,6 +93,14 @@ class Image(Entity, Sprites):
         elif isinstance(image, pyglet.image.AbstractImage):
             self.sprite = pyglet.sprite.Sprite(img=image, x=self.screen_x, y=self.screen_y, batch=game_state.batch)
         
+        elif isinstance(image, pyglet.image.Animation):
+            print('LOADED ANIMATION')
+            self.sprite = pyglet.sprite.Sprite(img=image.frames[0].image, x=self.screen_x, y=self.screen_y, batch=game_state.batch)
+            self.isAnimated = True
+            self.animation = image
+            self.animation_index = 0
+            self.animation_time = 0
+            self.animation_duration = image.get_duration()
         elif type(image) == str:
             self.sprite = pyglet.sprite.Sprite(img=pyglet.image.load(image), x=self.screen_x, y=self.screen_y, batch=game_state.batch)
         
@@ -120,7 +130,19 @@ class Image(Entity, Sprites):
     def draw(self, batch=None):
         x, y = self.screen_pos
         self.sprite.update(x, y)
-        self.sprite.draw()
+
+        if self.isAnimated:
+            self.animation_time += FRAME_TIME
+
+            if self.animation_time > self.animation_duration:
+                self.animation_time = 0
+            self.animation_index = 0
+            time = self.animation_time
+            while time > self.animation.frames[self.animation_index].duration:
+                time -= self.animation.frames[self.animation_index].duration
+                self.animation_index += 1
+            self.sprite.image = self.animation.frames[self.animation_index].image
+
 
     @property
     def bounds(self):
@@ -287,3 +309,34 @@ class Circle(Entity, Sprites):
 
         if useBatch:
             batch.draw()
+
+
+class Label(Entity):
+    """
+    
+    Texte affiché sur la carte
+    
+    """
+
+    def __init__(self, pos, text, game_state, font_size=12, font_name='Arial', color=(255, 255, 255, 255), anchor_x='center', anchor_y='center', speed=[0, 0]):
+        Entity.__init__(self, pos, game_state, speed=speed)
+        self.text = text
+        self.font_size = font_size
+        self.font_name = font_name
+        self.color = color
+        self.anchor_x = anchor_x
+        self.anchor_y = anchor_y
+
+    def draw(self, batch=None):
+        useBatch = batch is None
+
+        if batch is None:
+            batch = pyglet.graphics.Batch()
+
+        label = pyglet.text.Label(self.text, font_size=self.font_size, font_name=self.font_name, color=self.color, x=self.screen_x, y=self.screen_y, anchor_x=self.anchor_x, anchor_y=self.anchor_y, batch=batch)
+
+        if useBatch:
+            batch.draw()
+
+    def intersects(self, other):
+        return False
