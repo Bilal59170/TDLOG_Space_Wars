@@ -127,7 +127,7 @@ class MediumAsteroid(Asteroid):
     # Astéroïde Triangle !
     size = 30                   # Taille
     n_vertices = 3              # C'est un triangle => 3 côtés
-    fillColor = (252,118,119,0)   # Couleur de remplissage
+    fillColor = (252,118,119)   # Couleur de remplissage
     edgeColor = (189,88,89)     # Couleur des bords
     lineWidth = 4               # Épaisseur du bord
 

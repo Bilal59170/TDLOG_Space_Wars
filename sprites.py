@@ -158,7 +158,6 @@ class Polygon(Entity, Sprites):
         => theta : angle de rotation du polygone
 
     """
-
     def __init__(self, pos, vertices, game_state, lineWidth=1, theta=None, fillColor=None, edgeColor=None, speed=[0, 0]):
         
         if fillColor is None and edgeColor is None:

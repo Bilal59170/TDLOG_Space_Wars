@@ -15,7 +15,6 @@ class Ship(sprites.Polygon, pyglet.event.EventDispatcher):
         V3 = Ship.size * np.array([np.cos(np.pi / 6), np.sin(np.pi / 6)])
 
         vertices = np.array([V1, V2, V3]).astype(int)
-
         sprites.Polygon.__init__(self, pos, vertices, game_state, fillColor=(255,0,0))
         pyglet.event.EventDispatcher.__init__(self)
         self.angle = 0
