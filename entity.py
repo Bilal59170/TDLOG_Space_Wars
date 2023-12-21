@@ -44,13 +44,14 @@ class Entity:
         self._pos = np.array(pos).astype(float)
         self.speed = np.array(speed).astype(float)
 
-        self._game_state = game_state
+        self.game_state = game_state
+
         self.camera = game_state.camera
 
     @property
     def pos(self):
         return np.array(
-            [self._pos[0] % self._game_state.map_size[0], self._pos[1] % self._game_state.map_size[1]] #sorte de tore
+            [self._pos[0] % self.game_state.map_size[0], self._pos[1] % self.game_state.map_size[1]] #sorte de tore
         )
 
     @pos.setter
@@ -76,7 +77,7 @@ class Entity:
         screen_pos = pos - camera_pos
 
         # Si l'entité est en dehors de l'écran
-        map_size = self._game_state.map_size
+        map_size = self.game_state.map_size
         camera_width, camera_height = camera_size
         screen_pos[0] = (screen_pos[0] + map_size[0]) % map_size[0]
         screen_pos[1] = (screen_pos[1] + map_size[1]) % map_size[1]

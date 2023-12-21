@@ -1,12 +1,14 @@
 """ Classe du vaisseau principal """
 """
 Implémentation du vaisseau
-Implémentera Entity
 
+Implémente Entity
 """
 import config
 import numpy as np
 import pyglet
+from pyglet.shapes import Polygon
+import projectiles
 
 import sprites, entity
 
@@ -16,8 +18,9 @@ class Ship(sprites.Polygon, pyglet.event.EventDispatcher):
     # Taille du vaisseau
     size = 10
 
-    def __init__(self, pos, size, game_state):
+    def __init__(self, pos, size, acceleration, max_speed, game_state):
         # Code de Bilal
+
         V1 = np.array([0, Ship.size])
         V2 = -Ship.size * np.array([np.cos(np.pi / 6), np.sin(np.pi / 6)])
         V3 = Ship.size * np.array([np.cos(np.pi / 6), np.sin(np.pi / 6)])
@@ -25,8 +28,9 @@ class Ship(sprites.Polygon, pyglet.event.EventDispatcher):
         vertices = np.array([V1, V2, V3]).astype(int)
         sprites.Polygon.__init__(self, pos, vertices, game_state, fillColor=(255,0,0))
         pyglet.event.EventDispatcher.__init__(self)
-        self.angle = 0
-        self.size = size
+
+        self.acceleration = acceleration
+        self.max_speed = max_speed
 
     def tick(self):
         """Fonction qui met à jour la position en fonction de la vitesse"""
@@ -58,3 +62,8 @@ class Ship(sprites.Polygon, pyglet.event.EventDispatcher):
 
     def on_mouse_motion(self, x, y, dx, dy):
         self.get_angle(x, y)
+
+    def throw_projectile(self, speed):
+        p = projectiles.Projectile(self.x, self.y, speed*np.cos(self.theta), speed*np.sin(self.theta), 4, color = "r", game_state=self.game_state)
+        return p
+    

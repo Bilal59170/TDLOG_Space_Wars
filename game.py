@@ -1,5 +1,11 @@
+"""@package docstring
+Fichier où l'on intègre la boucle de jeu
 
-# Import des modules
+Fait appel à l'UI pour l'affichage
+L'instance de jeu est nommée game_state
+
+"""
+
 import config
 
 
@@ -10,11 +16,14 @@ import numpy as np
 
 import pyglet
 from pyglet.window import key
+from pyglet.window import mouse
+from time import time
 
 import sprites
 from ship import Ship
-from asteroids.asteroids import Asteroid
-# from ennemies.ennemies import Ennemy
+from asteroids import Asteroid
+from projectiles import Projectile
+from enemies import Enemy
 
 try:
     from numba import njit
@@ -188,16 +197,30 @@ class Game(pyglet.event.EventDispatcher, GameEvents):
         self.camera = Camera()
 
         # Création du joueur à un endroit aléatoire
-        self.player = Ship(
-            [np.random.randint(0, config.MAP_SIZE[0]), np.random.randint(0, config.MAP_SIZE[1])],
+        self.player = Ship([0,0],
+            #[np.random.randint(0, config.MAP_SIZE[0]), np.random.randint(0, config.MAP_SIZE[1])],
             config.SHIP_SIZE,
-            game_state=self
+            game_state=self,
+            acceleration=config.SHIP_ACCELERATION,
+            max_speed=config.SHIP_MAX_SPEED
         )
         
         # Initialisation des listes d'entités
         self.asteroids = []
-        self.ennemies = []
-        self.entities = []
+        enemy = Enemy(np.array([config.MAP_SIZE[0] / 4, config.MAP_SIZE[1] / 4]),
+                      size=30.,
+                      acceleration=2.,
+                      max_speed=2.,
+                      engage_radius=300.,
+                      caution_radius=200.,
+                      game_state=self)
+        
+        self.enemies = [enemy]
+        
+        self.entities = self.enemies
+
+        # Ajout du joueur à la liste d'entités
+        self.add_entity(self.player)
         
         # Permet de gérer les événements
         # Fonctionnement :
@@ -209,24 +232,58 @@ class Game(pyglet.event.EventDispatcher, GameEvents):
         self.window.push_handlers(self.player) 
         self.window.push_handlers(self)
 
-        # Ajout du joueur à la liste d'entités
-        self.add_entity(self.player)
+        # Code de Broni
+        self.time = 0
+        self.old_time = time.time()
+
+        self.keys = key.KeyStateHandler()
+        self.window.push_handlers(self.keys)
+        self.mousebuttons = mouse.MouseStateHandler()
+        self.window.push_handlers(self.mousebuttons)
+
+        self.mouse_x = 0
+        self.mouse_y = 0
+
+        @self.window.event
+        def on_mouse_motion(x, y, dx, dy):
+            self.mouse_x, self.mouse_y = x, y
+
+        @self.window.event
+        def on_mouse_drag(x, y, dx, dy, buttons, modifiers):
+            if self.mousebuttons[mouse.RIGHT]:
+                self.mouse_x, self.mouse_y = x, y
+
+
 
     def add_entity(self, object):
         # Ajoute un objet à la liste d'entités
         self.entities.append(object)
         if issubclass(object.__class__, Asteroid):
             self.asteroids.append(object)
-        # elif isinstance(object, Ennemy):
-        #     self.ennemies.append(object)
+        elif isinstance(object, Enemy):
+            self.ennemies.append(object)
 
     def remove_entity(self, object):
         # Supprime un objet de la liste d'entités
         self.entities.remove(object)
         if issubclass(object.__class__, Asteroid):
             self.asteroids.remove(object)
-        # elif isinstance(object, Ennemy):
-        #     self.ennemies.remove(object)
+        elif isinstance(object, Enemy):
+            self.ennemies.remove(object)
+            
+    def update_speed(self):
+        t = time.time() - self.old_time
+        self.old_time = time.time()
+        
+        if (self.keys[key.Z] or self.keys[key.UP]) and (abs(self.player.speed[1]) < self.player.max_speed or self.player.speed[1] < 0):
+            self.player.speed += t*self.player.acceleration*np.array([0., 1.])
+        if (self.keys[key.Q] or self.keys[key.LEFT]) and (abs(self.player.speed[0]) < self.player.max_speed or self.player.speed[0] > 0):
+            self.player.speed += t*self.player.acceleration*np.array([-1., 0.])
+        if (self.keys[key.S] or self.keys[key.DOWN]) and (abs(self.player.speed[1]) < self.player.max_speed or self.player.speed[1] > 0):
+            self.player.speed += t*self.player.acceleration*np.array([0., -1.])
+        if (self.keys[key.D] or self.keys[key.RIGHT]) and (abs(self.player.speed[0]) < self.player.max_speed or self.player.speed[0] < 0):
+            self.player.speed += t*self.player.acceleration*np.array([1., 0.])
+
 
     def display(self):
         # Fonction qui gère l'affichage de la fenêtre de jeu
@@ -251,9 +308,16 @@ class Game(pyglet.event.EventDispatcher, GameEvents):
 
         self.window.flip()
 
+    def new_projectile(self):
+        # Fonction qui gère le lancement de projectiles
+        if self.mousebuttons[mouse.RIGHT]:
+                self.entities.append(self.player.throw_projectile(20))
 
-    def update(self):
-        # On incrémente le temps
+
+    def update(self, *other):
+        self.new_projectile()
+        self.update_speed()
+
         self.time += config.TICK_TIME
 
         self.camera.center = self.player.pos
@@ -269,6 +333,7 @@ class Game(pyglet.event.EventDispatcher, GameEvents):
 
         for e in self.entities:
             e.tick()
+            
         if self.ticks % config.FRAME_TICKS == 0:
             self.display()
     
@@ -287,16 +352,3 @@ class Game(pyglet.event.EventDispatcher, GameEvents):
     def on_close(self):
         self.game_ended = True
         pyglet.app.exit()
-
-    # Contrôle de la direction du joueur
-    def on_key_press(self, symbol, modifiers):
-        if symbol == key.Z or symbol == key.UP:
-            self.player.speed = np.array([0, 1])*3
-        elif symbol == key.Q or symbol == key.LEFT:
-            self.player.speed = np.array([-1, 0])*3
-        elif symbol == key.S or symbol == key.DOWN:
-            self.player.speed = np.array([0, -1])*3
-        elif symbol == key.D or symbol == key.RIGHT:
-            self.player.speed = np.array([1, 0])*3
-    
-

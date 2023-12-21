@@ -1,5 +1,6 @@
-"""
+"""@package docstring
 Implémentation d'un projectile, tiré par le vaisseau
+
 Hérite de la classe Entity pour la gestion de la position
 
 Propriétés d'un projectile :
@@ -19,24 +20,28 @@ Méthodes d'un projectile :
 
 """
 from entity import Entity
+import pyglet
 
 
 class Projectile(Entity):
     """classe projectiles : projectiles circulaires"""
 
     def __init__(self, x_init, y_init, speed_x_init, speed_y_init, radius, color):
-        self.x = x_init
-        self.y = y_init
-        self.vx = speed_x_init
-        self.vy = speed_y_init
+        super().__init__([x_init, y_init], [speed_x_init, speed_y_init])
         self.r = radius
         self.color = color
 
-    def tick():
-        """fonction update"""
-        pass
+    def draw(self, batch):
+        #C = pyglet.shapes.Circle(self.x, self.y, self.r, color = (0, 0, 255), batch=batch)
+        C = pyglet.shapes.Star(self.x, self.y, self.r, self.r/2, 5, 0 , color=(255, 255,0), batch=batch)
+        C.draw()
 
     def collision_test():
         """teste si le projectile est en collision à l'instant présent.
         renvoi True s'il y a collision et False sinon"""
         pass
+
+    def is_out(self, x_min, x_max, y_min, y_max):
+        if self.x < x_min or self.x > x_max or self.y < y_min or self.y > y_max:
+            return True
+        return False

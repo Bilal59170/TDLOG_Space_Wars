@@ -1,5 +1,11 @@
-Le lien vers le sujet du Hackathon : bonnes pratiques de programmation Python (.venv,requirements.txt)
+Le lien vers le sujet du Hackathon : bonnes pratiques de programmation Python (.venv,requirements.txt) + techniques de configuration de projet pour intégration continue
 https://m33.notion.site/TP1-Application-Flask-8beed9e44cd24b57aa3083fdd9935e5f
 
 Un tutoriel détaillé pour implémenter un jeu (avec des astéroîdes et un vaisseau spatial !) en Pyglet
 https://pyglet.readthedocs.io/en/latest/programming_guide/examplegame.html
+
+Un tuto express sur YAML :
+https://www.ambient-it.net/tout-savoir-fichiers-yaml/
+
+Tuto tests CI Python
+https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-python

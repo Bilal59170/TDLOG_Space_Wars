@@ -1,3 +1,19 @@
+import pyglet
+from pyglet.window import key, mouse
+from ship import Ship
+import numpy as np
+import game
+import config
+from time import time
+
+# from game import *
+
+"""@package docstring
+Fichier d'application (sert pour l'instant à tester le code produit)
+
+
+"""
+
 """
     Fichier principal du jeu.
     Initie le jeu, ses différentes entités et lance la boucle principale.
@@ -16,7 +32,7 @@ from game import Game
 import game_logic
 
 # import des astéroïdes
-from asteroids.asteroids import *
+from asteroids import *
 
 if __name__ == "__main__":
 

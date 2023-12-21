@@ -2,3 +2,6 @@ numpy
 pyglet
 socket
 pickle
+shapely
+collections
+abc
