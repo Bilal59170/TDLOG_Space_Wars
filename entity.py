@@ -62,6 +62,9 @@ class Entity:
         """
         Position à l'écran de l'entité. La carte étant torique, on doit prendre en compte les cas où l'entité est en dehors de l'écran.
         """
+        
+        if True:
+            # Empêcher le cas où l'écran est plus grand que la map
 
         # Position de l'entité sur la carte
         pos = self.pos + self.camera.size / 2
@@ -80,6 +83,25 @@ class Entity:
         camera_width, camera_height = camera_size
         screen_pos[0] = (screen_pos[0] + map_size[0]) % map_size[0]
         screen_pos[1] = (screen_pos[1] + map_size[1]) % map_size[1]
+
+        # pos_0 = (self.pos - self.camera.center).astype(
+        #     int
+        # )  # Position 1 : Position normale
+        # pos_1 = (self.pos - self.camera.center + self.camera.size/2).astype(
+        #     int
+        # )  # Position 2 : A gauche ou en bas
+        # x = (
+        #     pos_0[0]
+        #     if abs(pos_0[0] - WIN_SIZE[0] / 2) < abs(pos_1[0] - WIN_SIZE[0] / 2)
+        #     else pos_1[0]
+        # )
+        # y = (
+        #     pos_0[1]
+        #     if abs(pos_0[1] - WIN_SIZE[1] / 2) < abs(pos_1[1] - WIN_SIZE[1] / 2)
+        #     else pos_1[1]
+        # )
+        # return self.pos - self.camera.center
+        # return np.array([x, y]).astype(int)
 
         return screen_pos
     
