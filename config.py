@@ -34,3 +34,8 @@ ASTEROID_STATS = [
 ASTEROID_CLASS_PROBABILITIES = [0.5, 0.3, 0.15, 0.05]
 
 # ----- Partie Astéroïdes -----
+
+# ----- Partie Vaisseau -------
+
+SHIP_ACCELERATION = 4
+SHIP_MAX_SPEED = 3

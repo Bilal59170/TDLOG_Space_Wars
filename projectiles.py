@@ -26,14 +26,16 @@ import pyglet
 class Projectile(Entity):
     """classe projectiles : projectiles circulaires"""
 
-    def __init__(self, x_init, y_init, speed_x_init, speed_y_init, radius, color):
-        super().__init__([x_init, y_init], [speed_x_init, speed_y_init])
+    def __init__(self, x_init, y_init, speed_x_init, speed_y_init, radius, color, game_state):
+        super().__init__([x_init, y_init], game_state, [speed_x_init, speed_y_init])
         self.r = radius
         self.color = color
 
     def draw(self, batch):
         #C = pyglet.shapes.Circle(self.x, self.y, self.r, color = (0, 0, 255), batch=batch)
         C = pyglet.shapes.Star(self.x, self.y, self.r, self.r/2, 5, 0 , color=(255, 255,0), batch=batch)
+        C.anchor_x = self.r
+        C.anchor_y = self.r
         C.draw()
 
     def collision_test():
@@ -42,6 +44,15 @@ class Projectile(Entity):
         pass
 
     def is_out(self, x_min, x_max, y_min, y_max):
-        if self.x < x_min or self.x > x_max or self.y < y_min or self.y > y_max:
+        x, y = self._pos
+        if x < x_min or x > x_max or y < y_min or y > y_max:
             return True
         return False
+    
+    def tick(self):
+        super().tick()
+
+        if(self.is_out(0, self.game_state.map_size[0], 0, self.game_state.map_size[1])):
+            # Supprime le projectile si il sort de la carte
+            #self.game_state.remove_entity(self)
+            pass

@@ -5,7 +5,7 @@ Notamment : - Les collisions entre astéroïdes => Fonction activate_collision(g
 """
 
 
-from asteroids.asteroids import *
+from asteroids import *
 import random
 import config
 

@@ -5,20 +5,17 @@ import projectiles
 from time import time
 
 class Enemy(entity.Entity):
-    def __init__(self, pos, speed, size, acceleration, max_speed, old_time, engage_radius, caution_radius, game_state=None):
-        super().__init__(pos, speed, game_state)
+    def __init__(self, pos, size, acceleration, max_speed, engage_radius, caution_radius, game_state, speed=np.array([0,0])):
+        super().__init__(pos, game_state, speed=speed)
         self.angle = 0
         self.size = size
         self.acceleration = acceleration
         self.max_speed = max_speed
-        self.old_time = old_time
+        self.old_time = time()
         self.engage_radius = engage_radius
         self.caution_radius = caution_radius
 
     """Fonction qui met à jour la position en fonction de la vitesse"""
-
-    def update_pos(self):
-        self.tick(self)
 
     def aim_at(self, player):
         delta_x = player.x - self.x
@@ -73,3 +70,7 @@ class Enemy(entity.Entity):
 
         if (norme_out_t2 <= self.max_speed or norme_out_t2 <= norme_t1) and distance_player < self.caution_radius :
             self.speed -= t*self.acceleration*np.array([np.cos(float(self.angle)), np.sin(float(self.angle))])
+
+    def tick(self):
+        self.close_in_and_out(self.game_state.player)
+        super().tick()
