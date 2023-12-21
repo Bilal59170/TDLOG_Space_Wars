@@ -1,5 +1,12 @@
-import numpy as np
+"""
+Gestion des collisions => - Collisions ligne - ligne
+                          - Collisions ligne - cercle
+                          - Collisions polygone - cercle
+                          - Collisions cercle - cercle
+                          - Collisions polygone - polygone
 
+"""
+import numpy as np
 
 try:
     from numba import jit, njit
@@ -28,42 +35,6 @@ def lineLineCollision(lineStart1: np.ndarray, lineEnd1: np.ndarray, lineStart2: 
     
     return True
 
-"""
-@njit
-def lineLineCollision(lineStart1: np.ndarray, lineEnd1: np.ndarray, lineStart2: np.ndarray, lineEnd2: np.ndarray):
-    # https://stackoverflow.com/questions/563198/how-do-you-detect-where-two-line-segments-intersect
-    x1, y1 = lineStart1
-    x2, y2 = lineEnd1
-    x3, y3 = lineStart2
-    x4, y4 = lineEnd2
-
-    denominator = np.cross(lineEnd1 - lineStart1, lineEnd2 - lineStart2)
-
-    
-    t = lineStart2 - lineStart1, lineEnd2 - lineStart2) / denominator
-
-    # Si les droites sont parallèles
-    if denominator == 0:
-        return False
-
-    # Calculate the point of intersection
-    x = ((x1 * y2 - y1 * x2) * (x3 - x4) -
-         (x1 - x2) * (x3 * y4 - y3 * x4)) / denominator
-    y = ((x1 * y2 - y1 * x2) * (y3 - y4) -
-         (y1 - y2) * (x3 * y4 - y3 * x4)) / denominator
-
-    # Check if the point of intersection is on the line segments
-    if x < min(x1, x2) or x > max(x1, x2):
-        return False
-    if x < min(x3, x4) or x > max(x3, x4):
-        return False
-    if y < min(y1, y2) or y > max(y1, y2):
-        return False
-    if y < min(y3, y4) or y > max(y3, y4):
-        return False
-
-    return True
-"""
 
 @njit
 def lineCircleCollision(lineStart: np.ndarray, lineEnd: np.ndarray, circleCenter: np.ndarray, circleRadius: float):
@@ -193,54 +164,3 @@ def faster_polygon_polygon_collision(polygons, n_threads = 4):
         indices += thread.result
 
     return indices
-
-
-def grid_range(start, stop, grid_size):
-    return range(start // grid_size * grid_size, stop, grid_size)    
-
-class GridSpatialPartitioning:
-    def __init__(self, cell_size, world_bounds):
-        self.cell_size = cell_size
-        self.world_bounds = world_bounds
-        self.grid = {}
-
-    def insert_into_grid(self, sprite):
-        min_x, min_y, max_x, max_y = sprite.bounds
-        for x in grid_range(min_x, max_x, self.cell_size):
-            for y in grid_range(min_y, max_y, self.cell_size):
-                if (x, y) not in self.grid:
-                    self.grid[(x, y)] = []
-                self.grid[(x, y)].append(sprite)
-
-    def get_potential_collisions(self, sprite):
-        potential_collisions = set()
-        min_x, min_y, max_x, max_y = sprite.bounds
-        for x in grid_range(min_x, max_x, self.cell_size):
-            for y in grid_range(min_y, max_y, self.cell_size):
-                potential_collisions.update(self.grid.get((x, y), []))
-        return potential_collisions
-
-    def check_collisions(self, sprite):
-        min_x, min_y, max_x, max_y = sprite.bounds
-        for x in grid_range(min_x, max_x):
-            for y in grid_range(min_y, max_y):
-                if (x, y) in self.grid:
-                    other_sprite = self.grid[(x, y)]
-                    if sprite.intersects(other_sprite):
-                        yield other_sprite
-
-    def check_collisions(self, sprite):
-        potential_collisions = self.get_potential_collisions(sprite)
-        for other_sprite in potential_collisions:
-            if sprite.intersects(other_sprite):
-                yield other_sprite
-
-
-if __name__ == "__main__":
-    # Test
-    lineStart = np.array([100, 170])
-    lineEnd = np.array([276, 50])
-    circleCenter = np.array([222, 30])
-    radius = 10
-
-    print(lineCircleCollision(lineStart, lineEnd, circleCenter, radius))

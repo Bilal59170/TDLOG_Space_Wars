@@ -1,15 +1,17 @@
-
+""" Classe du vaisseau principal """
 import numpy as np
 import pyglet
 
 import sprites, entity
 
 class Ship(sprites.Polygon, pyglet.event.EventDispatcher):
+    """ Classe du vaisseau principal """
 
+    # Taille du vaisseau
     size = 10
 
     def __init__(self, pos, size, game_state):
-
+        # Code de Bilal
         V1 = np.array([0, Ship.size])
         V2 = -Ship.size * np.array([np.cos(np.pi / 6), np.sin(np.pi / 6)])
         V3 = Ship.size * np.array([np.cos(np.pi / 6), np.sin(np.pi / 6)])

@@ -1,77 +1,44 @@
 """
-    Scénario d'une partie :
-    Génération initiale de terrain (skip for v1)
-    Création du personnage joueur
-    Affichage de la fenêtre
-    game_time = 0
-
-    Boucle principale de jeu (tant que l'utilisateur ne met pas fin au jeu, ou que vaisseau.PV > 0):
-    game_time += TICK_TIMESTEP
-    récupérer les événements : position de souris, clic
-    game.tick() (for all entities in game: entity.tick())
-    si game_time % FRAME_TIME == 0:
-        affichage
+    Fichier principal du jeu.
+    Initie le jeu, ses différentes entités et lance la boucle principale.
 """
 
+# Importations
+
+# configuration du jeu
 import config
 
-from entity import Entity
+# gestion des sprites
 import sprites
-from game import Game
 
+# gestion du jeu
+from game import Game
 import game_logic
 
+# import des astéroïdes
 from asteroids.asteroids import *
-
-# if __name__ == "__main__":  
-
-#     game = Game()
-
-#     pos = [0, 0]
-#     speed = [0, 0]
-#     vertices = create_nagon_vertices(5, 100)
-
-#     asteroid = BigAsteroid([100, 100], game, theta=np.pi/6)
-#     game.asteroids.append(asteroid)
-#     game.entities.append(asteroid)
-
-#     asteroid = SmallAsteroid([400, 400], game, theta=np.pi/6)
-#     game.asteroids.append(asteroid)
-#     game.   entities.append(asteroid)
-
-#     asteroideTriangle = MediumAsteroid([0, 400], game, theta=np.pi/6)
-#     game.asteroids.append(asteroideTriangle)
-#     game.entities.append(asteroideTriangle)
-
-#     masterAsteroid = MasterAsteroid([400, 0], game, theta=np.pi/6, speed=[.1, 0])
-#     game.asteroids.append(masterAsteroid)
-#     game.entities.append(masterAsteroid)
-
-
-
-#     game.run()
-
-
-""" LES TESTS DE BIL """
-
-
-img_caca = pyglet.image.load("Sprites/caca.png")
 
 if __name__ == "__main__":
 
+    # Création de la partie
     game = Game()
 
+    # Ajout de quatre astéroïdes de tailles différentes sur les quatre coins de la carte
     spacing = 50
 
-    asteroid = MasterAsteroid([spacing, 0], game)             # Position (0, 0) sur la carte => Au milieu de l'écran quand le vaisseau est en (0, 0) !
+    asteroid = MasterAsteroid([spacing, 0], game) # Un gros astéroïde !
     game.add_entity(asteroid)
+
     asteroid = BigAsteroid([MAP_SIZE[0]-spacing, 0], game)
     game.add_entity(asteroid)
+
     asteroid = SmallAsteroid([0, MAP_SIZE[1]-spacing], game)
     game.add_entity(asteroid)
+
     asteroid = MediumAsteroid([MAP_SIZE[0]-spacing, MAP_SIZE[1]-spacing], game)
     game.add_entity(asteroid)
 
+    # Ajout de textes indiquant les coordonnées à différents endroits de la carte, sur une grille de 5x5
     n = 5
     for x in range(0, MAP_SIZE[0], MAP_SIZE[0] // n):
         for y in range(0, MAP_SIZE[1], MAP_SIZE[1] // n):
@@ -79,7 +46,7 @@ if __name__ == "__main__":
             game.add_entity(text)
 
 
-
+    img_caca = pyglet.image.load("Sprites/caca.png")
 
     # Deux cacas. Le deuxième va plus vite et est incliné (normalement) (ne fonctionne pas !)
     caca = sprites.Image(np.array([-500, 0]), img_caca, game)
@@ -88,16 +55,22 @@ if __name__ == "__main__":
     game.add_entity(caca)
     game.add_entity(caca2)
 
-    # Animation de l'ogre !
+    # Ajout d'une image animée ! Les images sont dans le dossier Sprites/animation, et sont nommées an_1.png, an_2.png, etc.
+    # Elles sont ensuite chargées dans une liste, puis transformées en animation.
     images = [pyglet.image.load(f'Sprites/animation/an_{i}.png') for i in range(1, 6)]
     animation = pyglet.image.Animation.from_image_sequence(images, .5)
+
+    # L'image animée est ensuite ajoutée au jeu, comme pour une image normale.
     img = sprites.Image(np.array([0, 0]), animation, game)
     game.add_entity(img)
 
-
-
-    # Game Logic => Collision et spawn d'astéroïdes
+    # Logique de jeu => Collision et spawn d'astéroïdes
     game_logic.activate_collision(game)
-    # game_logic.activate_asteroid_spawn(game)
+    game_logic.activate_asteroid_spawn(game)
+
+    @game.each(5)
+    def on_tick(game):
+        print("Tick !")
+
 
     game.run()

@@ -1,8 +1,29 @@
+"""
+Implémentation de la logique du jeu
+Notamment : - Les collisions entre astéroïdes => Fonction activate_collision(game)
+            - Le spawn d'astéroïdes           => Fonction activate_asteroid_spawn(game)
+"""
+
+
 from asteroids.asteroids import *
 import random
 import config
 
 def collide(game, ast1, ast2):
+    """
+    Fonction de collision entre deux astéroïdes
+    @params:
+        game: la partie
+        ast1: le premier astéroïde
+        ast2: le deuxième astéroïde
+
+    Appelée vua le décorateur on_collide de la classe Game, dans la fonction activate_collision
+
+    Ne pas forcément comprendre le code qui suit, c'est la physique d'un rebond entre deux objets
+    Requiert que les astéroïdes aient une masse
+    """
+
+
     # On ignore les collisions entre astéroïdes qui sont sur au même endroit
     if ast1.pos[0] == ast2.pos[0]:
         return
@@ -44,28 +65,70 @@ def collide(game, ast1, ast2):
 
 
 def spawn_asteroids(game):
+    """
+    Fonction de spawn d'astéroïdes
+    @params:
+        game: la partie
+    Active le spawn des asétroïdes tous les 5 ticks
+    Le nombre d'astéroïdes spawné est aléatoire, et est limité à 20
+    """
+
+    # On ne veut pas plus de 20 astéroïdes
     if len(game.asteroids) > 20:
         return
 
+    # On veut que les petits astéroïdes soient plus fréquents que les gros -> on pondère les probabilités
     weights = [10, 20, 50]
     probabilities = [w/sum(weights) for w in weights]
 
+    # On spawn un astéroïde avec une probabilité de 20%
     if random.random() < .2:
+        # On choisit un nombre d'astéroïdes à spawn aléatoirement, suivant une loi géométrique de paramètre .6 (1.7 en moyenne)
         for i in range(np.random.geometric(p=.6)):
+
+            # Paramètres de l'astéroïde => position, vitesse, angle, aléatoires
             params = {
                 'pos' : np.array([random.randint(0, config.MAP_SIZE[0]), random.randint(0, config.MAP_SIZE[1])]),
                 'game_state' : game,
                 'theta' : random.random()*2*np.pi,
                 'speed' : np.array([random.random()*2-1, random.random()*2-1])
             }
-            asteroid = np.random.choice([BigAsteroid, MediumAsteroid, SmallAsteroid], p=probabilities)(**params)
-            game.add_entity(asteroid)
+
+            # On choisit aléatoirement un type d'astéroïde, suivant les probabilités définies plus haut
+            asteroid_type = np.random.choice([BigAsteroid, MediumAsteroid, SmallAsteroid], p=probabilities)
+            game.add_entity(asteroid_type(**params))
+
 
 def activate_collision(game):
+    """ Active les collisions entre astéroïdes """
     game.on_collide(Asteroid, Asteroid, sym = True)(collide)
 
 def activate_asteroid_spawn(game):
+    """ Active le spawn d'astéroïdes """
     game.each(5)(spawn_asteroids)
 
 
 
+def activate_FPS_counter(game):
+    """ Active l'affichage du nombre d'images par seconde """
+
+    game.frame_timer = time.time()
+    game.frame_counter = 0 # Compteur de frames
+    game.FPS = 0           # FPS
+    
+    #@game.on_draw
+    def update_FPS(game):
+        pyglet.text.Label('FPS : ' + str(game.FPS),
+                            font_name='Times New Roman',
+                            font_size=36,
+                            color=(255,0,0,255),
+                            x=10, y=10, batch=game.batch)
+        
+        game.frame_counter += 1
+        dt = time.time()-game.frame_timer
+        if dt > 1:
+            game.FPS =  int(game.frame_counter / dt)
+            game.frame_counter = 0
+            game.frame_timer = time.time()
+
+    

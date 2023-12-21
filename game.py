@@ -1,43 +1,86 @@
-"""
-Fichier où l'on intègre la boucle de jeu
-Fait appel à l'UI pour l'affichage
-L'instance de jeu est nommée game_state
 
-"""
-import pyglet
-from ship import Ship
+# Import des modules
 import config
-import numpy as np
-from pyglet.window import key
+
+
 import random
 import time
+from inspect import isclass
+import numpy as np
 
-from asteroids.asteroids import *
+import pyglet
+from pyglet.window import key
 
-from inspect import isclass # Fonction pour déterminer si les variables sont des classes ou des instances de classes
+import sprites
+from ship import Ship
+from asteroids.asteroids import Asteroid
+# from ennemies.ennemies import Ennemy
 
-from numba import njit
+try:
+    from numba import njit
+except:
+    print("Numba not installed, collisions will be slower")
+    njit = lambda x : x
+    
 from collisions import *
 
 class GameEvents:
+    """
+    Classe qui gère les événements du jeu
+    Notamment : - Les fonctions à appeler à chaque x ticks => Fonction each
+                - Les fonctions à appeler à chaque collision => Fonction on_collide
+
+    Exemple d'utilisation :
+        game = Game()
+        @game.each(10)
+        def my_function(game):
+            print("Appelée tous les 10 ticks")
+        @game.on_collide(Asteroid, Ship)
+        def my_function(game, asteroid, ship):
+            print("Appelée à chaque collision entre un astéroïde et un vaisseau")
+
+        @game.on_collide(Asteroid, Asteroid, sym=True)
+        def my_function(game, asteroid1, asteroid2):
+            print("Appelée à chaque collision entre deux astéroïdes")
+
+    
+    Comportement (pas passer trop de temps dessus):
+    @game.each(10) => Initialise une classe each qui prend en paramètre le nombre de ticks entre chaque appel de la fonction
+    def ...        => Appelle la fonction __call__ de l'instance de classe each avec en paramètre la fonction à appeler
+        
+    """
+
     def __init__(self):
+        # Liste des fonctions à appeler à chaque x ticks [(n_ticks, function)]
         self._each = []
+        # Liste des fonctions à appeler à chaque collision [(object1, object2, sym, function)]
         self._on_collide = []
 
+
+        # Utilisation de foncteurs que l'on utilise comme des décorateurs
         globals().update({'target' : self})
 
         class each:
+            # Foncteur qui permet d'ajouter une fonction à appeler à chaque x ticks
+
+            # Instance référencée par le foncteur (la partie)
             target = target
+
             def __init__(self, number):
+                # Nombre de ticks entre chaque appel de la fonction
                 self.number = number
                 
             def __call__(self, function):
+                # Fonction à appeler
                 self.target._each.append((self.number, function))
                 del self
 
         class on_collide:
+            # Même principe que each
             target = target
             def __init__(self, object1, object2, sym = False):
+                # object1 et object2 sont des classes ou des instances de classes
+                # sym indique si la collision est symétrique (ex : collision entre deux astéroïdes) => Evite d'appeler deux fois la fonction
                 self.object1 = object1
                 self.object2 = object2
                 self.sym = sym
@@ -48,45 +91,37 @@ class GameEvents:
         self.each = each
         self.on_collide = on_collide
         
-    def handle_functions(self):
+    def handle_events(self):
+        """ Fonction qui gère les événements, appelée à chaque tick, dans la boucle de jeu """
+
+        # Appel des fonctions à appeler à chaque x ticks
         for number, function in self._each:
             if self.ticks % number == 0:
                 function(self)
+        
+        # Appel des fonctions à appeler à chaque collision
+                
         for object1, object2, sym, function in self._on_collide:
-
-            # Optimisation : Pour les polygones, on utilise de la vectorisation sur les vertices
-            # print(issubclass(object1.__class__, sprites.Polygon), object2.__class__)
-            # if isclass(object1) and issubclass(object1, sprites.Polygon):
-
-            #     object1 = [e.vertices for e in self.entities if issubclass(e.__class__, object1)] if isclass(object1) else [object1.vertices]
-            #     object2 = [e.vertices for e in self.entities if issubclass(e.__class__, object2)] if isclass(object2) else [object2.vertices]
-
-            #     if not sym:
-            #         for e1 in object1:
-            #             for e2 in object2:
-            #                 if not e1 is e2:
-            #                     if polygonPolygonCollisionOptimized(e1, e2):
-            #                         function(self, e1, e2)
-            #                         print('HEY')
-            #     else:
-            #         # On évite de tester deux fois les collisions symétriques
-            #         for i in range(len(object1)):
-            #             for j in range(i+1, len(object2)):
-            #                 e1 = object1[i]
-            #                 e2 = object2[j]
-            #                 if polygonPolygonCollisionOptimized(e1, e2):
-            #                     function(self, e1, e2)
-            #                     print('HEZ')
-
-            # else:
+            
+            # On récupère les instances des classes si object1 et object2 sont des classes, sinon on les laisse telles quelles car ce sont des instances
+            # la fonction issubclass permet de savoir si une classe est une sous-classe d'une autre
+            # ex : issubclass(Asteroid, Entity) => True
+            # ex : issubclass(BigAsteroid, Asteroid) => True
+            # la fonction isclass permet de savoir si un objet est une classe
+            # ex : isclass(Asteroid) => True
+            # ex : isclass(Asteroid()) => False
             object1 = [e for e in self.entities if issubclass(e.__class__, object1)] if isclass(object1) else [object1]
             object2 = [e for e in self.entities if issubclass(e.__class__, object2)] if isclass(object2) else [object2]
 
+            # On teste les collisions entre les deux listes d'objets
             if not sym:
                 for e1 in object1:
                     for e2 in object2:
+                        # On évite de tester une collision entre un objet et lui-même
                         if not e1 is e2:
+                            # On teste la collision
                             if e1.intersects(e2):
+                                # On appelle la fonction
                                 function(self, e1, e2)
             else:
                 # On évite de tester deux fois les collisions symétriques
@@ -98,11 +133,8 @@ class GameEvents:
                             if e1.intersects(e2):
                                 function(self, e1, e2)
 
-class Map:
-    def __init__(self) -> None:
-        self.size = config.MAP_SIZE
-
 class Camera:
+    """ Classe qui gère la caméra """
     def __init__(self) -> None:
         self.size = config.WIN_SIZE
         self.center = [0, 0]
@@ -136,112 +168,119 @@ class Game(pyglet.event.EventDispatcher, GameEvents):
     
     """
 
+    time = 0          # Temps de jeu
+    ticks = 0         # Ticks de jeu
+
     def __init__(self):
+        # Initialisation des classes parentes
         pyglet.event.EventDispatcher.__init__(self)
         GameEvents.__init__(self)
 
-        self.endgame = False
-        self.map = Map()
+        self.window = pyglet.window.Window(*config.WIN_SIZE)
+        self.batch = pyglet.graphics.Batch()
+
+        # Variable qui indique si la partie est terminée
+        self.game_ended = False
+        self.tick = 0
+        
+        # Taille de la carte / caméra
+        self.map_size = config.MAP_SIZE
         self.camera = Camera()
 
+        # Création du joueur à un endroit aléatoire
         self.player = Ship(
-            np.array([0, 0]),
+            [np.random.randint(0, config.MAP_SIZE[0]), np.random.randint(0, config.MAP_SIZE[1])],
             config.SHIP_SIZE,
             game_state=self
         )
         
+        # Initialisation des listes d'entités
         self.asteroids = []
         self.ennemies = []
         self.entities = []
-        self.batch = pyglet.graphics.Batch()
-        self.tick = 0
         
-        self.window = pyglet.window.Window(*config.WIN_SIZE)
-        #push handler permet de ne pas utiliser de décorateur @windows.evnt. la fonction qui est appelée 
-        # est on_key_press. Lorsqu'on décide de fermer la fenêtre, la fonction on_close s'execute
+        # Permet de gérer les événements
+        # Fonctionnement :
+        # self.push_handlers(self.player) => Permet de gérer les événements liés au joueur
+        # self.push_handlers(self) => Permet de gérer les événements liés à la partie
+        # dans la classe dont on veut gérer les événements, on définit des fonctions de la forme on_xxx(self, ...), qui seront appelées à chaque événement xxx
+        # ex : on_key_press(self, symbol, modifiers) => Appelée à chaque pression d'une touche du clavier
+        # ex ici : on_close(self) => Appelée à chaque fermeture de la fenêtre
         self.window.push_handlers(self.player) 
         self.window.push_handlers(self)
 
-
-        self.images = [] # TEST A SUPPRIMER ME LE RAPPELER SI BESOIN
-
+        # Ajout du joueur à la liste d'entités
         self.add_entity(self.player)
 
     def add_entity(self, object):
+        # Ajoute un objet à la liste d'entités
         self.entities.append(object)
-            
-        if isinstance(object, sprites.Image):
-            self.images.append(object)
         if issubclass(object.__class__, Asteroid):
             self.asteroids.append(object)
         # elif isinstance(object, Ennemy):
         #     self.ennemies.append(object)
 
-
-    def remove(self, object):
-        pass
-
-    t = time.time()
-    frame_counter = 0
-    FPS = 0
-    time = 0
-    ticks = 0
+    def remove_entity(self, object):
+        # Supprime un objet de la liste d'entités
+        self.entities.remove(object)
+        if issubclass(object.__class__, Asteroid):
+            self.asteroids.remove(object)
+        # elif isinstance(object, Ennemy):
+        #     self.ennemies.remove(object)
 
     def display(self):
-        batch = pyglet.graphics.Batch()
-        pyglet.gl.glClearColor(*config.BACKGROUND_COLOR, 1) # Set the background color
+        # Fonction qui gère l'affichage de la fenêtre de jeu
+
+        self.window.clear()
+
+        batch = pyglet.graphics.Batch()            # On utilise un batch pour afficher les objets => Permet de gagner en performance en évitant de faire des appels à OpenGL à chaque objet
+        pyglet.gl.glClearColor(*config.BACKGROUND_COLOR, 1) # Couleur de fond de la fenêtre
+
+        # On dessine les objets
         for e in self.entities:
+            # On gère les erreurs de dessin pour afficher clairement dans quelle classe il y a une erreur
             try:
+                # On dessine l'objet
                 e.draw(batch=batch)
             except:
                 print("Error drawing : ", e.__class__.__name__)
                 raise
 
-        pyglet.text.Label('FPS : ' + str(self.FPS),
-                                font_name='Times New Roman',
-                                font_size=36,
-                                color=(255,0,0,255),
-                                x=10, y=10, batch=batch)
-
         batch.draw()
         self.batch.draw()
 
-        self.frame_counter += 1
-        dt = time.time()-self.t
-        if dt > 1:
-            self.FPS =  int(self.frame_counter / dt)
-            self.frame_counter = 0
-            self.t = time.time()
-        
+        self.window.flip()
+
 
     def update(self):
+        # On incrémente le temps
         self.time += config.TICK_TIME
         self.ticks += 1
         #Rajouter condition où la cam ne doit pas bouger: cas on est à la bordure
         self.camera.center = self.player._pos
+        # Tick des entités
         for e in self.entities:
             e.tick()
-        #if self.ticks % config.FRAME_TICKS == 0:
-        if True:
-            self.window.clear()
+        if self.ticks % config.FRAME_TICKS == 0:
             self.display()
     
     
     def run(self):
-        while not self.endgame:
-            self.handle_functions()
+        # Boucle de jeu
+        while not self.game_ended:
+            # On gère les événements
+            self.handle_events()
+            # On gère les entités / l'affichage
             self.update()
+            # On fait circuler les événements
             self.window.dispatch_events()
-            self.window.flip()
-            if self.endgame:
-                break
-
-
+            
+    # Evénement de quand on essaie de fermer la fenêtre => On quitte la boucle de jeu et la fenêtre
     def on_close(self):
-        self.endgame = True
+        self.game_ended = True
         pyglet.app.exit()
 
-    
+    # Contrôle de la direction du joueur
     def on_key_press(self, symbol, modifiers):
         if symbol == key.Z or symbol == key.UP:
             self.player.speed = np.array([0, 1])*3
