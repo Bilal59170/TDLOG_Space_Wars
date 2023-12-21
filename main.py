@@ -53,7 +53,7 @@ if __name__ == "__main__":
     caca2 = sprites.Image(np.array([500, 0]), img_caca, game, speed=[-10, 0], theta=np.pi/6)
 
     game.add_entity(caca)
-    game.add_entity(caca2)
+    # game.add_entity(caca2)
 
     # Ajout d'une image animée ! Les images sont dans le dossier Sprites/animation, et sont nommées an_1.png, an_2.png, etc.
     # Elles sont ensuite chargées dans une liste, puis transformées en animation.
@@ -67,21 +67,5 @@ if __name__ == "__main__":
     # Logique de jeu => Collision et spawn d'astéroïdes
     game_logic.activate_collision(game)
     game_logic.activate_asteroid_spawn(game)
-
-    @game.each(5)
-    def on_tick(game):
-        print("Tick !")
-
-
-    sprite_2 = PolygonSprite(pos_2, speed, vertices, (0, 0, 0), game)
-    sprite_2.game_state = game
-    game.asteroids.append(sprite_2)
-    game.entities.append(sprite_2)
-
-    asteroid_2 = BigAsteroid(pos_2, [0, 0], game)
-    game.asteroids.append(asteroid_2)
-    game.entities.append(asteroid_2)
-
-
 
     game.run()

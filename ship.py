@@ -48,11 +48,8 @@ class Ship(sprites.Polygon, pyglet.event.EventDispatcher):
         is_border['LEFT'] = (self.pos[0] - config.WIN_SIZE[0]/2) <= 0
         is_border['RIGHT'] = (self.pos[0] + config.WIN_SIZE[0]/2) >= config.MAP_SIZE[0]
 
-
-        # is_border = np.array([False, False, False, False])
-        # is_border[0] = (self.pos[0] + config.WIN_SIZE[0]/2 >= config.MAP_SIZE[0]) or (self.pos[0] - config.WIN_SIZE[0]/2 <= 0)
-        # is_border[1] = (self.pos[1] + config.WIN_SIZE[1]/2 >= config.MAP_SIZE[1]) or (self.pos[1] - config.WIN_SIZE[1]/2 <= 0) 
         return is_border
+    
     
     def draw(self, batch=None):
 
