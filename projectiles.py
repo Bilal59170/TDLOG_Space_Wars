@@ -33,7 +33,7 @@ class Projectile(Entity):
 
     def draw(self, batch):
         #C = pyglet.shapes.Circle(self.x, self.y, self.r, color = (0, 0, 255), batch=batch)
-        C = pyglet.shapes.Star(self.x, self.y, self.r, self.r/2, 5, 0 , color=(255, 255,0), batch=batch)
+        C = pyglet.shapes.Star(self.screen_x, self.screen_y, self.r, self.r/2, 5, 0 , color=(255, 255,0), batch=batch)
         C.anchor_x = self.r
         C.anchor_y = self.r
         C.draw()
