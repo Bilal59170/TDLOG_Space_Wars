@@ -28,6 +28,9 @@ class Sprites:
 
     def collides(self, other):
         raise NotImplementedError
+    
+    def is_on_screen(self):
+        raise NotImplementedError
 
 
 
@@ -166,6 +169,9 @@ class Image(Entity, Sprites):
         dy = int((self.screen_y - other.screen_y)/BITMAP_RATIO)
 
         return check_overlap(self.mask, other.mask, dx, dy)
+    
+    def is_on_screen(self):
+        return self.screen_x < WIN_SIZE[0] and self.screen_y < WIN_SIZE[1] and self.screen_x + self.sprite.width > 0 and self.screen_y + self.sprite.height > 0
 
 
 ######### PARTIE POLYGONES #########
@@ -265,6 +271,10 @@ class Polygon(Entity, Sprites):
         if useBatch:
             batch.draw()
 
+    def is_on_screen(self):
+        # On approxime la taille du polygone par le diamètre du cercle circonscrit
+        return self.screen_x + self.boundingRadius > 0 and self.screen_x - self.boundingRadius < WIN_SIZE[0] and self.screen_y + self.boundingRadius > 0 and self.screen_y - self.boundingRadius < WIN_SIZE[1]
+
 class Circle(Entity, Sprites):
     """
     Sprite pour afficher un cercle
@@ -309,6 +319,9 @@ class Circle(Entity, Sprites):
 
         if useBatch:
             batch.draw()
+    
+    def is_on_screen(self):
+        return self.screen_x + self.radius > 0 and self.screen_x - self.radius < WIN_SIZE[0] and self.screen_y + self.radius > 0 and self.screen_y - self.radius < WIN_SIZE[1]
 
 
 class Label(Entity):

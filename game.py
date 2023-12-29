@@ -68,6 +68,8 @@ class GameEvents:
         self._each = []
         # Liste des fonctions à appeler à chaque collision [(object1, object2, sym, function)]
         self._on_collide = []
+        # Liste des fonctions à appeler à chaque affichage
+        self._on_draw = []
 
 
         # Utilisation de foncteurs que l'on utilise comme des décorateurs
@@ -100,9 +102,14 @@ class GameEvents:
 
             def __call__(self, function):
                 self.target._on_collide.append((self.object1, self.object2, self.sym, function))
-
+        
         self.each = each
         self.on_collide = on_collide
+
+    
+    def on_draw(self, function):
+        self._on_draw.append(function)
+        return function
         
     @profiler.profile
     def handle_events(self):
@@ -112,6 +119,7 @@ class GameEvents:
         for number, function in self._each:
             if self.ticks % number == 0:
                 function(self)
+            
         
         # Appel des fonctions à appeler à chaque collision
                 
@@ -149,8 +157,8 @@ class GameEvents:
 
 class Camera:
     """ Classe qui gère la caméra """
-    def __init__(self) -> None:
-        self.size = config.WIN_SIZE
+    def __init__(self, win_size) -> None:
+        self.size = np.array(win_size)
         self.center = [0, 0]
 
 class Game(pyglet.event.EventDispatcher, GameEvents):
@@ -190,7 +198,25 @@ class Game(pyglet.event.EventDispatcher, GameEvents):
         pyglet.event.EventDispatcher.__init__(self)
         GameEvents.__init__(self)
 
-        self.window = pyglet.window.Window(*config.WIN_SIZE)
+        screen = pyglet.canvas.Display().get_default_screen()
+        screen_dims = [screen.width, screen.height]
+        del screen
+
+        if config.FULLSCREEN:
+            self.window = pyglet.window.Window(*screen_dims, fullscreen=True)
+            self.win_size = screen_dims
+
+        else:
+            # On centre la fenêtre
+            self.window = pyglet.window.Window(*config.WIN_SIZE, resizable=True)
+            self.window.set_location(int(self.window.screen.width/2 - self.window.width/2), int(self.window.screen.height/2 - self.window.height/2))
+            self.win_size = config.WIN_SIZE
+
+        self.window.set_mouse_visible(False)
+        self.window.set_caption("Space Wars")
+        self.window.set_vsync(False)
+        #self.window.set_icon(pyglet.image.load("ressources/icon.png")) => A ajouter quand on aura une icone
+        
         self.batch = pyglet.graphics.Batch()
 
         # Variable qui indique si la partie est terminée
@@ -199,7 +225,7 @@ class Game(pyglet.event.EventDispatcher, GameEvents):
         
         # Taille de la carte / caméra
         self.map_size = config.MAP_SIZE
-        self.camera = Camera()
+        self.camera = Camera(self.win_size)
 
         # Création du joueur à un endroit aléatoire
         self.player = Ship([0,0],
@@ -297,25 +323,33 @@ class Game(pyglet.event.EventDispatcher, GameEvents):
     @profiler.profile
     def display(self):
         # Fonction qui gère l'affichage de la fenêtre de jeu
-
         self.window.clear()
+        
+        self.batch = pyglet.graphics.Batch()
+        batch = pyglet.graphics.Batch()
 
-        batch = pyglet.graphics.Batch()            # On utilise un batch pour afficher les objets => Permet de gagner en performance en évitant de faire des appels à OpenGL à chaque objet
         pyglet.gl.glClearColor(*config.BACKGROUND_COLOR, 1) # Couleur de fond de la fenêtre
 
         # On dessine les objets
         for e in self.entities:
             # On gère les erreurs de dessin pour afficher clairement dans quelle classe il y a une erreur
+            if hasattr(e, 'is_on_screen'):
+                if not e.is_on_screen():
+                    continue
+
             try:
                 # On dessine l'objet
                 e.draw(batch=batch)
             except:
                 print("Error drawing : ", e.__class__.__name__)
                 raise
-
+        
         batch.draw()
         self.batch.draw()
 
+        for function in self._on_draw:
+            function(self)
+        
         self.window.flip()
 
     def new_projectile(self):
@@ -365,3 +399,7 @@ class Game(pyglet.event.EventDispatcher, GameEvents):
     def on_close(self):
         self.game_ended = True
         pyglet.app.exit()
+
+    def on_resize(self, width, height):
+        self.win_size = [width, height]
+        self.camera.size = np.array([width, height])

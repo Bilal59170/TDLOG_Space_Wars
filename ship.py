@@ -64,7 +64,7 @@ class Ship(sprites.Polygon, pyglet.event.EventDispatcher):
         self.get_angle(x, y)
 
     def throw_projectile(self, speed):
-        speed = 0
+        speed = 20
         p = projectiles.Projectile(self.x, self.y, speed*np.cos(self.theta), speed*np.sin(self.theta), 4, color = "r", game_state=self.game_state)
         return p
     

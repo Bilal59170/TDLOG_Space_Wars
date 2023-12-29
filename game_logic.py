@@ -116,13 +116,13 @@ def activate_FPS_counter(game):
     game.frame_counter = 0 # Compteur de frames
     game.FPS = 0           # FPS
     
-    #@game.on_draw
+    @game.on_draw
     def update_FPS(game):
         pyglet.text.Label('FPS : ' + str(game.FPS),
                             font_name='Times New Roman',
                             font_size=36,
                             color=(255,0,0,255),
-                            x=10, y=10, batch=game.batch)
+                            x=10, y=10).draw()
         
         game.frame_counter += 1
         dt = time.time()-game.frame_timer
@@ -130,5 +130,7 @@ def activate_FPS_counter(game):
             game.FPS =  int(game.frame_counter / dt)
             game.frame_counter = 0
             game.frame_timer = time.time()
+
+    
 
     

@@ -37,7 +37,7 @@ from asteroids import *
 if __name__ == "__main__":
 
     # Création de la partie
-    game = Game(profile=True)
+    game = Game(profile=False)
 
     # Ajout de quatre astéroïdes de tailles différentes sur les quatre coins de la carte
     spacing = 50
@@ -65,23 +65,24 @@ if __name__ == "__main__":
     img_caca = pyglet.image.load("Sprites/caca.png")
 
     # Deux cacas. Le deuxième va plus vite et est incliné (normalement) (ne fonctionne pas !)
-    # caca = sprites.Image(np.array([-500, 0]), img_caca, game)
-    # caca2 = sprites.Image(np.array([500, 0]), img_caca, game, speed=[-10, 0], theta=np.pi/6)
+    caca = sprites.Image(np.array([-500, 0]), img_caca, game)
+    caca2 = sprites.Image(np.array([500, 0]), img_caca, game, speed=[-10, 0], theta=np.pi/6)
 
-    # game.add_entity(caca)
-    # game.add_entity(caca2)
+    game.add_entity(caca)
+    game.add_entity(caca2)
 
     # Ajout d'une image animée ! Les images sont dans le dossier Sprites/animation, et sont nommées an_1.png, an_2.png, etc.
     # Elles sont ensuite chargées dans une liste, puis transformées en animation.
-    # images = [pyglet.image.load(f'Sprites/animation/an_{i}.png') for i in range(1, 6)]
-    # animation = pyglet.image.Animation.from_image_sequence(images, .5)
+    images = [pyglet.image.load(f'Sprites/animation/an_{i}.png') for i in range(1, 6)]
+    animation = pyglet.image.Animation.from_image_sequence(images, .5)
 
     # L'image animée est ensuite ajoutée au jeu, comme pour une image normale.
-    # img = sprites.Image(np.array([0, 0]), animation, game)
-    # game.add_entity(img)
+    img = sprites.Image(np.array([0, 0]), animation, game)
+    game.add_entity(img)
 
     # Logique de jeu => Collision et spawn d'astéroïdes
-    # game_logic.activate_collision(game)
-    # game_logic.activate_asteroid_spawn(game)
+    game_logic.activate_collision(game)
+    game_logic.activate_asteroid_spawn(game)
+    game_logic.activate_FPS_counter(game)
 
     game.run()
