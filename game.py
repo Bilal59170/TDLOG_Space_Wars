@@ -33,6 +33,10 @@ except:
     
 from collisions import *
 
+from profiling import Profiler
+
+profiler = Profiler()
+
 class GameEvents:
     """
     Classe qui gère les événements du jeu
@@ -100,6 +104,7 @@ class GameEvents:
         self.each = each
         self.on_collide = on_collide
         
+    @profiler.profile
     def handle_events(self):
         """ Fonction qui gère les événements, appelée à chaque tick, dans la boucle de jeu """
 
@@ -180,7 +185,7 @@ class Game(pyglet.event.EventDispatcher, GameEvents):
     time = 0          # Temps de jeu
     ticks = 0         # Ticks de jeu
 
-    def __init__(self):
+    def __init__(self, profile = False):
         # Initialisation des classes parentes
         pyglet.event.EventDispatcher.__init__(self)
         GameEvents.__init__(self)
@@ -244,6 +249,10 @@ class Game(pyglet.event.EventDispatcher, GameEvents):
         self.mouse_x = 0
         self.mouse_y = 0
 
+        self.profiling = profile
+        if profile:
+            profiler.open_plot()
+
         @self.window.event
         def on_mouse_motion(x, y, dx, dy):
             self.mouse_x, self.mouse_y = x, y
@@ -285,6 +294,7 @@ class Game(pyglet.event.EventDispatcher, GameEvents):
             self.player.speed += t*self.player.acceleration*np.array([1., 0.])
 
 
+    @profiler.profile
     def display(self):
         # Fonction qui gère l'affichage de la fenêtre de jeu
 
@@ -313,7 +323,7 @@ class Game(pyglet.event.EventDispatcher, GameEvents):
         if self.mousebuttons[mouse.RIGHT]:
                 self.entities.append(self.player.throw_projectile(20))
 
-
+    @profiler.profile
     def update(self, *other):
         self.new_projectile()
         self.update_speed()
@@ -347,6 +357,9 @@ class Game(pyglet.event.EventDispatcher, GameEvents):
             self.update()
             # On fait circuler les événements
             self.window.dispatch_events()
+            
+            if self.profiling:
+                profiler.update_plot()
             
     # Evénement de quand on essaie de fermer la fenêtre => On quitte la boucle de jeu et la fenêtre
     def on_close(self):
