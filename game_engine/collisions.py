@@ -15,6 +15,7 @@ except:
     njit = lambda x:x
     print("Warning: numba not installed, collisions will be slow")
 
+
 @njit
 def lineLineCollision(lineStart1: np.ndarray, lineEnd1: np.ndarray, lineStart2: np.ndarray, lineEnd2: np.ndarray):
 
@@ -36,13 +37,13 @@ def lineLineCollision(lineStart1: np.ndarray, lineEnd1: np.ndarray, lineStart2: 
     return True
 
 
-@njit
+#@njit
 def lineCircleCollision(lineStart: np.ndarray, lineEnd: np.ndarray, circleCenter: np.ndarray, circleRadius: float):
     t = (lineEnd - lineStart) /  np.linalg.norm(lineEnd - lineStart)
     dist = np.cross(circleCenter - lineStart, t)
     return dist < circleRadius
 
-@njit
+#@njit
 def polygonCircleCollision(polygonVertices: np.ndarray, circleCenter: np.ndarray, circleRadius: float):
     for i in range(len(polygonVertices)):
         lineStart = polygonVertices[i]

@@ -6,9 +6,6 @@ L'instance de jeu est nommée game_state
 
 """
 
-import config
-
-
 import random
 import time
 from inspect import isclass
@@ -19,21 +16,15 @@ from pyglet.window import key
 from pyglet.window import mouse
 from time import time
 
-import sprites
-from ship import Ship
-from asteroids import Asteroid
-from projectiles import Projectile
-from enemies import Enemy
+from game_engine import config, sprites
+from game_engine.collisions import *
+from game_engine.profiling import Profiler
 
-try:
-    from numba import njit
-except:
-    print("Numba not installed, collisions will be slower")
-    njit = lambda x : x
-    
-from collisions import *
+from game_objects.ship import Ship
+from game_objects.asteroids import Asteroid
+from game_objects.projectiles import Projectile
+from game_objects.enemies import Enemy
 
-from profiling import Profiler
 
 profiler = Profiler()
 
@@ -155,6 +146,7 @@ class GameEvents:
                             if e1.intersects(e2):
                                 function(self, e1, e2)
 
+
 class Camera:
     """ Classe qui gère la caméra """
     def __init__(self, win_size) -> None:
@@ -229,22 +221,14 @@ class Game(pyglet.event.EventDispatcher, GameEvents):
 
         # Création du joueur à un endroit aléatoire
         self.player = Ship([0,0],
-            #[np.random.randint(0, config.MAP_SIZE[0]), np.random.randint(0, config.MAP_SIZE[1])],
-            config.SHIP_SIZE,
+            [np.random.randint(0, config.MAP_SIZE[0]), np.random.randint(0, config.MAP_SIZE[1])],
             game_state=self,
-            acceleration=config.SHIP_ACCELERATION,
-            max_speed=config.SHIP_MAX_SPEED
         )
-        
+        self.score = 0
+
         # Initialisation des listes d'entités
         self.asteroids = []
-        enemy = Enemy(np.array([config.MAP_SIZE[0] / 4, config.MAP_SIZE[1] / 4]),
-                      size=30.,
-                      acceleration=2.,
-                      max_speed=2.,
-                      engage_radius=300.,
-                      caution_radius=200.,
-                      game_state=self)
+        enemy = Enemy(np.array([config.MAP_SIZE[0] / 4, config.MAP_SIZE[1] / 4]), game_state=self)
         
         self.enemies = [enemy]
         
@@ -288,7 +272,9 @@ class Game(pyglet.event.EventDispatcher, GameEvents):
             if self.mousebuttons[mouse.RIGHT]:
                 self.mouse_x, self.mouse_y = x, y
 
-
+    def add_score(self, score):
+        self.score += score
+        print(f'Score : {self.score}')
 
     def add_entity(self, object):
         # Ajoute un objet à la liste d'entités
@@ -355,7 +341,7 @@ class Game(pyglet.event.EventDispatcher, GameEvents):
     def new_projectile(self):
         # Fonction qui gère le lancement de projectiles
         if self.mousebuttons[mouse.RIGHT]:
-                self.entities.append(self.player.throw_projectile(20))
+                self.entities.append(self.player.throw_projectile())
 
     @profiler.profile
     def update(self, *other):

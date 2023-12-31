@@ -1,11 +1,4 @@
-from config import *
-from utils import *
-
-from typing import Any
-from abc import ABC, abstractmethod
-
 import numpy as np
-
 
 class NoGameStateError(Exception):
     """ Exception levée lorsqu'un objet n'a pas d'attribut game_state"""
@@ -104,7 +97,3 @@ class Entity:
     @property
     def y(self):
         return self.pos[1]
-
-
-        
-

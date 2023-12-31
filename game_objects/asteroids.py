@@ -2,16 +2,13 @@ from typing import Any
 import numpy as np
 
 import sys
- 
-# setting path
-sys.path.append('../TDLOG_Space_Wars')
+sys.path.append("../")
 
-import sprites
-from config import *
-from utils import *
+from game_engine import sprites
+from game_engine.utils import create_nagon_vertices, draw_bar
+from game_engine.config import *
 
 import time
-
 
 class Asteroid(sprites.Polygon):
 
@@ -91,6 +88,16 @@ class Asteroid(sprites.Polygon):
             color = self.bar_color,
             batch=batch
         )
+
+    def die(self):
+        """
+        Fonction de mort de l'astéroïde
+        """
+        self.game_state.add_score(self.ressources)
+        try:
+            self.game_state.remove_entity(self)
+        except ValueError:
+            pass
         
 
 class MasterAsteroid(Asteroid):   
@@ -106,7 +113,7 @@ class MasterAsteroid(Asteroid):
     barHeight = 16
     barSpacing = 5
 
-    HP = 100
+    max_HP = 100
     ressources = 100
     mass = 100
 
@@ -119,7 +126,7 @@ class BigAsteroid(Asteroid):
 
     bar_color = (118,141,252)
 
-    HP = 100
+    max_HP = 100
     ressources = 100
     mass = 100
 
@@ -150,6 +157,6 @@ class SmallAsteroid(Asteroid):
 
     bar_color = (255,232,105)
 
-    HP = 10
+    max_HP = 10
     ressources = 10
     mass = 10

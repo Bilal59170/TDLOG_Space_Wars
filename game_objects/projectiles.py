@@ -19,29 +19,30 @@ Méthodes d'un projectile :
     => Retourne : Une liste d'ennemis avec lequel l'astéroïde est en collision (vide s'il ne touche rien)
 
 """
-from entity import Entity
+
+import sys
+sys.path.append("../")
+
+from game_engine.sprites import Circle
 import pyglet
 
+class Projectile(Circle):
 
-class Projectile(Entity):
+    damage = 5
+
     """classe projectiles : projectiles circulaires"""
 
     def __init__(self, x_init, y_init, speed_x_init, speed_y_init, radius, color, game_state):
-        super().__init__([x_init, y_init], game_state, [speed_x_init, speed_y_init])
+        super().__init__([x_init, y_init], radius, game_state, speed=[speed_x_init, speed_y_init])
         self.r = radius
         self.color = color
 
     def draw(self, batch):
-        #C = pyglet.shapes.Circle(self.x, self.y, self.r, color = (0, 0, 255), batch=batch)
         C = pyglet.shapes.Star(self.screen_x, self.screen_y, self.r, self.r/2, 5, 0 , color=(255, 255,0), batch=batch)
         C.anchor_x = self.r
         C.anchor_y = self.r
         C.draw()
 
-    def collision_test():
-        """teste si le projectile est en collision à l'instant présent.
-        renvoi True s'il y a collision et False sinon"""
-        pass
 
     def is_out(self, x_min, x_max, y_min, y_max):
         x, y = self._pos
@@ -54,5 +55,5 @@ class Projectile(Entity):
 
         if(self.is_out(0, self.game_state.map_size[0], 0, self.game_state.map_size[1])):
             # Supprime le projectile si il sort de la carte
-            #self.game_state.remove_entity(self)
+            self.game_state.remove_entity(self)
             pass

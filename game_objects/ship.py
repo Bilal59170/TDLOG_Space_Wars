@@ -1,36 +1,36 @@
 """ Classe du vaisseau principal """
-"""
-Implémentation du vaisseau
 
-Implémente Entity
-"""
-import config
+import sys
+sys.path.append("../")
+
 import numpy as np
 import pyglet
-from pyglet.shapes import Polygon
-import projectiles
 
-import sprites, entity
+from game_engine import config, sprites, entity
+from game_objects import projectiles
+
+import game_engine.config as config
 
 class Ship(sprites.Polygon, pyglet.event.EventDispatcher):
     """ Classe du vaisseau principal """
 
     # Taille du vaisseau
     size = 10
+    acceleration = config.SHIP_ACCELERATION
+    max_speed = config.SHIP_MAX_SPEED
+    bullet_speed = 5
 
-    def __init__(self, pos, size, acceleration, max_speed, game_state):
+    def __init__(self, pos, size, game_state):
         # Code de Bilal
 
         V1 = np.array([0, Ship.size])
-        V2 = -Ship.size * np.array([np.cos(np.pi / 6), np.sin(np.pi / 6)])
+        V2 = - Ship.size * np.array([np.cos(np.pi / 6), np.sin(np.pi / 6)])
         V3 = Ship.size * np.array([np.cos(np.pi / 6), np.sin(np.pi / 6)])
 
         vertices = np.array([V1, V2, V3]).astype(int)
         sprites.Polygon.__init__(self, pos, vertices, game_state, fillColor=(255,0,0))
         pyglet.event.EventDispatcher.__init__(self)
 
-        self.acceleration = acceleration
-        self.max_speed = max_speed
 
     def tick(self):
         """Fonction qui met à jour la position en fonction de la vitesse"""
@@ -53,18 +53,12 @@ class Ship(sprites.Polygon, pyglet.event.EventDispatcher):
         is_border['RIGHT'] = (self.pos[0] + config.WIN_SIZE[0]/2) >= config.MAP_SIZE[0]
 
         return is_border
-    
-    
-    def draw(self, batch=None):
-
-        super().draw(batch)
-
 
     def on_mouse_motion(self, x, y, dx, dy):
         self.get_angle(x, y)
 
-    def throw_projectile(self, speed):
-        speed = 20
+    def throw_projectile(self):
+        speed = self.bullet_speed
         p = projectiles.Projectile(self.x, self.y, speed*np.cos(self.theta), speed*np.sin(self.theta), 4, color = "r", game_state=self.game_state)
         return p
     

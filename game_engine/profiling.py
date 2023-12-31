@@ -3,12 +3,23 @@ import matplotlib.pyplot as plt
 
 
 class Profiler:
+    """
+    Classe permettant de profiler le temps d'exécution des fonctions décorées
+    exemple d'utilisation :
+
+    profiler = Profiler()
+    
+    @profiler.profile
+    def my_function():
+        ...
+
+    """
+
     def __init__(self) -> None:
         self.functions = {}
         
         
     def profile(self, function):
-
         self.functions[function.__name__] = []
 
         def wrapper(*args, **kwargs):

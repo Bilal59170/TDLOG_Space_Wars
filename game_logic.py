@@ -4,10 +4,12 @@ Notamment : - Les collisions entre astéroïdes => Fonction activate_collision(g
             - Le spawn d'astéroïdes           => Fonction activate_asteroid_spawn(game)
 """
 
-
-from asteroids import *
 import random
-import config
+
+import pyglet
+
+import game_engine.config as config
+from game_objects.asteroids import *
 
 def collide(game, ast1, ast2):
     """
@@ -96,6 +98,12 @@ def spawn_asteroids(game):
 
             # On choisit aléatoirement un type d'astéroïde, suivant les probabilités définies plus haut
             asteroid_type = np.random.choice([BigAsteroid, MediumAsteroid, SmallAsteroid], p=probabilities)
+
+            # On vérifie que l'astéroïde ne spawn pas sur un autre
+            while any([a.intersects(asteroid_type(**params)) for a in game.asteroids]):
+                params['pos'] = np.array([random.randint(0, config.MAP_SIZE[0]), random.randint(0, config.MAP_SIZE[1])])
+
+
             game.add_entity(asteroid_type(**params))
 
 

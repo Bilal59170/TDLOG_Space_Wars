@@ -1,12 +1,19 @@
-import pyglet
-from pyglet.window import key, mouse
-from ship import Ship
 import numpy as np
-import game
-import config
 from time import time
 
-# from game import *
+import pyglet
+from pyglet.window import key, mouse
+
+from game_engine.config import *
+from game_engine import sprites
+from game_objects.ship import Ship
+from game_objects.asteroids import *
+from game_objects.enemies import *
+from game_objects.projectiles import *
+
+# gestion du jeu
+from game import Game
+import game_logic
 
 """@package docstring
 Fichier d'application (sert pour l'instant à tester le code produit)
@@ -19,20 +26,7 @@ Fichier d'application (sert pour l'instant à tester le code produit)
     Initie le jeu, ses différentes entités et lance la boucle principale.
 """
 
-# Importations
-
-# configuration du jeu
-import config
-
-# gestion des sprites
-import sprites
-
-# gestion du jeu
-from game import Game
-import game_logic
-
 # import des astéroïdes
-from asteroids import *
 
 if __name__ == "__main__":
 
@@ -62,7 +56,7 @@ if __name__ == "__main__":
     #         game.add_entity(text)
 
 
-    img_caca = pyglet.image.load("Sprites/caca.png")
+    img_caca = pyglet.image.load("resources/Sprites/caca.png")
 
     # Deux cacas. Le deuxième va plus vite et est incliné (normalement) (ne fonctionne pas !)
     caca = sprites.Image(np.array([-500, 0]), img_caca, game)
@@ -73,7 +67,7 @@ if __name__ == "__main__":
 
     # Ajout d'une image animée ! Les images sont dans le dossier Sprites/animation, et sont nommées an_1.png, an_2.png, etc.
     # Elles sont ensuite chargées dans une liste, puis transformées en animation.
-    images = [pyglet.image.load(f'Sprites/animation/an_{i}.png') for i in range(1, 6)]
+    images = [pyglet.image.load(f'resources/Sprites/animation/an_{i}.png') for i in range(1, 6)]
     animation = pyglet.image.Animation.from_image_sequence(images, .5)
 
     # L'image animée est ensuite ajoutée au jeu, comme pour une image normale.
@@ -84,5 +78,10 @@ if __name__ == "__main__":
     game_logic.activate_collision(game)
     game_logic.activate_asteroid_spawn(game)
     game_logic.activate_FPS_counter(game)
+
+    @game.on_collide(Projectile, Asteroid)
+    def bullet_asteroid_collision(game, bullet, asteroid):
+        asteroid.HP = asteroid.HP - bullet.damage
+        game.remove_entity(bullet)
 
     game.run()

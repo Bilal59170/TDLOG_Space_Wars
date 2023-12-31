@@ -1,13 +1,10 @@
-from shapely.geometry import Polygon as Poly
-
-from entity import Entity
+from .entity import Entity
 from pyglet.gl import *
-glEnable(GL_BLEND)
 import pyglet
 
 import numpy as np
-from config import *
-from collisions import *
+from .config import *
+from .collisions import *
 
 try:
     from numba import njit
@@ -153,6 +150,10 @@ class Image(Entity, Sprites):
 
 
     def intersects(self, other):
+
+        if not isinstance(other, Image):
+            raise ValueError("other must be an instance of Image")
+
         if not (self.screen_x < other.screen_x + other.sprite.width and
             self.screen_x + self.sprite.width > other.screen_x and
             self.screen_y < other.screen_y + other.sprite.height and
@@ -185,6 +186,16 @@ class Polygon(Entity, Sprites):
         => intersects : teste si le polygone se superpose à un autre sprite
         => theta : angle de rotation du polygone
 
+    Paramètres :
+        => pos : position du polygone sur la carte
+        => vertices : tableau numpy des sommets du polygone
+        => game_state : instance de GameState
+        => lineWidth : largeur des bords du polygone
+        => theta : angle de rotation du polygone
+        => fillColor : couleur de remplissage du polygone
+        => edgeColor : couleur des bords du polygone
+        => speed : vitesse du polygone
+
     """
     def __init__(self, pos, vertices, game_state, lineWidth=1, theta=None, fillColor=None, edgeColor=None, speed=[0, 0]):
         
@@ -192,8 +203,12 @@ class Polygon(Entity, Sprites):
             raise ValueError("Either fillColor or edgeColor must be specified")
         
         Entity.__init__(self, pos, game_state, speed=speed)
-
         self._vertices = np.array(vertices)
+        self.boundingRadius = np.max(np.linalg.norm(self._vertices, axis=1))
+    
+        self.fillColor = fillColor
+        self.edgeColor = edgeColor
+        self.lineWidth = lineWidth
 
         if theta is not None:
             self._theta = theta
@@ -201,13 +216,6 @@ class Polygon(Entity, Sprites):
                 [np.cos(theta), np.sin(theta)],
                 [-np.sin(theta), np.cos(theta)],
             ])
-    
-        self.fillColor = fillColor
-        self.edgeColor = edgeColor
-        self.lineWidth = lineWidth
-
-        self.boundingRadius = np.max(np.linalg.norm(self._vertices, axis=1))
-
 
     @property
     def theta(self):
@@ -215,6 +223,7 @@ class Polygon(Entity, Sprites):
     
     @theta.setter
     def theta(self, theta):
+        # On met à jour la matrice de rotation quand on change l'angle
         self._theta = theta
         self.rotation_matrix = np.array([
                 [np.cos(theta), np.sin(theta)],
@@ -223,6 +232,7 @@ class Polygon(Entity, Sprites):
 
     @property
     def vertices(self):
+        # On applique la rotation si elle existe pour obtenir les sommets du polygone à l'écran
         if hasattr(self, 'theta'):
             return self.screen_pos + self._vertices @ self.rotation_matrix
         return self.screen_pos + self._vertices
@@ -232,15 +242,7 @@ class Polygon(Entity, Sprites):
         return np.min(self.vertices, axis=0)[0], np.min(self.vertices, axis=0)[1], np.max(self.vertices, axis=0)[0], np.max(self.vertices, axis=0)[1]
     
     def intersects(self, other):
-        if isinstance(other, Polygon):
-            if self.boundingRadius + other.boundingRadius < np.linalg.norm(self.pos - other.pos):
-                return False
-            return polygonPolygonCollisionOptimized(self.vertices, other.vertices)
-        elif isinstance(other, Circle):
-            return polygonCircleCollision(self.vertices, other.pos, other.radius)
-        elif isinstance(other, Image):
-            return other.intersects(self)
-        raise ValueError("Collision not implemented")
+        return does_collide(self, other)
     
     def draw(self, batch = None):
         batch = None
@@ -273,7 +275,9 @@ class Polygon(Entity, Sprites):
 
     def is_on_screen(self):
         # On approxime la taille du polygone par le diamètre du cercle circonscrit
-        return self.screen_x + self.boundingRadius > 0 and self.screen_x - self.boundingRadius < WIN_SIZE[0] and self.screen_y + self.boundingRadius > 0 and self.screen_y - self.boundingRadius < WIN_SIZE[1]
+        win_size = self.camera.size
+        x, y = self.screen_pos
+        return x + self.boundingRadius > 0 and x - self.boundingRadius < win_size[0] and y + self.boundingRadius > 0 and y - self.boundingRadius < win_size[1]
 
 class Circle(Entity, Sprites):
     """
@@ -292,13 +296,7 @@ class Circle(Entity, Sprites):
         self.lineWidth = lineWidth
 
     def intersects(self, other):
-        if isinstance(other, Polygon):
-            return polygonCircleCollision(other.vertices, self.pos, self.radius)
-        elif isinstance(other, Circle):
-            return np.linalg.norm(self.pos - other.pos) < self.radius + other.radius
-        elif isinstance(other, Image):
-            return other.intersects(self)
-        raise ValueError("Collision not implemented")
+        return does_collide(self, other)
     
     def bounds(self):
         return self.screen_x - self.radius, self.screen_y - self.radius, self.screen_x + self.radius, self.screen_y + self.radius
@@ -351,5 +349,47 @@ class Label(Entity):
         if useBatch:
             batch.draw()
 
-    def intersects(self, other):
-        return False
+
+def does_collide(sprite1, sprite2):
+    """
+    Fonction qui teste si deux sprites se superposent
+    """
+
+    assert isinstance(sprite1, Sprites) and isinstance(sprite2, Sprites), "sprite1 and sprite2 must be instances of Sprites"
+
+    if isinstance(sprite1, Polygon) and isinstance(sprite2, Polygon):
+        # On teste d'abord si les bounding boxes se superposent
+        if sprite1.boundingRadius + sprite2.boundingRadius < np.linalg.norm(sprite1.pos - sprite2.pos):
+            return False
+        return polygonPolygonCollisionOptimized(sprite1.vertices, sprite2.vertices)
+    
+    elif isinstance(sprite1, Polygon) and isinstance(sprite2, Circle):
+        # On teste d'abord si les bounding boxes se superposent
+        if sprite1.boundingRadius + sprite2.radius < np.linalg.norm(sprite1.pos - sprite2.pos):
+            return False
+        return polygonCircleCollision(sprite1.vertices, sprite2.pos, sprite2.radius)
+    
+    elif isinstance(sprite1, Circle) and isinstance(sprite2, Polygon):
+        # On teste d'abord si les bounding boxes se superposent
+        if sprite1.radius + sprite2.boundingRadius < np.linalg.norm(sprite1.pos - sprite2.pos):
+            return False
+        return polygonCircleCollision(sprite2.vertices, sprite1.pos, sprite1.radius)
+    
+    elif isinstance(sprite1, Circle) and isinstance(sprite2, Circle):
+        return np.linalg.norm(sprite1.pos - sprite2.pos) < sprite1.radius + sprite2.radius
+    
+    elif isinstance(sprite1, Image) and isinstance(sprite2, Image):
+        return sprite1.intersects(sprite2)
+    
+    elif isinstance(sprite1, Image) and isinstance(sprite2, Polygon):
+        raise ValueError("Image-Polygon collision not implemented")
+    elif isinstance(sprite1, Polygon) and isinstance(sprite2, Image):
+        raise ValueError("Image-Polygon collision not implemented")
+    
+    elif isinstance(sprite1, Image) and isinstance(sprite2, Circle):
+        raise ValueError("Image-Circle collision not implemented")
+    elif isinstance(sprite1, Circle) and isinstance(sprite2, Image):
+        raise ValueError("Image-Circle collision not implemented")
+    
+        
+    
