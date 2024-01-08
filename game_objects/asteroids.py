@@ -93,9 +93,9 @@ class Asteroid(sprites.Polygon):
         """
         Fonction de mort de l'astéroïde
         """
-        self.game_state.add_score(self.ressources)
         try:
             self.game_state.remove_entity(self)
+            self.game_state.add_score(self.ressources)
         except ValueError:
             pass
         

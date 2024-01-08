@@ -10,6 +10,28 @@ import pyglet
 
 import game_engine.config as config
 from game_objects.asteroids import *
+from game_objects.ship import Ship
+from game_objects.enemies import Enemy
+
+def repel(game, ast, entity):
+    """
+    Fonction qui repousse les entités des astéroïdes (pour éviter qu'ils ne se chevauchent)
+    @params:
+        game: la partie
+        ast: l'astéroïde
+        entity: l'entité à repousser
+    """
+    
+    # On ignore les collisions entre astéroïdes qui sont sur au même endroit
+    if ast.pos[0] == entity.pos[0]:
+        return
+
+    # On calcule la distance entre l'astéroïde et l'entité
+    dist = np.linalg.norm(ast.pos - entity.pos)
+
+    # Si l'entité est trop proche de l'astéroïde, on la repousse
+    if dist < ast.size:
+        entity.speed += .05 * (ast.pos - entity.pos) * (dist - ast.size) / dist
 
 def collide(game, ast1, ast2):
     """
@@ -100,16 +122,20 @@ def spawn_asteroids(game):
             asteroid_type = np.random.choice([BigAsteroid, MediumAsteroid, SmallAsteroid], p=probabilities)
 
             # On vérifie que l'astéroïde ne spawn pas sur un autre
-            while any([a.intersects(asteroid_type(**params)) for a in game.asteroids]):
+            asteroid = asteroid_type(**params)
+            while any([a.intersects(asteroid) for a in game.asteroids]):
                 params['pos'] = np.array([random.randint(0, config.MAP_SIZE[0]), random.randint(0, config.MAP_SIZE[1])])
+                asteroid = asteroid_type(**params)
 
 
-            game.add_entity(asteroid_type(**params))
+            game.add_entity(asteroid)
 
 
 def activate_collision(game):
     """ Active les collisions entre astéroïdes """
     game.on_collide(Asteroid, Asteroid, sym = True)(collide)
+    game.on_collide(Asteroid, Ship)(repel)
+    game.on_collide(Asteroid, Enemy)(repel)
 
 def activate_asteroid_spawn(game):
     """ Active le spawn d'astéroïdes """

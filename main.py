@@ -4,6 +4,9 @@ from time import time
 import pyglet
 from pyglet.window import key, mouse
 
+pyglet.gl.glEnable(pyglet.gl.GL_BLEND)
+pyglet.gl.glBlendFunc(pyglet.gl.GL_SRC_ALPHA, pyglet.gl.GL_ONE_MINUS_SRC_ALPHA)
+
 from game_engine.config import *
 from game_engine import sprites
 from game_objects.ship import Ship
@@ -75,13 +78,14 @@ if __name__ == "__main__":
     game.add_entity(img)
 
     # Logique de jeu => Collision et spawn d'astéroïdes
-    game_logic.activate_collision(game)
+    #game_logic.activate_collision(game)
     game_logic.activate_asteroid_spawn(game)
     game_logic.activate_FPS_counter(game)
 
     @game.on_collide(Projectile, Asteroid)
     def bullet_asteroid_collision(game, bullet, asteroid):
         asteroid.HP = asteroid.HP - bullet.damage
+        asteroid.speed += bullet.speed * bullet.mass / asteroid.mass
         game.remove_entity(bullet)
 
     game.run()

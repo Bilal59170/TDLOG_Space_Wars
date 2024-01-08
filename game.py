@@ -249,7 +249,7 @@ class Game(pyglet.event.EventDispatcher, GameEvents):
 
         # Code de Broni
         self.time = 0
-        self.old_time = time.time()
+        self.old_time = time()
 
         self.keys = key.KeyStateHandler()
         self.window.push_handlers(self.keys)
@@ -293,8 +293,8 @@ class Game(pyglet.event.EventDispatcher, GameEvents):
             self.ennemies.remove(object)
             
     def update_speed(self):
-        t = time.time() - self.old_time
-        self.old_time = time.time()
+        t = time() - self.old_time
+        self.old_time = time()
         
         if (self.keys[key.Z] or self.keys[key.UP]) and (abs(self.player.speed[1]) < self.player.max_speed or self.player.speed[1] < 0):
             self.player.speed += t*self.player.acceleration*np.array([0., 1.])
@@ -311,7 +311,6 @@ class Game(pyglet.event.EventDispatcher, GameEvents):
         # Fonction qui gère l'affichage de la fenêtre de jeu
         self.window.clear()
         
-        self.batch = pyglet.graphics.Batch()
         batch = pyglet.graphics.Batch()
 
         pyglet.gl.glClearColor(*config.BACKGROUND_COLOR, 1) # Couleur de fond de la fenêtre

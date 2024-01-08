@@ -29,6 +29,8 @@ import pyglet
 class Projectile(Circle):
 
     damage = 5
+    mass = 5
+    size = 10
 
     """classe projectiles : projectiles circulaires"""
 
@@ -57,3 +59,8 @@ class Projectile(Circle):
             # Supprime le projectile si il sort de la carte
             self.game_state.remove_entity(self)
             pass
+
+class SmallBullet(Projectile):
+    damage = 5
+    mass = 5
+    size = 10

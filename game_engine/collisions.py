@@ -17,7 +17,10 @@ except:
 
 
 @njit
-def lineLineCollision(lineStart1: np.ndarray, lineEnd1: np.ndarray, lineStart2: np.ndarray, lineEnd2: np.ndarray):
+def lineLineCrossing(lineStart1: np.ndarray, lineEnd1: np.ndarray, lineStart2: np.ndarray, lineEnd2: np.ndarray):
+    """
+    Fonction qui teste si deux droites se croisent
+    """
 
     # Si les droites sont parallèles
     denominator = np.cross(lineEnd1 - lineStart1, lineEnd2 - lineStart2)
@@ -38,52 +41,58 @@ def lineLineCollision(lineStart1: np.ndarray, lineEnd1: np.ndarray, lineStart2: 
 
 
 #@njit
-def lineCircleCollision(lineStart: np.ndarray, lineEnd: np.ndarray, circleCenter: np.ndarray, circleRadius: float):
+def lineCircleCrossing(lineStart: np.ndarray, lineEnd: np.ndarray, circleCenter: np.ndarray, circleRadius: float):
+    """
+    Fonction qui teste si une droite et un cercle se croisent
+    """
+
     t = (lineEnd - lineStart) /  np.linalg.norm(lineEnd - lineStart)
     dist = np.cross(circleCenter - lineStart, t)
     return dist < circleRadius
 
 #@njit
-def polygonCircleCollision(polygonVertices: np.ndarray, circleCenter: np.ndarray, circleRadius: float):
+def polygonCircleCrossing(polygonVertices: np.ndarray, circleCenter: np.ndarray, circleRadius: float):
+    """
+    Fonction qui teste si un polygone et un cercle se croisent
+    """
     for i in range(len(polygonVertices)):
         lineStart = polygonVertices[i]
         lineEnd = polygonVertices[(i + 1) % len(polygonVertices)]
-        if lineCircleCollision(lineStart, lineEnd, circleCenter, circleRadius):
+        if lineCircleCrossing(lineStart, lineEnd, circleCenter, circleRadius):
             return True
     return False
 
-@njit
-def circleCircleCollision(circleCenter1: np.ndarray, circleRadius1: float, circleCenter2: np.ndarray, circleRadius2: float):
-    return np.linalg.norm(circleCenter1 - circleCenter2) < circleRadius1 + circleRadius2
+
 
 @njit
-def polygonPolygonCollision(polygonVertices1: np.ndarray, polygonVertices2: np.ndarray):
-
-    # Test des coordoonnées pour déterminer si les polygones sont proches
-    if np.max(polygonVertices1[:,0]) < np.min(polygonVertices2[:,0]) or np.max(polygonVertices2[:,0]) < np.min(polygonVertices1[:,0]):
-        return False
-    if np.max(polygonVertices1[:,1]) < np.min(polygonVertices2[:,1]) or np.max(polygonVertices2[:,1]) < np.min(polygonVertices1[:,1]):
-        return False
-
+def polygonPolygonCrossing(polygonVertices1: np.ndarray, polygonVertices2: np.ndarray):
+    """
+    Fonction qui teste si deux polygones se croisent
+    """
+    
+    # Test des intersections entre les côtés des polygones
     for i in range(len(polygonVertices1)):
         lineStart = polygonVertices1[i]
         lineEnd = polygonVertices1[(i + 1) % len(polygonVertices1)]
         for j in range(len(polygonVertices2)):
             lineStart2 = polygonVertices2[j]
             lineEnd2 = polygonVertices2[(j + 1) % len(polygonVertices2)]
-            if lineLineCollision(lineStart, lineEnd, lineStart2, lineEnd2):
+            if lineLineCrossing(lineStart, lineEnd, lineStart2, lineEnd2):
                 return True
     return False
 
 @njit
-def polygonPolygonCollisionOptimizedV2(polygonVertices1: np.ndarray, polygonVertices2: np.ndarray):
-    # Fonctionnement : on projette les polygones sur un axe, et on teste si les projections se superposent
-    # Si les projections se superposent pour tous les axes, alors les polygones se superposent
+def polygonPolygonCrossingOptimized(polygonVertices1: np.ndarray, polygonVertices2: np.ndarray):
+    # On utilise le théorème de séparation des axes
+    # Si les polygones ne se superposent pas sur un axe, alors ils ne se superposent pas
 
     for polygon in [polygonVertices1, polygonVertices2]:
+
         for i in range(len(polygon)):
+            # Pour chaque côté du polygone
             edge = polygon[i] - polygon[ (i + 1) % len(polygon)]
 
+            # On calcule les projections des polygones sur le vecteur normal au côté
             n = np.array([edge[1], -edge[0]])
             n /= np.linalg.norm(n)
 
@@ -93,13 +102,14 @@ def polygonPolygonCollisionOptimizedV2(polygonVertices1: np.ndarray, polygonVert
             dot_product = polygonVertices2 @ n
             min2, max2 = np.min(dot_product), np.max(dot_product)
 
+            # Si les projections ne se superposent pas, alors les polygones ne se superposent pas
             if max1 < min2 or max2 < min1:
                 return False
 
     return True
 
 
-def polygonPolygonCollisionOptimized(polygonVertices1: np.ndarray, polygonVertices2: np.ndarray):
+def polygonPolygonCrossingVectorized(polygonVertices1: np.ndarray, polygonVertices2: np.ndarray):
     # Fonctionnement : on projette les polygones sur un axe, et on teste si les projections se superposent
     # Si les projections se superposent pour tous les axes, alors les polygones se superposent
 
@@ -127,41 +137,34 @@ def polygonPolygonCollisionOptimized(polygonVertices1: np.ndarray, polygonVertic
     return True
 
 
-import threading
-import time
+@njit
+def is_point_in_polygon(point, polygon):
+    """
+    Fonction qui teste si un point est dans un polygone
+    """
+    # On trace une droite horizontale passant par le point et on compte le nombre d'intersections avec les côtés du polygone
+    intersections = 0
+    for i in range(len(polygon)):
+        line_start = polygon[i]
+        line_end = polygon[(i+1) % len(polygon)]
+        if line_start[1] <= point[1] <= line_end[1] or line_end[1] <= point[1] <= line_start[1]:
+            if line_start[0] <= point[0] <= line_end[0] or line_end[0] <= point[0] <= line_start[0]:
+                intersections += 1
+    return intersections % 2 == 1
 
-def polygon_polygon_collision(polygons):
-    """
-    Fonction qui teste les collisions entre les polygones de la liste polygons et renvoie les indices de collisions
-    """
-    indices = []
-    for i in range(len(polygons)):
-        for j in range(i+1, len(polygons)):
-            if polygonPolygonCollision(polygons[i], polygons[j]):
-                indices += [(i, j)]
+@njit
+def circleCircleCollision(circleCenter1: np.ndarray, circleRadius1: float, circleCenter2: np.ndarray, circleRadius2: float):
+    return np.linalg.norm(circleCenter1 - circleCenter2) < circleRadius1 + circleRadius2
 
-def faster_polygon_polygon_collision(polygons, n_threads = 4):
+@njit
+def does_polygons_collide(polygonVertices1, polygonVertices2):
     """
-    Fonction qui teste les collisions entre les polygones de la liste polygons en utilisant le multithreading
+    Fonction qui teste si deux polygones se superposent
     """
-    # On crée une liste de threads qui va tester les collisions sur des blocs de polygones
-    threads = []
-    for i in range(n_threads):
-        start = i * len(polygons) // n_threads
-        end = (i+1) * len(polygons) // n_threads
-        threads += [threading.Thread(target=polygon_polygon_collision, args=(polygons[start:end],))]
+    if polygonPolygonCrossing(polygonVertices1, polygonVertices2):
+        return True
     
-    # On lance les threads
-    for thread in threads:
-        thread.start()
-    
-    # On attend la fin des threads
-    for thread in threads:
-        thread.join()
-
-    # On récupère les indices de collisions
-    indices = []
-    for thread in threads:
-        indices += thread.result
-
-    return indices
+    for polygon in [polygonVertices1, polygonVertices2]:
+        for vertex in polygon:
+            if is_point_in_polygon(vertex, polygon):
+                return True

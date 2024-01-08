@@ -361,7 +361,7 @@ def does_collide(sprite1, sprite2):
         # On teste d'abord si les bounding boxes se superposent
         if sprite1.boundingRadius + sprite2.boundingRadius < np.linalg.norm(sprite1.pos - sprite2.pos):
             return False
-        return polygonPolygonCollisionOptimized(sprite1.vertices, sprite2.vertices)
+        return does_polygons_collide(sprite1.vertices, sprite2.vertices)
     
     elif isinstance(sprite1, Polygon) and isinstance(sprite2, Circle):
         # On teste d'abord si les bounding boxes se superposent
