@@ -10,8 +10,10 @@ import pyglet
 
 import game_engine.config as config
 from game_objects.asteroids import *
+from game_objects.projectiles import *
 from game_objects.ship import Ship
 from game_objects.enemies import Enemy
+from game_objects.animations import XPLosion
 
 def repel(game, ast, entity):
     """
@@ -88,6 +90,32 @@ def collide(game, ast1, ast2):
         ast2.pos += ast2.speed * config.TICK_TIME
 
 
+
+def bullet_asteroid_collision(game, bullet, asteroid):
+    asteroid.HP = asteroid.HP - bullet.damage
+    if not asteroid.alive:
+        if bullet.ship is not None:
+            bullet.ship.xp += asteroid.ressources
+
+    XPLosion(bullet.pos, game)
+
+    asteroid.speed += bullet.speed * bullet.mass / asteroid.mass
+    game.remove_entity(bullet)
+
+
+def bullet_ship_collision(game, bullet, ship):
+    if bullet.ship is not ship:
+        ship.HP = ship.HP - bullet.damage
+
+
+def asteroid_ship_collision(game, asteroid, ship):
+    if not(ship.is_invicible):
+        ship.HP -= asteroid.damage
+        ship.is_invicible = True
+    else:
+        pass
+
+
 def spawn_asteroids(game):
     """
     Fonction de spawn d'astéroïdes
@@ -129,11 +157,16 @@ def spawn_asteroids(game):
 
 
             game.add_entity(asteroid)
-
+    
 
 def activate_collision(game):
     """ Active les collisions entre astéroïdes """
     game.on_collide(Asteroid, Asteroid, sym = True)(collide)
+
+    game.on_collide(Projectile, Asteroid)(bullet_asteroid_collision)
+    game.on_collide(Projectile, Ship)(bullet_ship_collision)
+    game.on_collide(Asteroid, Ship)(asteroid_ship_collision)
+    
     game.on_collide(Asteroid, Ship)(repel)
     game.on_collide(Asteroid, Enemy)(repel)
 
