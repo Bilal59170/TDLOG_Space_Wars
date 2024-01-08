@@ -85,21 +85,7 @@ if __name__ == "__main__":
     game_logic.activate_asteroid_spawn(game)
     game_logic.activate_FPS_counter(game)
 
-    @game.on_collide(Projectile, Asteroid)
-    def bullet_asteroid_collision(game, bullet, asteroid):
-        asteroid.HP = asteroid.HP - bullet.damage
-        if not asteroid.alive:
-            if bullet.ship is not None:
-                bullet.ship.xp += asteroid.ressources
 
-        XPLosion(bullet.pos, game)
 
-        asteroid.speed += bullet.speed * bullet.mass / asteroid.mass
-        game.remove_entity(bullet)
-
-    @game.on_collide(Projectile, Ship)
-    def bullet_ship_collision(game, bullet, ship):
-        if bullet.ship is not ship:
-            ship.HP = ship.HP - bullet.damage
 
     game.run()

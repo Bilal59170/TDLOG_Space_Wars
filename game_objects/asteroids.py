@@ -38,6 +38,7 @@ class Asteroid(sprites.Polygon):
     ressources = 10             # XP donnée en tuant l'astéroïde
     max_HP = 100                # PVs maximum de l'astéroïd
     mass = 100
+    damage = 100 
 
 
 

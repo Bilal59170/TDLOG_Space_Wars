@@ -8,6 +8,7 @@ import pyglet
 
 from game_engine import config, sprites, entity
 from game_objects import projectiles
+from game_engine import config
 from game_engine.utils import create_nagon_vertices, draw_bar
 
 import game_engine.config as config
@@ -22,14 +23,18 @@ class Ship(sprites.Polygon, pyglet.event.EventDispatcher):
     max_speed = config.SHIP_MAX_SPEED
     bullet_speed = 5
     max_HP = 1000
-    Ship_color = (255,0,0)
+    ship_color = (255,0,0)
     
     bar_grey = (128, 128, 128)  # Gris de la barre de vie
-    bar_color = Ship_color      # Couleur de la barre de vie
+    bar_color = ship_color      # Couleur de la barre de vie
     barWidthFactor = .8         # Longueur de la barre de vie (en % de la taille de l'astéroïde)
     barHeight = 16              # Largeur de la barre de vie
     barSpacing = 5              # Largeur de la bordure
     barwidth = 50               # Longueur de la barre de vie
+    is_invicible = False
+    timer_invicible = 0
+    invicible_time = 3          #In seconds
+
 
     def __init__(self, pos, game_state):
         V1 = np.array([0, Ship.size])
@@ -37,7 +42,7 @@ class Ship(sprites.Polygon, pyglet.event.EventDispatcher):
         V3 = Ship.size * np.array([np.cos(np.pi / 6), np.sin(np.pi / 6)])
 
         vertices = np.array([V1, V2, V3]).astype(int)
-        sprites.Polygon.__init__(self, pos, vertices, game_state, fillColor=Ship.Ship_color)
+        sprites.Polygon.__init__(self, pos, vertices, game_state, fillColor=Ship.ship_color)
         pyglet.event.EventDispatcher.__init__(self)
 
         self._HP = self.max_HP
@@ -53,6 +58,7 @@ class Ship(sprites.Polygon, pyglet.event.EventDispatcher):
         if HP <= 0:
             self.die()
         self._HP = min(self.max_HP, HP)
+
 
 
     def die(self):
@@ -111,7 +117,14 @@ class Ship(sprites.Polygon, pyglet.event.EventDispatcher):
             batch=batch
         )
 
+
     def tick(self):
         """Fonction qui met à jour la position en fonction de la vitesse"""
         super().tick()
-        self.HP -= 1
+
+        if (self.is_invicible):
+            self.timer_invicible += 1/config.TPS
+        if self.timer_invicible >= self.invicible_time:
+            self.is_invicible = False
+            self.timer_invicible = 0
+
