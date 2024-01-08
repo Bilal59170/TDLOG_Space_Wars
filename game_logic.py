@@ -96,8 +96,7 @@ def bullet_asteroid_collision(game, bullet, asteroid):
     if not asteroid.alive:
         if bullet.ship is not None:
             bullet.ship.xp += asteroid.ressources
-
-    XPLosion(bullet.pos, game)
+            XPLosion(bullet.pos, game)
 
     asteroid.speed += bullet.speed * bullet.mass / asteroid.mass
     game.remove_entity(bullet)
