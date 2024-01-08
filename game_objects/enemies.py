@@ -3,7 +3,7 @@ import numpy as np
 import sys
 sys.path.append("../")
 
-from game_engine import entity
+from game_engine import entity, config
 from game_engine.sprites import Polygon
 from game_objects.projectiles import Projectile
 
@@ -17,6 +17,7 @@ class Enemy(Polygon):
     engage_radius = 200
     caution_radius = 400
     projectile_speed = 15
+    reload_speed = 10
 
     fill_color = (255, 0, 0)
     edge_color = (0, 0, 0)
@@ -32,6 +33,7 @@ class Enemy(Polygon):
         super().__init__(pos, vertices, game_state, fillColor=self.fill_color, edgeColor=self.edge_color, lineWidth=2, speed=speed)
 
         self.old_time = time()
+        self.reload = 0
 
 
     """Fonction qui met à jour la position en fonction de la vitesse"""
@@ -73,5 +75,7 @@ class Enemy(Polygon):
         P = None
         r = np.linalg.norm(self.pos - player.pos)
         if r <= self.caution_radius and r >= self.engage_radius:
-            P = self.throw_projectile()
+            if self.reload % self.reload_speed == 0:
+                P = self.throw_projectile()
+            self.reload += 1
         return P
