@@ -105,6 +105,7 @@ def bullet_asteroid_collision(game, bullet, asteroid):
 def bullet_ship_collision(game, bullet, ship):
     if bullet.ship is not ship:
         ship.HP = ship.HP - bullet.damage
+        game.remove_entity(bullet)
 
 
 def asteroid_ship_collision(game, asteroid, ship):

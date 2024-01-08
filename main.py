@@ -92,7 +92,4 @@ if __name__ == "__main__":
     game_logic.activate_asteroid_spawn(game)
     game_logic.activate_FPS_counter(game)
 
-
-
-
     game.run()
