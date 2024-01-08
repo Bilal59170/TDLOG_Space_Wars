@@ -80,7 +80,7 @@ if __name__ == "__main__":
         game.add_entity(img)
 
     # Logique de jeu => Collision et spawn d'astéroïdes
-    #game_logic.activate_collision(game)
+    #game_logizc.activate_collision(game)
     game_logic.activate_asteroid_spawn(game)
     game_logic.activate_FPS_counter(game)
 

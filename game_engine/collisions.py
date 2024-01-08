@@ -9,14 +9,14 @@ Gestion des collisions => - Collisions ligne - ligne
 import numpy as np
 
 try:
-    from numba import jit, njit
+    from numba import jit, jit
 except:
     jit = lambda x:x
-    njit = lambda x:x
+    jit = lambda x:x
     print("Warning: numba not installed, collisions will be slow")
 
 
-@njit
+@jit
 def lineLineCrossing(lineStart1: np.ndarray, lineEnd1: np.ndarray, lineStart2: np.ndarray, lineEnd2: np.ndarray):
     """
     Fonction qui teste si deux droites se croisent
@@ -40,7 +40,7 @@ def lineLineCrossing(lineStart1: np.ndarray, lineEnd1: np.ndarray, lineStart2: n
     return True
 
 
-#@njit
+#@jit
 def lineCircleCrossing(lineStart: np.ndarray, lineEnd: np.ndarray, circleCenter: np.ndarray, circleRadius: float):
     """
     Fonction qui teste si une droite et un cercle se croisent
@@ -50,7 +50,7 @@ def lineCircleCrossing(lineStart: np.ndarray, lineEnd: np.ndarray, circleCenter:
     dist = np.cross(circleCenter - lineStart, t)
     return dist < circleRadius
 
-#@njit
+#@jit
 def polygonCircleCrossing(polygonVertices: np.ndarray, circleCenter: np.ndarray, circleRadius: float):
     """
     Fonction qui teste si un polygone et un cercle se croisent
@@ -64,7 +64,7 @@ def polygonCircleCrossing(polygonVertices: np.ndarray, circleCenter: np.ndarray,
 
 
 
-@njit
+@jit
 def polygonPolygonCrossing(polygonVertices1: np.ndarray, polygonVertices2: np.ndarray):
     """
     Fonction qui teste si deux polygones se croisent
@@ -81,8 +81,8 @@ def polygonPolygonCrossing(polygonVertices1: np.ndarray, polygonVertices2: np.nd
                 return True
     return False
 
-@njit
-def polygonPolygonCrossingOptimized(polygonVertices1: np.ndarray, polygonVertices2: np.ndarray):
+@jit
+def polygonPolygonCrossingOptimized(polygonVertices1: np.ndarray, polygonVertices2: np.ndarray) -> bool:
     # On utilise le théorème de séparation des axes
     # Si les polygones ne se superposent pas sur un axe, alors ils ne se superposent pas
 
@@ -137,7 +137,7 @@ def polygonPolygonCrossingVectorized(polygonVertices1: np.ndarray, polygonVertic
     return True
 
 
-@njit
+@jit
 def is_point_in_polygon(point, polygon):
     """
     Fonction qui teste si un point est dans un polygone
@@ -152,11 +152,11 @@ def is_point_in_polygon(point, polygon):
                 intersections += 1
     return intersections % 2 == 1
 
-@njit
+@jit
 def circleCircleCollision(circleCenter1: np.ndarray, circleRadius1: float, circleCenter2: np.ndarray, circleRadius2: float):
     return np.linalg.norm(circleCenter1 - circleCenter2) < circleRadius1 + circleRadius2
 
-@njit
+@jit
 def does_polygons_collide(polygonVertices1, polygonVertices2):
     """
     Fonction qui teste si deux polygones se superposent
