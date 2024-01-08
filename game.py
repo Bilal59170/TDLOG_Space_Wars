@@ -204,7 +204,7 @@ class Game(pyglet.event.EventDispatcher, GameEvents):
             self.window.set_location(int(self.window.screen.width/2 - self.window.width/2), int(self.window.screen.height/2 - self.window.height/2))
             self.win_size = config.WIN_SIZE
 
-        self.window.set_mouse_visible(False)
+        self.window.set_mouse_visible(True)
         self.window.set_caption("Space Wars")
         self.window.set_vsync(False)
         #self.window.set_icon(pyglet.image.load("ressources/icon.png")) => A ajouter quand on aura une icone
@@ -220,11 +220,15 @@ class Game(pyglet.event.EventDispatcher, GameEvents):
         self.camera = Camera(self.win_size)
 
         # Création du joueur à un endroit aléatoire
-        self.player = Ship([0,0],
+        self.player = Ship(
             [np.random.randint(0, config.MAP_SIZE[0]), np.random.randint(0, config.MAP_SIZE[1])],
             game_state=self,
         )
         self.score = 0
+        #Position finale du vaisseau quand il meurt. 
+        #Utile pour afficher des animation quand on veut enlever le vaisseau du jeu une fois mort 
+        self.final_player_pos = np.array([0, 0]) 
+        self.player_dead = "Alive"
 
         # Initialisation des listes d'entités
         self.asteroids = []
@@ -337,6 +341,8 @@ class Game(pyglet.event.EventDispatcher, GameEvents):
         
         self.window.flip()
 
+
+
     def new_projectile(self):
         # Fonction qui gère le lancement de projectiles
         if self.mousebuttons[mouse.RIGHT]:
@@ -349,16 +355,29 @@ class Game(pyglet.event.EventDispatcher, GameEvents):
 
         self.time += config.TICK_TIME
 
-        self.camera.center = self.player.pos
-        #Cas de bordure où la caméra ne doit pas bouger 
-        if self.player.border['UP']:
-            self.camera.center[1] =  config.WIN_SIZE[1]/2
-        if self.player.border['DOWN']:
-            self.camera.center[1] =  config.MAP_SIZE[1]- config.WIN_SIZE[1]/2
-        if self.player.border['LEFT']:
-            self.camera.center[0] =  config.WIN_SIZE[0]/2
-        if self.player.border['RIGHT']:
-            self.camera.center[0] =  config.MAP_SIZE[0]- config.WIN_SIZE[0]/2
+        if (self.player_dead == "Alive"):
+            self.camera.center = self.player.pos
+            #Cas de bordure où la caméra ne doit pas bouger 
+            if self.player.border['UP']:
+                self.camera.center[1] =  config.WIN_SIZE[1]/2
+            if self.player.border['DOWN']:
+                self.camera.center[1] =  config.MAP_SIZE[1]- config.WIN_SIZE[1]/2
+            if self.player.border['LEFT']:
+                self.camera.center[0] =  config.WIN_SIZE[0]/2
+            if self.player.border['RIGHT']:
+                self.camera.center[0] =  config.MAP_SIZE[0]- config.WIN_SIZE[0]/2
+        elif(self.player_dead == "Dead"):
+            self.final_player_pos = self.player.die()
+            self.remove_entity(self.player)
+            self.player_dead = "Gone"
+
+            #Animation de mort: affiche une image centrée sur la position du vaisseau
+            img_die = pyglet.image.load("resources/Sprites/caca.png")
+            self.add_entity(sprites.Image(
+                self.final_player_pos - np.array([img_die.width, img_die.height])/2,
+                img_die, 
+                self))
+            
 
         for e in self.entities:
             e.tick()
