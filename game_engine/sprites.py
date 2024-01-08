@@ -133,11 +133,8 @@ class Image(Entity, Sprites):
 
         if self.isAnimated:
             self.animation_time += FRAME_TIME
-
-            if self.animation_time > self.animation_duration:
-                self.animation_time = 0
             self.animation_index = 0
-            time = self.animation_time
+            time = self.animation_time % self.animation_duration
             while time > self.animation.frames[self.animation_index].duration:
                 time -= self.animation.frames[self.animation_index].duration
                 self.animation_index += 1

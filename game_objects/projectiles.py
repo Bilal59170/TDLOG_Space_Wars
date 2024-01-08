@@ -33,11 +33,11 @@ class Projectile(Circle):
     size = 10
 
     """classe projectiles : projectiles circulaires"""
-
-    def __init__(self, x_init, y_init, speed_x_init, speed_y_init, radius, color, game_state):
+    def __init__(self, x_init, y_init, speed_x_init, speed_y_init, radius, color, game_state, ship = None):
         super().__init__([x_init, y_init], radius, game_state, speed=[speed_x_init, speed_y_init])
         self.r = radius
         self.color = color
+        self.ship = ship
 
     def draw(self, batch):
         C = pyglet.shapes.Star(self.screen_x, self.screen_y, self.r, self.r/2, 5, 0 , color=(255, 255,0), batch=batch)

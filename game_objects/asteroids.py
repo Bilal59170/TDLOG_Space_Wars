@@ -48,6 +48,7 @@ class Asteroid(sprites.Polygon):
         self.orientation = theta
 
         self._HP = self.max_HP
+        self.alive = True
 
     def tick(self):
         """
@@ -94,6 +95,7 @@ class Asteroid(sprites.Polygon):
         Fonction de mort de l'astéroïde
         """
         try:
+            self.alive = False
             self.game_state.remove_entity(self)
             self.game_state.add_score(self.ressources)
         except ValueError:

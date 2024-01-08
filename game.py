@@ -24,7 +24,7 @@ from game_objects.ship import Ship
 from game_objects.asteroids import Asteroid
 from game_objects.projectiles import Projectile
 from game_objects.enemies import Enemy
-
+from game_objects.animations import XPLosion
 
 profiler = Profiler()
 
@@ -372,11 +372,13 @@ class Game(pyglet.event.EventDispatcher, GameEvents):
             self.player_dead = "Gone"
 
             #Animation de mort: affiche une image centrée sur la position du vaisseau
-            img_die = pyglet.image.load("resources/Sprites/caca.png")
-            self.add_entity(sprites.Image(
-                self.final_player_pos - np.array([img_die.width, img_die.height])/2,
-                img_die, 
-                self))
+            images = [pyglet.image.load(f'resources/Sprites/xplosion/xplosion-{i}.png') for i in range(0, 17)]
+            animation = pyglet.image.Animation.from_image_sequence(images, .1)
+
+            # L'image animée est ensuite ajoutée au jeu, comme pour une image normale.
+            # img = sprites.Image(self.final_player_pos - np.array([images[0].width, images[0].height])/2, animation, self)
+            # self.add_entity(img)
+            XPLosion(self.final_player_pos, self)
             
 
         for e in self.entities:

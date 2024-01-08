@@ -41,6 +41,7 @@ class Ship(sprites.Polygon, pyglet.event.EventDispatcher):
         pyglet.event.EventDispatcher.__init__(self)
 
         self._HP = self.max_HP
+        self.xp = 0
 
 
 
@@ -91,7 +92,7 @@ class Ship(sprites.Polygon, pyglet.event.EventDispatcher):
 
     def throw_projectile(self):
         speed = self.bullet_speed
-        p = projectiles.Projectile(self.x, self.y, speed*np.cos(self.theta), speed*np.sin(self.theta), 4, color = "r", game_state=self.game_state)
+        p = projectiles.Projectile(self.x, self.y, speed*np.cos(self.theta), speed*np.sin(self.theta), 4, color = "r", game_state=self.game_state, ship=self)
         return p
     
     def draw(self, batch=None):
@@ -118,5 +119,5 @@ class Ship(sprites.Polygon, pyglet.event.EventDispatcher):
 
     def tick(self):
         """Fonction qui met à jour la position en fonction de la vitesse"""
-        self.HP -= 1
         super().tick()
+        self.HP -= 3
