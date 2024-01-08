@@ -236,7 +236,8 @@ class Game(pyglet.event.EventDispatcher, GameEvents):
         
         self.enemies = [enemy]
         
-        self.entities = self.enemies
+        self.entities = []
+        self.entities += self.enemies
 
         # Ajout du joueur à la liste d'entités
         self.add_entity(self.player)
@@ -286,7 +287,7 @@ class Game(pyglet.event.EventDispatcher, GameEvents):
         if issubclass(object.__class__, Asteroid):
             self.asteroids.append(object)
         elif isinstance(object, Enemy):
-            self.ennemies.append(object)
+            self.enemies.append(object)
 
     def remove_entity(self, object):
         # Supprime un objet de la liste d'entités
@@ -294,7 +295,7 @@ class Game(pyglet.event.EventDispatcher, GameEvents):
         if issubclass(object.__class__, Asteroid):
             self.asteroids.remove(object)
         elif isinstance(object, Enemy):
-            self.ennemies.remove(object)
+            self.enemies.remove(object)
             
     def update_speed(self):
         t = time() - self.old_time
@@ -347,6 +348,11 @@ class Game(pyglet.event.EventDispatcher, GameEvents):
         # Fonction qui gère le lancement de projectiles
         if self.mousebuttons[mouse.RIGHT]:
                 self.entities.append(self.player.throw_projectile())
+        for enemy in self.enemies:
+            P = enemy.shoot(self.player)
+            if P != None:
+                self.entities.append(P)
+
 
     @profiler.profile
     def update(self, *other):

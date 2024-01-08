@@ -44,7 +44,6 @@ class Ship(sprites.Polygon, pyglet.event.EventDispatcher):
         self.xp = 0
 
 
-
     @property
     def HP(self):
         return self._HP
@@ -67,15 +66,12 @@ class Ship(sprites.Polygon, pyglet.event.EventDispatcher):
         return self.pos
 
 
-
-
-    def get_angle(self, x, y):
+    def get_angle_mouse(self):
         """Fonction qui donne l'angle entre la position du vaisseau et celle d'un
         point (x,y)"""
-        delta_x = x - self.screen_x
-        delta_y = y - self.screen_y
+        delta_x = self.game_state.mouse_x - self.screen_x
+        delta_y = self.game_state.mouse_y - self.screen_y
         self.theta = np.arctan2(delta_y, delta_x)
-
     
     @property
     def border(self):
@@ -87,10 +83,8 @@ class Ship(sprites.Polygon, pyglet.event.EventDispatcher):
 
         return is_border
 
-    def on_mouse_motion(self, x, y, dx, dy):
-        self.get_angle(x, y)
-
     def throw_projectile(self):
+        self.get_angle_mouse()
         speed = self.bullet_speed
         p = projectiles.Projectile(self.x, self.y, speed*np.cos(self.theta), speed*np.sin(self.theta), 4, color = "r", game_state=self.game_state, ship=self)
         return p
