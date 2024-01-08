@@ -21,13 +21,15 @@ Méthodes d'un projectile :
 """
 from entity import Entity
 import pyglet
+import numpy as np
 
 
 class Projectile(Entity):
     """classe projectiles : projectiles circulaires"""
 
-    def __init__(self, x_init, y_init, speed_x_init, speed_y_init, radius, color):
+    def __init__(self, x_init, y_init, speed_x_init, speed_y_init, radius, color, angle):
         super().__init__([x_init, y_init], [speed_x_init, speed_y_init])
+        self.angle = angle
         self.r = radius
         self.color = color
 
