@@ -16,7 +16,7 @@ class Enemy(Polygon):
     max_speed = 2
     engage_radius = 200
     caution_radius = 400
-    projectile_speed = 5
+    projectile_speed = 15
 
     fill_color = (255, 0, 0)
     edge_color = (0, 0, 0)

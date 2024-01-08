@@ -21,7 +21,7 @@ class Ship(sprites.Polygon, pyglet.event.EventDispatcher):
     size = 10 # Taille du vaisseau
     acceleration = config.SHIP_ACCELERATION
     max_speed = config.SHIP_MAX_SPEED
-    bullet_speed = 5
+    bullet_speed = 15
     max_HP = 1000
     ship_color = (255,0,0)
     

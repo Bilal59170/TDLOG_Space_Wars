@@ -232,9 +232,11 @@ class Game(pyglet.event.EventDispatcher, GameEvents):
 
         # Initialisation des listes d'entités
         self.asteroids = []
-        enemy = Enemy(np.array([config.MAP_SIZE[0] / 4, config.MAP_SIZE[1] / 4]), game_state=self)
+        positions = []
+        for i in range(5):
+            positions.append(np.array([random.random()*config.MAP_SIZE[0], random.random()*config.MAP_SIZE[1]]))
         
-        self.enemies = [enemy]
+        self.enemies = [Enemy(position,game_state=self) for position in positions]
         
         self.entities = []
         self.entities += self.enemies
@@ -378,7 +380,7 @@ class Game(pyglet.event.EventDispatcher, GameEvents):
             self.player_dead = "Gone"
 
             #Animation de mort: affiche une image centrée sur la position du vaisseau
-            images = [pyglet.image.load(f'resources/Sprites/xplosion/xplosion-{i}.png') for i in range(0, 17)]
+            images = [pyglet.image.load(f'resources/Sprites/xplosion/xplosion-{i}.png') for i in range(0, 3)]
             animation = pyglet.image.Animation.from_image_sequence(images, .1)
 
             # L'image animée est ensuite ajoutée au jeu, comme pour une image normale.
