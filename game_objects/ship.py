@@ -120,4 +120,4 @@ class Ship(sprites.Polygon, pyglet.event.EventDispatcher):
     def tick(self):
         """Fonction qui met à jour la position en fonction de la vitesse"""
         super().tick()
-        self.HP -= 3
+        self.HP -= 1

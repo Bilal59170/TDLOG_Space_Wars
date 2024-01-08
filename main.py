@@ -13,6 +13,7 @@ from game_objects.ship import Ship
 from game_objects.asteroids import *
 from game_objects.enemies import *
 from game_objects.projectiles import *
+from game_objects.animations import XPLosion
 
 # gestion du jeu
 from game import Game
@@ -90,6 +91,8 @@ if __name__ == "__main__":
         if not asteroid.alive:
             if bullet.ship is not None:
                 bullet.ship.xp += asteroid.ressources
+
+        XPLosion(bullet.pos, game)
 
         asteroid.speed += bullet.speed * bullet.mass / asteroid.mass
         game.remove_entity(bullet)

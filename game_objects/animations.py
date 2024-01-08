@@ -25,10 +25,10 @@ class Animation(sprites.Image):
 
 
 images = [pyglet.image.load(f'resources/Sprites/xplosion/xplosion-{i}.png') for i in range(0, 17)]
-# for im in images:
-#     # set the anchor so that it is centered
-#     im.anchor_x = im.width // 2
-#     im.anchor_y = im.height // 2
+for im in images:
+    # set the anchor so that it is centered
+    im.anchor_x = im.width // 2
+    im.anchor_y = im.height // 2
 
 animation = pyglet.image.Animation.from_image_sequence(images, .1)
 
