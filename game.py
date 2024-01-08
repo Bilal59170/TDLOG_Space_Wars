@@ -26,6 +26,8 @@ from game_objects.projectiles import Projectile
 from game_objects.enemies import Enemy
 from game_objects.animations import XPLosion
 
+from game_functions import game_static_display
+
 profiler = Profiler()
 
 class GameEvents:
@@ -338,9 +340,22 @@ class Game(pyglet.event.EventDispatcher, GameEvents):
 
         for function in self._on_draw:
             function(self)
+
+        game_static_display(self)
         
         self.window.flip()
 
+
+    def hurt_animation(self):
+        alpha_func = lambda x : np.sin(x * np.pi)
+
+        # Fonction qui fait une transition entre la couleur blanche, rouge, verte et blanche
+        rgb_func = lambda x : (1 - 4*x*(1-x), 1, 1)
+
+        if self.player.is_invicible:
+            x = self.player.timer_invicible / self.player.invicible_time
+            alpha = alpha_func(x)
+            pyglet.gl.glClearColor(*rgb_func(x), 1)
 
 
     def new_projectile(self):
