@@ -1,12 +1,23 @@
-import pyglet
-from pyglet.window import key, mouse
-from ship import Ship
 import numpy as np
-import game
-import config
 from time import time
 
-# from game import *
+import pyglet
+from pyglet.window import key, mouse
+
+pyglet.gl.glEnable(pyglet.gl.GL_BLEND)
+pyglet.gl.glBlendFunc(pyglet.gl.GL_SRC_ALPHA, pyglet.gl.GL_ONE_MINUS_SRC_ALPHA)
+
+from game_engine.config import *
+from game_engine import sprites
+from game_objects.ship import Ship
+from game_objects.asteroids import *
+from game_objects.enemies import *
+from game_objects.projectiles import *
+from game_objects.animations import XPLosion
+
+# gestion du jeu
+from game import Game
+import game_logic
 
 """@package docstring
 Fichier d'application (sert pour l'instant à tester le code produit)
@@ -15,82 +26,80 @@ Fichier d'application (sert pour l'instant à tester le code produit)
 """
 
 """
-    Scénario d'une partie :
-    Génération initiale de terrain (skip for v1)
-    Création du personnage joueur
-    Affichage de la fenêtre
-    game_time = 0
-
-    Boucle principale de jeu (tant que l'utilisateur ne met pas fin au jeu, ou que vaisseau.PV > 0):
-    game_time += TICK_TIMESTEP
-    récupérer les événements : position de souris, clic
-    game.tick() (for all entities in game: entity.tick())
-    si game_time % FRAME_TIME == 0:
-        affichage
+    Fichier principal du jeu.
+    Initie le jeu, ses différentes entités et lance la boucle principale.
 """
 
+# import des astéroïdes
 
-# Create a window
-# window = pyglet.window.Window()
-game_test = game.Game()
-game_window = game_test.window
+if __name__ == "__main__":
 
+    # Création de la partie
+    game = Game(profile=False)
 
-if __name__ ==  '__main__':
-    #initialisation  du vaisseau test
+    # Ajout de quatre astéroïdes de tailles différentes sur les quatre coins de la carte
+    spacing = 50
 
+    if(False):
+        asteroid = MasterAsteroid([spacing, 0], game) # Un gros astéroïde !
+        game.add_entity(asteroid)
 
-    @game_window.event
-    def on_draw(): 
-        # Clear the window
-        game_window.clear()
-        #game_test.player.draw(game_test.batch)
-        for e in game_test.entities:
-            e.draw(game_test.batch)
-    
-    # Start the main event loop (+define the tick duration in seconds for update functions)
-    pyglet.clock.schedule_interval(game_test.update, config.TICK_TIME)
-    pyglet.app.run()
+        asteroid = BigAsteroid([MAP_SIZE[0]-spacing, 0], game)
+        game.add_entity(asteroid)
 
+        asteroid = SmallAsteroid([0, MAP_SIZE[1]-spacing], game)
+        game.add_entity(asteroid)
 
+        asteroid = MediumAsteroid([MAP_SIZE[0]-spacing, MAP_SIZE[1]-spacing], game)
+        game.add_entity(asteroid)
 
-# music = pyglet.resource.media("ost/bgm_forever.mp3")
-# music.play()
-
-# @window.event
-# def on_mouse_press(x, y, button, modifiers):
-#     if button == mouse.LEFT:
-#         # Ship.shoot()
-#         print("The left mouse button was pressed.")
+    # Ajout de textes indiquant les coordonnées à différents endroits de la carte, sur une grille de 5x5
+    # n = 5
+    # for x in range(0, MAP_SIZE[0], MAP_SIZE[0] // n):
+    #     for y in range(0, MAP_SIZE[1], MAP_SIZE[1] // n):
+    #         text = sprites.Label([x, y], f"{x}, {y}", game, color=(0,0,0,255))
+    #         game.add_entity(text)
 
 
-# @window.event
-# def on_mouse_drag(x, y, dx, dy, buttons, modifiers):
-#     # Modify ship orientation
-#     print(f"Mouse moved. Current coordinates : {x}, {y}")
+    img_caca = pyglet.image.load("resources/Sprites/caca.png")
 
+    if(False):
+            # Deux cacas. Le deuxième va plus vite et est incliné (normalement) (ne fonctionne pas !)
+        caca = sprites.Image(np.array([-500, 0]), img_caca, game)
+        caca2 = sprites.Image(np.array([500, 0]), img_caca, game, speed=[-10, 0], theta=np.pi/6)
 
+        game.add_entity(caca)
+        game.add_entity(caca2)
 
+        # Ajout d'une image animée ! Les images sont dans le dossier Sprites/animation, et sont nommées an_1.png, an_2.png, etc.
+        # Elles sont ensuite chargées dans une liste, puis transformées en animation.
+        images = [pyglet.image.load(f'resources/Sprites/animation/an_{i}.png') for i in range(1, 6)]
+        animation = pyglet.image.Animation.from_image_sequence(images, .5)
 
-#@window.event
-#def on_draw():
-    # Clear the window
-    #window.clear()
+        # L'image animée est ensuite ajoutée au jeu, comme pour une image normale.
+        img = sprites.Image(np.array([0, 0]), animation, game)
+        game.add_entity(img)
 
-    # Create a batch to hold our graphics
-    # batch = pyglet.graphics.Batch()
+    # Logique de jeu => Collision et spawn d'astéroïdes
+    game_logic.activate_collision(game)
+    game_logic.activate_asteroid_spawn(game)
+    game_logic.activate_FPS_counter(game)
 
-    # Draw a red rectangle
-    # x, y, width, height = 100, 100, 200, 150
-    # radius = 25
-    # pyglet.shapes.Circle(x, y, radius, color=(255, 0, 0), batch=batch).draw()
+    @game.on_collide(Projectile, Asteroid)
+    def bullet_asteroid_collision(game, bullet, asteroid):
+        asteroid.HP = asteroid.HP - bullet.damage
+        if not asteroid.alive:
+            if bullet.ship is not None:
+                bullet.ship.xp += asteroid.ressources
 
-    # Create the ship
-    # current_game = Game()
-    #ship_test = Ship(np.array([100, 100]), np.array([0, 0]), 50)
-    #ship_test.draw()
+        XPLosion(bullet.pos, game)
 
+        asteroid.speed += bullet.speed * bullet.mass / asteroid.mass
+        game.remove_entity(bullet)
 
-# Start the main event loop (+define the tick duration in seconds for update functions)
-# pyglet.clock.schedule_interval(update, TICK_TIME)
-#pyglet.app.run()
+    @game.on_collide(Projectile, Ship)
+    def bullet_ship_collision(game, bullet, ship):
+        if bullet.ship is not ship:
+            ship.HP = ship.HP - bullet.damage
+
+    game.run()
