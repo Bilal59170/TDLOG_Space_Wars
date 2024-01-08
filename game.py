@@ -234,11 +234,14 @@ class Game(pyglet.event.EventDispatcher, GameEvents):
 
         # Initialisation des listes d'entités
         self.asteroids = []
-        enemy = Enemy(np.array([config.MAP_SIZE[0] / 4, config.MAP_SIZE[1] / 4]), game_state=self)
+        positions = []
+        for i in range(5):
+            positions.append(np.array([random.random()*config.MAP_SIZE[0], random.random()*config.MAP_SIZE[1]]))
         
-        self.enemies = [enemy]
+        self.enemies = [Enemy(position,game_state=self) for position in positions]
         
-        self.entities = self.enemies
+        self.entities = []
+        self.entities += self.enemies
 
         # Ajout du joueur à la liste d'entités
         self.add_entity(self.player)
@@ -288,7 +291,7 @@ class Game(pyglet.event.EventDispatcher, GameEvents):
         if issubclass(object.__class__, Asteroid):
             self.asteroids.append(object)
         elif isinstance(object, Enemy):
-            self.ennemies.append(object)
+            self.enemies.append(object)
 
     def remove_entity(self, object):
         # Supprime un objet de la liste d'entités
@@ -296,7 +299,7 @@ class Game(pyglet.event.EventDispatcher, GameEvents):
         if issubclass(object.__class__, Asteroid):
             self.asteroids.remove(object)
         elif isinstance(object, Enemy):
-            self.ennemies.remove(object)
+            self.enemies.remove(object)
             
     def update_speed(self):
         t = time() - self.old_time
@@ -362,6 +365,11 @@ class Game(pyglet.event.EventDispatcher, GameEvents):
         # Fonction qui gère le lancement de projectiles
         if self.mousebuttons[mouse.RIGHT]:
                 self.entities.append(self.player.throw_projectile())
+        for enemy in self.enemies:
+            P = enemy.shoot(self.player)
+            if P != None:
+                self.entities.append(P)
+
 
     @profiler.profile
     def update(self, *other):
@@ -387,7 +395,7 @@ class Game(pyglet.event.EventDispatcher, GameEvents):
             self.player_dead = "Gone"
 
             #Animation de mort: affiche une image centrée sur la position du vaisseau
-            images = [pyglet.image.load(f'resources/Sprites/xplosion/xplosion-{i}.png') for i in range(0, 17)]
+            images = [pyglet.image.load(f'resources/Sprites/xplosion/xplosion-{i}.png') for i in range(0, 3)]
             animation = pyglet.image.Animation.from_image_sequence(images, .1)
 
             # L'image animée est ensuite ajoutée au jeu, comme pour une image normale.

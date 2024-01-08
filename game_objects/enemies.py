@@ -16,7 +16,7 @@ class Enemy(Polygon):
     max_speed = 2
     engage_radius = 200
     caution_radius = 400
-    projectile_speed = 5
+    projectile_speed = 15
 
     fill_color = (255, 0, 0)
     edge_color = (0, 0, 0)
@@ -43,11 +43,8 @@ class Enemy(Polygon):
 
     def throw_projectile(self):
         speed = self.projectile_speed
-        p = Projectile(self.x, self.y, speed*np.cos(self.theta), speed*np.sin(self.theta), color = "r")
+        p = Projectile(self.x, self.y, speed*np.cos(self.theta), speed*np.sin(self.theta), radius=4, color = "r", game_state=self.game_state)
         return p
-    
-    def is_out(self, x_min, x_max, y_min, y_max):
-        return False
     
     def close_in_and_out(self, player):
         
@@ -71,3 +68,10 @@ class Enemy(Polygon):
     def tick(self):
         self.close_in_and_out(self.game_state.player)
         super().tick()
+
+    def shoot(self, player):
+        P = None
+        r = np.linalg.norm(self.pos - player.pos)
+        if r <= self.caution_radius and r >= self.engage_radius:
+            P = self.throw_projectile()
+        return P
