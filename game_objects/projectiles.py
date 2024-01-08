@@ -40,7 +40,7 @@ class Projectile(Circle):
         self.ship = ship
 
     def draw(self, batch):
-        C = pyglet.shapes.Star(self.screen_x, self.screen_y, self.r, self.r/2, 5, 0 , color=(255, 255,0), batch=batch)
+        C = pyglet.shapes.Star(self.screen_x, self.screen_y, self.r, self.r/2, 5, 0 , color=(0, 160 ,255), batch=batch)
         C.anchor_x = self.r
         C.anchor_y = self.r
         C.draw()
