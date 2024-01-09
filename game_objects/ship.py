@@ -37,8 +37,7 @@ class Ship(sprites.Polygon, pyglet.event.EventDispatcher):
     invicible_time = 3          #In seconds
     size = 10
 
-    max_reload_levels = [5, 8, 12, 15]
-    reload_speeds = [1, 1, 2, 3]
+    reload_speeds = [5, 4, 3, 2]
 
     def __init__(self, pos, game_state, step=0):
         self.size_step = 10 # Taille du vaisseau
@@ -60,8 +59,7 @@ class Ship(sprites.Polygon, pyglet.event.EventDispatcher):
         self._HP = self.max_HP
         self.xp = 0
         self.level = 0
-        self.max_reload = self.max_reload_levels[0]
-        self.reload = self.max_reload
+        self.reload = 0
 
     @property
     def HP(self):
@@ -156,7 +154,7 @@ class Ship(sprites.Polygon, pyglet.event.EventDispatcher):
 
     def shoot(self):
         P = None
-        if self.reload > 0:
+        if self.reload % self.reload_speeds[self.level] == 0:
             P = self.throw_projectile()
-            self.reload -= 1
+        self.reload += 1
         return P

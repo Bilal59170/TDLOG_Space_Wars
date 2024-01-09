@@ -376,8 +376,6 @@ class Game(pyglet.event.EventDispatcher, GameEvents):
             P = self.player.shoot()
             if P != None:
                 self.entities.append(P)
-        else:
-            self.player.reload = max(self.player.max_reload_levels[self.player.level], self.player.reload + self.player.reload_speeds[self.player.level])
         for enemy in self.enemies:
             P = enemy.shoot(self.player)
             if P != None:
