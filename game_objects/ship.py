@@ -97,6 +97,7 @@ class Ship(sprites.Polygon, pyglet.event.EventDispatcher):
     
     def draw(self, batch=None):
         """Dessine l'astéroïde"""
+        self.get_angle_mouse()
         super().draw(batch=batch)
 
         draw_bar(
