@@ -71,10 +71,17 @@ class Enemy(Polygon):
 
         self.old_time = time()
         self.alive = True
+        self._theta = 0
 
     @property
     def HP(self):
         return self._HP
+
+    @property
+    def rotation_matrix(self):
+        M = np.array([[np.cos(self._theta), np.sin(self._theta)],
+                     [-np.sin(self._theta), np.cos(self._theta)]])
+        return M
 
     @HP.setter
     def HP(self, HP):
@@ -120,11 +127,11 @@ class Enemy(Polygon):
     def aim_at(self, player):
         delta_x = player.x - self.x
         delta_y = player.y - self.y
-        self.theta = np.arctan2(delta_y, delta_x)
+        self._theta = np.arctan2(delta_y, delta_x)
 
     def throw_projectile(self):
         speed = self.projectile_speed
-        p = Projectile(self.x, self.y, speed*np.cos(self.theta), speed*np.sin(self.theta), radius=4, color = "r", game_state=self.game_state, ship=None)
+        p = Projectile(self.x, self.y, speed*np.cos(self._theta), speed*np.sin(self._theta), radius=4, color = "r", game_state=self.game_state, ship=None, level=self.level)
         return p
     
     def close_in_and_out(self, player):
@@ -135,16 +142,16 @@ class Enemy(Polygon):
         self.old_time = time()
         
         norme_t1 = np.linalg.norm(self.speed) 
-        norme_in_t2 = np.linalg.norm(self.speed + t*self.acceleration*np.array([np.cos(float(self.theta)), np.sin(float(self.theta))]))
-        norme_out_t2 = np.linalg.norm(self.speed - t*self.acceleration*np.array([np.cos(float(self.theta)), np.sin(float(self.theta))]))
+        norme_in_t2 = np.linalg.norm(self.speed + t*self.acceleration*np.array([np.cos(float(self._theta)), np.sin(float(self.theta))]))
+        norme_out_t2 = np.linalg.norm(self.speed - t*self.acceleration*np.array([np.cos(float(self._theta)), np.sin(float(self.theta))]))
 
         distance_player = np.sqrt((self.x - player.x)**2 + (self.y - player.y)**2)
 
         if (norme_in_t2 <= self.max_speed or norme_in_t2 <= norme_t1) and distance_player > self.engage_radius :
-            self.speed += t*self.acceleration*np.array([np.cos(float(self.theta)), np.sin(float(self.theta))])
+            self.speed += t*self.acceleration*np.array([np.cos(float(self._theta)), np.sin(float(self._theta))])
 
         if (norme_out_t2 <= self.max_speed or norme_out_t2 <= norme_t1) and distance_player < self.caution_radius :
-            self.speed -= t*self.acceleration*np.array([np.cos(float(self.theta)), np.sin(float(self.theta))])
+            self.speed -= t*self.acceleration*np.array([np.cos(float(self._theta)), np.sin(float(self._theta))])
 
     def tick(self):
         self.close_in_and_out(self.game_state.player)
