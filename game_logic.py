@@ -184,6 +184,7 @@ def activate_collision(game):
 def activate_asteroid_spawn(game):
     """ Active le spawn d'astéroïdes """
     game.each(5)(spawn_asteroids)
+    game.each(5)(spawn_enemies)
 
 
 
@@ -210,5 +211,24 @@ def activate_FPS_counter(game):
             game.frame_timer = time.time()
 
     
+def spawn_enemies(game):
+    """
+    Fonction de spawn des ennemis
+    @params:
+        game: la partie
+    Active le spawn des asétroïdes tous les 5 ticks
+    Le nombre d'astéroïdes spawné est aléatoire, et est limité à 10
+    """
 
-    
+    # On ne veut pas plus de 7 ennemis
+    if len(game.enemies) > 7:
+        return
+
+    # On veut que les petits astéroïdes soient plus fréquents que les gros -> on pondère les probabilités
+    probabilities = [0.5, 0.30, 0.15, 0.05]
+    levels = [0, 1, 2, 3]
+    level = np.random.choice(levels, p=probabilities)
+    pos = np.array([random.randint(0, config.MAP_SIZE[0]), random.randint(0, config.MAP_SIZE[1])])
+    speed = np.array([random.random()*2-1, random.random()*2-1])
+    enemy = Enemy(pos, game, speed, level)
+    game.add_entity(enemy)

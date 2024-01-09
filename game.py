@@ -234,6 +234,9 @@ class Game(pyglet.event.EventDispatcher, GameEvents):
 
         # Initialisation des listes d'entités
         self.asteroids = []
+        self.enemies = []
+        self.entities = []
+        """
         positions = []
         for i in range(5):
             positions.append(np.array([random.random()*config.MAP_SIZE[0], random.random()*config.MAP_SIZE[1]]))
@@ -242,6 +245,7 @@ class Game(pyglet.event.EventDispatcher, GameEvents):
         
         self.entities = []
         self.entities += self.enemies
+        """
 
         # Ajout du joueur à la liste d'entités
         self.add_entity(self.player)
