@@ -28,21 +28,25 @@ import pyglet
 
 class Projectile(Circle):
 
-    damage = 5
+    #damage = 5
     mass = 5
-    size = 10
+    #size = 10
+    damages_levels = [5, 20, 50, 100]
+    size_levels = [5, 10, 15, 20]
 
     """classe projectiles : projectiles circulaires"""
-    def __init__(self, x_init, y_init, speed_x_init, speed_y_init, radius, color, game_state, ship = None):
+    def __init__(self, x_init, y_init, speed_x_init, speed_y_init, radius, color, game_state, ship = None, level=0):
         super().__init__([x_init, y_init], radius, game_state, speed=[speed_x_init, speed_y_init])
         self.r = radius
         self.color = color
         self.ship = ship
+        self.size = self.size_levels[level]
+        self.damage = self.damages_levels[level]
 
     def draw(self, batch):
-        C = pyglet.shapes.Star(self.screen_x, self.screen_y, self.r, self.r/2, 5, 0 , color=(0, 160 ,255), batch=batch)
-        C.anchor_x = self.r
-        C.anchor_y = self.r
+        C = pyglet.shapes.Star(self.screen_x, self.screen_y, self.size, self.size/2, 5, 0 , color=(0, 160 ,255), batch=batch)
+        C.anchor_x = self.size
+        C.anchor_y = self.size
         C.draw()
 
 

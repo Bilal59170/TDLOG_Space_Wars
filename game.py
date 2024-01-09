@@ -187,6 +187,9 @@ class Game(pyglet.event.EventDispatcher, GameEvents):
     time = 0          # Temps de jeu
     ticks = 0         # Ticks de jeu
 
+    score_steps = [1000, 5000, 10000, 20000]
+    step = 0
+
     def __init__(self, profile = False):
         # Initialisation des classes parentes
         pyglet.event.EventDispatcher.__init__(self)
@@ -299,11 +302,12 @@ class Game(pyglet.event.EventDispatcher, GameEvents):
 
     def remove_entity(self, object):
         # Supprime un objet de la liste d'entités
-        self.entities.remove(object)
-        if issubclass(object.__class__, Asteroid):
-            self.asteroids.remove(object)
-        elif isinstance(object, Enemy):
-            self.enemies.remove(object)
+        if object in self.entities:
+            self.entities.remove(object)
+            if issubclass(object.__class__, Asteroid):
+                self.asteroids.remove(object)
+            elif isinstance(object, Enemy):
+                self.enemies.remove(object)
             
     def update_speed(self):
         t = time() - self.old_time
@@ -368,7 +372,12 @@ class Game(pyglet.event.EventDispatcher, GameEvents):
     def new_projectile(self):
         # Fonction qui gère le lancement de projectiles
         if self.mousebuttons[mouse.RIGHT]:
-                self.entities.append(self.player.throw_projectile())
+            #self.entities.append(self.player.throw_projectile())
+            P = self.player.shoot()
+            if P != None:
+                self.entities.append(P)
+        else:
+            self.player.reload = max(self.player.max_reload_levels[self.player.level], self.player.reload + self.player.reload_speeds[self.player.level])
         for enemy in self.enemies:
             P = enemy.shoot(self.player)
             if P != None:
@@ -381,6 +390,11 @@ class Game(pyglet.event.EventDispatcher, GameEvents):
         self.update_speed()
 
         self.time += config.TICK_TIME
+
+        if self.step < len(self.score_steps):
+            if self.score >= self.score_steps[self.step]:
+                self.step += 1
+                self.player.update_step()
 
         if (self.player_dead == "Alive"):
             self.camera.center = self.player.pos
