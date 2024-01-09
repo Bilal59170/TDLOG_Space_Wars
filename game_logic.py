@@ -95,12 +95,22 @@ def bullet_asteroid_collision(game, bullet, asteroid):
     asteroid.HP = asteroid.HP - bullet.damage
     if not asteroid.alive:
         if bullet.ship is not None:
-            bullet.ship.xp += asteroid.ressources
+            game.player.xp += asteroid.ressources
             XPLosion(bullet.pos, game)
 
     asteroid.speed += bullet.speed * bullet.mass / asteroid.mass
     game.remove_entity(bullet)
 
+def bullet_enemy_collision(game, bullet, enemy):
+    if bullet.ship is not None:
+        enemy.HP = enemy.HP - bullet.damage
+        if not enemy.alive:
+            if bullet.ship is not None:
+                game.player.xp += enemy.ressources
+                XPLosion(bullet.pos, game)
+
+        #enemy.speed += bullet.speed * bullet.mass / enemy.mass
+        game.remove_entity(bullet)
 
 def bullet_ship_collision(game, bullet, ship):
     if bullet.ship is not ship:
@@ -166,7 +176,8 @@ def activate_collision(game):
     game.on_collide(Projectile, Asteroid)(bullet_asteroid_collision)
     game.on_collide(Projectile, Ship)(bullet_ship_collision)
     game.on_collide(Asteroid, Ship)(asteroid_ship_collision)
-    
+    game.on_collide(Projectile, Enemy)(bullet_enemy_collision)
+
     game.on_collide(Asteroid, Ship)(repel)
     game.on_collide(Asteroid, Enemy)(repel)
 

@@ -6,6 +6,7 @@ sys.path.append("../")
 from game_engine import entity, config
 from game_engine.sprites import Polygon
 from game_objects.projectiles import Projectile
+from game_engine.utils import draw_bar
 
 from time import time
 
@@ -20,7 +21,17 @@ class Enemy(Polygon):
     reload_speed = 10
 
     fill_color = (255, 0, 0)
-    edge_color = (0, 0, 0)
+    edge_color = (0, 0, 0)   # Couleur du bord
+    lineWidth = 5               # Taille de bord
+
+    bar_grey = (128, 128, 128)  # Gris de la barre de vie
+    bar_color = (0,128,0)       # Couleur de la barre de vie
+    barWidthFactor = .8         # Longueur de la barre de vie (en % de la taille de l'ennemi)
+    barHeight = 16              # Largeur de la barre de vie
+    barSpacing = 5              # Largeur de la bordure
+
+    ressources = 100             # XP donnée en tuant l'ennemi
+    max_HP = 100
 
     #def __init__(self, pos, size, acceleration, max_speed, engage_radius, caution_radius, game_state, speed=np.array([0,0])):
     def __init__(self, pos, game_state, speed=np.array([0,0])):
@@ -34,7 +45,51 @@ class Enemy(Polygon):
 
         self.old_time = time()
         self.reload = 0
+        self._HP = self.max_HP
+        self.alive = True
 
+    @property
+    def HP(self):
+        return self._HP
+
+    @HP.setter
+    def HP(self, HP):
+        if HP <= 0:
+            self.die()
+        self._HP = min(self.max_HP, HP)
+
+    def die(self):
+        """
+        Fonction de mort de l'astéroïde
+        """
+        try:
+            self.alive = False
+            self.game_state.remove_entity(self)
+            self.game_state.add_score(self.ressources)
+        except ValueError:
+            pass
+
+    def draw(self, batch=None):
+        """Dessine l'astéroïde"""
+        super().draw(batch=batch)
+
+        draw_bar(
+            center = (self.screen_pos[0], self.screen_pos[1]-self.size-self.barHeight),
+            width = self.size*4*self.barWidthFactor,
+            height = self.barHeight,
+            color = self.bar_grey,
+            batch=batch
+        )
+
+        width = int(self.size * 4 * self.barWidthFactor - self.barSpacing * 2)
+        
+        draw_bar(
+            center = (self.screen_pos[0]- width * (1 - self._HP/self.max_HP)/2, self.screen_pos[1]-self.size-self.barHeight),
+            width = width * self._HP/self.max_HP,
+            height = self.barHeight - self.barSpacing,
+            color = self.fill_color,
+            batch=batch
+        )
 
     """Fonction qui met à jour la position en fonction de la vitesse"""
 
@@ -45,7 +100,7 @@ class Enemy(Polygon):
 
     def throw_projectile(self):
         speed = self.projectile_speed
-        p = Projectile(self.x, self.y, speed*np.cos(self.theta), speed*np.sin(self.theta), radius=4, color = "r", game_state=self.game_state)
+        p = Projectile(self.x, self.y, speed*np.cos(self.theta), speed*np.sin(self.theta), radius=4, color = "r", game_state=self.game_state, ship=None)
         return p
     
     def close_in_and_out(self, player):
