@@ -83,6 +83,7 @@ class Image(Entity, Sprites):
         super().__init__(pos, game_state, speed)
 
         self.isAnimated = False
+        self.was_on_screen = False
 
         if isinstance(image, pyglet.sprite.Sprite):
             self.sprite = image
@@ -129,16 +130,16 @@ class Image(Entity, Sprites):
 
     def draw(self, batch=None):
         x, y = self.screen_pos
-        self.sprite.update(x, y)
 
         if self.isAnimated:
-            self.animation_time += FRAME_TIME
             self.animation_index = 0
             time = self.animation_time % self.animation_duration
             while time > self.animation.frames[self.animation_index].duration:
                 time -= self.animation.frames[self.animation_index].duration
                 self.animation_index += 1
             self.sprite.image = self.animation.frames[self.animation_index].image
+
+        self.sprite.update(x, y)
 
 
     @property
@@ -169,8 +170,22 @@ class Image(Entity, Sprites):
         return check_overlap(self.mask, other.mask, dx, dy)
     
     def is_on_screen(self):
-        return self.screen_x < WIN_SIZE[0] and self.screen_y < WIN_SIZE[1] and self.screen_x + self.sprite.width > 0 and self.screen_y + self.sprite.height > 0
+        
+        if self.screen_x < WIN_SIZE[0] and self.screen_y < WIN_SIZE[1] and self.screen_x + self.sprite.width > 0 and self.screen_y + self.sprite.height > 0:
+            self.was_on_screen = True
+            return True
 
+        else:
+            if self.was_on_screen:
+                self.was_on_screen = False
+                return True
+
+            return False
+
+    def tick(self):
+        super().tick()
+        if self.isAnimated:
+            self.animation_time += TICK_TIME
 
 ######### PARTIE POLYGONES #########
 
