@@ -325,7 +325,6 @@ class Game(pyglet.event.EventDispatcher, GameEvents):
         if (self.keys[key.D] or self.keys[key.RIGHT]) and (abs(self.player.speed[0]) < self.player.max_speed or self.player.speed[0] < 0):
             self.player.speed += t*self.player.acceleration*np.array([1., 0.])
 
-
     @profiler.profile
     def display(self):
         # Fonction qui gère l'affichage de la fenêtre de jeu
@@ -428,8 +427,6 @@ class Game(pyglet.event.EventDispatcher, GameEvents):
             if P != None:
                 self.entities.append(P)
 
-
-
     @profiler.profile
     def update(self, *other):
         self.new_projectile()
@@ -453,6 +450,7 @@ class Game(pyglet.event.EventDispatcher, GameEvents):
                 self.camera.center[0] =  config.WIN_SIZE[0]/2
             if self.player.border['RIGHT']:
                 self.camera.center[0] =  config.MAP_SIZE[0]- config.WIN_SIZE[0]/2
+
         elif(self.player_dead == "Dead"):
             self.final_player_pos = self.player.die()
             self.player.speed = [0,0]

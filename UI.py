@@ -64,17 +64,15 @@ class StartMenu:
 
 
 class DeathMenu:
-    def __init__(self, game):
-        self.window = pyglet.window.Window(width=800, height=600, caption="Game Over")
+    def __init__(self, window):
+        self.window = window
         self.batch = pyglet.graphics.Batch()
         self.labels = []
 
         self.window.on_draw = self.on_draw
 
         self.window.on_mouse_press = self.on_mouse_press
-
-        self.game = game
-
+        
         self.labels.append(pyglet.text.Label('Game Over',
                                              font_name='Arial',
                                              font_size=24,

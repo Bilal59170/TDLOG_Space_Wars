@@ -6,6 +6,8 @@ from game_engine.utils import *
 
 import pyglet.gui
 
+from UI import Button
+
 import math
 from PIL import Image
 
@@ -42,6 +44,61 @@ def draw_filled_bar(pos,
         batch=batch
     )
 
+def death_menu(game):
+    game.death_menu_batch.draw()
+
+
+def death_menu_first_time(game):
+    # Affichage du game over et du score
+    x_center = game.camera.size[0] // 2
+
+    game.death_menu_batch = pyglet.graphics.Batch()
+
+    # On grise l'écran pour faire un effet de game over avec un fondu
+    rectangle = pyglet.shapes.Rectangle(
+        0, 0,
+        game.camera.size[0], game.camera.size[1],
+        color=(0,0,0),
+        batch=game.death_menu_batch
+    )
+
+    rectangle.opacity = 100
+    rectangle.draw()
+
+    pyglet.text.Label(
+        f"GAME OVER",
+        font_name='Arial',
+        font_size=50,
+        x=x_center, y=game.camera.size[1] // 2,
+        anchor_x='center', anchor_y='center',
+        color=(255,0,0,255),
+        batch=game.death_menu_batch)
+
+    pyglet.text.Label(
+        f"Score : {game.score}",
+        font_name='Arial',
+        font_size=30,
+        x=x_center, y=game.camera.size[1] // 2 - 50,
+        anchor_x='center', anchor_y='center',
+        color=(255,255,255,255),
+        batch=game.death_menu_batch)
+    
+    
+    # Bouton rejouer
+    rejouer_button = Button(
+        x_center, game.camera.size[1] // 2 - 100,
+        100, 50,
+        "Rejouer",
+        game.death_menu_batch
+    )
+
+    # Bouton quitter
+    quitter_button = Button(
+        x_center, game.camera.size[1] // 2 - 150,
+        100, 50,
+        "Quitter",
+        game.death_menu_batch
+    )
 
 
 
@@ -114,40 +171,7 @@ def game_static_display(game):
 
     game.hurt_animation()
 
+    if game.player_dead == "Dead":
+        death_menu_first_time(game)
     if game.player.state != "Alive":
-        # Affichage du game over et du score
-
-        # On grise l'écran pour faire un effet de game over avec un fondu
-        rectangle = pyglet.shapes.Rectangle(
-            0, 0,
-            game.camera.size[0], game.camera.size[1],
-            color=(0,0,0),
-        )
-        rectangle.opacity = 100
-        rectangle.draw()
-
-        pyglet.text.Label(
-            f"GAME OVER",
-            font_name='Arial',
-            font_size=50,
-            x=x_center, y=game.camera.size[1] // 2,
-            anchor_x='center', anchor_y='center',
-            color=(255,0,0,255)).draw()
-
-        pyglet.text.Label(
-            f"Score : {game.score}",
-            font_name='Arial',
-            font_size=30,
-            x=x_center, y=game.camera.size[1] // 2 - 50,
-            anchor_x='center', anchor_y='center',
-            color=(255,255,255,255)).draw()
-        
-
-        # Label rejouer
-        label = pyglet.text.Label(
-            f"Rejouer",
-            font_name='Arial',
-            font_size=30,
-            x=x_center, y=game.camera.size[1] // 2 - 100,
-            anchor_x='center', anchor_y='center',
-            color=(255,255,255,255)).draw()
+        death_menu(game)
