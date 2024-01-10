@@ -47,6 +47,15 @@ def draw_filled_bar(pos,
 def death_menu(game):
     game.death_menu_batch.draw()
 
+    if game.death_menu_buttons[0].on_mouse_press(game.mouse_x, game.mouse_y, 1, None):
+        game.reset()
+
+    
+    elif game.death_menu_buttons[1].on_mouse_press(game.mouse_x, game.mouse_y, 1, None):
+        game.window.close()
+        import sys
+        sys.exit()
+
 
 def death_menu_first_time(game):
     # Affichage du game over et du score
@@ -99,6 +108,8 @@ def death_menu_first_time(game):
         "Quitter",
         game.death_menu_batch
     )
+
+    game.death_menu_buttons = [rejouer_button, quitter_button]
 
 
 
@@ -171,7 +182,7 @@ def game_static_display(game):
 
     game.hurt_animation()
 
-    if game.player_dead == "Dead":
-        death_menu_first_time(game)
-    if game.player.state != "Alive":
+    if game.player_dead != "Alive":
+        if not hasattr(game, "death_menu_batch") or game.death_menu_batch is None:
+            death_menu_first_time(game)
         death_menu(game)

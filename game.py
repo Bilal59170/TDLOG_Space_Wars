@@ -514,3 +514,6 @@ class Game(pyglet.event.EventDispatcher, GameEvents):
         pixel_array = pixel_array.reshape((image_data.height, image_data.width, 3))
 
         return pixel_array
+    
+    def reset(self):
+        self.__init__(profile=self.profiling)
