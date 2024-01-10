@@ -14,7 +14,7 @@ import numpy as np
 import pyglet
 from pyglet.window import key
 from pyglet.window import mouse
-from time import time
+from time import time, sleep
 
 from game_engine import config, sprites
 from game_engine.collisions import *
@@ -187,7 +187,7 @@ class Game(pyglet.event.EventDispatcher, GameEvents):
     time = 0          # Temps de jeu
     ticks = 0         # Ticks de jeu
 
-    score_steps = [1000, 5000, 10000, 20000]
+    score_steps = [1000, 5000, 10000]
     step = 0
 
     def __init__(self, profile = False):
@@ -211,7 +211,7 @@ class Game(pyglet.event.EventDispatcher, GameEvents):
 
         self.window.set_mouse_visible(True)
         self.window.set_caption("Space Wars")
-        self.window.set_vsync(False)
+        self.window.set_vsync(True ) #synchronise les fps du jeu avec les fps de l'écran de l'ordi 
         #self.window.set_icon(pyglet.image.load("ressources/icon.png")) => A ajouter quand on aura une icone
         
         self.batch = pyglet.graphics.Batch()
@@ -266,6 +266,7 @@ class Game(pyglet.event.EventDispatcher, GameEvents):
         # Code de Broni
         self.time = 0
         self.old_time = time()
+        self.tick_time = 0
 
         self.keys = key.KeyStateHandler()
         self.window.push_handlers(self.keys)
@@ -345,9 +346,60 @@ class Game(pyglet.event.EventDispatcher, GameEvents):
             except:
                 print("Error drawing : ", e.__class__.__name__)
                 raise
+                #Affichage de la map et de la position du ship
+             
+        mult_factor_win = 1/10
+        mult_factor_map_win = config.MAP_SIZE / config.WIN_SIZE
+        gap = 10 #espace entre la map et la bordure de la fenêtre
+
+        #Point en haut à gauche du carré
+
+        little_map_coord = np.array([
+            (1-mult_factor_win)*config.WIN_SIZE[0] - gap,
+            (1-mult_factor_win)*config.WIN_SIZE[1] - gap])
         
+        ship_little_map_coord = little_map_coord + np.array([
+            self.player.x / mult_factor_map_win[0] * mult_factor_win,
+            self.player.y / mult_factor_map_win[1] * mult_factor_win])
+        
+        little_cam_coord = little_map_coord + np.array([
+            (self.camera.center[0]-self.camera.size[0]/2) / mult_factor_map_win[0] * mult_factor_win,
+            (self.camera.center[1]-self.camera.size[1]/2) / mult_factor_map_win[1] * mult_factor_win,
+        ])
+        
+        little_map = pyglet.shapes.BorderedRectangle(
+            x = little_map_coord[0],
+            y = little_map_coord[1], 
+            width = mult_factor_win*config.WIN_SIZE[0], 
+            height = mult_factor_win*config.WIN_SIZE[1],
+            border = 5,
+            color = (200, 200, 200),
+            border_color = (0, 0, 0),
+            batch = batch)
+        
+        little_cam = pyglet.shapes.BorderedRectangle(
+            x = little_cam_coord[0],
+            y = little_cam_coord[1], 
+            width = mult_factor_win*config.WIN_SIZE[0]/ mult_factor_map_win[0], 
+            height = mult_factor_win*config.WIN_SIZE[1]/ mult_factor_map_win[1],
+            border = 1,
+            color = (255, 255, 255),
+            border_color = (0, 0, 0),
+            batch = batch)
+        
+
+        little_point = pyglet.shapes.Circle(
+            x = ship_little_map_coord[0],
+            y = ship_little_map_coord[1],
+            radius = 5,
+            color = (0, 255, 0)
+        )
+
+        
+        # little_point = pyglet.shapes.Circle(self.player.screen_x ,5, color = (255, 0, 0), batch = batch)
         batch.draw()
         self.batch.draw()
+        little_point.draw()
 
         for function in self._on_draw:
             function(self)
@@ -358,28 +410,22 @@ class Game(pyglet.event.EventDispatcher, GameEvents):
 
 
     def hurt_animation(self):
-        alpha_func = lambda x : np.sin(x * np.pi)
-
         # Fonction qui fait une transition entre la couleur blanche, rouge, verte et blanche
-        rgb_func = lambda x : (1 - 4*x*(1-x), 1, 1)
+        rgb_func = lambda x : (1 , 1- 4*x*(1-x)/2, 1- 4*x*(1-x)/2)
 
         if self.player.is_invicible:
-            x = 10 * self.player.timer_invicible / self.player.invicible_time
-            alpha = alpha_func(x)
+            x = self.player.timer_invicible / self.player.invicible_time
             pyglet.gl.glClearColor(*rgb_func(x), 1)
 
 
     def new_projectile(self):
         # Fonction qui gère le lancement de projectiles
-        if self.mousebuttons[mouse.RIGHT]:
+        if self.mousebuttons[mouse.RIGHT] and self.player.state == "Alive":
             #self.entities.append(self.player.throw_projectile())
             P = self.player.shoot()
             if P != None:
                 self.entities.append(P)
-        for enemy in self.enemies:
-            P = enemy.shoot(self.player)
-            if P != None:
-                self.entities.append(P)
+
 
 
     @profiler.profile
@@ -400,23 +446,17 @@ class Game(pyglet.event.EventDispatcher, GameEvents):
             if self.player.border['UP']:
                 self.camera.center[1] =  config.WIN_SIZE[1]/2
             if self.player.border['DOWN']:
-                self.camera.center[1] =  config.MAP_SIZE[1]- config.WIN_SIZE[1]/2
+                self.camera.center[1] =  config.MAP_SIZE[1]- config.WIN_SIZE[1]/2   
             if self.player.border['LEFT']:
                 self.camera.center[0] =  config.WIN_SIZE[0]/2
             if self.player.border['RIGHT']:
                 self.camera.center[0] =  config.MAP_SIZE[0]- config.WIN_SIZE[0]/2
         elif(self.player_dead == "Dead"):
             self.final_player_pos = self.player.die()
-            self.remove_entity(self.player)
+            self.player.speed = [0,0]
+            self.player.state = "Dead"
+            self.player.fillColor = (128, 128, 128, 200)
             self.player_dead = "Gone"
-
-            #Animation de mort: affiche une image centrée sur la position du vaisseau
-            images = [pyglet.image.load(f'resources/Sprites/xplosion/xplosion-{i}.png') for i in range(0, 3)]
-            animation = pyglet.image.Animation.from_image_sequence(images, .1)
-
-            # L'image animée est ensuite ajoutée au jeu, comme pour une image normale.
-            # img = sprites.Image(self.final_player_pos - np.array([images[0].width, images[0].height])/2, animation, self)
-            # self.add_entity(img)
             XPLosion(self.final_player_pos, self)
             
 
@@ -425,7 +465,18 @@ class Game(pyglet.event.EventDispatcher, GameEvents):
             
         if self.ticks % config.FRAME_TICKS == 0:
             self.display()
-    
+
+        # On attend le temps restant pour avoir un tick toutes les config.TICK_TIME secondes
+        # On calcule le temps restant en secondes
+        time_to_wait = config.TICK_TIME - (time() - self.tick_time)
+        # On attend le temps restant
+        if time_to_wait > 0:
+            sleep(time_to_wait)
+        # On met à jour le temps de tick
+        self.tick_time = time()
+        # On incrémente le nombre de ticks
+        self.ticks += 1
+
     
     def run(self):
         # Boucle de jeu
@@ -448,3 +499,19 @@ class Game(pyglet.event.EventDispatcher, GameEvents):
     def on_resize(self, width, height):
         self.win_size = [width, height]
         self.camera.size = np.array([width, height])
+
+    def get_screen_pixels(self):
+        buffer_manager = pyglet.image.get_buffer_manager()
+        color_buffer = buffer_manager.get_color_buffer()
+        image_data = color_buffer.get_image_data()
+
+        # Get pixel data as string
+        pixel_data = image_data.get_data('RGB', image_data.width * 3)
+
+        # Convert pixel data to NumPy array
+        pixel_array = np.frombuffer(pixel_data, dtype=np.uint8)
+
+        # Reshape the array to match the image dimensions
+        pixel_array = pixel_array.reshape((image_data.height, image_data.width, 3))
+
+        return pixel_array

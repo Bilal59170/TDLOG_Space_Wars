@@ -404,4 +404,3 @@ def does_collide(sprite1, sprite2):
         raise ValueError("Image-Circle collision not implemented")
     
         
-    

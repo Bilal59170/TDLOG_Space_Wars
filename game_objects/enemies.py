@@ -7,6 +7,7 @@ from game_engine import entity, config
 from game_engine.sprites import Polygon
 from game_objects.projectiles import Projectile
 from game_engine.utils import draw_bar
+from game_functions import draw_filled_bar
 
 from time import time
 
@@ -29,7 +30,7 @@ class Enemy(Polygon):
     bar_color = (0,128,0)       # Couleur de la barre de vie
     barWidthFactor = .8         # Longueur de la barre de vie (en % de la taille de l'ennemi)
     barHeight = 16              # Largeur de la barre de vie
-    barSpacing = 5              # Largeur de la bordure
+    barSpacing = 2              # Largeur de la bordure
     """
     ressources = 100             # XP donnée en tuant l'ennemi
     max_HP = 100
@@ -103,22 +104,15 @@ class Enemy(Polygon):
     def draw(self, batch=None):
         """Dessine l'astéroïde"""
         super().draw(batch=batch)
-
-        draw_bar(
-            center = (self.screen_pos[0], self.screen_pos[1]-self.size-self.barHeight),
-            width = self.size*3*self.barWidthFactor,
-            height = self.barHeight,
-            color = self.bar_grey,
-            batch=batch
-        )
-
-        width = int(self.size* 3 * self.barWidthFactor - self.barSpacing * 2)
         
-        draw_bar(
-            center = (self.screen_pos[0]- width * (1 - self._HP/self.max_HP)/2, self.screen_pos[1]-self.size-self.barHeight),
-            width = width * self._HP/self.max_HP,
-            height = self.barHeight - self.barSpacing,
-            color = self.fill_color,
+        draw_filled_bar(
+            (self.screen_pos[0], self.screen_pos[1]-self.size-self.barHeight),
+            self.size*2*self.barWidthFactor,
+            self.barHeight,
+            self.barSpacing,
+            self._HP/self.max_HP,
+            self.fill_color,
+            self.bar_grey,
             batch=batch
         )
 
@@ -154,7 +148,12 @@ class Enemy(Polygon):
             self.speed -= t*self.acceleration*np.array([np.cos(float(self._theta)), np.sin(float(self._theta))])
 
     def tick(self):
-        self.close_in_and_out(self.game_state.player)
+        if self.game_state.player.state == "Alive":
+            self.aim_at(self.game_state.player)
+            P = self.shoot(self.game_state.player)
+            if P is not None:
+                self.game_state.add_entity(P)
+
         super().tick()
 
     def shoot(self, player):

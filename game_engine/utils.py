@@ -28,7 +28,9 @@ def draw_bar(center, width, height, color, batch = None):
     
     rectangle = pyglet.shapes.Rectangle(x-width/2+r, y-r, width-2*r, 2*r, color=color, batch=batch)
     circle_left = pyglet.shapes.Circle(x-width/2+r, y, r, color=color, batch=batch)
-    circle_right = pyglet.shapes.Circle(x+width/2-r, y, r, color=color, batch=batch)
+    
+    if width > 2*r:
+        circle_right = pyglet.shapes.Circle(x+width/2-r, y, r, color=color, batch=batch)
 
     if not use_batch:
         batch.draw()

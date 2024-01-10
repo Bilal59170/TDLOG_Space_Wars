@@ -18,19 +18,23 @@ def draw_filled_bar(pos,
                 ):
         
     draw_bar(
-        center = (pos[0], pos[1]-height),
+        center = (pos[0], pos[1]),
         width = width,
         height = height,
         color = secondary_color,
         batch=batch
     )
 
-    width = int(width - spacing * 2)
-    
+    new_width = int(height / 2 + (width - spacing * 2 - height / 2) * filled_percent)
+
+    height = int(height - spacing * 2)
+
+    new_x_center = pos[0] - width / 2 + spacing + new_width / 2
+
     draw_bar(
-        center = (pos[0]- width * (1 - filled_percent)/2, pos[1]-height),
-        width = width * filled_percent,
-        height = height - spacing,
+        center = (new_x_center, pos[1]),
+        width = new_width,
+        height = height,
         color = primary_color,
         batch=batch
     )
@@ -47,23 +51,32 @@ def game_static_display(game):
     resources_secondary_color = (55,61,58)
 
     x_center = game.camera.size[0] // 2
-    y_center_lvl = 35
-    y_center_resources = 60
+    y_center_lvl = 30
+    y_center_resources = 70
 
     spacing = 5
 
-    lvl_width = game.camera.size[0] // 6
-    lvl_height = 20
+    lvl_width = game.camera.size[0] // 3.2
+    lvl_height = 30
 
-    resources_width = game.camera.size[0] // 10
-    resources_height = 20
+    resources_width = game.camera.size[0] // 4
+    resources_height = 30
+
+    lvl = game.player.level
+    print(f"lvl {lvl} len {len(game.score_steps)}")
+    if lvl == len(game.score_steps) - 1:
+        prct = 1
+    else:
+        prct = game.score / game.score_steps[lvl]
+
+    resources_prct = game.score / game.score_steps[-1] * 1.5
 
     draw_filled_bar(
         (x_center, y_center_lvl),
         lvl_width,
         lvl_height,
         spacing,
-        1,
+        prct,
         lvl_primary_color,
         lvl_secondary_color,
         game.batch
@@ -74,11 +87,27 @@ def game_static_display(game):
         resources_width,
         resources_height,
         spacing,
-        1,
+        resources_prct,
         resources_primary_color,
         resources_secondary_color,
         game.batch
     )
+
+    pyglet.text.Label(
+        f"lvl : {lvl+1}  Xp : {game.score} / {game.score_steps[lvl]}",
+        font_name='Calibri',
+        font_size=11,
+        x=x_center, y=y_center_lvl,
+        anchor_x='center', anchor_y='center',
+        color=(255,255,255,255)).draw()
+
+    pyglet.text.Label(
+        f"Resources : {game.score}",
+        font_name='Arial',
+        font_size=11,
+        x=x_center, y=y_center_resources,
+        anchor_x='center', anchor_y='center',
+        color=(255,255,255,255)).draw()
 
     game.hurt_animation()
 

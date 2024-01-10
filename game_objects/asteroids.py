@@ -8,6 +8,8 @@ from game_engine import sprites
 from game_engine.utils import create_nagon_vertices, draw_bar
 from game_engine.config import *
 
+from game_functions import draw_filled_bar
+
 import time
 
 class Asteroid(sprites.Polygon):
@@ -33,7 +35,7 @@ class Asteroid(sprites.Polygon):
     bar_color = (0,128,0)       # Couleur de la barre de vie
     barWidthFactor = .8         # Longueur de la barre de vie (en % de la taille de l'astéroïde)
     barHeight = 16              # Largeur de la barre de vie
-    barSpacing = 5              # Largeur de la bordure
+    barSpacing = 2              # Largeur de la bordure
 
     ressources = 10             # XP donnée en tuant l'astéroïde
     max_HP = 100                # PVs maximum de l'astéroïd
@@ -73,23 +75,19 @@ class Asteroid(sprites.Polygon):
         """Dessine l'astéroïde"""
         super().draw(batch=batch)
 
-        draw_bar(
-            center = (self.screen_pos[0], self.screen_pos[1]-self.size-self.barHeight),
-            width = self.size*2*self.barWidthFactor,
-            height = self.barHeight,
-            color = self.bar_grey,
-            batch=batch
-        )
+        if self._HP < self.max_HP:
+            
+            draw_filled_bar(
+                pos = (self.screen_pos[0], self.screen_pos[1]-self.size-self.barHeight),
+                width = self.size*2*self.barWidthFactor,
+                height = self.barHeight,
+                spacing = self.barSpacing,
+                filled_percent = self._HP/self.max_HP,
+                primary_color = self.bar_color,
+                secondary_color = self.bar_grey,
+                batch=batch
+            )
 
-        width = int(self.size * 2 * self.barWidthFactor - self.barSpacing * 2)
-        
-        draw_bar(
-            center = (self.screen_pos[0]- width * (1 - self._HP/self.max_HP)/2, self.screen_pos[1]-self.size-self.barHeight),
-            width = width * self._HP/self.max_HP,
-            height = self.barHeight - self.barSpacing,
-            color = self.bar_color,
-            batch=batch
-        )
 
     def die(self):
         """
@@ -114,7 +112,7 @@ class MasterAsteroid(Asteroid):
     bar_color = (0,128,0)
     barWidthFactor = .8
     barHeight = 16
-    barSpacing = 5
+    barSpacing = 2
 
     max_HP = 100
     ressources = 100
