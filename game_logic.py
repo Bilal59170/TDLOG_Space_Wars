@@ -119,7 +119,7 @@ def bullet_ship_collision(game, bullet, ship):
 
 
 def asteroid_ship_collision(game, asteroid, ship):
-    if not(ship.is_invicible):
+    if not(ship.is_invicible) and ship.state == "Alive":
         ship.HP -= asteroid.damage
         ship.is_invicible = True
     else:
@@ -221,12 +221,12 @@ def spawn_enemies(game):
     """
 
     # On ne veut pas plus de 7 ennemis
-    if len(game.enemies) > 100 + game.player.level:
+    if len(game.enemies) > 7 + game.player.level:
         return
 
     # On veut que les petits astéroïdes soient plus fréquents que les gros -> on pondère les probabilités
     probabilities = [0.5, 0.30, 0.15, 0.05]
-    probabilities = [0,0,0,1]
+    #probabilities = [0,0,0,1]
     levels = [0, 1, 2, 3]
     level = np.random.choice(levels, p=probabilities)
     pos = np.array([random.randint(0, config.MAP_SIZE[0]), random.randint(0, config.MAP_SIZE[1])])
