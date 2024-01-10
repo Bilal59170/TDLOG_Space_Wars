@@ -9,18 +9,14 @@ class Button:
         self.text = pyglet.text.Label(text,
                                       font_name='Arial',
                                       font_size=18,
-                                      x=self.x, y=self.y,
+                                      color=(0, 0, 0, 255),
+                                      x=x, y=y,
                                       anchor_x='center', anchor_y='center', batch=batch)
-
-    def draw(self):
-        # Dessine le bouton
-        pyglet.graphics.draw(4, pyglet.gl.GL_QUADS,
-                             ('v2i', [self.x - self.width // 2, self.y - self.height // 2,
-                                      self.x + self.width // 2, self.y - self.height // 2,
-                                      self.x + self.width // 2, self.y + self.height // 2,
-                                      self.x - self.width // 2, self.y + self.height // 2]),
-                             ('c3B', (255, 255, 255) * 4))
         
+        self.rectangle = pyglet.shapes.Rectangle(x - width/2, y - height/2, width, height, color=(255, 255, 255), batch = batch)
+
+
+
 
     def on_mouse_press(self, x, y, button, modifiers):
         if self.x - self.width // 2 < x < self.x + self.width // 2 and \
@@ -51,8 +47,6 @@ class StartMenu:
 
     def on_draw(self):
         self.window.clear()
-        self.play_button.draw()
-        self.quit_button.draw()
         self.batch.draw()
 
 
