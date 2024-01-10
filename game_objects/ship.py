@@ -63,6 +63,8 @@ class Ship(sprites.Polygon, pyglet.event.EventDispatcher):
         self.level = 0
         self.reload = 0
 
+        self.state = "Alive"
+
     @property
     def HP(self):
         return self._HP
@@ -110,29 +112,34 @@ class Ship(sprites.Polygon, pyglet.event.EventDispatcher):
     
     def draw(self, batch=None):
         """Dessine l'astéroïde"""
-        self.get_angle_mouse()
+        if self.state == "Alive":
+            self.get_angle_mouse()
         super().draw(batch=batch)
 
-        draw_filled_bar(
-            pos = (self.screen_pos[0], self.screen_pos[1]-self.size_step-self.barHeight),
-            width = self.barwidth, 
-            height = self.barHeight,
-            spacing = self.barSpacing,
-            filled_percent = self._HP/self.max_HP,
-            primary_color = self.bar_color,
-            secondary_color = self.bar_grey,
-            batch=batch
-        )
+        if self.state == "Alive":
+
+            draw_filled_bar(
+                pos = (self.screen_pos[0], self.screen_pos[1]-self.size_step-self.barHeight),
+                width = self.barwidth, 
+                height = self.barHeight,
+                spacing = self.barSpacing,
+                filled_percent = self._HP/self.max_HP,
+                primary_color = self.bar_color,
+                secondary_color = self.bar_grey,
+                batch=batch
+            )
 
     def tick(self):
         """Fonction qui met à jour la position en fonction de la vitesse"""
-        super().tick()
+        if self.state == "Alive":
+            super().tick()
 
-        if (self.is_invicible):
-            self.timer_invicible += 1/config.TPS
-        if self.timer_invicible >= self.invicible_time:
-            self.is_invicible = False
-            self.timer_invicible = 0
+            if (self.is_invicible):
+                self.timer_invicible += 1/config.TPS
+            if self.timer_invicible >= self.invicible_time:
+                self.is_invicible = False
+                self.timer_invicible = 0
+
 
     def update_step(self):
         self.level += 1

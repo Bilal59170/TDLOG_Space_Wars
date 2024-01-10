@@ -148,7 +148,12 @@ class Enemy(Polygon):
             self.speed -= t*self.acceleration*np.array([np.cos(float(self._theta)), np.sin(float(self._theta))])
 
     def tick(self):
-        self.close_in_and_out(self.game_state.player)
+        if self.game_state.player.state == "Alive":
+            self.aim_at(self.game_state.player)
+            P = self.shoot(self.game_state.player)
+            if P is not None:
+                self.game_state.add_entity(P)
+
         super().tick()
 
     def shoot(self, player):

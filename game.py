@@ -187,7 +187,7 @@ class Game(pyglet.event.EventDispatcher, GameEvents):
     time = 0          # Temps de jeu
     ticks = 0         # Ticks de jeu
 
-    score_steps = [1000, 5000, 10000, 20000]
+    score_steps = [1000, 5000, 10000]
     step = 0
 
     def __init__(self, profile = False):
@@ -372,15 +372,12 @@ class Game(pyglet.event.EventDispatcher, GameEvents):
 
     def new_projectile(self):
         # Fonction qui gère le lancement de projectiles
-        if self.mousebuttons[mouse.RIGHT]:
+        if self.mousebuttons[mouse.RIGHT] and self.player.state == "Alive":
             #self.entities.append(self.player.throw_projectile())
             P = self.player.shoot()
             if P != None:
                 self.entities.append(P)
-        for enemy in self.enemies:
-            P = enemy.shoot(self.player)
-            if P != None:
-                self.entities.append(P)
+
 
 
     @profiler.profile
@@ -408,7 +405,9 @@ class Game(pyglet.event.EventDispatcher, GameEvents):
                 self.camera.center[0] =  config.MAP_SIZE[0]- config.WIN_SIZE[0]/2
         elif(self.player_dead == "Dead"):
             self.final_player_pos = self.player.die()
-            self.remove_entity(self.player)
+            self.player.speed = [0,0]
+            self.player.state = "Dead"
+            self.player.fillColor = (128, 128, 128, 200)
             self.player_dead = "Gone"
             XPLosion(self.final_player_pos, self)
             
@@ -452,3 +451,19 @@ class Game(pyglet.event.EventDispatcher, GameEvents):
     def on_resize(self, width, height):
         self.win_size = [width, height]
         self.camera.size = np.array([width, height])
+
+    def get_screen_pixels(self):
+        buffer_manager = pyglet.image.get_buffer_manager()
+        color_buffer = buffer_manager.get_color_buffer()
+        image_data = color_buffer.get_image_data()
+
+        # Get pixel data as string
+        pixel_data = image_data.get_data('RGB', image_data.width * 3)
+
+        # Convert pixel data to NumPy array
+        pixel_array = np.frombuffer(pixel_data, dtype=np.uint8)
+
+        # Reshape the array to match the image dimensions
+        pixel_array = pixel_array.reshape((image_data.height, image_data.width, 3))
+
+        return pixel_array
