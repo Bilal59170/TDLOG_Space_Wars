@@ -51,11 +51,12 @@ def death_menu(game):
         0, 0,
         game.camera.size[0], game.camera.size[1],
         color=(0,0,0),
-        batch=game.death_menu_batch
     )
 
     rectangle.opacity = 100
     rectangle.draw()
+
+    game.mission_failed_sprite.draw()
 
     game.death_menu_batch.draw()
 
@@ -80,22 +81,13 @@ def death_menu_first_time(game):
     mission_failed_img = pyglet.image.load("resources/Sprites/mission_failed.png")
     mission_failed_img.anchor_x = mission_failed_img.width // 2
     mission_failed_img.anchor_y = mission_failed_img.height // 2
-    mission_failed_sprite = pyglet.sprite.Sprite(mission_failed_img, x=x_center, y=game.camera.size[1] // 2 + 100, batch=game.death_menu_batch)
-
-    pyglet.text.Label(
-        f"GAME OVER",
-        font_name='Arial',
-        font_size=50,
-        x=x_center, y=game.camera.size[1] // 2,
-        anchor_x='center', anchor_y='center',
-        color=(255,0,0,255),
-        batch=game.death_menu_batch)
+    game.mission_failed_sprite = pyglet.sprite.Sprite(mission_failed_img, x=x_center, y=game.camera.size[1] // 2 + 170)
 
     pyglet.text.Label(
         f"Score : {game.score}",
         font_name='Arial',
         font_size=30,
-        x=x_center, y=game.camera.size[1] // 2 - 50,
+        x=x_center, y=game.camera.size[1] // 2,
         anchor_x='center', anchor_y='center',
         color=(255,255,255,255),
         batch=game.death_menu_batch)
