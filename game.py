@@ -364,7 +364,7 @@ class Game(pyglet.event.EventDispatcher, GameEvents):
         rgb_func = lambda x : (1 - 4*x*(1-x), 1, 1)
 
         if self.player.is_invicible:
-            x = self.player.timer_invicible / self.player.invicible_time
+            x = 10 * self.player.timer_invicible / self.player.invicible_time
             alpha = alpha_func(x)
             pyglet.gl.glClearColor(*rgb_func(x), 1)
 
