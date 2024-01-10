@@ -36,7 +36,7 @@ class Ship(sprites.Polygon, pyglet.event.EventDispatcher):
     barwidth = 50               # Longueur de la barre de vie
     is_invicible = False
     timer_invicible = 0
-    invicible_time = 3          #In seconds
+    invicible_time = 1          #In seconds
     size = 10
 
     reload_speeds = [2, 2, 1, 1]

@@ -410,14 +410,11 @@ class Game(pyglet.event.EventDispatcher, GameEvents):
 
 
     def hurt_animation(self):
-        alpha_func = lambda x : np.sin(x * np.pi)
-
         # Fonction qui fait une transition entre la couleur blanche, rouge, verte et blanche
-        rgb_func = lambda x : (1 - 4*x*(1-x), 1, 1)
+        rgb_func = lambda x : (1 , 1- 4*x*(1-x)/2, 1- 4*x*(1-x)/2)
 
         if self.player.is_invicible:
-            x = 10 * self.player.timer_invicible / self.player.invicible_time
-            alpha = alpha_func(x)
+            x = self.player.timer_invicible / self.player.invicible_time
             pyglet.gl.glClearColor(*rgb_func(x), 1)
 
 
