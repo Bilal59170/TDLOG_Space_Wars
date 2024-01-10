@@ -47,14 +47,17 @@ def draw_filled_bar(pos,
 def death_menu(game):
     game.death_menu_batch.draw()
 
-    if game.death_menu_buttons[0].on_mouse_press(game.mouse_x, game.mouse_y, 1, None):
-        game.reset()
+    # On vérifie si le clic gauche est appuyé
+    if game.mousebuttons[pyglet.window.mouse.LEFT]:
 
-    
-    elif game.death_menu_buttons[1].on_mouse_press(game.mouse_x, game.mouse_y, 1, None):
-        game.window.close()
-        import sys
-        sys.exit()
+
+        if game.death_menu_buttons[0].on_mouse_press(game.mouse_x, game.mouse_y, 1, None):
+            game.reset()
+        
+        elif game.death_menu_buttons[1].on_mouse_press(game.mouse_x, game.mouse_y, 1, None):
+            game.window.close()
+            import sys
+            sys.exit()
 
 
 def death_menu_first_time(game):

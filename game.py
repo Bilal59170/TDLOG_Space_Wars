@@ -516,4 +516,5 @@ class Game(pyglet.event.EventDispatcher, GameEvents):
         return pixel_array
     
     def reset(self):
+        self.window.close()
         self.__init__(profile=self.profiling)
