@@ -19,7 +19,7 @@ SPEED_FACTOR = 1
 
 FULLSCREEN = False
 WIN_SIZE = np.array([1280, 720])
-
+# WIN_SIZE = np.array([1920, 1080])
 MAP_SIZE = WIN_SIZE * 2
 BACKGROUND_COLOR = (1,1,1)
 

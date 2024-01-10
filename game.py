@@ -211,7 +211,7 @@ class Game(pyglet.event.EventDispatcher, GameEvents):
 
         self.window.set_mouse_visible(True)
         self.window.set_caption("Space Wars")
-        self.window.set_vsync(False)
+        self.window.set_vsync(True ) #synchronise les fps du jeu avec les fps de l'écran de l'ordi 
         #self.window.set_icon(pyglet.image.load("ressources/icon.png")) => A ajouter quand on aura une icone
         
         self.batch = pyglet.graphics.Batch()
@@ -345,9 +345,60 @@ class Game(pyglet.event.EventDispatcher, GameEvents):
             except:
                 print("Error drawing : ", e.__class__.__name__)
                 raise
+                #Affichage de la map et de la position du ship
+             
+        mult_factor_win = 1/10
+        mult_factor_map_win = config.MAP_SIZE / config.WIN_SIZE
+        gap = 10 #espace entre la map et la bordure de la fenêtre
+
+        #Point en haut à gauche du carré
+
+        little_map_coord = np.array([
+            (1-mult_factor_win)*config.WIN_SIZE[0] - gap,
+            (1-mult_factor_win)*config.WIN_SIZE[1] - gap])
         
+        ship_little_map_coord = little_map_coord + np.array([
+            self.player.x / mult_factor_map_win[0] * mult_factor_win,
+            self.player.y / mult_factor_map_win[1] * mult_factor_win])
+        
+        little_cam_coord = little_map_coord + np.array([
+            (self.camera.center[0]-self.camera.size[0]/2) / mult_factor_map_win[0] * mult_factor_win,
+            (self.camera.center[1]-self.camera.size[1]/2) / mult_factor_map_win[1] * mult_factor_win,
+        ])
+        
+        little_map = pyglet.shapes.BorderedRectangle(
+            x = little_map_coord[0],
+            y = little_map_coord[1], 
+            width = mult_factor_win*config.WIN_SIZE[0], 
+            height = mult_factor_win*config.WIN_SIZE[1],
+            border = 5,
+            color = (200, 200, 200),
+            border_color = (0, 0, 0),
+            batch = batch)
+        
+        little_cam = pyglet.shapes.BorderedRectangle(
+            x = little_cam_coord[0],
+            y = little_cam_coord[1], 
+            width = mult_factor_win*config.WIN_SIZE[0]/ mult_factor_map_win[0], 
+            height = mult_factor_win*config.WIN_SIZE[1]/ mult_factor_map_win[1],
+            border = 1,
+            color = (255, 255, 255),
+            border_color = (0, 0, 0),
+            batch = batch)
+        
+
+        little_point = pyglet.shapes.Circle(
+            x = ship_little_map_coord[0],
+            y = ship_little_map_coord[1],
+            radius = 5,
+            color = (0, 255, 0)
+        )
+
+        
+        # little_point = pyglet.shapes.Circle(self.player.screen_x ,5, color = (255, 0, 0), batch = batch)
         batch.draw()
         self.batch.draw()
+        little_point.draw()
 
         for function in self._on_draw:
             function(self)
@@ -400,7 +451,7 @@ class Game(pyglet.event.EventDispatcher, GameEvents):
             if self.player.border['UP']:
                 self.camera.center[1] =  config.WIN_SIZE[1]/2
             if self.player.border['DOWN']:
-                self.camera.center[1] =  config.MAP_SIZE[1]- config.WIN_SIZE[1]/2
+                self.camera.center[1] =  config.MAP_SIZE[1]- config.WIN_SIZE[1]/2   
             if self.player.border['LEFT']:
                 self.camera.center[0] =  config.WIN_SIZE[0]/2
             if self.player.border['RIGHT']:
