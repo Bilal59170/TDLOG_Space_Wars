@@ -13,11 +13,14 @@ class Button:
                                       anchor_x='center', anchor_y='center', batch=batch)
 
     def draw(self):
+        # Dessine le bouton
         pyglet.graphics.draw(4, pyglet.gl.GL_QUADS,
-                             ('v2f', (self.x - self.width // 2, self.y - self.height // 2,
+                             ('v2i', [self.x - self.width // 2, self.y - self.height // 2,
                                       self.x + self.width // 2, self.y - self.height // 2,
                                       self.x + self.width // 2, self.y + self.height // 2,
-                                      self.x - self.width // 2, self.y + self.height // 2)))
+                                      self.x - self.width // 2, self.y + self.height // 2]),
+                             ('c3B', (255, 255, 255) * 4))
+        
 
     def on_mouse_press(self, x, y, button, modifiers):
         if self.x - self.width // 2 < x < self.x + self.width // 2 and \
@@ -43,12 +46,15 @@ class StartMenu:
                                              x=self.window.width // 2, y=self.window.height // 2,
                                              anchor_x='center', anchor_y='center', batch=self.batch))
 
-        self.play_button = Button(self.window.width // 4, self.window.height // 2 - 100, 100, 50, "Jouer", self.batch)
-        self.quit_button = Button(3*(self.window.width // 4), self.window.height // 2 - 100, 100, 50, "Quitter", self.batch)
+        # self.play_button = Button(self.window.width // 4, self.window.height // 2 - 100, 100, 50, "Jouer", self.batch)
+        # self.quit_button = Button(3*(self.window.width // 4), self.window.height // 2 - 100, 100, 50, "Quitter", self.batch)
 
     def on_draw(self):
         self.window.clear()
+        self.play_button.draw()
+        self.quit_button.draw()
         self.batch.draw()
+
 
     def on_mouse_press(self, x, y, button, modifiers):
         if self.play_button.on_mouse_press(x, y, button, modifiers):
@@ -58,4 +64,3 @@ class StartMenu:
         elif self.quit_button.on_mouse_press(x, y, button, modifiers):
             self.window.close()
 
-class 
