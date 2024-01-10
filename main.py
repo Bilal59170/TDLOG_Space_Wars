@@ -53,7 +53,7 @@ from pyglet.window import key
 import game_logic
 from game import Game
 
-from UI import StartMenu
+from UI import StartMenu, DeathMenu
 
 def start_game():
     game = Game(profile=False)
@@ -63,7 +63,8 @@ def start_game():
     game.run()
 
 if __name__ == "__main__":
+    # menu = StartMenu()
+    # menu.start_game = start_game
     menu = StartMenu()
-    menu.start_game = start_game
     pyglet.app.run()
 

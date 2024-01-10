@@ -151,12 +151,3 @@ def game_static_display(game):
             x=x_center, y=game.camera.size[1] // 2 - 100,
             anchor_x='center', anchor_y='center',
             color=(255,255,255,255)).draw()
-        # Bouton rejouer !
-        pyglet.gui.PushButton(
-            x=game.camera.size[0]//3,
-            y=game.camera.size[1]//2 - 100,
-            pressed=label,
-            depressed=label,
-            #on_press=game.restart,
-            batch=game.batch
-        )
