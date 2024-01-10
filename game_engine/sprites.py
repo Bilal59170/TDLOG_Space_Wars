@@ -404,4 +404,13 @@ def does_collide(sprite1, sprite2):
         raise ValueError("Image-Circle collision not implemented")
     
         
-    
+from pyglet.event import EventDispatcher
+class FixedButton(EventDispatcher):
+    """ 
+    Bouton clickable, à sous classer avec une méthode callback, qui sera appelée quand le bouton est cliqué
+    Méthodes : 
+        => draw : affiche le bouton
+        => on_mouse_press : détecte si le bouton a été cliqué
+    """
+
+    pass

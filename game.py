@@ -14,7 +14,7 @@ import numpy as np
 import pyglet
 from pyglet.window import key
 from pyglet.window import mouse
-from time import time
+from time import time, sleep
 
 from game_engine import config, sprites
 from game_engine.collisions import *
@@ -211,7 +211,7 @@ class Game(pyglet.event.EventDispatcher, GameEvents):
 
         self.window.set_mouse_visible(True)
         self.window.set_caption("Space Wars")
-        self.window.set_vsync(False)
+        self.window.set_vsync(True)
         #self.window.set_icon(pyglet.image.load("ressources/icon.png")) => A ajouter quand on aura une icone
         
         self.batch = pyglet.graphics.Batch()
@@ -266,6 +266,7 @@ class Game(pyglet.event.EventDispatcher, GameEvents):
         # Code de Broni
         self.time = 0
         self.old_time = time()
+        self.tick_time = 0
 
         self.keys = key.KeyStateHandler()
         self.window.push_handlers(self.keys)
@@ -409,14 +410,6 @@ class Game(pyglet.event.EventDispatcher, GameEvents):
             self.final_player_pos = self.player.die()
             self.remove_entity(self.player)
             self.player_dead = "Gone"
-
-            #Animation de mort: affiche une image centrée sur la position du vaisseau
-            images = [pyglet.image.load(f'resources/Sprites/xplosion/xplosion-{i}.png') for i in range(0, 3)]
-            animation = pyglet.image.Animation.from_image_sequence(images, .1)
-
-            # L'image animée est ensuite ajoutée au jeu, comme pour une image normale.
-            # img = sprites.Image(self.final_player_pos - np.array([images[0].width, images[0].height])/2, animation, self)
-            # self.add_entity(img)
             XPLosion(self.final_player_pos, self)
             
 
@@ -425,7 +418,18 @@ class Game(pyglet.event.EventDispatcher, GameEvents):
             
         if self.ticks % config.FRAME_TICKS == 0:
             self.display()
-    
+
+        # On attend le temps restant pour avoir un tick toutes les config.TICK_TIME secondes
+        # On calcule le temps restant en secondes
+        time_to_wait = config.TICK_TIME - (time() - self.tick_time)
+        # On attend le temps restant
+        if time_to_wait > 0:
+            sleep(time_to_wait)
+        # On met à jour le temps de tick
+        self.tick_time = time()
+        # On incrémente le nombre de ticks
+        self.ticks += 1
+
     
     def run(self):
         # Boucle de jeu

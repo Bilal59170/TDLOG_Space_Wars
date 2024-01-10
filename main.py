@@ -78,7 +78,7 @@ if __name__ == "__main__":
         game.add_entity(caca)
         game.add_entity(caca2)
 
-        # Ajout d'une image animée ! Les images sont dans le dossier Sprites/animation, et sont nommées an_1.png, an_2.png, etc.
+        # Ajout d'une image animées ! Les images sont dans le dossier Sprites/animation, et sont nommées an_1.png, an_2.png, etc.
         # Elles sont ensuite chargées dans une liste, puis transformées en animation.
         images = [pyglet.image.load(f'resources/Sprites/animation/an_{i}.png') for i in range(1, 6)]
         animation = pyglet.image.Animation.from_image_sequence(images, .5)

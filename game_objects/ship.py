@@ -13,6 +13,8 @@ from game_engine.utils import create_nagon_vertices, draw_bar
 
 import game_engine.config as config
 
+from game_functions import draw_filled_bar
+
 class Ship(sprites.Polygon, pyglet.event.EventDispatcher):
     """ Classe du vaisseau principal """
 
@@ -30,7 +32,7 @@ class Ship(sprites.Polygon, pyglet.event.EventDispatcher):
     bar_color = ship_color      # Couleur de la barre de vie
     barWidthFactor = .8         # Longueur de la barre de vie (en % de la taille de l'astéroïde)
     barHeight = 16              # Largeur de la barre de vie
-    barSpacing = 5              # Largeur de la bordure
+    barSpacing = 2              # Largeur de la bordure
     barwidth = 50               # Longueur de la barre de vie
     is_invicible = False
     timer_invicible = 0
@@ -111,21 +113,14 @@ class Ship(sprites.Polygon, pyglet.event.EventDispatcher):
         self.get_angle_mouse()
         super().draw(batch=batch)
 
-        draw_bar(
-            center = (self.screen_pos[0], self.screen_pos[1]-self.size_step-self.barHeight),
-            # width = self.size*2*self.barWidthFactor,
+        draw_filled_bar(
+            pos = (self.screen_pos[0], self.screen_pos[1]-self.size_step-self.barHeight),
             width = self.barwidth, 
             height = self.barHeight,
-            color = self.bar_grey,
-            batch=batch
-        )
-
-        # width = int(self.size * 2 * self.barWidthFactor - self.barSpacing * 2)
-        draw_bar(
-            center = (self.screen_pos[0]- self.barwidth * (1 - self._HP/self.max_HP)/2, self.screen_pos[1]-self.size_step-self.barHeight),
-            width = self.barwidth * self._HP/self.max_HP,
-            height = self.barHeight - self.barSpacing,
-            color = self.bar_color,
+            spacing = self.barSpacing,
+            filled_percent = self._HP/self.max_HP,
+            primary_color = self.bar_color,
+            secondary_color = self.bar_grey,
             batch=batch
         )
 
