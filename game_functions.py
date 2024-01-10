@@ -4,7 +4,10 @@ import pyglet
 import game_engine.sprites as sprites
 from game_engine.utils import *
 
+import pyglet.gui
+
 import math
+from PIL import Image
 
 
 def draw_filled_bar(pos,
@@ -111,3 +114,54 @@ def game_static_display(game):
 
     game.hurt_animation()
 
+    if game.player.state != "Alive":
+        # Affichage du game over et du score
+
+        # On grise l'écran pour faire un effet de game over avec un fondu
+        rectangle = pyglet.shapes.Rectangle(
+            0, 0,
+            game.camera.size[0], game.camera.size[1],
+            color=(0,0,0),
+        )
+        rectangle.opacity = 100
+        rectangle.draw()
+
+        pyglet.text.Label(
+            f"GAME OVER",
+            font_name='Arial',
+            font_size=50,
+            x=x_center, y=game.camera.size[1] // 2,
+            anchor_x='center', anchor_y='center',
+            color=(255,0,0,255)).draw()
+
+        pyglet.text.Label(
+            f"Score : {game.score}",
+            font_name='Arial',
+            font_size=30,
+            x=x_center, y=game.camera.size[1] // 2 - 50,
+            anchor_x='center', anchor_y='center',
+            color=(255,255,255,255)).draw()
+        
+
+        # Création de l'image de quand lebouton est appuyé
+        img = Image.open("resources/Sprites/Buttons/Menu.png")
+        img = img.resize((int(img.size[0] * 1.5), int(img.size[1] * 1.5)))
+        img.save("resources/Sprites/Buttons/Menu_pressed.png")
+
+
+        # Label rejouer
+        label = pyglet.text.Label(
+            f"Rejouer",
+            font_name='Arial',
+            font_size=30,
+            x=x_center, y=game.camera.size[1] // 2 - 100,
+            anchor_x='center', anchor_y='center',
+            color=(255,255,255,255)).draw()
+        # Bouton rejouer !
+        pyglet.gui.PushButton(
+            x=game.camera.size[0]//3,
+            y=game.camera.size[1]//2 - 100,
+
+            #on_press=game.restart,
+            batch=game.batch
+        )

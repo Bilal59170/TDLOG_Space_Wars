@@ -402,5 +402,3 @@ def does_collide(sprite1, sprite2):
         raise ValueError("Image-Circle collision not implemented")
     elif isinstance(sprite1, Circle) and isinstance(sprite2, Image):
         raise ValueError("Image-Circle collision not implemented")
-    
-        

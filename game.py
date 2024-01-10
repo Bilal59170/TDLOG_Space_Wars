@@ -11,6 +11,8 @@ import time
 from inspect import isclass
 import numpy as np
 
+import pyglet.gui
+
 import pyglet
 from pyglet.window import key
 from pyglet.window import mouse
@@ -457,8 +459,7 @@ class Game(pyglet.event.EventDispatcher, GameEvents):
             self.player.state = "Dead"
             self.player.fillColor = (128, 128, 128, 200)
             self.player_dead = "Gone"
-            XPLosion(self.final_player_pos, self)
-            
+            XPLosion(self.final_player_pos, self)            
 
         for e in self.entities:
             e.tick()
