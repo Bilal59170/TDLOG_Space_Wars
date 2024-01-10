@@ -45,11 +45,22 @@ def draw_filled_bar(pos,
     )
 
 def death_menu(game):
+
+    # On grise l'écran pour faire un effet de game over avec un fondu
+    rectangle = pyglet.shapes.Rectangle(
+        0, 0,
+        game.camera.size[0], game.camera.size[1],
+        color=(0,0,0),
+        batch=game.death_menu_batch
+    )
+
+    rectangle.opacity = 100
+    rectangle.draw()
+
     game.death_menu_batch.draw()
 
     # On vérifie si le clic gauche est appuyé
     if game.mousebuttons[pyglet.window.mouse.LEFT]:
-
 
         if game.death_menu_buttons[0].on_mouse_press(game.mouse_x, game.mouse_y, 1, None):
             game.reset()
@@ -66,16 +77,10 @@ def death_menu_first_time(game):
 
     game.death_menu_batch = pyglet.graphics.Batch()
 
-    # On grise l'écran pour faire un effet de game over avec un fondu
-    rectangle = pyglet.shapes.Rectangle(
-        0, 0,
-        game.camera.size[0], game.camera.size[1],
-        color=(0,0,0),
-        batch=game.death_menu_batch
-    )
-
-    rectangle.opacity = 100
-    rectangle.draw()
+    mission_failed_img = pyglet.image.load("resources/Sprites/mission_failed.png")
+    mission_failed_img.anchor_x = mission_failed_img.width // 2
+    mission_failed_img.anchor_y = mission_failed_img.height // 2
+    mission_failed_sprite = pyglet.sprite.Sprite(mission_failed_img, x=x_center, y=game.camera.size[1] // 2 + 100, batch=game.death_menu_batch)
 
     pyglet.text.Label(
         f"GAME OVER",
@@ -137,13 +142,12 @@ def game_static_display(game):
     resources_height = 30
 
     lvl = game.player.level
-    print(f"lvl {lvl} len {len(game.score_steps)}")
     if lvl == len(game.score_steps) - 1:
         prct = 1
     else:
         prct = game.score / game.score_steps[lvl]
 
-    resources_prct = game.score / game.score_steps[-1] * 1.5
+    resources_prct = min(game.score / game.score_steps[-1] * 1.5, 1)
 
     draw_filled_bar(
         (x_center, y_center_lvl),
