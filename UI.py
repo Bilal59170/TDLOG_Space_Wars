@@ -6,6 +6,7 @@ class Button:
         self.y = y
         self.width = width
         self.height = height
+        self.rectangle = pyglet.shapes.Rectangle(x - width/2, y - height/2, width, height, color=(255, 255, 255), batch = batch)
         self.text = pyglet.text.Label(text,
                                       font_name='Arial',
                                       font_size=18,
@@ -13,7 +14,7 @@ class Button:
                                       x=x, y=y,
                                       anchor_x='center', anchor_y='center', batch=batch)
         
-        self.rectangle = pyglet.shapes.Rectangle(x - width/2, y - height/2, width, height, color=(255, 255, 255), batch = batch)
+        
 
 
 
