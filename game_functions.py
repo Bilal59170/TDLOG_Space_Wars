@@ -143,12 +143,6 @@ def game_static_display(game):
             color=(255,255,255,255)).draw()
         
 
-        # Création de l'image de quand lebouton est appuyé
-        img = Image.open("resources/Sprites/Buttons/Menu.png")
-        img = img.resize((int(img.size[0] * 1.5), int(img.size[1] * 1.5)))
-        img.save("resources/Sprites/Buttons/Menu_pressed.png")
-
-
         # Label rejouer
         label = pyglet.text.Label(
             f"Rejouer",
@@ -161,7 +155,8 @@ def game_static_display(game):
         pyglet.gui.PushButton(
             x=game.camera.size[0]//3,
             y=game.camera.size[1]//2 - 100,
-
+            pressed=label,
+            depressed=label,
             #on_press=game.restart,
             batch=game.batch
         )
