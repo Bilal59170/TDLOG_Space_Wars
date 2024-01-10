@@ -221,7 +221,7 @@ def spawn_enemies(game):
     """
 
     # On ne veut pas plus de 7 ennemis
-    if len(game.enemies) > 7:
+    if len(game.enemies) > 5 + game.player.level:
         return
 
     # On veut que les petits astéroïdes soient plus fréquents que les gros -> on pondère les probabilités
