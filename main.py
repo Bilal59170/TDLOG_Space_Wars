@@ -63,8 +63,8 @@ def start_game():
     game.run()
 
 if __name__ == "__main__":
-    # menu = StartMenu()
-    # menu.start_game = start_game
     menu = StartMenu()
+    menu.start_game = start_game
+    # menu = StartMenu()
     pyglet.app.run()
 
