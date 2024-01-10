@@ -291,6 +291,8 @@ class Game(pyglet.event.EventDispatcher, GameEvents):
             if self.mousebuttons[mouse.RIGHT]:
                 self.mouse_x, self.mouse_y = x, y
 
+        #Menu de mort
+        self.death_menu_batch = None
     def add_score(self, score):
         self.score += score
         print(f'Score : {self.score}')
