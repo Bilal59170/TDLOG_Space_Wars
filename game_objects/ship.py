@@ -84,6 +84,8 @@ class Ship(sprites.Polygon, pyglet.event.EventDispatcher):
         """
         print("MORT DU VAISSEAU")
         self.game_state.player_dead = "Dead"
+        self.is_invicible = False
+        self.timer_invicible = 0
         return self.pos
 
 

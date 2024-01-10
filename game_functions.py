@@ -60,6 +60,13 @@ def death_menu(game):
 
     game.death_menu_batch.draw()
 
+    #Affichage Boutons
+    game.death_menu_buttons[0].rectangle.draw()
+    game.death_menu_buttons[1].rectangle.draw()
+
+    game.death_menu_buttons[0].text.draw()
+    game.death_menu_buttons[1].text.draw()
+
     # On vérifie si le clic gauche est appuyé
     if game.mousebuttons[pyglet.window.mouse.LEFT]:
 
@@ -111,30 +118,6 @@ def death_menu_first_time(game):
     game.death_menu_buttons = [rejouer_button, quitter_button]
 
     
-
-
-
-def death_menu(game):
-
-    game.death_menu_batch.draw()
-    game.death_menu_buttons[0].rectangle.draw()
-    game.death_menu_buttons[1].rectangle.draw()
-
-    game.death_menu_buttons[0].text.draw()
-    game.death_menu_buttons[1].text.draw()
-
-
-    # On vérifie si le clic gauche est appuyé
-    if game.mousebuttons[pyglet.window.mouse.LEFT]:
-
-
-        if game.death_menu_buttons[0].on_mouse_press(game.mouse_x, game.mouse_y, 1, None):
-            game.reset()
-        
-        elif game.death_menu_buttons[1].on_mouse_press(game.mouse_x, game.mouse_y, 1, None):
-            game.window.close()
-            import sys
-            sys.exit()
 
 
 
