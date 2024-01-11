@@ -39,14 +39,14 @@ class Ship(sprites.Polygon, pyglet.event.EventDispatcher):
     invicible_time = 1          #In seconds
     size = 10
 
-    reload_speeds = [2, 2, 1, 1]
+    reload_speeds = [3, 3, 2, 2]
 
     def __init__(self, pos, game_state, step=0):
         self.size_step = 10 # Taille du vaisseau
         self.acceleration = config.SHIP_ACCELERATION
         self.max_speed = config.SHIP_MAX_SPEED
         self.bullet_speed = 20
-        self.max_HP = 1000
+        self.max_HP = 2000
 
         V1 = np.array([0, Ship.size])
         V2 = - Ship.size * np.array([np.cos(np.pi / 6), np.sin(np.pi / 6)])

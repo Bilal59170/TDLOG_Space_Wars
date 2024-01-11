@@ -29,10 +29,10 @@ import pyglet
 class Projectile(Circle):
 
     #damage = 5
-    mass = 5
+    mass = 1
     #size = 10
-    damages_levels = [5, 20, 50, 100]
-    size_levels = [5, 10, 15, 20]
+    damages_levels = [5, 10, 25, 50]
+    size_levels = [6, 8, 10, 12]
 
     """classe projectiles : projectiles circulaires"""
     def __init__(self, x_init, y_init, speed_x_init, speed_y_init, radius, color, game_state, ship = None, level=0):

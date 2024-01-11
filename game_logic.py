@@ -223,9 +223,9 @@ def spawn_enemies(game):
     # On ne veut pas plus de 7 ennemis
     if len(game.enemies) > 7 + game.player.level:
         return
-
+    level = game.player.level
     # On veut que les petits astéroïdes soient plus fréquents que les gros -> on pondère les probabilités
-    probabilities = [0.5, 0.30, 0.15, 0.05]
+    probabilities = [0.5 - 0.1 * level, 0.40 - 0.1 * level, 0.10 + 0.1 * level, 0 + 0.1 * level ]
     #probabilities = [0,0,0,1]
     levels = [0, 1, 2, 3]
     level = np.random.choice(levels, p=probabilities)
