@@ -13,10 +13,9 @@ TICK_TIME = 1 / TPS
 FRAME_TICKS = int(FRAME_TIME / TICK_TIME)
 
 SHIP_SIZE = 50
-SHIP_FRICTION = .99
+SHIP_FRICTION = .97 # Coefficient de ralentissement du vaisseau
 
 SPEED_FACTOR = 1
-
 
 FULLSCREEN = False
 WIN_SIZE = np.array([1280, 720])

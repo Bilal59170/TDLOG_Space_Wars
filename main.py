@@ -16,7 +16,7 @@ Fichier d'application (sert pour l'instant à tester le code produit)
 """
 
 """
-    Fichier principal du jeu.
+    Fichier principal du jeu
     Initie le jeu, ses différentes entités et lance la boucle principale.
 """
 
@@ -41,12 +41,6 @@ if __name__ == "__main__":
         asteroid = MediumAsteroid([MAP_SIZE[0]-spacing, MAP_SIZE[1]-spacing], game)
         game.add_entity(asteroid)
 
-    # Ajout de textes indiquant les coordonnées à différents endroits de la carte, sur une grille de 5x5
-    # n = 5
-    # for x in range(0, MAP_SIZE[0], MAP_SIZE[0] // n):
-    #     for y in range(0, MAP_SIZE[1], MAP_SIZE[1] // n):
-    #         text = sprites.Label([x, y], f"{x}, {y}", game, color=(0,0,0,255))
-    #         game.add_entity(text)
 
 import pyglet
 from pyglet.window import key
