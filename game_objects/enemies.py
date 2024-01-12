@@ -125,7 +125,7 @@ class Enemy(Polygon):
 
     def throw_projectile(self):
         speed = self.projectile_speed
-        p = Projectile(self.x, self.y, speed*np.cos(self._theta), speed*np.sin(self._theta), radius=4, color = "r", game_state=self.game_state, ship=None, level=self.level)
+        p = Projectile(self.x, self.y, self.speed[0] + speed*np.cos(self._theta), self.speed[1] + speed*np.sin(self._theta), radius=4, color = "r", game_state=self.game_state, ship=None, level=self.level)
         return p
     
     def close_in_and_out(self, player):

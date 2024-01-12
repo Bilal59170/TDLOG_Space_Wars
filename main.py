@@ -47,7 +47,7 @@ from pyglet.window import key
 import game_logic
 from game import Game
 
-from UI import StartMenu, DeathMenu
+from UI import StartMenu
 
 def start_game():
     game = Game(profile=False)

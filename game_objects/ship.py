@@ -109,7 +109,7 @@ class Ship(sprites.Polygon, pyglet.event.EventDispatcher):
     def throw_projectile(self):
         self.get_angle_mouse()
         speed = self.bullet_speed
-        p = projectiles.Projectile(self.x, self.y, speed*np.cos(self.theta), speed*np.sin(self.theta), 4, color = "r", game_state=self.game_state, ship=self, level=self.level)
+        p = projectiles.Projectile(self.x, self.y, self.speed[0] + speed*np.cos(self.theta), self.speed[1] + speed*np.sin(self.theta), 4, color = "r", game_state=self.game_state, ship=self, level=self.level)
         return p
     
     def draw(self, batch=None):

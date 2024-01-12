@@ -12,6 +12,8 @@ from game_functions import draw_filled_bar
 
 import time
 
+import game_engine.config as config
+
 class Asteroid(sprites.Polygon):
 
 
@@ -58,6 +60,9 @@ class Asteroid(sprites.Polygon):
         Fonction de tick
             OPTIONNEL => Rajouter la régénération au bout d'un certain temps
         """
+        self.speed[0] *= config.ASTEROID_FRICTION
+        self.speed[1] *= config.ASTEROID_FRICTION
+
         super().tick()
 
     @property

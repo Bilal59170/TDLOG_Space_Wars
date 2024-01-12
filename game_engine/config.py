@@ -15,6 +15,8 @@ FRAME_TICKS = int(FRAME_TIME / TICK_TIME)
 SHIP_SIZE = 50
 SHIP_FRICTION = .97 # Coefficient de ralentissement du vaisseau
 
+ASTEROID_FRICTION = .99
+
 SPEED_FACTOR = 1
 
 FULLSCREEN = False
