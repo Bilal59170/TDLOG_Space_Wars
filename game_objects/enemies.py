@@ -35,16 +35,16 @@ class Enemy(Polygon):
     ressources = 100             # XP donnée en tuant l'ennemi
     max_HP = 100
     """
-    max_HP_levels = [100, 250, 500, 1500]
-    ressources_levels = [100, 250, 500, 1500]
+    max_HP_levels = [200, 400, 1500, 3000]
+    ressources_levels = [100, 200, 500, 1000]
     size_levels = [20, 30, 40, 50]
     projectile_speed_levels = [15, 20, 25, 40]
     reload_speed_levels = [15, 10, 10, 8]
-    damage_levels = [5, 10, 15, 20]
+    damage_levels = [5, 15, 25, 100]
     acceleration_levels = [0.1, 0.2, 0.2, 0.4]
     max_speed_levels = [2, 3, 3, 1]
-    engage_radius_levels = [200, 200, 100, 50]
-    caution_radius_levels = [400, 500, 500, 400]
+    engage_radius_levels = [100, 100, 75, 50]
+    caution_radius_levels = [400, 500, 500, 450]
     fill_color_levels = [(255, 0, 0), (0, 255, 0), (0, 0, 255), (255, 255, 255)]
 
     #def __init__(self, pos, size, acceleration, max_speed, engage_radius, caution_radius, game_state, speed=np.array([0,0])):

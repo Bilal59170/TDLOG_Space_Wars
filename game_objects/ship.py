@@ -40,6 +40,8 @@ class Ship(sprites.Polygon, pyglet.event.EventDispatcher):
     size = 10
 
     reload_speeds = [3, 3, 2, 2]
+    size_levels = [6, 8, 10, 12]
+    damage_levels = [5, 10, 25, 50]
 
     def __init__(self, pos, game_state, step=0):
         self.size_step = 10 # Taille du vaisseau
