@@ -423,7 +423,7 @@ class Game(pyglet.event.EventDispatcher, GameEvents):
 
     def new_projectile(self):
         # Fonction qui gère le lancement de projectiles
-        if self.mousebuttons[mouse.RIGHT] and self.player.state == "Alive":
+        if self.mousebuttons[mouse.RIGHT] and self.player.state == "Alive" and self.time > 50 * config.TICK_TIME:
             #self.entities.append(self.player.throw_projectile())
             P = self.player.shoot()
             if P != None:

@@ -31,7 +31,7 @@ class Projectile(Circle):
     #damage = 5
     mass = 1
     #size = 10
-    damages_levels = [5, 10, 25, 50]
+    damage_levels = [10, 20, 50, 100]
     size_levels = [6, 8, 10, 12]
 
     """classe projectiles : projectiles circulaires"""
@@ -41,7 +41,10 @@ class Projectile(Circle):
         self.color = color
         self.ship = ship
         self.size = self.size_levels[level]
-        self.damage = self.damages_levels[level]
+        if ship is not None:
+            self.damage = ship.damage_levels[level]
+        else:
+            self.damage = self.damage_levels[level]
 
     def draw(self, batch):
         C = pyglet.shapes.Star(self.screen_x, self.screen_y, self.size, self.size/2, 5, 0 , color=(0, 160 ,255), batch=batch)
