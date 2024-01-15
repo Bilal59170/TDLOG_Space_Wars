@@ -34,3 +34,24 @@ def draw_bar(center, width, height, color, batch = None):
 
     if not use_batch:
         batch.draw()
+
+
+import os.path
+
+def func(line):
+    return [int(line.split(',')[1]), line.split(',')[0]]
+
+def read_scoreboard(path = "scoreboard.txt"):
+    if os.path.isfile(path):
+        with open(path, 'r') as fh:
+            scores = map(func, fh.readlines()) # (score, player)
+        
+    else:
+        with open(path, 'x') as fh:
+            scores = [100, 'new user']
+    return scores
+
+def append_new_score(score, player, path="scoreboard.txt"):
+     with open(path, "a") as fh:
+          fh.write(str(score) + "," + player)
+

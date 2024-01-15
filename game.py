@@ -30,6 +30,8 @@ from game_objects.animations import XPLosion
 
 from game_functions import game_static_display
 
+from game_engine.utils import *
+
 profiler = Profiler()
 
 class GameEvents:
@@ -522,6 +524,8 @@ class Game(pyglet.event.EventDispatcher, GameEvents):
         on_draw = self._on_draw
         on_collide = self._on_collide
         each = self._each
+
+        append_new_score(self.score, self.player_name)
 
         self.window.close()
         self.__init__(profile=self.profiling)
