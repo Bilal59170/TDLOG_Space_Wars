@@ -49,16 +49,16 @@ from game import Game
 
 from UI import StartMenu
 
-def start_game():
+def start_game(player_name):
     game = Game(profile=False)
     game_logic.activate_collision(game)
     game_logic.activate_asteroid_spawn(game)
     game_logic.activate_FPS_counter(game)
+    game.player_name = player_name
     game.run()
 
 if __name__ == "__main__":
     menu = StartMenu()
     menu.start_game = start_game
-    # menu = StartMenu()
     pyglet.app.run()
 

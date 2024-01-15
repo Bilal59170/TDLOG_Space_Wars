@@ -44,12 +44,12 @@ def func(line):
 def read_scoreboard(path = "scoreboard.txt"):
     if os.path.isfile(path):
         with open(path, 'r') as fh:
-            scores = map(func, fh.readlines()) # (score, player)
+            scores = list(map(func, fh.readlines())) # (score, player)
         
     else:
         with open(path, 'x') as fh:
             scores = [100, 'new user']
-    return scores
+    return sorted(scores, key = lambda score : score[0], reverse=True)[:10]
 
 def append_new_score(score, player, path="scoreboard.txt"):
      with open(path, "a") as fh:

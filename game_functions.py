@@ -91,13 +91,13 @@ def death_menu_first_time(game):
     game.mission_failed_sprite = pyglet.sprite.Sprite(mission_failed_img, x=x_center, y=game.camera.size[1] // 2 + 170)
 
     pyglet.text.Label(
-        f"Score : {game.score}",
+        f"Player : {game.player_name} \n Score : {game.score}",
         font_name='Arial',
         font_size=30,
         x=x_center, y=game.camera.size[1] // 2,
         anchor_x='center', anchor_y='center',
         color=(255,255,255,255),
-        batch=game.death_menu_batch)
+        batch=game.death_menu_batch, multiline=True, width=300)
     
     
     # Bouton rejouer
