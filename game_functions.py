@@ -142,7 +142,7 @@ def game_static_display(game):
     resources_height = 30
 
     lvl = game.player.level
-    if lvl == len(game.score_steps) - 1:
+    if lvl == len(game.score_steps) :
         prct = 1
     else:
         prct = game.score / game.score_steps[lvl]
@@ -172,7 +172,7 @@ def game_static_display(game):
     )
 
     pyglet.text.Label(
-        f"lvl : {lvl+1}  Xp : {game.score} / {game.score_steps[lvl]}",
+        f"lvl : {lvl+1}  Xp : {game.score} / {game.score_steps[lvl]}" if lvl != len(game.score_steps) else f"lvl : {lvl+1}",
         font_name='Calibri',
         font_size=11,
         x=x_center, y=y_center_lvl,
