@@ -462,7 +462,7 @@ class Game(pyglet.event.EventDispatcher, GameEvents):
             self.player.fillColor = (128, 128, 128, 200)
             self.player_dead = "Gone"
             XPLosion(self.final_player_pos, self)
-            append_new_score(self.score, self.player_name)       
+                
 
         for e in self.entities:
             e.tick()
@@ -532,4 +532,6 @@ class Game(pyglet.event.EventDispatcher, GameEvents):
         self._on_draw = on_draw
         self._on_collide = on_collide
         self._each = each
+
+        self.step = 0
         

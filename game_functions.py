@@ -78,8 +78,9 @@ def death_menu(game):
             import sys
             sys.exit()
 
-
+from game_engine.utils import *
 def death_menu_first_time(game):
+    append_new_score(game.score, game.player_name)   
     # Affichage du game over et du score
     x_center = game.camera.size[0] // 2
 

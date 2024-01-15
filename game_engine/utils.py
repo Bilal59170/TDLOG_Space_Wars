@@ -39,6 +39,8 @@ def draw_bar(center, width, height, color, batch = None):
 import os.path
 
 def func(line):
+    print(line)
+    print(line.split(','))
     return [int(line.split(',')[1]), line.split(',')[0]]
 
 def read_scoreboard(path = "scoreboard.txt"):
@@ -53,5 +55,5 @@ def read_scoreboard(path = "scoreboard.txt"):
 
 def append_new_score(score, player, path="scoreboard.txt"):
      with open(path, "a") as fh:
-          fh.write(str(score) + "," + player)
+          fh.write(player + "," + str(score) + '\n')
 

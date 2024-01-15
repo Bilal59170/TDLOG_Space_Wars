@@ -6,7 +6,7 @@ from pyglet.gl import *
 # pyglet.gl.glBlendFunc (GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA)                             
 # pyglet.gl.glEnable (GL_BLEND)                                                            
 # pyglet.gl.glEnable (GL_LINE_SMOOTH);                                                     
-# pyglet.gl.glHint (GL_LINE_SMOOTH_HINT, GL_DONT_CARE)                                     
+# pyglet.gl.glHint (GL_LINE_SMOOTH_HINT, GL_DONT_CARE)                                    
 
 
 """@package docstring
