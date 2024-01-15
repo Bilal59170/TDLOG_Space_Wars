@@ -191,7 +191,7 @@ class Game(pyglet.event.EventDispatcher, GameEvents):
     time = 0          # Temps de jeu
     ticks = 0         # Ticks de jeu
 
-    score_steps = [1000, 5000, 10000]
+    score_steps = [2000, 10000, 50000]
     step = 0
 
     def __init__(self, profile = False):
@@ -425,7 +425,7 @@ class Game(pyglet.event.EventDispatcher, GameEvents):
 
     def new_projectile(self):
         # Fonction qui gère le lancement de projectiles
-        if self.mousebuttons[mouse.RIGHT] and self.player.state == "Alive" and self.time > 50 * config.TICK_TIME:
+        if self.mousebuttons[mouse.RIGHT] and self.player.state == "Alive" and self.time > 100 * config.TICK_TIME:
             #self.entities.append(self.player.throw_projectile())
             P = self.player.shoot()
             if P != None:
