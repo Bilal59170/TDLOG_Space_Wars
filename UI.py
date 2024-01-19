@@ -46,7 +46,7 @@ class StartMenu:
         
         Y_LABEL = 200
 
-        self.labels.append(pyglet.text.Label('New Diep.io',
+        self.labels.append(pyglet.text.Label('Pied.io: the new Diep.io',
                                              font_name='Arial',
                                              font_size=24,
                                              x=self.window.width // 2, y=Y_LABEL,
