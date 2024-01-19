@@ -28,7 +28,7 @@ from game_objects.projectiles import Projectile
 from game_objects.enemies import Enemy
 from game_objects.animations import XPLosion
 
-from game_functions import game_static_display
+from UI import game_static_display
 
 from game_engine.utils import *
 
