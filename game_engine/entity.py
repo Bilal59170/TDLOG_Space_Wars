@@ -3,7 +3,7 @@ import numpy as np
 class NoGameStateError(Exception):
     """ Exception levée lorsqu'un objet n'a pas d'attribut game_state"""
 
-    def __init__(self, object):
+    def __init__(self, object):         
         super().__init__("No game state attributed to : {}".format(object))
 
 

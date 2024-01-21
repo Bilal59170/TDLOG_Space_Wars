@@ -7,7 +7,7 @@ from game_engine import entity, config
 from game_engine.sprites import Polygon
 from game_objects.projectiles import Projectile
 from game_engine.utils import draw_bar
-from game_functions import draw_filled_bar
+from UI import draw_filled_bar
 
 from time import time
 

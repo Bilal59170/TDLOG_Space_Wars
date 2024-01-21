@@ -21,6 +21,7 @@ from time import time, sleep
 from game_engine import config, sprites
 from game_engine.collisions import *
 from game_engine.profiling import Profiler
+from game_engine.utils import *
 
 from game_objects.ship import Ship
 from game_objects.asteroids import Asteroid
@@ -30,7 +31,6 @@ from game_objects.animations import XPLosion
 
 from UI import game_static_display
 
-from game_engine.utils import *
 
 profiler = Profiler()
 
@@ -295,6 +295,7 @@ class Game(pyglet.event.EventDispatcher, GameEvents):
 
         #Menu de mort
         self.death_menu_batch = None
+        
     def add_score(self, score):
         self.score += score
         print(f'Score : {self.score}')

@@ -8,7 +8,7 @@ from game_engine import sprites
 from game_engine.utils import create_nagon_vertices, draw_bar
 from game_engine.config import *
 
-from game_functions import draw_filled_bar
+from UI import draw_filled_bar
 
 import time
 

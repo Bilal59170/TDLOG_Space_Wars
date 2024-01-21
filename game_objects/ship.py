@@ -13,8 +13,7 @@ from game_engine.utils import create_nagon_vertices, draw_bar
 
 import game_engine.config as config
 
-from game_functions import draw_filled_bar, append_new_score
-
+from UI import draw_filled_bar, append_new_score
 class Ship(sprites.Polygon, pyglet.event.EventDispatcher):
     """ Classe du vaisseau principal """
 
