@@ -1,0 +1,167 @@
+\doxysection{game\+\_\+engine.\+config Namespace Reference}
+\hypertarget{namespacegame__engine_1_1config}{}\label{namespacegame__engine_1_1config}\index{game\_engine.config@{game\_engine.config}}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{namespacegame__engine_1_1config_a31c403cf786d297908ea2e98e84b5901}{FPS}} = 60
+\item 
+int \mbox{\hyperlink{namespacegame__engine_1_1config_a53bcc7c4ea239140f359b43da2e0ddb3}{TPS}} = 2 \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{namespacegame__engine_1_1config_a31c403cf786d297908ea2e98e84b5901}{FPS}}
+\item 
+int \mbox{\hyperlink{namespacegame__engine_1_1config_abae20feaf2d351f44a1978a7394d6402}{FRAME\+\_\+\+TIME}} = 1 / \mbox{\hyperlink{namespacegame__engine_1_1config_a31c403cf786d297908ea2e98e84b5901}{FPS}}
+\item 
+int \mbox{\hyperlink{namespacegame__engine_1_1config_af5d0132791f0a728106e2c57c22014d3}{TICK\+\_\+\+TIME}} = 1 / \mbox{\hyperlink{namespacegame__engine_1_1config_a53bcc7c4ea239140f359b43da2e0ddb3}{TPS}}
+\item 
+\mbox{\hyperlink{namespacegame__engine_1_1config_a09937a868eecf6bad280ad1d5afed990}{FRAME\+\_\+\+TICKS}} = int(\mbox{\hyperlink{namespacegame__engine_1_1config_abae20feaf2d351f44a1978a7394d6402}{FRAME\+\_\+\+TIME}} / \mbox{\hyperlink{namespacegame__engine_1_1config_af5d0132791f0a728106e2c57c22014d3}{TICK\+\_\+\+TIME}})
+\item 
+int \mbox{\hyperlink{namespacegame__engine_1_1config_a032d50c5e88b9ae2a67141c90be16892}{SHIP\+\_\+\+SIZE}} = 50
+\item 
+int \mbox{\hyperlink{namespacegame__engine_1_1config_a16f38672e211ca8246be8ac756b753a2}{SHIP\+\_\+\+FRICTION}} = .\+97
+\item 
+int \mbox{\hyperlink{namespacegame__engine_1_1config_acebfcc0c9d3764cde698cd0e69d3c61c}{ASTEROID\+\_\+\+FRICTION}} = .\+99
+\item 
+int \mbox{\hyperlink{namespacegame__engine_1_1config_aa33c0b3c3a65b98f44ebb9c4d51c27d9}{SPEED\+\_\+\+FACTOR}} = 1
+\item 
+bool \mbox{\hyperlink{namespacegame__engine_1_1config_ae42be3fd5e0351c50aa98093bcf2baa3}{FULLSCREEN}} = False
+\item 
+\mbox{\hyperlink{namespacegame__engine_1_1config_abe5519242576cce76b8f6528210c9664}{WIN\+\_\+\+SIZE}} = np.\+array(\mbox{[}1280, 720\mbox{]})
+\item 
+int \mbox{\hyperlink{namespacegame__engine_1_1config_ad5f71f6081dbbc4c503ab21081d479c1}{MAP\+\_\+\+SIZE}} = \mbox{\hyperlink{namespacegame__engine_1_1config_abe5519242576cce76b8f6528210c9664}{WIN\+\_\+\+SIZE}} \texorpdfstring{$\ast$}{*} 2
+\item 
+list \mbox{\hyperlink{namespacegame__engine_1_1config_ad235cc83ad1cdd1698c4b7c485350dde}{BACKGROUND\+\_\+\+COLOR}} = \mbox{[}204/255,204/255,204/255\mbox{]}
+\item 
+int \mbox{\hyperlink{namespacegame__engine_1_1config_af0129c42380feaafa7d0459743ccb526}{BITMAP\+\_\+\+RATIO}} = 5
+\item 
+list \mbox{\hyperlink{namespacegame__engine_1_1config_ab2de10001957d62177fcd1923f4e3c36}{ASTEROID\+\_\+\+STATS}}
+\item 
+list \mbox{\hyperlink{namespacegame__engine_1_1config_ad736a7d39f0c205f66e0bad12bca1664}{ASTEROID\+\_\+\+CLASS\+\_\+\+PROBABILITIES}} = \mbox{[}0.\+5, 0.\+3, 0.\+15, 0.\+05\mbox{]}
+\item 
+int \mbox{\hyperlink{namespacegame__engine_1_1config_aff182afa8d7aea14a7fdc2e5b456c1d9}{SHIP\+\_\+\+ACCELERATION}} = 4
+\item 
+int \mbox{\hyperlink{namespacegame__engine_1_1config_a08492f42d9cc33a15231dbedcf071738}{SHIP\+\_\+\+MAX\+\_\+\+SPEED}} = 3
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}@package docstring
+Fichier de configuration - Contient toutes les constantes d'exécution du programme\end{DoxyVerb}
+ 
+
+\doxysubsection{Variable Documentation}
+\Hypertarget{namespacegame__engine_1_1config_ad736a7d39f0c205f66e0bad12bca1664}\label{namespacegame__engine_1_1config_ad736a7d39f0c205f66e0bad12bca1664} 
+\index{game\_engine.config@{game\_engine.config}!ASTEROID\_CLASS\_PROBABILITIES@{ASTEROID\_CLASS\_PROBABILITIES}}
+\index{ASTEROID\_CLASS\_PROBABILITIES@{ASTEROID\_CLASS\_PROBABILITIES}!game\_engine.config@{game\_engine.config}}
+\doxysubsubsection{\texorpdfstring{ASTEROID\_CLASS\_PROBABILITIES}{ASTEROID\_CLASS\_PROBABILITIES}}
+{\footnotesize\ttfamily list game\+\_\+engine.\+config.\+ASTEROID\+\_\+\+CLASS\+\_\+\+PROBABILITIES = \mbox{[}0.\+5, 0.\+3, 0.\+15, 0.\+05\mbox{]}}
+
+\Hypertarget{namespacegame__engine_1_1config_acebfcc0c9d3764cde698cd0e69d3c61c}\label{namespacegame__engine_1_1config_acebfcc0c9d3764cde698cd0e69d3c61c} 
+\index{game\_engine.config@{game\_engine.config}!ASTEROID\_FRICTION@{ASTEROID\_FRICTION}}
+\index{ASTEROID\_FRICTION@{ASTEROID\_FRICTION}!game\_engine.config@{game\_engine.config}}
+\doxysubsubsection{\texorpdfstring{ASTEROID\_FRICTION}{ASTEROID\_FRICTION}}
+{\footnotesize\ttfamily int game\+\_\+engine.\+config.\+ASTEROID\+\_\+\+FRICTION = .\+99}
+
+\Hypertarget{namespacegame__engine_1_1config_ab2de10001957d62177fcd1923f4e3c36}\label{namespacegame__engine_1_1config_ab2de10001957d62177fcd1923f4e3c36} 
+\index{game\_engine.config@{game\_engine.config}!ASTEROID\_STATS@{ASTEROID\_STATS}}
+\index{ASTEROID\_STATS@{ASTEROID\_STATS}!game\_engine.config@{game\_engine.config}}
+\doxysubsubsection{\texorpdfstring{ASTEROID\_STATS}{ASTEROID\_STATS}}
+{\footnotesize\ttfamily list game\+\_\+engine.\+config.\+ASTEROID\+\_\+\+STATS}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ =\ \ [}
+\DoxyCodeLine{00002\ \ \ \ \ [10,\ 10],\ \ \textcolor{comment}{\#\ Petit\ Astéroïde\ :\ 10\ HP,\ 10\ Ressources}}
+\DoxyCodeLine{00003\ \ \ \ \ [50,\ 60],\ \ \textcolor{comment}{\#\ Moyen\ Astéroïde\ :\ 50\ HP,\ 60\ Ressources}}
+\DoxyCodeLine{00004\ \ \ \ \ [200,\ 300],\ \ \textcolor{comment}{\#\ ...}}
+\DoxyCodeLine{00005\ \ \ \ \ [1000,\ 2000],}
+\DoxyCodeLine{00006\ ]}
+
+\end{DoxyCode}
+\Hypertarget{namespacegame__engine_1_1config_ad235cc83ad1cdd1698c4b7c485350dde}\label{namespacegame__engine_1_1config_ad235cc83ad1cdd1698c4b7c485350dde} 
+\index{game\_engine.config@{game\_engine.config}!BACKGROUND\_COLOR@{BACKGROUND\_COLOR}}
+\index{BACKGROUND\_COLOR@{BACKGROUND\_COLOR}!game\_engine.config@{game\_engine.config}}
+\doxysubsubsection{\texorpdfstring{BACKGROUND\_COLOR}{BACKGROUND\_COLOR}}
+{\footnotesize\ttfamily list game\+\_\+engine.\+config.\+BACKGROUND\+\_\+\+COLOR = \mbox{[}204/255,204/255,204/255\mbox{]}}
+
+\Hypertarget{namespacegame__engine_1_1config_af0129c42380feaafa7d0459743ccb526}\label{namespacegame__engine_1_1config_af0129c42380feaafa7d0459743ccb526} 
+\index{game\_engine.config@{game\_engine.config}!BITMAP\_RATIO@{BITMAP\_RATIO}}
+\index{BITMAP\_RATIO@{BITMAP\_RATIO}!game\_engine.config@{game\_engine.config}}
+\doxysubsubsection{\texorpdfstring{BITMAP\_RATIO}{BITMAP\_RATIO}}
+{\footnotesize\ttfamily int game\+\_\+engine.\+config.\+BITMAP\+\_\+\+RATIO = 5}
+
+\Hypertarget{namespacegame__engine_1_1config_a31c403cf786d297908ea2e98e84b5901}\label{namespacegame__engine_1_1config_a31c403cf786d297908ea2e98e84b5901} 
+\index{game\_engine.config@{game\_engine.config}!FPS@{FPS}}
+\index{FPS@{FPS}!game\_engine.config@{game\_engine.config}}
+\doxysubsubsection{\texorpdfstring{FPS}{FPS}}
+{\footnotesize\ttfamily int game\+\_\+engine.\+config.\+FPS = 60}
+
+\Hypertarget{namespacegame__engine_1_1config_a09937a868eecf6bad280ad1d5afed990}\label{namespacegame__engine_1_1config_a09937a868eecf6bad280ad1d5afed990} 
+\index{game\_engine.config@{game\_engine.config}!FRAME\_TICKS@{FRAME\_TICKS}}
+\index{FRAME\_TICKS@{FRAME\_TICKS}!game\_engine.config@{game\_engine.config}}
+\doxysubsubsection{\texorpdfstring{FRAME\_TICKS}{FRAME\_TICKS}}
+{\footnotesize\ttfamily game\+\_\+engine.\+config.\+FRAME\+\_\+\+TICKS = int(\mbox{\hyperlink{namespacegame__engine_1_1config_abae20feaf2d351f44a1978a7394d6402}{FRAME\+\_\+\+TIME}} / \mbox{\hyperlink{namespacegame__engine_1_1config_af5d0132791f0a728106e2c57c22014d3}{TICK\+\_\+\+TIME}})}
+
+\Hypertarget{namespacegame__engine_1_1config_abae20feaf2d351f44a1978a7394d6402}\label{namespacegame__engine_1_1config_abae20feaf2d351f44a1978a7394d6402} 
+\index{game\_engine.config@{game\_engine.config}!FRAME\_TIME@{FRAME\_TIME}}
+\index{FRAME\_TIME@{FRAME\_TIME}!game\_engine.config@{game\_engine.config}}
+\doxysubsubsection{\texorpdfstring{FRAME\_TIME}{FRAME\_TIME}}
+{\footnotesize\ttfamily int game\+\_\+engine.\+config.\+FRAME\+\_\+\+TIME = 1 / \mbox{\hyperlink{namespacegame__engine_1_1config_a31c403cf786d297908ea2e98e84b5901}{FPS}}}
+
+\Hypertarget{namespacegame__engine_1_1config_ae42be3fd5e0351c50aa98093bcf2baa3}\label{namespacegame__engine_1_1config_ae42be3fd5e0351c50aa98093bcf2baa3} 
+\index{game\_engine.config@{game\_engine.config}!FULLSCREEN@{FULLSCREEN}}
+\index{FULLSCREEN@{FULLSCREEN}!game\_engine.config@{game\_engine.config}}
+\doxysubsubsection{\texorpdfstring{FULLSCREEN}{FULLSCREEN}}
+{\footnotesize\ttfamily bool game\+\_\+engine.\+config.\+FULLSCREEN = False}
+
+\Hypertarget{namespacegame__engine_1_1config_ad5f71f6081dbbc4c503ab21081d479c1}\label{namespacegame__engine_1_1config_ad5f71f6081dbbc4c503ab21081d479c1} 
+\index{game\_engine.config@{game\_engine.config}!MAP\_SIZE@{MAP\_SIZE}}
+\index{MAP\_SIZE@{MAP\_SIZE}!game\_engine.config@{game\_engine.config}}
+\doxysubsubsection{\texorpdfstring{MAP\_SIZE}{MAP\_SIZE}}
+{\footnotesize\ttfamily int game\+\_\+engine.\+config.\+MAP\+\_\+\+SIZE = \mbox{\hyperlink{namespacegame__engine_1_1config_abe5519242576cce76b8f6528210c9664}{WIN\+\_\+\+SIZE}} \texorpdfstring{$\ast$}{*} 2}
+
+\Hypertarget{namespacegame__engine_1_1config_aff182afa8d7aea14a7fdc2e5b456c1d9}\label{namespacegame__engine_1_1config_aff182afa8d7aea14a7fdc2e5b456c1d9} 
+\index{game\_engine.config@{game\_engine.config}!SHIP\_ACCELERATION@{SHIP\_ACCELERATION}}
+\index{SHIP\_ACCELERATION@{SHIP\_ACCELERATION}!game\_engine.config@{game\_engine.config}}
+\doxysubsubsection{\texorpdfstring{SHIP\_ACCELERATION}{SHIP\_ACCELERATION}}
+{\footnotesize\ttfamily int game\+\_\+engine.\+config.\+SHIP\+\_\+\+ACCELERATION = 4}
+
+\Hypertarget{namespacegame__engine_1_1config_a16f38672e211ca8246be8ac756b753a2}\label{namespacegame__engine_1_1config_a16f38672e211ca8246be8ac756b753a2} 
+\index{game\_engine.config@{game\_engine.config}!SHIP\_FRICTION@{SHIP\_FRICTION}}
+\index{SHIP\_FRICTION@{SHIP\_FRICTION}!game\_engine.config@{game\_engine.config}}
+\doxysubsubsection{\texorpdfstring{SHIP\_FRICTION}{SHIP\_FRICTION}}
+{\footnotesize\ttfamily int game\+\_\+engine.\+config.\+SHIP\+\_\+\+FRICTION = .\+97}
+
+\Hypertarget{namespacegame__engine_1_1config_a08492f42d9cc33a15231dbedcf071738}\label{namespacegame__engine_1_1config_a08492f42d9cc33a15231dbedcf071738} 
+\index{game\_engine.config@{game\_engine.config}!SHIP\_MAX\_SPEED@{SHIP\_MAX\_SPEED}}
+\index{SHIP\_MAX\_SPEED@{SHIP\_MAX\_SPEED}!game\_engine.config@{game\_engine.config}}
+\doxysubsubsection{\texorpdfstring{SHIP\_MAX\_SPEED}{SHIP\_MAX\_SPEED}}
+{\footnotesize\ttfamily int game\+\_\+engine.\+config.\+SHIP\+\_\+\+MAX\+\_\+\+SPEED = 3}
+
+\Hypertarget{namespacegame__engine_1_1config_a032d50c5e88b9ae2a67141c90be16892}\label{namespacegame__engine_1_1config_a032d50c5e88b9ae2a67141c90be16892} 
+\index{game\_engine.config@{game\_engine.config}!SHIP\_SIZE@{SHIP\_SIZE}}
+\index{SHIP\_SIZE@{SHIP\_SIZE}!game\_engine.config@{game\_engine.config}}
+\doxysubsubsection{\texorpdfstring{SHIP\_SIZE}{SHIP\_SIZE}}
+{\footnotesize\ttfamily int game\+\_\+engine.\+config.\+SHIP\+\_\+\+SIZE = 50}
+
+\Hypertarget{namespacegame__engine_1_1config_aa33c0b3c3a65b98f44ebb9c4d51c27d9}\label{namespacegame__engine_1_1config_aa33c0b3c3a65b98f44ebb9c4d51c27d9} 
+\index{game\_engine.config@{game\_engine.config}!SPEED\_FACTOR@{SPEED\_FACTOR}}
+\index{SPEED\_FACTOR@{SPEED\_FACTOR}!game\_engine.config@{game\_engine.config}}
+\doxysubsubsection{\texorpdfstring{SPEED\_FACTOR}{SPEED\_FACTOR}}
+{\footnotesize\ttfamily int game\+\_\+engine.\+config.\+SPEED\+\_\+\+FACTOR = 1}
+
+\Hypertarget{namespacegame__engine_1_1config_af5d0132791f0a728106e2c57c22014d3}\label{namespacegame__engine_1_1config_af5d0132791f0a728106e2c57c22014d3} 
+\index{game\_engine.config@{game\_engine.config}!TICK\_TIME@{TICK\_TIME}}
+\index{TICK\_TIME@{TICK\_TIME}!game\_engine.config@{game\_engine.config}}
+\doxysubsubsection{\texorpdfstring{TICK\_TIME}{TICK\_TIME}}
+{\footnotesize\ttfamily int game\+\_\+engine.\+config.\+TICK\+\_\+\+TIME = 1 / \mbox{\hyperlink{namespacegame__engine_1_1config_a53bcc7c4ea239140f359b43da2e0ddb3}{TPS}}}
+
+\Hypertarget{namespacegame__engine_1_1config_a53bcc7c4ea239140f359b43da2e0ddb3}\label{namespacegame__engine_1_1config_a53bcc7c4ea239140f359b43da2e0ddb3} 
+\index{game\_engine.config@{game\_engine.config}!TPS@{TPS}}
+\index{TPS@{TPS}!game\_engine.config@{game\_engine.config}}
+\doxysubsubsection{\texorpdfstring{TPS}{TPS}}
+{\footnotesize\ttfamily int game\+\_\+engine.\+config.\+TPS = 2 \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{namespacegame__engine_1_1config_a31c403cf786d297908ea2e98e84b5901}{FPS}}}
+
+\Hypertarget{namespacegame__engine_1_1config_abe5519242576cce76b8f6528210c9664}\label{namespacegame__engine_1_1config_abe5519242576cce76b8f6528210c9664} 
+\index{game\_engine.config@{game\_engine.config}!WIN\_SIZE@{WIN\_SIZE}}
+\index{WIN\_SIZE@{WIN\_SIZE}!game\_engine.config@{game\_engine.config}}
+\doxysubsubsection{\texorpdfstring{WIN\_SIZE}{WIN\_SIZE}}
+{\footnotesize\ttfamily game\+\_\+engine.\+config.\+WIN\+\_\+\+SIZE = np.\+array(\mbox{[}1280, 720\mbox{]})}
+

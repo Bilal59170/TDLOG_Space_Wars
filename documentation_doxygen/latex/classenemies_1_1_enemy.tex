@@ -1,0 +1,541 @@
+\doxysection{enemies.\+Enemy Class Reference}
+\hypertarget{classenemies_1_1_enemy}{}\label{classenemies_1_1_enemy}\index{enemies.Enemy@{enemies.Enemy}}
+
+
+Inheritance diagram for enemies.\+Enemy\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classenemies_1_1_enemy__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for enemies.\+Enemy\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classenemies_1_1_enemy__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classenemies_1_1_enemy_a04630a74b4cd4a5961af2b5682cc37ae}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, \mbox{\hyperlink{classgame__engine_1_1entity_1_1_entity_af815a3e2a6b5ad8368966f5005379d90}{pos}}, \mbox{\hyperlink{classgame__engine_1_1entity_1_1_entity_af2c22bdff5334a7b717f53f6fd162aca}{game\+\_\+state}}, \mbox{\hyperlink{classgame__engine_1_1entity_1_1_entity_a0ee597df74b23e9da461a8d02406f8e9}{speed}}=np.\+array(\mbox{[}0, 0\mbox{]}), \mbox{\hyperlink{classenemies_1_1_enemy_a1a487a953702afaa4a6e5abd9a3938aa}{level}}=0)
+\item 
+\mbox{\hyperlink{classenemies_1_1_enemy_a8f8893bc5bafaf694614c878723139b6}{HP}} (self)
+\item 
+\mbox{\hyperlink{classenemies_1_1_enemy_a3fe09a4867a781a741fc1bb7de0e80b6}{rotation\+\_\+matrix}} (self)
+\item 
+\mbox{\hyperlink{classenemies_1_1_enemy_a5400510ba97bf5d8b3dd252bc1bd310e}{HP}} (self, HP)
+\item 
+\mbox{\hyperlink{classenemies_1_1_enemy_a64bdbb5a512127460efc2572021bf4bb}{die}} (self)
+\item 
+\mbox{\hyperlink{classenemies_1_1_enemy_aa77bd692c1cdde15ab13c4a40d230ee7}{draw}} (self, batch=None)
+\item 
+\mbox{\hyperlink{classenemies_1_1_enemy_aed0a0a8ea0046ef8331f2fefe72a30a8}{aim\+\_\+at}} (self, player)
+\item 
+\mbox{\hyperlink{classenemies_1_1_enemy_ae728e947ef015028617ec2d08a0fd747}{throw\+\_\+projectile}} (self)
+\item 
+\mbox{\hyperlink{classenemies_1_1_enemy_a7ff17ed5b4b47ae270e90ac90554b59c}{close\+\_\+in\+\_\+and\+\_\+out}} (self, player)
+\item 
+\mbox{\hyperlink{classenemies_1_1_enemy_afd28d928eaf5258d3107dedae443699a}{tick}} (self)
+\item 
+\mbox{\hyperlink{classenemies_1_1_enemy_a004fc29f8d054407018340e30d6b1f40}{shoot}} (self, player)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classgame__engine_1_1sprites_1_1_polygon}{game\+\_\+engine.\+sprites.\+Polygon}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classgame__engine_1_1sprites_1_1_polygon_a8a63dc0487326d92afc0c3084c1c9565}{theta}} (self)
+\item 
+\mbox{\hyperlink{classgame__engine_1_1sprites_1_1_polygon_aff599e3d0efd9c9767c97fa4e6a7ca2a}{theta}} (self, theta)
+\item 
+\mbox{\hyperlink{classgame__engine_1_1sprites_1_1_polygon_a1aca4a25f941e4db28c23e67c51be9cc}{vertices}} (self)
+\item 
+\mbox{\hyperlink{classgame__engine_1_1sprites_1_1_polygon_a8138b601aaa4e88a33308f505a18fa15}{bounds}} (self)
+\item 
+\mbox{\hyperlink{classgame__engine_1_1sprites_1_1_polygon_a128052815fe9e709992984ab7e88df58}{intersects}} (self, other)
+\item 
+\mbox{\hyperlink{classgame__engine_1_1sprites_1_1_polygon_a15cd32e4666576c1aa0c3164855b54fb}{is\+\_\+on\+\_\+screen}} (self)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classgame__engine_1_1entity_1_1_entity}{game\+\_\+engine.\+entity.\+Entity}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classgame__engine_1_1entity_1_1_entity_af815a3e2a6b5ad8368966f5005379d90}{pos}} (self)
+\item 
+\mbox{\hyperlink{classgame__engine_1_1entity_1_1_entity_ad8675f8320858638971d07383477ffd5}{pos}} (self, pos)
+\item 
+\mbox{\hyperlink{classgame__engine_1_1entity_1_1_entity_aef049cd6315fa3c702f37d485f49497d}{screen\+\_\+pos}} (self)
+\item 
+\mbox{\hyperlink{classgame__engine_1_1entity_1_1_entity_a7991de2777ae67728cb6349bd870f313}{screen\+\_\+x}} (self)
+\item 
+\mbox{\hyperlink{classgame__engine_1_1entity_1_1_entity_acd44ad2c9a5d58fe8c5c169821b957bf}{screen\+\_\+y}} (self)
+\item 
+\mbox{\hyperlink{classgame__engine_1_1entity_1_1_entity_a67f5a4dd48c4f4aa19d4b55d00c2720e}{x}} (self)
+\item 
+\mbox{\hyperlink{classgame__engine_1_1entity_1_1_entity_a439be568bc74156524d56d1c20495a59}{y}} (self)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classgame__engine_1_1sprites_1_1_sprites}{game\+\_\+engine.\+sprites.\+Sprites}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classgame__engine_1_1sprites_1_1_sprites_aedd5c5df54e8f44fe9cbc022bb9730f0}{collides}} (self, other)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classenemies_1_1_enemy_a136736cf5a5e4285dfc6f76aed1c996f}{reload}}
+\item 
+\mbox{\hyperlink{classenemies_1_1_enemy_a1a487a953702afaa4a6e5abd9a3938aa}{level}}
+\item 
+\mbox{\hyperlink{classenemies_1_1_enemy_ac6a5ae7961a22af16e89521d41c9d081}{max\+\_\+\+HP}}
+\item 
+\mbox{\hyperlink{classenemies_1_1_enemy_ad2870dc10c12225440cab32fcff8dd4c}{max\+\_\+speed}}
+\item 
+\mbox{\hyperlink{classenemies_1_1_enemy_a5089263e8ad12c6c16cbfe0cb1e946d3}{size}}
+\item 
+\mbox{\hyperlink{classenemies_1_1_enemy_aaf83fc9ae15510ca0c268740ea6a9fb8}{projectile\+\_\+speed}}
+\item 
+\mbox{\hyperlink{classenemies_1_1_enemy_a9d265ee9835efb63ec47d3fd3fb7c301}{reload\+\_\+speed}}
+\item 
+\mbox{\hyperlink{classenemies_1_1_enemy_a622c78244030c5d48e1cb638c6a054d6}{ressources}}
+\item 
+\mbox{\hyperlink{classenemies_1_1_enemy_a40e1bebda09710e3ba1878bb9f2f537b}{acceleration}}
+\item 
+\mbox{\hyperlink{classenemies_1_1_enemy_a96465179e692c3b94b7b5fa1d72b48ac}{engage\+\_\+radius}}
+\item 
+\mbox{\hyperlink{classenemies_1_1_enemy_abd5b18e2c263ab6f42db5b923eec726e}{caution\+\_\+radius}}
+\item 
+\mbox{\hyperlink{classenemies_1_1_enemy_aeda79d1afc13c3f94cd263128a59536e}{fill\+\_\+color}}
+\item 
+\mbox{\hyperlink{classenemies_1_1_enemy_a8e860515c2f994c47ea1b602e4283fd5}{old\+\_\+time}}
+\item 
+\mbox{\hyperlink{classenemies_1_1_enemy_aea8d44466b31d2fea09d48d927532540}{alive}}
+\item 
+\mbox{\hyperlink{classenemies_1_1_enemy_a0d9052ecbd252012ef8b20f9b73b60e6}{bar\+Height}}
+\item 
+\mbox{\hyperlink{classenemies_1_1_enemy_a740fe2351992875b27c4c00cc771143b}{bar\+Width\+Factor}}
+\item 
+\mbox{\hyperlink{classenemies_1_1_enemy_aae48738dbf2bc60740436746b6d4a593}{bar\+Spacing}}
+\item 
+\mbox{\hyperlink{classenemies_1_1_enemy_a2ad7cffc5c815a2ed40b93d9531ab81a}{bar\+\_\+grey}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes inherited from \mbox{\hyperlink{classgame__engine_1_1sprites_1_1_polygon}{game\+\_\+engine.\+sprites.\+Polygon}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classgame__engine_1_1sprites_1_1_polygon_ac0f6766eb4575686026ffda7c90a0c83}{bounding\+Radius}}
+\item 
+\mbox{\hyperlink{classgame__engine_1_1sprites_1_1_polygon_ac09f873d50e4c49514f831483166758e}{fill\+Color}}
+\item 
+\mbox{\hyperlink{classgame__engine_1_1sprites_1_1_polygon_a901052408767ebfbd2e9cd9a7ff549f8}{edge\+Color}}
+\item 
+\mbox{\hyperlink{classgame__engine_1_1sprites_1_1_polygon_a13e2fb30e8b3a7ac45e696216ead2805}{line\+Width}}
+\item 
+\mbox{\hyperlink{classgame__engine_1_1sprites_1_1_polygon_a43a11c24a0d20fc3160779117c39d370}{vertices}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes inherited from \mbox{\hyperlink{classgame__engine_1_1entity_1_1_entity}{game\+\_\+engine.\+entity.\+Entity}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classgame__engine_1_1entity_1_1_entity_a0ee597df74b23e9da461a8d02406f8e9}{speed}}
+\item 
+\mbox{\hyperlink{classgame__engine_1_1entity_1_1_entity_af2c22bdff5334a7b717f53f6fd162aca}{game\+\_\+state}}
+\item 
+\mbox{\hyperlink{classgame__engine_1_1entity_1_1_entity_a7a10c36ae48751b8f1f37058e9a3c616}{camera}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+tuple \mbox{\hyperlink{classenemies_1_1_enemy_a0b95891267849c29461bca227e5a5e5b}{edge\+\_\+color}} = (0, 0, 0)
+\item 
+int \mbox{\hyperlink{classenemies_1_1_enemy_acb132f8b1cf35edd241d7c2e912fe74f}{line\+Width}} = 5
+\item 
+tuple \mbox{\hyperlink{classenemies_1_1_enemy_a7967850846207a251877c57532083965}{bar\+\_\+grey}} = (128, 128, 128)
+\item 
+tuple \mbox{\hyperlink{classenemies_1_1_enemy_aaf8f52272d79c605b21c6c7598aa0be4}{bar\+\_\+color}} = (0,128,0)
+\item 
+int \mbox{\hyperlink{classenemies_1_1_enemy_a138e233e19b936d26d2b50c262038ec4}{bar\+Width\+Factor}} = .\+8
+\item 
+int \mbox{\hyperlink{classenemies_1_1_enemy_a3e803db2bf387ac61d2ffab38dc1b1c2}{bar\+Height}} = 16
+\item 
+int \mbox{\hyperlink{classenemies_1_1_enemy_a5d14aa910726e1b1002b183abf4810a5}{bar\+Spacing}} = 2
+\item 
+list \mbox{\hyperlink{classenemies_1_1_enemy_a393284936692113cf9bbfe0dfc1ca082}{max\+\_\+\+HP\+\_\+levels}} = \mbox{[}200, 500, 2000, 4000\mbox{]}
+\item 
+list \mbox{\hyperlink{classenemies_1_1_enemy_a21eaa9c2fbeb28964de60f92ad36988a}{ressources\+\_\+levels}} = \mbox{[}100, 200, 500, 1000\mbox{]}
+\item 
+list \mbox{\hyperlink{classenemies_1_1_enemy_aafa5eac29cd54717eb0bda5e2ca08918}{size\+\_\+levels}} = \mbox{[}20, 30, 40, 50\mbox{]}
+\item 
+list \mbox{\hyperlink{classenemies_1_1_enemy_ab22e31173c101807f46f5c0b77ac8110}{projectile\+\_\+speed\+\_\+levels}} = \mbox{[}15, 20, 25, 40\mbox{]}
+\item 
+list \mbox{\hyperlink{classenemies_1_1_enemy_a6e51e7d0c400185b9931ac7c284dbac6}{reload\+\_\+speed\+\_\+levels}} = \mbox{[}15, 10, 10, 8\mbox{]}
+\item 
+list \mbox{\hyperlink{classenemies_1_1_enemy_ad27b09d343f315b7171d1d780e338fb9}{damage\+\_\+levels}} = \mbox{[}5, 10, 25, 100\mbox{]}
+\item 
+list \mbox{\hyperlink{classenemies_1_1_enemy_aa698e5ad948b691ff2458c4d2e5426e3}{acceleration\+\_\+levels}} = \mbox{[}0.\+5, 0.\+7, 0.\+7, 1\mbox{]}
+\item 
+list \mbox{\hyperlink{classenemies_1_1_enemy_a403eca982933f3a327c4bc79cfdf82a6}{max\+\_\+speed\+\_\+levels}} = \mbox{[}1, 2, 2, 3\mbox{]}
+\item 
+list \mbox{\hyperlink{classenemies_1_1_enemy_ad5a8223b21a83780e754b64ecd0ca1c0}{engage\+\_\+radius\+\_\+levels}} = \mbox{[}100, 100, 75, 50\mbox{]}
+\item 
+list \mbox{\hyperlink{classenemies_1_1_enemy_a659c83efedf88c122663632bf6d6ed8a}{caution\+\_\+radius\+\_\+levels}} = \mbox{[}400, 500, 500, 450\mbox{]}
+\item 
+list \mbox{\hyperlink{classenemies_1_1_enemy_ae939e750a7b1d287eb32ec78e70cd08c}{fill\+\_\+color\+\_\+levels}} = \mbox{[}(255, 0, 0), (0, 255, 0), (0, 0, 255), (255, 255, 255)\mbox{]}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classenemies_1_1_enemy_afb168cd45dd9ad91e9e7aea46f92e2c8}{\+\_\+\+HP}}
+\item 
+\mbox{\hyperlink{classenemies_1_1_enemy_a60ded006ece62a7845051393503c8981}{\+\_\+theta}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{classgame__engine_1_1sprites_1_1_polygon}{game\+\_\+engine.\+sprites.\+Polygon}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classgame__engine_1_1sprites_1_1_polygon_adbd170321d75adda65b3f0828fc59fcc}{\+\_\+vertices}}
+\item 
+\mbox{\hyperlink{classgame__engine_1_1sprites_1_1_polygon_aee8c48531e422b55afa086de9021889c}{\+\_\+theta}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{classgame__engine_1_1entity_1_1_entity}{game\+\_\+engine.\+entity.\+Entity}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classgame__engine_1_1entity_1_1_entity_a6e2833bd589cc3e962a440ce69aa4b45}{\+\_\+pos}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}size = 20
+acceleration = 0.1
+max_speed = 2
+engage_radius = 200
+caution_radius = 400
+projectile_speed = 15
+reload_speed = 10
+
+fill_color = (255, 0, 0)
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classenemies_1_1_enemy_a04630a74b4cd4a5961af2b5682cc37ae}\label{classenemies_1_1_enemy_a04630a74b4cd4a5961af2b5682cc37ae} 
+\index{enemies.Enemy@{enemies.Enemy}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!enemies.Enemy@{enemies.Enemy}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily enemies.\+Enemy.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{pos,  }\item[{}]{game\+\_\+state,  }\item[{}]{speed = {\ttfamily np.array(\mbox{[}0,0\mbox{]})},  }\item[{}]{level = {\ttfamily 0} }\end{DoxyParamCaption})}
+
+
+
+Reimplemented from \mbox{\hyperlink{classgame__engine_1_1sprites_1_1_polygon_aca22695450e9c16858f1becef43ac7e1}{game\+\_\+engine.\+sprites.\+Polygon}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classenemies_1_1_enemy_aed0a0a8ea0046ef8331f2fefe72a30a8}\label{classenemies_1_1_enemy_aed0a0a8ea0046ef8331f2fefe72a30a8} 
+\index{enemies.Enemy@{enemies.Enemy}!aim\_at@{aim\_at}}
+\index{aim\_at@{aim\_at}!enemies.Enemy@{enemies.Enemy}}
+\doxysubsubsection{\texorpdfstring{aim\_at()}{aim\_at()}}
+{\footnotesize\ttfamily enemies.\+Enemy.\+aim\+\_\+at (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{player }\end{DoxyParamCaption})}
+
+\Hypertarget{classenemies_1_1_enemy_a7ff17ed5b4b47ae270e90ac90554b59c}\label{classenemies_1_1_enemy_a7ff17ed5b4b47ae270e90ac90554b59c} 
+\index{enemies.Enemy@{enemies.Enemy}!close\_in\_and\_out@{close\_in\_and\_out}}
+\index{close\_in\_and\_out@{close\_in\_and\_out}!enemies.Enemy@{enemies.Enemy}}
+\doxysubsubsection{\texorpdfstring{close\_in\_and\_out()}{close\_in\_and\_out()}}
+{\footnotesize\ttfamily enemies.\+Enemy.\+close\+\_\+in\+\_\+and\+\_\+out (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{player }\end{DoxyParamCaption})}
+
+\Hypertarget{classenemies_1_1_enemy_a64bdbb5a512127460efc2572021bf4bb}\label{classenemies_1_1_enemy_a64bdbb5a512127460efc2572021bf4bb} 
+\index{enemies.Enemy@{enemies.Enemy}!die@{die}}
+\index{die@{die}!enemies.Enemy@{enemies.Enemy}}
+\doxysubsubsection{\texorpdfstring{die()}{die()}}
+{\footnotesize\ttfamily enemies.\+Enemy.\+die (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Fonction de mort de l'astéroïde
+\end{DoxyVerb}
+ \Hypertarget{classenemies_1_1_enemy_aa77bd692c1cdde15ab13c4a40d230ee7}\label{classenemies_1_1_enemy_aa77bd692c1cdde15ab13c4a40d230ee7} 
+\index{enemies.Enemy@{enemies.Enemy}!draw@{draw}}
+\index{draw@{draw}!enemies.Enemy@{enemies.Enemy}}
+\doxysubsubsection{\texorpdfstring{draw()}{draw()}}
+{\footnotesize\ttfamily enemies.\+Enemy.\+draw (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{batch = {\ttfamily None} }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Dessine l'astéroïde\end{DoxyVerb}
+ 
+
+Reimplemented from \mbox{\hyperlink{classgame__engine_1_1sprites_1_1_polygon_a4214780bd547ea747e428463b96c7858}{game\+\_\+engine.\+sprites.\+Polygon}}.
+
+\Hypertarget{classenemies_1_1_enemy_a8f8893bc5bafaf694614c878723139b6}\label{classenemies_1_1_enemy_a8f8893bc5bafaf694614c878723139b6} 
+\index{enemies.Enemy@{enemies.Enemy}!HP@{HP}}
+\index{HP@{HP}!enemies.Enemy@{enemies.Enemy}}
+\doxysubsubsection{\texorpdfstring{HP()}{HP()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily enemies.\+Enemy.\+HP (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+\Hypertarget{classenemies_1_1_enemy_a5400510ba97bf5d8b3dd252bc1bd310e}\label{classenemies_1_1_enemy_a5400510ba97bf5d8b3dd252bc1bd310e} 
+\index{enemies.Enemy@{enemies.Enemy}!HP@{HP}}
+\index{HP@{HP}!enemies.Enemy@{enemies.Enemy}}
+\doxysubsubsection{\texorpdfstring{HP()}{HP()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily enemies.\+Enemy.\+HP (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{HP }\end{DoxyParamCaption})}
+
+\Hypertarget{classenemies_1_1_enemy_a3fe09a4867a781a741fc1bb7de0e80b6}\label{classenemies_1_1_enemy_a3fe09a4867a781a741fc1bb7de0e80b6} 
+\index{enemies.Enemy@{enemies.Enemy}!rotation\_matrix@{rotation\_matrix}}
+\index{rotation\_matrix@{rotation\_matrix}!enemies.Enemy@{enemies.Enemy}}
+\doxysubsubsection{\texorpdfstring{rotation\_matrix()}{rotation\_matrix()}}
+{\footnotesize\ttfamily enemies.\+Enemy.\+rotation\+\_\+matrix (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Reimplemented from \mbox{\hyperlink{classgame__engine_1_1sprites_1_1_polygon_a6713e940d6b46dfa6eaba63a1b361399}{game\+\_\+engine.\+sprites.\+Polygon}}.
+
+\Hypertarget{classenemies_1_1_enemy_a004fc29f8d054407018340e30d6b1f40}\label{classenemies_1_1_enemy_a004fc29f8d054407018340e30d6b1f40} 
+\index{enemies.Enemy@{enemies.Enemy}!shoot@{shoot}}
+\index{shoot@{shoot}!enemies.Enemy@{enemies.Enemy}}
+\doxysubsubsection{\texorpdfstring{shoot()}{shoot()}}
+{\footnotesize\ttfamily enemies.\+Enemy.\+shoot (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{player }\end{DoxyParamCaption})}
+
+\Hypertarget{classenemies_1_1_enemy_ae728e947ef015028617ec2d08a0fd747}\label{classenemies_1_1_enemy_ae728e947ef015028617ec2d08a0fd747} 
+\index{enemies.Enemy@{enemies.Enemy}!throw\_projectile@{throw\_projectile}}
+\index{throw\_projectile@{throw\_projectile}!enemies.Enemy@{enemies.Enemy}}
+\doxysubsubsection{\texorpdfstring{throw\_projectile()}{throw\_projectile()}}
+{\footnotesize\ttfamily enemies.\+Enemy.\+throw\+\_\+projectile (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+\Hypertarget{classenemies_1_1_enemy_afd28d928eaf5258d3107dedae443699a}\label{classenemies_1_1_enemy_afd28d928eaf5258d3107dedae443699a} 
+\index{enemies.Enemy@{enemies.Enemy}!tick@{tick}}
+\index{tick@{tick}!enemies.Enemy@{enemies.Enemy}}
+\doxysubsubsection{\texorpdfstring{tick()}{tick()}}
+{\footnotesize\ttfamily enemies.\+Enemy.\+tick (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Reimplemented from \mbox{\hyperlink{classgame__engine_1_1entity_1_1_entity_afdc2015e106fc1da39fdd1592db4fb5d}{game\+\_\+engine.\+entity.\+Entity}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classenemies_1_1_enemy_afb168cd45dd9ad91e9e7aea46f92e2c8}\label{classenemies_1_1_enemy_afb168cd45dd9ad91e9e7aea46f92e2c8} 
+\index{enemies.Enemy@{enemies.Enemy}!\_HP@{\_HP}}
+\index{\_HP@{\_HP}!enemies.Enemy@{enemies.Enemy}}
+\doxysubsubsection{\texorpdfstring{\_HP}{\_HP}}
+{\footnotesize\ttfamily enemies.\+Enemy.\+\_\+\+HP\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{classenemies_1_1_enemy_a60ded006ece62a7845051393503c8981}\label{classenemies_1_1_enemy_a60ded006ece62a7845051393503c8981} 
+\index{enemies.Enemy@{enemies.Enemy}!\_theta@{\_theta}}
+\index{\_theta@{\_theta}!enemies.Enemy@{enemies.Enemy}}
+\doxysubsubsection{\texorpdfstring{\_theta}{\_theta}}
+{\footnotesize\ttfamily enemies.\+Enemy.\+\_\+theta\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{classenemies_1_1_enemy_a40e1bebda09710e3ba1878bb9f2f537b}\label{classenemies_1_1_enemy_a40e1bebda09710e3ba1878bb9f2f537b} 
+\index{enemies.Enemy@{enemies.Enemy}!acceleration@{acceleration}}
+\index{acceleration@{acceleration}!enemies.Enemy@{enemies.Enemy}}
+\doxysubsubsection{\texorpdfstring{acceleration}{acceleration}}
+{\footnotesize\ttfamily enemies.\+Enemy.\+acceleration}
+
+\Hypertarget{classenemies_1_1_enemy_aa698e5ad948b691ff2458c4d2e5426e3}\label{classenemies_1_1_enemy_aa698e5ad948b691ff2458c4d2e5426e3} 
+\index{enemies.Enemy@{enemies.Enemy}!acceleration\_levels@{acceleration\_levels}}
+\index{acceleration\_levels@{acceleration\_levels}!enemies.Enemy@{enemies.Enemy}}
+\doxysubsubsection{\texorpdfstring{acceleration\_levels}{acceleration\_levels}}
+{\footnotesize\ttfamily list enemies.\+Enemy.\+acceleration\+\_\+levels = \mbox{[}0.\+5, 0.\+7, 0.\+7, 1\mbox{]}\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classenemies_1_1_enemy_aea8d44466b31d2fea09d48d927532540}\label{classenemies_1_1_enemy_aea8d44466b31d2fea09d48d927532540} 
+\index{enemies.Enemy@{enemies.Enemy}!alive@{alive}}
+\index{alive@{alive}!enemies.Enemy@{enemies.Enemy}}
+\doxysubsubsection{\texorpdfstring{alive}{alive}}
+{\footnotesize\ttfamily enemies.\+Enemy.\+alive}
+
+\Hypertarget{classenemies_1_1_enemy_aaf8f52272d79c605b21c6c7598aa0be4}\label{classenemies_1_1_enemy_aaf8f52272d79c605b21c6c7598aa0be4} 
+\index{enemies.Enemy@{enemies.Enemy}!bar\_color@{bar\_color}}
+\index{bar\_color@{bar\_color}!enemies.Enemy@{enemies.Enemy}}
+\doxysubsubsection{\texorpdfstring{bar\_color}{bar\_color}}
+{\footnotesize\ttfamily tuple enemies.\+Enemy.\+bar\+\_\+color = (0,128,0)\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classenemies_1_1_enemy_a7967850846207a251877c57532083965}\label{classenemies_1_1_enemy_a7967850846207a251877c57532083965} 
+\index{enemies.Enemy@{enemies.Enemy}!bar\_grey@{bar\_grey}}
+\index{bar\_grey@{bar\_grey}!enemies.Enemy@{enemies.Enemy}}
+\doxysubsubsection{\texorpdfstring{bar\_grey}{bar\_grey}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily tuple enemies.\+Enemy.\+bar\+\_\+grey = (128, 128, 128)\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classenemies_1_1_enemy_a2ad7cffc5c815a2ed40b93d9531ab81a}\label{classenemies_1_1_enemy_a2ad7cffc5c815a2ed40b93d9531ab81a} 
+\index{enemies.Enemy@{enemies.Enemy}!bar\_grey@{bar\_grey}}
+\index{bar\_grey@{bar\_grey}!enemies.Enemy@{enemies.Enemy}}
+\doxysubsubsection{\texorpdfstring{bar\_grey}{bar\_grey}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily enemies.\+Enemy.\+bar\+\_\+grey}
+
+\Hypertarget{classenemies_1_1_enemy_a3e803db2bf387ac61d2ffab38dc1b1c2}\label{classenemies_1_1_enemy_a3e803db2bf387ac61d2ffab38dc1b1c2} 
+\index{enemies.Enemy@{enemies.Enemy}!barHeight@{barHeight}}
+\index{barHeight@{barHeight}!enemies.Enemy@{enemies.Enemy}}
+\doxysubsubsection{\texorpdfstring{barHeight}{barHeight}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily int enemies.\+Enemy.\+bar\+Height = 16\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classenemies_1_1_enemy_a0d9052ecbd252012ef8b20f9b73b60e6}\label{classenemies_1_1_enemy_a0d9052ecbd252012ef8b20f9b73b60e6} 
+\index{enemies.Enemy@{enemies.Enemy}!barHeight@{barHeight}}
+\index{barHeight@{barHeight}!enemies.Enemy@{enemies.Enemy}}
+\doxysubsubsection{\texorpdfstring{barHeight}{barHeight}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily enemies.\+Enemy.\+bar\+Height}
+
+\Hypertarget{classenemies_1_1_enemy_a5d14aa910726e1b1002b183abf4810a5}\label{classenemies_1_1_enemy_a5d14aa910726e1b1002b183abf4810a5} 
+\index{enemies.Enemy@{enemies.Enemy}!barSpacing@{barSpacing}}
+\index{barSpacing@{barSpacing}!enemies.Enemy@{enemies.Enemy}}
+\doxysubsubsection{\texorpdfstring{barSpacing}{barSpacing}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily int enemies.\+Enemy.\+bar\+Spacing = 2\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classenemies_1_1_enemy_aae48738dbf2bc60740436746b6d4a593}\label{classenemies_1_1_enemy_aae48738dbf2bc60740436746b6d4a593} 
+\index{enemies.Enemy@{enemies.Enemy}!barSpacing@{barSpacing}}
+\index{barSpacing@{barSpacing}!enemies.Enemy@{enemies.Enemy}}
+\doxysubsubsection{\texorpdfstring{barSpacing}{barSpacing}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily enemies.\+Enemy.\+bar\+Spacing}
+
+\Hypertarget{classenemies_1_1_enemy_a138e233e19b936d26d2b50c262038ec4}\label{classenemies_1_1_enemy_a138e233e19b936d26d2b50c262038ec4} 
+\index{enemies.Enemy@{enemies.Enemy}!barWidthFactor@{barWidthFactor}}
+\index{barWidthFactor@{barWidthFactor}!enemies.Enemy@{enemies.Enemy}}
+\doxysubsubsection{\texorpdfstring{barWidthFactor}{barWidthFactor}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily int enemies.\+Enemy.\+bar\+Width\+Factor = .\+8\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classenemies_1_1_enemy_a740fe2351992875b27c4c00cc771143b}\label{classenemies_1_1_enemy_a740fe2351992875b27c4c00cc771143b} 
+\index{enemies.Enemy@{enemies.Enemy}!barWidthFactor@{barWidthFactor}}
+\index{barWidthFactor@{barWidthFactor}!enemies.Enemy@{enemies.Enemy}}
+\doxysubsubsection{\texorpdfstring{barWidthFactor}{barWidthFactor}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily enemies.\+Enemy.\+bar\+Width\+Factor}
+
+\Hypertarget{classenemies_1_1_enemy_abd5b18e2c263ab6f42db5b923eec726e}\label{classenemies_1_1_enemy_abd5b18e2c263ab6f42db5b923eec726e} 
+\index{enemies.Enemy@{enemies.Enemy}!caution\_radius@{caution\_radius}}
+\index{caution\_radius@{caution\_radius}!enemies.Enemy@{enemies.Enemy}}
+\doxysubsubsection{\texorpdfstring{caution\_radius}{caution\_radius}}
+{\footnotesize\ttfamily enemies.\+Enemy.\+caution\+\_\+radius}
+
+\Hypertarget{classenemies_1_1_enemy_a659c83efedf88c122663632bf6d6ed8a}\label{classenemies_1_1_enemy_a659c83efedf88c122663632bf6d6ed8a} 
+\index{enemies.Enemy@{enemies.Enemy}!caution\_radius\_levels@{caution\_radius\_levels}}
+\index{caution\_radius\_levels@{caution\_radius\_levels}!enemies.Enemy@{enemies.Enemy}}
+\doxysubsubsection{\texorpdfstring{caution\_radius\_levels}{caution\_radius\_levels}}
+{\footnotesize\ttfamily list enemies.\+Enemy.\+caution\+\_\+radius\+\_\+levels = \mbox{[}400, 500, 500, 450\mbox{]}\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classenemies_1_1_enemy_ad27b09d343f315b7171d1d780e338fb9}\label{classenemies_1_1_enemy_ad27b09d343f315b7171d1d780e338fb9} 
+\index{enemies.Enemy@{enemies.Enemy}!damage\_levels@{damage\_levels}}
+\index{damage\_levels@{damage\_levels}!enemies.Enemy@{enemies.Enemy}}
+\doxysubsubsection{\texorpdfstring{damage\_levels}{damage\_levels}}
+{\footnotesize\ttfamily list enemies.\+Enemy.\+damage\+\_\+levels = \mbox{[}5, 10, 25, 100\mbox{]}\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classenemies_1_1_enemy_a0b95891267849c29461bca227e5a5e5b}\label{classenemies_1_1_enemy_a0b95891267849c29461bca227e5a5e5b} 
+\index{enemies.Enemy@{enemies.Enemy}!edge\_color@{edge\_color}}
+\index{edge\_color@{edge\_color}!enemies.Enemy@{enemies.Enemy}}
+\doxysubsubsection{\texorpdfstring{edge\_color}{edge\_color}}
+{\footnotesize\ttfamily tuple enemies.\+Enemy.\+edge\+\_\+color = (0, 0, 0)\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classenemies_1_1_enemy_a96465179e692c3b94b7b5fa1d72b48ac}\label{classenemies_1_1_enemy_a96465179e692c3b94b7b5fa1d72b48ac} 
+\index{enemies.Enemy@{enemies.Enemy}!engage\_radius@{engage\_radius}}
+\index{engage\_radius@{engage\_radius}!enemies.Enemy@{enemies.Enemy}}
+\doxysubsubsection{\texorpdfstring{engage\_radius}{engage\_radius}}
+{\footnotesize\ttfamily enemies.\+Enemy.\+engage\+\_\+radius}
+
+\Hypertarget{classenemies_1_1_enemy_ad5a8223b21a83780e754b64ecd0ca1c0}\label{classenemies_1_1_enemy_ad5a8223b21a83780e754b64ecd0ca1c0} 
+\index{enemies.Enemy@{enemies.Enemy}!engage\_radius\_levels@{engage\_radius\_levels}}
+\index{engage\_radius\_levels@{engage\_radius\_levels}!enemies.Enemy@{enemies.Enemy}}
+\doxysubsubsection{\texorpdfstring{engage\_radius\_levels}{engage\_radius\_levels}}
+{\footnotesize\ttfamily list enemies.\+Enemy.\+engage\+\_\+radius\+\_\+levels = \mbox{[}100, 100, 75, 50\mbox{]}\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classenemies_1_1_enemy_aeda79d1afc13c3f94cd263128a59536e}\label{classenemies_1_1_enemy_aeda79d1afc13c3f94cd263128a59536e} 
+\index{enemies.Enemy@{enemies.Enemy}!fill\_color@{fill\_color}}
+\index{fill\_color@{fill\_color}!enemies.Enemy@{enemies.Enemy}}
+\doxysubsubsection{\texorpdfstring{fill\_color}{fill\_color}}
+{\footnotesize\ttfamily enemies.\+Enemy.\+fill\+\_\+color}
+
+\Hypertarget{classenemies_1_1_enemy_ae939e750a7b1d287eb32ec78e70cd08c}\label{classenemies_1_1_enemy_ae939e750a7b1d287eb32ec78e70cd08c} 
+\index{enemies.Enemy@{enemies.Enemy}!fill\_color\_levels@{fill\_color\_levels}}
+\index{fill\_color\_levels@{fill\_color\_levels}!enemies.Enemy@{enemies.Enemy}}
+\doxysubsubsection{\texorpdfstring{fill\_color\_levels}{fill\_color\_levels}}
+{\footnotesize\ttfamily list enemies.\+Enemy.\+fill\+\_\+color\+\_\+levels = \mbox{[}(255, 0, 0), (0, 255, 0), (0, 0, 255), (255, 255, 255)\mbox{]}\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classenemies_1_1_enemy_a1a487a953702afaa4a6e5abd9a3938aa}\label{classenemies_1_1_enemy_a1a487a953702afaa4a6e5abd9a3938aa} 
+\index{enemies.Enemy@{enemies.Enemy}!level@{level}}
+\index{level@{level}!enemies.Enemy@{enemies.Enemy}}
+\doxysubsubsection{\texorpdfstring{level}{level}}
+{\footnotesize\ttfamily enemies.\+Enemy.\+level}
+
+\Hypertarget{classenemies_1_1_enemy_acb132f8b1cf35edd241d7c2e912fe74f}\label{classenemies_1_1_enemy_acb132f8b1cf35edd241d7c2e912fe74f} 
+\index{enemies.Enemy@{enemies.Enemy}!lineWidth@{lineWidth}}
+\index{lineWidth@{lineWidth}!enemies.Enemy@{enemies.Enemy}}
+\doxysubsubsection{\texorpdfstring{lineWidth}{lineWidth}}
+{\footnotesize\ttfamily int enemies.\+Enemy.\+line\+Width = 5\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classenemies_1_1_enemy_ac6a5ae7961a22af16e89521d41c9d081}\label{classenemies_1_1_enemy_ac6a5ae7961a22af16e89521d41c9d081} 
+\index{enemies.Enemy@{enemies.Enemy}!max\_HP@{max\_HP}}
+\index{max\_HP@{max\_HP}!enemies.Enemy@{enemies.Enemy}}
+\doxysubsubsection{\texorpdfstring{max\_HP}{max\_HP}}
+{\footnotesize\ttfamily enemies.\+Enemy.\+max\+\_\+\+HP}
+
+\Hypertarget{classenemies_1_1_enemy_a393284936692113cf9bbfe0dfc1ca082}\label{classenemies_1_1_enemy_a393284936692113cf9bbfe0dfc1ca082} 
+\index{enemies.Enemy@{enemies.Enemy}!max\_HP\_levels@{max\_HP\_levels}}
+\index{max\_HP\_levels@{max\_HP\_levels}!enemies.Enemy@{enemies.Enemy}}
+\doxysubsubsection{\texorpdfstring{max\_HP\_levels}{max\_HP\_levels}}
+{\footnotesize\ttfamily list enemies.\+Enemy.\+max\+\_\+\+HP\+\_\+levels = \mbox{[}200, 500, 2000, 4000\mbox{]}\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classenemies_1_1_enemy_ad2870dc10c12225440cab32fcff8dd4c}\label{classenemies_1_1_enemy_ad2870dc10c12225440cab32fcff8dd4c} 
+\index{enemies.Enemy@{enemies.Enemy}!max\_speed@{max\_speed}}
+\index{max\_speed@{max\_speed}!enemies.Enemy@{enemies.Enemy}}
+\doxysubsubsection{\texorpdfstring{max\_speed}{max\_speed}}
+{\footnotesize\ttfamily enemies.\+Enemy.\+max\+\_\+speed}
+
+\Hypertarget{classenemies_1_1_enemy_a403eca982933f3a327c4bc79cfdf82a6}\label{classenemies_1_1_enemy_a403eca982933f3a327c4bc79cfdf82a6} 
+\index{enemies.Enemy@{enemies.Enemy}!max\_speed\_levels@{max\_speed\_levels}}
+\index{max\_speed\_levels@{max\_speed\_levels}!enemies.Enemy@{enemies.Enemy}}
+\doxysubsubsection{\texorpdfstring{max\_speed\_levels}{max\_speed\_levels}}
+{\footnotesize\ttfamily list enemies.\+Enemy.\+max\+\_\+speed\+\_\+levels = \mbox{[}1, 2, 2, 3\mbox{]}\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classenemies_1_1_enemy_a8e860515c2f994c47ea1b602e4283fd5}\label{classenemies_1_1_enemy_a8e860515c2f994c47ea1b602e4283fd5} 
+\index{enemies.Enemy@{enemies.Enemy}!old\_time@{old\_time}}
+\index{old\_time@{old\_time}!enemies.Enemy@{enemies.Enemy}}
+\doxysubsubsection{\texorpdfstring{old\_time}{old\_time}}
+{\footnotesize\ttfamily enemies.\+Enemy.\+old\+\_\+time}
+
+\Hypertarget{classenemies_1_1_enemy_aaf83fc9ae15510ca0c268740ea6a9fb8}\label{classenemies_1_1_enemy_aaf83fc9ae15510ca0c268740ea6a9fb8} 
+\index{enemies.Enemy@{enemies.Enemy}!projectile\_speed@{projectile\_speed}}
+\index{projectile\_speed@{projectile\_speed}!enemies.Enemy@{enemies.Enemy}}
+\doxysubsubsection{\texorpdfstring{projectile\_speed}{projectile\_speed}}
+{\footnotesize\ttfamily enemies.\+Enemy.\+projectile\+\_\+speed}
+
+\Hypertarget{classenemies_1_1_enemy_ab22e31173c101807f46f5c0b77ac8110}\label{classenemies_1_1_enemy_ab22e31173c101807f46f5c0b77ac8110} 
+\index{enemies.Enemy@{enemies.Enemy}!projectile\_speed\_levels@{projectile\_speed\_levels}}
+\index{projectile\_speed\_levels@{projectile\_speed\_levels}!enemies.Enemy@{enemies.Enemy}}
+\doxysubsubsection{\texorpdfstring{projectile\_speed\_levels}{projectile\_speed\_levels}}
+{\footnotesize\ttfamily list enemies.\+Enemy.\+projectile\+\_\+speed\+\_\+levels = \mbox{[}15, 20, 25, 40\mbox{]}\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classenemies_1_1_enemy_a136736cf5a5e4285dfc6f76aed1c996f}\label{classenemies_1_1_enemy_a136736cf5a5e4285dfc6f76aed1c996f} 
+\index{enemies.Enemy@{enemies.Enemy}!reload@{reload}}
+\index{reload@{reload}!enemies.Enemy@{enemies.Enemy}}
+\doxysubsubsection{\texorpdfstring{reload}{reload}}
+{\footnotesize\ttfamily enemies.\+Enemy.\+reload}
+
+\Hypertarget{classenemies_1_1_enemy_a9d265ee9835efb63ec47d3fd3fb7c301}\label{classenemies_1_1_enemy_a9d265ee9835efb63ec47d3fd3fb7c301} 
+\index{enemies.Enemy@{enemies.Enemy}!reload\_speed@{reload\_speed}}
+\index{reload\_speed@{reload\_speed}!enemies.Enemy@{enemies.Enemy}}
+\doxysubsubsection{\texorpdfstring{reload\_speed}{reload\_speed}}
+{\footnotesize\ttfamily enemies.\+Enemy.\+reload\+\_\+speed}
+
+\Hypertarget{classenemies_1_1_enemy_a6e51e7d0c400185b9931ac7c284dbac6}\label{classenemies_1_1_enemy_a6e51e7d0c400185b9931ac7c284dbac6} 
+\index{enemies.Enemy@{enemies.Enemy}!reload\_speed\_levels@{reload\_speed\_levels}}
+\index{reload\_speed\_levels@{reload\_speed\_levels}!enemies.Enemy@{enemies.Enemy}}
+\doxysubsubsection{\texorpdfstring{reload\_speed\_levels}{reload\_speed\_levels}}
+{\footnotesize\ttfamily list enemies.\+Enemy.\+reload\+\_\+speed\+\_\+levels = \mbox{[}15, 10, 10, 8\mbox{]}\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classenemies_1_1_enemy_a622c78244030c5d48e1cb638c6a054d6}\label{classenemies_1_1_enemy_a622c78244030c5d48e1cb638c6a054d6} 
+\index{enemies.Enemy@{enemies.Enemy}!ressources@{ressources}}
+\index{ressources@{ressources}!enemies.Enemy@{enemies.Enemy}}
+\doxysubsubsection{\texorpdfstring{ressources}{ressources}}
+{\footnotesize\ttfamily enemies.\+Enemy.\+ressources}
+
+\Hypertarget{classenemies_1_1_enemy_a21eaa9c2fbeb28964de60f92ad36988a}\label{classenemies_1_1_enemy_a21eaa9c2fbeb28964de60f92ad36988a} 
+\index{enemies.Enemy@{enemies.Enemy}!ressources\_levels@{ressources\_levels}}
+\index{ressources\_levels@{ressources\_levels}!enemies.Enemy@{enemies.Enemy}}
+\doxysubsubsection{\texorpdfstring{ressources\_levels}{ressources\_levels}}
+{\footnotesize\ttfamily list enemies.\+Enemy.\+ressources\+\_\+levels = \mbox{[}100, 200, 500, 1000\mbox{]}\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classenemies_1_1_enemy_a5089263e8ad12c6c16cbfe0cb1e946d3}\label{classenemies_1_1_enemy_a5089263e8ad12c6c16cbfe0cb1e946d3} 
+\index{enemies.Enemy@{enemies.Enemy}!size@{size}}
+\index{size@{size}!enemies.Enemy@{enemies.Enemy}}
+\doxysubsubsection{\texorpdfstring{size}{size}}
+{\footnotesize\ttfamily enemies.\+Enemy.\+size}
+
+\Hypertarget{classenemies_1_1_enemy_aafa5eac29cd54717eb0bda5e2ca08918}\label{classenemies_1_1_enemy_aafa5eac29cd54717eb0bda5e2ca08918} 
+\index{enemies.Enemy@{enemies.Enemy}!size\_levels@{size\_levels}}
+\index{size\_levels@{size\_levels}!enemies.Enemy@{enemies.Enemy}}
+\doxysubsubsection{\texorpdfstring{size\_levels}{size\_levels}}
+{\footnotesize\ttfamily list enemies.\+Enemy.\+size\+\_\+levels = \mbox{[}20, 30, 40, 50\mbox{]}\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+game\+\_\+objects/\mbox{\hyperlink{enemies_8py}{enemies.\+py}}\end{DoxyCompactItemize}

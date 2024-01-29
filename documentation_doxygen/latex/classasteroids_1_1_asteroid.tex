@@ -1,0 +1,254 @@
+\doxysection{asteroids.\+Asteroid Class Reference}
+\hypertarget{classasteroids_1_1_asteroid}{}\label{classasteroids_1_1_asteroid}\index{asteroids.Asteroid@{asteroids.Asteroid}}
+
+
+Inheritance diagram for asteroids.\+Asteroid\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classasteroids_1_1_asteroid__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for asteroids.\+Asteroid\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=175pt]{classasteroids_1_1_asteroid__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classasteroids_1_1_asteroid_a28c262a053a0b46a684411dde0970c88}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, pos, game\+\_\+state, theta=0, speed=np.\+array(\mbox{[}0, 0\mbox{]}))
+\item 
+\mbox{\hyperlink{classasteroids_1_1_asteroid_ad0d06e902acacf8a19904f02446ab476}{tick}} (self)
+\item 
+\mbox{\hyperlink{classasteroids_1_1_asteroid_a6c656a9435dfb0e57ce9ef6893023a2d}{HP}} (self)
+\item 
+\mbox{\hyperlink{classasteroids_1_1_asteroid_a610066c073a6da9bd4c3b930ac2b5ee1}{HP}} (self, HP)
+\item 
+\mbox{\hyperlink{classasteroids_1_1_asteroid_a9d19ae74275b92dbdd63ba70cf94d981}{draw}} (self, batch=None)
+\item 
+\mbox{\hyperlink{classasteroids_1_1_asteroid_a8a31d89d388785dc04ca62d3810a7049}{die}} (self)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classasteroids_1_1_asteroid_ae699c88892f587bfc8f388ee34199b7f}{orientation}}
+\item 
+\mbox{\hyperlink{classasteroids_1_1_asteroid_a89f9fbb302819e2b7e126afbf7a7bda6}{alive}}
+\item 
+\mbox{\hyperlink{classasteroids_1_1_asteroid_aa954ae6177566da8137b222a58d9e598}{ressources}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{classasteroids_1_1_asteroid_af362ef7cf1273cbcc622a09afb0d6c16}{size}} = 100
+\begin{DoxyCompactList}\small\item\em ATTRIBUTS \#\#\#\#\#\#. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classasteroids_1_1_asteroid_a5416a3baf13e28fb87f6b75af27f0722}{n\+\_\+vertices}} = 8
+\item 
+tuple \mbox{\hyperlink{classasteroids_1_1_asteroid_ad22a63cec093f28d4f7a1f27b2f1beec}{fill\+Color}} = (128, 128, 0)
+\item 
+tuple \mbox{\hyperlink{classasteroids_1_1_asteroid_af93e050b3a882b14894ad75e76fcb7e8}{edge\+Color}} = (0, 0, 0)
+\item 
+int \mbox{\hyperlink{classasteroids_1_1_asteroid_a315eccb4c0578682e4a3e5b596a28107}{line\+Width}} = 5
+\item 
+tuple \mbox{\hyperlink{classasteroids_1_1_asteroid_a575b6ba10830642b147131640dcef6c9}{bar\+\_\+grey}} = (128, 128, 128)
+\item 
+tuple \mbox{\hyperlink{classasteroids_1_1_asteroid_a85aad445e1331fd2323fc6ea4f831316}{bar\+\_\+color}} = (0,128,0)
+\item 
+int \mbox{\hyperlink{classasteroids_1_1_asteroid_a445fbdfe861db4490479dde0d2c37aa9}{bar\+Width\+Factor}} = .\+8
+\item 
+int \mbox{\hyperlink{classasteroids_1_1_asteroid_a412a8f85c620f3d4d0a62382be3ba9a5}{bar\+Height}} = 16
+\item 
+int \mbox{\hyperlink{classasteroids_1_1_asteroid_ad50654735ba741d69494406b6f6900ec}{bar\+Spacing}} = 2
+\item 
+int \mbox{\hyperlink{classasteroids_1_1_asteroid_a56b9f2d18ace34eedbe1b30660d0ffcd}{ressources}} = 10
+\item 
+int \mbox{\hyperlink{classasteroids_1_1_asteroid_af802aab7a235f368c4ea0f7de3b3e174}{max\+\_\+\+HP}} = 100
+\item 
+int \mbox{\hyperlink{classasteroids_1_1_asteroid_a94c344a4124044f437786bcf592801cb}{mass}} = 100
+\item 
+int \mbox{\hyperlink{classasteroids_1_1_asteroid_ad352d77d3b4803c572e532d86b44c7e9}{damage}} = 100
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classasteroids_1_1_asteroid_a25535483c6cdd338562cba8a4d4b079b}{\+\_\+\+HP}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}Classe Asteroid
+Objectif => Implémenter les astéroïdes de façon simple et modulable
+Solution => Sous classer cette classe mère en changeant ses attributs\end{DoxyVerb}
+ 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classasteroids_1_1_asteroid_a28c262a053a0b46a684411dde0970c88}\label{classasteroids_1_1_asteroid_a28c262a053a0b46a684411dde0970c88} 
+\index{asteroids.Asteroid@{asteroids.Asteroid}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!asteroids.Asteroid@{asteroids.Asteroid}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily asteroids.\+Asteroid.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{pos,  }\item[{}]{game\+\_\+state,  }\item[{}]{theta = {\ttfamily 0},  }\item[{}]{speed = {\ttfamily np.array(\mbox{[}0,0\mbox{]})} }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classasteroids_1_1_asteroid_a8a31d89d388785dc04ca62d3810a7049}\label{classasteroids_1_1_asteroid_a8a31d89d388785dc04ca62d3810a7049} 
+\index{asteroids.Asteroid@{asteroids.Asteroid}!die@{die}}
+\index{die@{die}!asteroids.Asteroid@{asteroids.Asteroid}}
+\doxysubsubsection{\texorpdfstring{die()}{die()}}
+{\footnotesize\ttfamily asteroids.\+Asteroid.\+die (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Fonction de mort de l'astéroïde
+\end{DoxyVerb}
+ \Hypertarget{classasteroids_1_1_asteroid_a9d19ae74275b92dbdd63ba70cf94d981}\label{classasteroids_1_1_asteroid_a9d19ae74275b92dbdd63ba70cf94d981} 
+\index{asteroids.Asteroid@{asteroids.Asteroid}!draw@{draw}}
+\index{draw@{draw}!asteroids.Asteroid@{asteroids.Asteroid}}
+\doxysubsubsection{\texorpdfstring{draw()}{draw()}}
+{\footnotesize\ttfamily asteroids.\+Asteroid.\+draw (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{batch = {\ttfamily None} }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Dessine l'astéroïde\end{DoxyVerb}
+ \Hypertarget{classasteroids_1_1_asteroid_a6c656a9435dfb0e57ce9ef6893023a2d}\label{classasteroids_1_1_asteroid_a6c656a9435dfb0e57ce9ef6893023a2d} 
+\index{asteroids.Asteroid@{asteroids.Asteroid}!HP@{HP}}
+\index{HP@{HP}!asteroids.Asteroid@{asteroids.Asteroid}}
+\doxysubsubsection{\texorpdfstring{HP()}{HP()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily asteroids.\+Asteroid.\+HP (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+\Hypertarget{classasteroids_1_1_asteroid_a610066c073a6da9bd4c3b930ac2b5ee1}\label{classasteroids_1_1_asteroid_a610066c073a6da9bd4c3b930ac2b5ee1} 
+\index{asteroids.Asteroid@{asteroids.Asteroid}!HP@{HP}}
+\index{HP@{HP}!asteroids.Asteroid@{asteroids.Asteroid}}
+\doxysubsubsection{\texorpdfstring{HP()}{HP()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily asteroids.\+Asteroid.\+HP (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{HP }\end{DoxyParamCaption})}
+
+\Hypertarget{classasteroids_1_1_asteroid_ad0d06e902acacf8a19904f02446ab476}\label{classasteroids_1_1_asteroid_ad0d06e902acacf8a19904f02446ab476} 
+\index{asteroids.Asteroid@{asteroids.Asteroid}!tick@{tick}}
+\index{tick@{tick}!asteroids.Asteroid@{asteroids.Asteroid}}
+\doxysubsubsection{\texorpdfstring{tick()}{tick()}}
+{\footnotesize\ttfamily asteroids.\+Asteroid.\+tick (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Fonction de tick
+    OPTIONNEL => Rajouter la régénération au bout d'un certain temps
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classasteroids_1_1_asteroid_a25535483c6cdd338562cba8a4d4b079b}\label{classasteroids_1_1_asteroid_a25535483c6cdd338562cba8a4d4b079b} 
+\index{asteroids.Asteroid@{asteroids.Asteroid}!\_HP@{\_HP}}
+\index{\_HP@{\_HP}!asteroids.Asteroid@{asteroids.Asteroid}}
+\doxysubsubsection{\texorpdfstring{\_HP}{\_HP}}
+{\footnotesize\ttfamily asteroids.\+Asteroid.\+\_\+\+HP\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{classasteroids_1_1_asteroid_a89f9fbb302819e2b7e126afbf7a7bda6}\label{classasteroids_1_1_asteroid_a89f9fbb302819e2b7e126afbf7a7bda6} 
+\index{asteroids.Asteroid@{asteroids.Asteroid}!alive@{alive}}
+\index{alive@{alive}!asteroids.Asteroid@{asteroids.Asteroid}}
+\doxysubsubsection{\texorpdfstring{alive}{alive}}
+{\footnotesize\ttfamily asteroids.\+Asteroid.\+alive}
+
+\Hypertarget{classasteroids_1_1_asteroid_a85aad445e1331fd2323fc6ea4f831316}\label{classasteroids_1_1_asteroid_a85aad445e1331fd2323fc6ea4f831316} 
+\index{asteroids.Asteroid@{asteroids.Asteroid}!bar\_color@{bar\_color}}
+\index{bar\_color@{bar\_color}!asteroids.Asteroid@{asteroids.Asteroid}}
+\doxysubsubsection{\texorpdfstring{bar\_color}{bar\_color}}
+{\footnotesize\ttfamily tuple asteroids.\+Asteroid.\+bar\+\_\+color = (0,128,0)\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classasteroids_1_1_asteroid_a575b6ba10830642b147131640dcef6c9}\label{classasteroids_1_1_asteroid_a575b6ba10830642b147131640dcef6c9} 
+\index{asteroids.Asteroid@{asteroids.Asteroid}!bar\_grey@{bar\_grey}}
+\index{bar\_grey@{bar\_grey}!asteroids.Asteroid@{asteroids.Asteroid}}
+\doxysubsubsection{\texorpdfstring{bar\_grey}{bar\_grey}}
+{\footnotesize\ttfamily tuple asteroids.\+Asteroid.\+bar\+\_\+grey = (128, 128, 128)\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classasteroids_1_1_asteroid_a412a8f85c620f3d4d0a62382be3ba9a5}\label{classasteroids_1_1_asteroid_a412a8f85c620f3d4d0a62382be3ba9a5} 
+\index{asteroids.Asteroid@{asteroids.Asteroid}!barHeight@{barHeight}}
+\index{barHeight@{barHeight}!asteroids.Asteroid@{asteroids.Asteroid}}
+\doxysubsubsection{\texorpdfstring{barHeight}{barHeight}}
+{\footnotesize\ttfamily int asteroids.\+Asteroid.\+bar\+Height = 16\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classasteroids_1_1_asteroid_ad50654735ba741d69494406b6f6900ec}\label{classasteroids_1_1_asteroid_ad50654735ba741d69494406b6f6900ec} 
+\index{asteroids.Asteroid@{asteroids.Asteroid}!barSpacing@{barSpacing}}
+\index{barSpacing@{barSpacing}!asteroids.Asteroid@{asteroids.Asteroid}}
+\doxysubsubsection{\texorpdfstring{barSpacing}{barSpacing}}
+{\footnotesize\ttfamily int asteroids.\+Asteroid.\+bar\+Spacing = 2\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classasteroids_1_1_asteroid_a445fbdfe861db4490479dde0d2c37aa9}\label{classasteroids_1_1_asteroid_a445fbdfe861db4490479dde0d2c37aa9} 
+\index{asteroids.Asteroid@{asteroids.Asteroid}!barWidthFactor@{barWidthFactor}}
+\index{barWidthFactor@{barWidthFactor}!asteroids.Asteroid@{asteroids.Asteroid}}
+\doxysubsubsection{\texorpdfstring{barWidthFactor}{barWidthFactor}}
+{\footnotesize\ttfamily int asteroids.\+Asteroid.\+bar\+Width\+Factor = .\+8\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classasteroids_1_1_asteroid_ad352d77d3b4803c572e532d86b44c7e9}\label{classasteroids_1_1_asteroid_ad352d77d3b4803c572e532d86b44c7e9} 
+\index{asteroids.Asteroid@{asteroids.Asteroid}!damage@{damage}}
+\index{damage@{damage}!asteroids.Asteroid@{asteroids.Asteroid}}
+\doxysubsubsection{\texorpdfstring{damage}{damage}}
+{\footnotesize\ttfamily int asteroids.\+Asteroid.\+damage = 100\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classasteroids_1_1_asteroid_af93e050b3a882b14894ad75e76fcb7e8}\label{classasteroids_1_1_asteroid_af93e050b3a882b14894ad75e76fcb7e8} 
+\index{asteroids.Asteroid@{asteroids.Asteroid}!edgeColor@{edgeColor}}
+\index{edgeColor@{edgeColor}!asteroids.Asteroid@{asteroids.Asteroid}}
+\doxysubsubsection{\texorpdfstring{edgeColor}{edgeColor}}
+{\footnotesize\ttfamily tuple asteroids.\+Asteroid.\+edge\+Color = (0, 0, 0)\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classasteroids_1_1_asteroid_ad22a63cec093f28d4f7a1f27b2f1beec}\label{classasteroids_1_1_asteroid_ad22a63cec093f28d4f7a1f27b2f1beec} 
+\index{asteroids.Asteroid@{asteroids.Asteroid}!fillColor@{fillColor}}
+\index{fillColor@{fillColor}!asteroids.Asteroid@{asteroids.Asteroid}}
+\doxysubsubsection{\texorpdfstring{fillColor}{fillColor}}
+{\footnotesize\ttfamily tuple asteroids.\+Asteroid.\+fill\+Color = (128, 128, 0)\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classasteroids_1_1_asteroid_a315eccb4c0578682e4a3e5b596a28107}\label{classasteroids_1_1_asteroid_a315eccb4c0578682e4a3e5b596a28107} 
+\index{asteroids.Asteroid@{asteroids.Asteroid}!lineWidth@{lineWidth}}
+\index{lineWidth@{lineWidth}!asteroids.Asteroid@{asteroids.Asteroid}}
+\doxysubsubsection{\texorpdfstring{lineWidth}{lineWidth}}
+{\footnotesize\ttfamily int asteroids.\+Asteroid.\+line\+Width = 5\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classasteroids_1_1_asteroid_a94c344a4124044f437786bcf592801cb}\label{classasteroids_1_1_asteroid_a94c344a4124044f437786bcf592801cb} 
+\index{asteroids.Asteroid@{asteroids.Asteroid}!mass@{mass}}
+\index{mass@{mass}!asteroids.Asteroid@{asteroids.Asteroid}}
+\doxysubsubsection{\texorpdfstring{mass}{mass}}
+{\footnotesize\ttfamily int asteroids.\+Asteroid.\+mass = 100\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classasteroids_1_1_asteroid_af802aab7a235f368c4ea0f7de3b3e174}\label{classasteroids_1_1_asteroid_af802aab7a235f368c4ea0f7de3b3e174} 
+\index{asteroids.Asteroid@{asteroids.Asteroid}!max\_HP@{max\_HP}}
+\index{max\_HP@{max\_HP}!asteroids.Asteroid@{asteroids.Asteroid}}
+\doxysubsubsection{\texorpdfstring{max\_HP}{max\_HP}}
+{\footnotesize\ttfamily int asteroids.\+Asteroid.\+max\+\_\+\+HP = 100\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classasteroids_1_1_asteroid_a5416a3baf13e28fb87f6b75af27f0722}\label{classasteroids_1_1_asteroid_a5416a3baf13e28fb87f6b75af27f0722} 
+\index{asteroids.Asteroid@{asteroids.Asteroid}!n\_vertices@{n\_vertices}}
+\index{n\_vertices@{n\_vertices}!asteroids.Asteroid@{asteroids.Asteroid}}
+\doxysubsubsection{\texorpdfstring{n\_vertices}{n\_vertices}}
+{\footnotesize\ttfamily int asteroids.\+Asteroid.\+n\+\_\+vertices = 8\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classasteroids_1_1_asteroid_ae699c88892f587bfc8f388ee34199b7f}\label{classasteroids_1_1_asteroid_ae699c88892f587bfc8f388ee34199b7f} 
+\index{asteroids.Asteroid@{asteroids.Asteroid}!orientation@{orientation}}
+\index{orientation@{orientation}!asteroids.Asteroid@{asteroids.Asteroid}}
+\doxysubsubsection{\texorpdfstring{orientation}{orientation}}
+{\footnotesize\ttfamily asteroids.\+Asteroid.\+orientation}
+
+\Hypertarget{classasteroids_1_1_asteroid_a56b9f2d18ace34eedbe1b30660d0ffcd}\label{classasteroids_1_1_asteroid_a56b9f2d18ace34eedbe1b30660d0ffcd} 
+\index{asteroids.Asteroid@{asteroids.Asteroid}!ressources@{ressources}}
+\index{ressources@{ressources}!asteroids.Asteroid@{asteroids.Asteroid}}
+\doxysubsubsection{\texorpdfstring{ressources}{ressources}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily int asteroids.\+Asteroid.\+ressources = 10\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classasteroids_1_1_asteroid_aa954ae6177566da8137b222a58d9e598}\label{classasteroids_1_1_asteroid_aa954ae6177566da8137b222a58d9e598} 
+\index{asteroids.Asteroid@{asteroids.Asteroid}!ressources@{ressources}}
+\index{ressources@{ressources}!asteroids.Asteroid@{asteroids.Asteroid}}
+\doxysubsubsection{\texorpdfstring{ressources}{ressources}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily asteroids.\+Asteroid.\+ressources}
+
+\Hypertarget{classasteroids_1_1_asteroid_af362ef7cf1273cbcc622a09afb0d6c16}\label{classasteroids_1_1_asteroid_af362ef7cf1273cbcc622a09afb0d6c16} 
+\index{asteroids.Asteroid@{asteroids.Asteroid}!size@{size}}
+\index{size@{size}!asteroids.Asteroid@{asteroids.Asteroid}}
+\doxysubsubsection{\texorpdfstring{size}{size}}
+{\footnotesize\ttfamily int asteroids.\+Asteroid.\+size = 100\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+ATTRIBUTS \#\#\#\#\#\#. 
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+game\+\_\+objects/\mbox{\hyperlink{asteroids_8py}{asteroids.\+py}}\end{DoxyCompactItemize}

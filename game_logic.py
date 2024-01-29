@@ -1,7 +1,7 @@
-"""
-Implémentation de la logique du jeu
-Notamment : - Les collisions entre astéroïdes => Fonction activate_collision(game)
-            - Le spawn d'astéroïdes           => Fonction activate_asteroid_spawn(game)
+"""!@brief Implémentation de la logique du jeu
+Notamment : 
+- Les collisions entre astéroïdes => Fonction activate_collision(game)
+- Le spawn d'astéroïdes           => Fonction activate_asteroid_spawn(game)
 """
 
 import random
@@ -16,8 +16,7 @@ from game_objects.enemies import Enemy
 from game_objects.animations import XPLosion
 
 def repel(game, ast, entity):
-    """
-    Fonction qui repousse les entités des astéroïdes (pour éviter qu'ils ne se chevauchent)
+    """@!brief Fonction qui repousse les entités des astéroïdes (pour éviter qu'ils ne se chevauchent)
     @params:
         game: la partie
         ast: l'astéroïde

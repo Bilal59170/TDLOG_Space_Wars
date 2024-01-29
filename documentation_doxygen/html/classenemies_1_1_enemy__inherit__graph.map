@@ -1,0 +1,9 @@
+<map id="enemies.Enemy" name="enemies.Enemy">
+<area shape="rect" id="Node000001" title=" " alt="" coords="135,155,251,181"/>
+<area shape="rect" id="Node000002" href="$classgame__engine_1_1sprites_1_1_polygon.html" title=" " alt="" coords="97,80,289,107"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="196,122,196,154,190,154,190,122"/>
+<area shape="rect" id="Node000003" href="$classgame__engine_1_1entity_1_1_entity.html" title=" " alt="" coords="5,5,178,32"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="123,39,177,77,174,82,119,43"/>
+<area shape="rect" id="Node000004" href="$classgame__engine_1_1sprites_1_1_sprites.html" title=" " alt="" coords="202,5,389,32"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="268,43,212,82,209,77,265,38"/>
+</map>

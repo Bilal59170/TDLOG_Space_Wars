@@ -1,8 +1,12 @@
-"""@package docstring
-Fichier où l'on intègre la boucle de jeu
+"""!@brief Fichier qui contient la classe Game, qui gère le jeu
 
-Fait appel à l'UI pour l'affichage
-L'instance de jeu est nommée game_state
+@file game.py
+@package game
+@section description_main Description
+Classe principale du jeu, qui gère les entités, les événements, l'affichage, la boucle de jeu, etc.
+Contient également la classe Camera, qui gère la caméra, ainsi que la classe GameEvents, qui gère les événements du jeu.
+Fait appel à la classe Profiler, qui permet de profiler le jeu pour optimiser les performances.
+Utilise les modules que l'on a développé dans game_engine, game_objects et UI.
 
 """
 
@@ -34,11 +38,13 @@ from UI import game_static_display
 
 profiler = Profiler()
 
+
 class GameEvents:
-    """
-    Classe qui gère les événements du jeu
-    Notamment : - Les fonctions à appeler à chaque x ticks => Fonction each
-                - Les fonctions à appeler à chaque collision => Fonction on_collide
+    """! Cette classe gère les événements du jeu.
+
+    Notamment : 
+        - Les fonctions à appeler à chaque x ticks => fonction each
+        - Les fonctions à appeler à chaque collision => fonction on_collide
 
     Exemple d'utilisation :
         game = Game()
@@ -53,19 +59,17 @@ class GameEvents:
         def my_function(game, asteroid1, asteroid2):
             print("Appelée à chaque collision entre deux astéroïdes")
 
-    
     Comportement (pas passer trop de temps dessus):
     @game.each(10) => Initialise une classe each qui prend en paramètre le nombre de ticks entre chaque appel de la fonction
     def ...        => Appelle la fonction __call__ de l'instance de classe each avec en paramètre la fonction à appeler
-        
     """
 
     def __init__(self):
-        # Liste des fonctions à appeler à chaque x ticks [(n_ticks, function)]
+        ## @brief Liste des fonctions à appeler à chaque x ticks [(n_ticks, function)]
         self._each = []
-        # Liste des fonctions à appeler à chaque collision [(object1, object2, sym, function)]
+        ## @brief Liste des fonctions à appeler à chaque collision [(object1, object2, sym, function)]
         self._on_collide = []
-        # Liste des fonctions à appeler à chaque affichage
+        ## @brief Liste des fonctions à appeler à chaque affichage
         self._on_draw = []
 
 
@@ -78,10 +82,12 @@ class GameEvents:
             # Instance référencée par le foncteur (la partie)
             target = target
 
+            #  @param number Nombre de ticks entre chaque appel de la fonction
             def __init__(self, number):
                 # Nombre de ticks entre chaque appel de la fonction
                 self.number = number
                 
+            #  @param function Fonction à appeler
             def __call__(self, function):
                 # Fonction à appeler
                 self.target._each.append((self.number, function))
@@ -90,27 +96,36 @@ class GameEvents:
         class on_collide:
             # Même principe que each
             target = target
+
+
             def __init__(self, object1, object2, sym = False):
-                # object1 et object2 sont des classes ou des instances de classes
-                # sym indique si la collision est symétrique (ex : collision entre deux astéroïdes) => Evite d'appeler deux fois la fonction
+                """!@brief Foncteur qui permet d'ajouter une fonction à appeler à chaque collision entre deux objets
+                @param object1 Classe ou instance de classe
+                @param object2 Classe ou instance de classe
+                @param sym Booléen qui indique si la collision est symétrique
+                """
                 self.object1 = object1
                 self.object2 = object2
                 self.sym = sym
 
             def __call__(self, function):
+                #  @param function Fonction à appeler
                 self.target._on_collide.append((self.object1, self.object2, self.sym, function))
         
         self.each = each
         self.on_collide = on_collide
 
-    
+
     def on_draw(self, function):
+        """!@brief Fonction qui permet d'ajouter une fonction à appeler à chaque affichage
+        @param function Fonction à appeler
+        """
         self._on_draw.append(function)
         return function
         
     @profiler.profile
     def handle_events(self):
-        """ Fonction qui gère les événements, appelée à chaque tick, dans la boucle de jeu """
+        """!@brief Fonction qui gère les événements, appelée à chaque tick, dans la boucle de jeu """
 
         # Appel des fonctions à appeler à chaque x ticks
         for number, function in self._each:
@@ -154,15 +169,15 @@ class GameEvents:
 
 
 class Camera:
-    """ Classe qui gère la caméra """
+    """!@brief Classe qui gère la caméra """
     def __init__(self, win_size) -> None:
+        ## @brief Taille de la caméra
         self.size = np.array(win_size)
+        ## @brief Position de la caméra (centre de la caméra)
         self.center = [0, 0]
 
 class Game(pyglet.event.EventDispatcher, GameEvents):
-
-    """ 
-    Classe principale du jeu
+    """!@brief Classe principale du jeu
 
     Attributs : 
     - endgame : booléen qui indique si la partie est terminée
@@ -184,8 +199,6 @@ class Game(pyglet.event.EventDispatcher, GameEvents):
     Méthodes de gestion des événements :
     - on_close : ferme la fenêtre de jeu
     - on_key_press : gère les événements liés aux touches du clavier
-    
-    
     """
 
     time = 0          # Temps de jeu
@@ -204,11 +217,13 @@ class Game(pyglet.event.EventDispatcher, GameEvents):
         del screen
 
         if config.FULLSCREEN:
+            ## @brief Fenêtre de jeu
             self.window = pyglet.window.Window(*screen_dims, fullscreen=True)
             self.win_size = screen_dims
 
         else:
             # On centre la fenêtre
+            ## @brief Fenêtre de jeu
             self.window = pyglet.window.Window(*config.WIN_SIZE, resizable=True)
             self.window.set_location(int(self.window.screen.width/2 - self.window.width/2), int(self.window.screen.height/2 - self.window.height/2))
             self.win_size = config.WIN_SIZE
@@ -218,6 +233,7 @@ class Game(pyglet.event.EventDispatcher, GameEvents):
         self.window.set_vsync(True ) #synchronise les fps du jeu avec les fps de l'écran de l'ordi 
         #self.window.set_icon(pyglet.image.load("ressources/icon.png")) => A ajouter quand on aura une icone
         
+        ## @brief Batch d'objets
         self.batch = pyglet.graphics.Batch()
 
         # Variable qui indique si la partie est terminée
@@ -225,14 +241,18 @@ class Game(pyglet.event.EventDispatcher, GameEvents):
         self.tick = 0
         
         # Taille de la carte / caméra
+        ## @brief Taille de la carte
         self.map_size = config.MAP_SIZE
+        ## @brief Caméra
         self.camera = Camera(self.win_size)
 
         # Création du joueur à un endroit aléatoire
+        ## @brief Joueur
         self.player = Ship(
             [np.random.randint(0, config.MAP_SIZE[0]), np.random.randint(0, config.MAP_SIZE[1])],
             game_state=self,
         )
+        ## @brief Score
         self.score = 0
         #Position finale du vaisseau quand il meurt. 
         #Utile pour afficher des animation quand on veut enlever le vaisseau du jeu une fois mort 
@@ -240,19 +260,12 @@ class Game(pyglet.event.EventDispatcher, GameEvents):
         self.player_dead = "Alive"
 
         # Initialisation des listes d'entités
+        ## @brief Liste d'astéroïdes
         self.asteroids = []
+        ## @brief Liste d'ennemis
         self.enemies = []
+        ## @brief Liste d'entités
         self.entities = []
-        """
-        positions = []
-        for i in range(5):
-            positions.append(np.array([random.random()*config.MAP_SIZE[0], random.random()*config.MAP_SIZE[1]]))
-        
-        self.enemies = [Enemy(position,game_state=self) for position in positions]
-        
-        self.entities = []
-        self.entities += self.enemies
-        """
 
         # Ajout du joueur à la liste d'entités
         self.add_entity(self.player)
@@ -272,6 +285,7 @@ class Game(pyglet.event.EventDispatcher, GameEvents):
         self.old_time = time()
         self.tick_time = 0
 
+        ## @brief Gestion des touches du clavier
         self.keys = key.KeyStateHandler()
         self.window.push_handlers(self.keys)
         self.mousebuttons = mouse.MouseStateHandler()
@@ -297,10 +311,13 @@ class Game(pyglet.event.EventDispatcher, GameEvents):
         self.death_menu_batch = None
         
     def add_score(self, score):
+        """!@brief Fonction qui ajoute un score au score actuel"""
         self.score += score
         print(f'Score : {self.score}')
 
     def add_entity(self, object):
+        """!@brief Fonction qui ajoute un objet à la liste d'entités
+        @param object Entité à ajouter"""
         # Ajoute un objet à la liste d'entités
         self.entities.append(object)
         if issubclass(object.__class__, Asteroid):
@@ -309,6 +326,8 @@ class Game(pyglet.event.EventDispatcher, GameEvents):
             self.enemies.append(object)
 
     def remove_entity(self, object):
+        """!@brief Fonction qui supprime un objet de la liste d'entités
+        @param object Entité à supprimer"""
         # Supprime un objet de la liste d'entités
         if object in self.entities:
             self.entities.remove(object)
@@ -318,6 +337,7 @@ class Game(pyglet.event.EventDispatcher, GameEvents):
                 self.enemies.remove(object)
             
     def update_speed(self):
+        """!@brief Fonction qui met à jour la vitesse du joueur en fonction des touches du clavier"""
         t = time() - self.old_time
         self.old_time = time()
         
@@ -332,12 +352,14 @@ class Game(pyglet.event.EventDispatcher, GameEvents):
 
     @profiler.profile
     def display(self):
-        # Fonction qui gère l'affichage de la fenêtre de jeu
-        self.window.clear()
-        
-        batch = pyglet.graphics.Batch()
+        """!@brief Fonction qui affiche la fenêtre de jeu"""
 
+        # On efface la fenêtre
+        self.window.clear()
         pyglet.gl.glClearColor(*config.BACKGROUND_COLOR, 1) # Couleur de fond de la fenêtre
+
+
+        batch = pyglet.graphics.Batch()
 
         # On dessine les objets
         for e in self.entities:
@@ -354,6 +376,10 @@ class Game(pyglet.event.EventDispatcher, GameEvents):
                 raise
                 #Affichage de la map et de la position du ship
              
+
+        ### AFFICHAGE DE LA MINICARTE ###
+            
+
         mult_factor_win = 1/10
         mult_factor_map_win = config.MAP_SIZE / config.WIN_SIZE
         gap = 10 #espace entre la map et la bordure de la fenêtre
@@ -401,21 +427,24 @@ class Game(pyglet.event.EventDispatcher, GameEvents):
             color = (0, 255, 0)
         )
 
-        
-        # little_point = pyglet.shapes.Circle(self.player.screen_x ,5, color = (255, 0, 0), batch = batch)
+        # On dessine les objets des autres batches
         batch.draw()
         self.batch.draw()
         little_point.draw()
 
+        # Appel des fonctions à appeler à chaque affichage
         for function in self._on_draw:
             function(self)
 
+        # Affichage statique (score / barre de ressources / etc)
         game_static_display(self)
         
+        # On affiche la fenêtre
         self.window.flip()
 
 
     def hurt_animation(self):
+        """!@brief Fonction qui gère l'animation de blessure du joueur"""
         # Fonction qui fait une transition entre la couleur blanche, rouge, verte et blanche
         rgb_func = lambda x : (1 , 1- 4*x*(1-x)/2, 1- 4*x*(1-x)/2)
 
@@ -425,7 +454,7 @@ class Game(pyglet.event.EventDispatcher, GameEvents):
 
 
     def new_projectile(self):
-        # Fonction qui gère le lancement de projectiles
+        """!@brief Fonction qui gère le lancement de projectiles"""
         if self.mousebuttons[mouse.RIGHT] and self.player.state == "Alive" and self.time > 100 * config.TICK_TIME:
             #self.entities.append(self.player.throw_projectile())
             P = self.player.shoot()
@@ -434,16 +463,21 @@ class Game(pyglet.event.EventDispatcher, GameEvents):
 
     @profiler.profile
     def update(self, *other):
+        """!@brief Fonction qui met à jour les entités et l'affichage"""
+
         self.new_projectile()
         self.update_speed()
 
+        # màj du temps de jeu
         self.time += config.TICK_TIME
 
+        # màj du niveau du joueur
         if self.step < len(self.score_steps):
             if self.score >= self.score_steps[self.step]:
                 self.step += 1
                 self.player.update_step()
 
+        # màj de la position de la caméra
         if (self.player_dead == "Alive"):
             self.camera.center = self.player.pos
             #Cas de bordure où la caméra ne doit pas bouger 
@@ -464,10 +498,11 @@ class Game(pyglet.event.EventDispatcher, GameEvents):
             self.player_dead = "Gone"
             XPLosion(self.final_player_pos, self)
                 
-
+        # màj des entités
         for e in self.entities:
             e.tick()
-            
+
+        # màj de l'affichage  
         if self.ticks % config.FRAME_TICKS == 0:
             self.display()
 
@@ -484,7 +519,7 @@ class Game(pyglet.event.EventDispatcher, GameEvents):
 
     
     def run(self):
-        # Boucle de jeu
+        """!@brief Fonction qui lance la boucle de jeu"""
         while not self.game_ended:
             # On gère les événements
             self.handle_events()
@@ -496,32 +531,32 @@ class Game(pyglet.event.EventDispatcher, GameEvents):
             if self.profiling:
                 profiler.update_plot()
             
-    # Evénement de quand on essaie de fermer la fenêtre => On quitte la boucle de jeu et la fenêtre
     def on_close(self):
+        """!@brief Fonction qui gère la fermeture de la fenêtre"""
         self.game_ended = True
         pyglet.app.exit()
 
     def on_resize(self, width, height):
+        """!@brief Fonction qui gère le redimensionnement de la fenêtre"""
         self.win_size = [width, height]
         self.camera.size = np.array([width, height])
 
     def get_screen_pixels(self):
+        """!@brief Fonction qui récupère les pixels de l'écran"""
         buffer_manager = pyglet.image.get_buffer_manager()
         color_buffer = buffer_manager.get_color_buffer()
         image_data = color_buffer.get_image_data()
 
-        # Get pixel data as string
         pixel_data = image_data.get_data('RGB', image_data.width * 3)
 
-        # Convert pixel data to NumPy array
         pixel_array = np.frombuffer(pixel_data, dtype=np.uint8)
 
-        # Reshape the array to match the image dimensions
         pixel_array = pixel_array.reshape((image_data.height, image_data.width, 3))
 
         return pixel_array
     
     def reset(self):
+        """!@brief Fonction qui réinitialise le jeu une fois la partie terminée après avoir cliqué sur le bouton "Rejouer" """
 
         on_draw = self._on_draw
         on_collide = self._on_collide

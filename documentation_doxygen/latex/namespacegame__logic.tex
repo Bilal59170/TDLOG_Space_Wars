@@ -1,0 +1,143 @@
+\doxysection{game\+\_\+logic Namespace Reference}
+\hypertarget{namespacegame__logic}{}\label{namespacegame__logic}\index{game\_logic@{game\_logic}}
+
+
+Implémentation de la logique du jeu Notamment \+:  
+
+
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespacegame__logic_a549283301f7eb550c415627213d42227}{repel}} (game, ast, entity)
+\item 
+\mbox{\hyperlink{namespacegame__logic_a82e4032e9f8b436e65874cf2c7555df2}{collide}} (game, ast1, ast2)
+\item 
+\mbox{\hyperlink{namespacegame__logic_a44eb9504d9193dacd0e182a40097e663}{bullet\+\_\+asteroid\+\_\+collision}} (game, bullet, asteroid)
+\item 
+\mbox{\hyperlink{namespacegame__logic_a78d3233be5193569a6aa7eb40ec01361}{bullet\+\_\+enemy\+\_\+collision}} (game, bullet, enemy)
+\item 
+\mbox{\hyperlink{namespacegame__logic_a0b84c5a7e216df499b35a935782dce27}{bullet\+\_\+ship\+\_\+collision}} (game, bullet, ship)
+\item 
+\mbox{\hyperlink{namespacegame__logic_ad0f46c58f6275b4cc49a3d9581905dba}{asteroid\+\_\+ship\+\_\+collision}} (game, asteroid, ship)
+\item 
+\mbox{\hyperlink{namespacegame__logic_a6f14adad12edf15e0964e495f9294d35}{spawn\+\_\+asteroids}} (game)
+\item 
+\mbox{\hyperlink{namespacegame__logic_a6c562c2d681e42a1b205ea61e8d37727}{activate\+\_\+collision}} (game)
+\item 
+\mbox{\hyperlink{namespacegame__logic_aecd5246be72fa3b1f8d0ec7a9eaef0de}{activate\+\_\+asteroid\+\_\+spawn}} (game)
+\item 
+\mbox{\hyperlink{namespacegame__logic_ab489a4aa3539014ccd247d8801ded211}{activate\+\_\+\+FPS\+\_\+counter}} (game)
+\item 
+\mbox{\hyperlink{namespacegame__logic_a0479481fb026c54128febe3f96acfc88}{spawn\+\_\+enemies}} (game)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Implémentation de la logique du jeu Notamment \+: 
+
+
+\begin{DoxyItemize}
+\item Les collisions entre astéroïdes =\texorpdfstring{$>$}{>} Fonction activate\+\_\+collision(game)
+\item Le spawn d\textquotesingle{}astéroïdes =\texorpdfstring{$>$}{>} Fonction activate\+\_\+asteroid\+\_\+spawn(game) 
+\end{DoxyItemize}
+
+\doxysubsection{Function Documentation}
+\Hypertarget{namespacegame__logic_aecd5246be72fa3b1f8d0ec7a9eaef0de}\label{namespacegame__logic_aecd5246be72fa3b1f8d0ec7a9eaef0de} 
+\index{game\_logic@{game\_logic}!activate\_asteroid\_spawn@{activate\_asteroid\_spawn}}
+\index{activate\_asteroid\_spawn@{activate\_asteroid\_spawn}!game\_logic@{game\_logic}}
+\doxysubsubsection{\texorpdfstring{activate\_asteroid\_spawn()}{activate\_asteroid\_spawn()}}
+{\footnotesize\ttfamily game\+\_\+logic.\+activate\+\_\+asteroid\+\_\+spawn (\begin{DoxyParamCaption}\item[{}]{game }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb} Active le spawn d'astéroïdes \end{DoxyVerb}
+ \Hypertarget{namespacegame__logic_a6c562c2d681e42a1b205ea61e8d37727}\label{namespacegame__logic_a6c562c2d681e42a1b205ea61e8d37727} 
+\index{game\_logic@{game\_logic}!activate\_collision@{activate\_collision}}
+\index{activate\_collision@{activate\_collision}!game\_logic@{game\_logic}}
+\doxysubsubsection{\texorpdfstring{activate\_collision()}{activate\_collision()}}
+{\footnotesize\ttfamily game\+\_\+logic.\+activate\+\_\+collision (\begin{DoxyParamCaption}\item[{}]{game }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb} Active les collisions entre astéroïdes \end{DoxyVerb}
+ \Hypertarget{namespacegame__logic_ab489a4aa3539014ccd247d8801ded211}\label{namespacegame__logic_ab489a4aa3539014ccd247d8801ded211} 
+\index{game\_logic@{game\_logic}!activate\_FPS\_counter@{activate\_FPS\_counter}}
+\index{activate\_FPS\_counter@{activate\_FPS\_counter}!game\_logic@{game\_logic}}
+\doxysubsubsection{\texorpdfstring{activate\_FPS\_counter()}{activate\_FPS\_counter()}}
+{\footnotesize\ttfamily game\+\_\+logic.\+activate\+\_\+\+FPS\+\_\+counter (\begin{DoxyParamCaption}\item[{}]{game }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb} Active l'affichage du nombre d'images par seconde \end{DoxyVerb}
+ \Hypertarget{namespacegame__logic_ad0f46c58f6275b4cc49a3d9581905dba}\label{namespacegame__logic_ad0f46c58f6275b4cc49a3d9581905dba} 
+\index{game\_logic@{game\_logic}!asteroid\_ship\_collision@{asteroid\_ship\_collision}}
+\index{asteroid\_ship\_collision@{asteroid\_ship\_collision}!game\_logic@{game\_logic}}
+\doxysubsubsection{\texorpdfstring{asteroid\_ship\_collision()}{asteroid\_ship\_collision()}}
+{\footnotesize\ttfamily game\+\_\+logic.\+asteroid\+\_\+ship\+\_\+collision (\begin{DoxyParamCaption}\item[{}]{game,  }\item[{}]{asteroid,  }\item[{}]{ship }\end{DoxyParamCaption})}
+
+\Hypertarget{namespacegame__logic_a44eb9504d9193dacd0e182a40097e663}\label{namespacegame__logic_a44eb9504d9193dacd0e182a40097e663} 
+\index{game\_logic@{game\_logic}!bullet\_asteroid\_collision@{bullet\_asteroid\_collision}}
+\index{bullet\_asteroid\_collision@{bullet\_asteroid\_collision}!game\_logic@{game\_logic}}
+\doxysubsubsection{\texorpdfstring{bullet\_asteroid\_collision()}{bullet\_asteroid\_collision()}}
+{\footnotesize\ttfamily game\+\_\+logic.\+bullet\+\_\+asteroid\+\_\+collision (\begin{DoxyParamCaption}\item[{}]{game,  }\item[{}]{bullet,  }\item[{}]{asteroid }\end{DoxyParamCaption})}
+
+\Hypertarget{namespacegame__logic_a78d3233be5193569a6aa7eb40ec01361}\label{namespacegame__logic_a78d3233be5193569a6aa7eb40ec01361} 
+\index{game\_logic@{game\_logic}!bullet\_enemy\_collision@{bullet\_enemy\_collision}}
+\index{bullet\_enemy\_collision@{bullet\_enemy\_collision}!game\_logic@{game\_logic}}
+\doxysubsubsection{\texorpdfstring{bullet\_enemy\_collision()}{bullet\_enemy\_collision()}}
+{\footnotesize\ttfamily game\+\_\+logic.\+bullet\+\_\+enemy\+\_\+collision (\begin{DoxyParamCaption}\item[{}]{game,  }\item[{}]{bullet,  }\item[{}]{enemy }\end{DoxyParamCaption})}
+
+\Hypertarget{namespacegame__logic_a0b84c5a7e216df499b35a935782dce27}\label{namespacegame__logic_a0b84c5a7e216df499b35a935782dce27} 
+\index{game\_logic@{game\_logic}!bullet\_ship\_collision@{bullet\_ship\_collision}}
+\index{bullet\_ship\_collision@{bullet\_ship\_collision}!game\_logic@{game\_logic}}
+\doxysubsubsection{\texorpdfstring{bullet\_ship\_collision()}{bullet\_ship\_collision()}}
+{\footnotesize\ttfamily game\+\_\+logic.\+bullet\+\_\+ship\+\_\+collision (\begin{DoxyParamCaption}\item[{}]{game,  }\item[{}]{bullet,  }\item[{}]{ship }\end{DoxyParamCaption})}
+
+\Hypertarget{namespacegame__logic_a82e4032e9f8b436e65874cf2c7555df2}\label{namespacegame__logic_a82e4032e9f8b436e65874cf2c7555df2} 
+\index{game\_logic@{game\_logic}!collide@{collide}}
+\index{collide@{collide}!game\_logic@{game\_logic}}
+\doxysubsubsection{\texorpdfstring{collide()}{collide()}}
+{\footnotesize\ttfamily game\+\_\+logic.\+collide (\begin{DoxyParamCaption}\item[{}]{game,  }\item[{}]{ast1,  }\item[{}]{ast2 }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Fonction de collision entre deux astéroïdes
+@params:
+    game: la partie
+    ast1: le premier astéroïde
+    ast2: le deuxième astéroïde
+
+Appelée vua le décorateur on_collide de la classe Game, dans la fonction activate_collision
+
+Ne pas forcément comprendre le code qui suit, c'est la physique d'un rebond entre deux objets
+Requiert que les astéroïdes aient une masse
+\end{DoxyVerb}
+ \Hypertarget{namespacegame__logic_a549283301f7eb550c415627213d42227}\label{namespacegame__logic_a549283301f7eb550c415627213d42227} 
+\index{game\_logic@{game\_logic}!repel@{repel}}
+\index{repel@{repel}!game\_logic@{game\_logic}}
+\doxysubsubsection{\texorpdfstring{repel()}{repel()}}
+{\footnotesize\ttfamily game\+\_\+logic.\+repel (\begin{DoxyParamCaption}\item[{}]{game,  }\item[{}]{ast,  }\item[{}]{entity }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@!brief Fonction qui repousse les entités des astéroïdes (pour éviter qu'ils ne se chevauchent)
+@params:
+    game: la partie
+    ast: l'astéroïde
+    entity: l'entité à repousser
+\end{DoxyVerb}
+ \Hypertarget{namespacegame__logic_a6f14adad12edf15e0964e495f9294d35}\label{namespacegame__logic_a6f14adad12edf15e0964e495f9294d35} 
+\index{game\_logic@{game\_logic}!spawn\_asteroids@{spawn\_asteroids}}
+\index{spawn\_asteroids@{spawn\_asteroids}!game\_logic@{game\_logic}}
+\doxysubsubsection{\texorpdfstring{spawn\_asteroids()}{spawn\_asteroids()}}
+{\footnotesize\ttfamily game\+\_\+logic.\+spawn\+\_\+asteroids (\begin{DoxyParamCaption}\item[{}]{game }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Fonction de spawn d'astéroïdes
+@params:
+    game: la partie
+Active le spawn des asétroïdes tous les 5 ticks
+Le nombre d'astéroïdes spawné est aléatoire, et est limité à 20
+\end{DoxyVerb}
+ \Hypertarget{namespacegame__logic_a0479481fb026c54128febe3f96acfc88}\label{namespacegame__logic_a0479481fb026c54128febe3f96acfc88} 
+\index{game\_logic@{game\_logic}!spawn\_enemies@{spawn\_enemies}}
+\index{spawn\_enemies@{spawn\_enemies}!game\_logic@{game\_logic}}
+\doxysubsubsection{\texorpdfstring{spawn\_enemies()}{spawn\_enemies()}}
+{\footnotesize\ttfamily game\+\_\+logic.\+spawn\+\_\+enemies (\begin{DoxyParamCaption}\item[{}]{game }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Fonction de spawn des ennemis
+@params:
+    game: la partie
+Active le spawn des asétroïdes tous les 5 ticks
+Le nombre d'astéroïdes spawné est aléatoire, et est limité à 10
+\end{DoxyVerb}
+ 

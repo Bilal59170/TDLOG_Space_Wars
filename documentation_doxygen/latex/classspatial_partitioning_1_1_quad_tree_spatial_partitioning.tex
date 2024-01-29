@@ -1,0 +1,93 @@
+\doxysection{spatial\+Partitioning.\+Quad\+Tree\+Spatial\+Partitioning Class Reference}
+\hypertarget{classspatial_partitioning_1_1_quad_tree_spatial_partitioning}{}\label{classspatial_partitioning_1_1_quad_tree_spatial_partitioning}\index{spatialPartitioning.QuadTreeSpatialPartitioning@{spatialPartitioning.QuadTreeSpatialPartitioning}}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classspatial_partitioning_1_1_quad_tree_spatial_partitioning_a7cc1b10166400103ae06d4aa1f2a6538}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, boundary, capacity)
+\item 
+\mbox{\hyperlink{classspatial_partitioning_1_1_quad_tree_spatial_partitioning_a23a8a9181a4d3f430623d327a6b1b747}{add}} (self, entity)
+\item 
+\mbox{\hyperlink{classspatial_partitioning_1_1_quad_tree_spatial_partitioning_a65d9dd9b3bafd44f4e984591941bcf51}{get\+\_\+entities\+\_\+in\+\_\+range}} (self, range)
+\item 
+\mbox{\hyperlink{classspatial_partitioning_1_1_quad_tree_spatial_partitioning_acbff149ebdd44c2978dcaeac49a9a554}{get\+\_\+entities\+\_\+near\+\_\+entity}} (self, entity)
+\item 
+\mbox{\hyperlink{classspatial_partitioning_1_1_quad_tree_spatial_partitioning_a2e1add1e10d03a60194711b18c7d8811}{get\+\_\+entities\+\_\+near\+\_\+point}} (self, x, y, w, h)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classspatial_partitioning_1_1_quad_tree_spatial_partitioning_af91e4ee0d719865e80e3f5ea6a5d9840}{quadtree}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}Classe qui permet le partitionnement spatial des entités du jeu dans un quadtree
+On utilise un arbre pour stocker les entités dans des cellules de la grille
+
+Fonctionnement : 
+- On initialise le quadtree avec une taille de cellule donnée
+- On ajoute les entités dans le quadtree
+- On peut récupérer les entités qui sont dans un rectangle donné
+- On peut récupérer les entités qui sont dans un rectangle donné et qui sont proches d'une entité donnée
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classspatial_partitioning_1_1_quad_tree_spatial_partitioning_a7cc1b10166400103ae06d4aa1f2a6538}\label{classspatial_partitioning_1_1_quad_tree_spatial_partitioning_a7cc1b10166400103ae06d4aa1f2a6538} 
+\index{spatialPartitioning.QuadTreeSpatialPartitioning@{spatialPartitioning.QuadTreeSpatialPartitioning}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!spatialPartitioning.QuadTreeSpatialPartitioning@{spatialPartitioning.QuadTreeSpatialPartitioning}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily spatial\+Partitioning.\+Quad\+Tree\+Spatial\+Partitioning.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{boundary,  }\item[{}]{capacity }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}boundary : rectangle qui représente la zone couverte par le quadtree
+capacity : nombre maximum d'entités dans une cellule
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classspatial_partitioning_1_1_quad_tree_spatial_partitioning_a23a8a9181a4d3f430623d327a6b1b747}\label{classspatial_partitioning_1_1_quad_tree_spatial_partitioning_a23a8a9181a4d3f430623d327a6b1b747} 
+\index{spatialPartitioning.QuadTreeSpatialPartitioning@{spatialPartitioning.QuadTreeSpatialPartitioning}!add@{add}}
+\index{add@{add}!spatialPartitioning.QuadTreeSpatialPartitioning@{spatialPartitioning.QuadTreeSpatialPartitioning}}
+\doxysubsubsection{\texorpdfstring{add()}{add()}}
+{\footnotesize\ttfamily spatial\+Partitioning.\+Quad\+Tree\+Spatial\+Partitioning.\+add (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{entity }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Ajoute une entité dans le quadtree
+\end{DoxyVerb}
+ \Hypertarget{classspatial_partitioning_1_1_quad_tree_spatial_partitioning_a65d9dd9b3bafd44f4e984591941bcf51}\label{classspatial_partitioning_1_1_quad_tree_spatial_partitioning_a65d9dd9b3bafd44f4e984591941bcf51} 
+\index{spatialPartitioning.QuadTreeSpatialPartitioning@{spatialPartitioning.QuadTreeSpatialPartitioning}!get\_entities\_in\_range@{get\_entities\_in\_range}}
+\index{get\_entities\_in\_range@{get\_entities\_in\_range}!spatialPartitioning.QuadTreeSpatialPartitioning@{spatialPartitioning.QuadTreeSpatialPartitioning}}
+\doxysubsubsection{\texorpdfstring{get\_entities\_in\_range()}{get\_entities\_in\_range()}}
+{\footnotesize\ttfamily spatial\+Partitioning.\+Quad\+Tree\+Spatial\+Partitioning.\+get\+\_\+entities\+\_\+in\+\_\+range (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{range }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Renvoie les entités qui sont dans le rectangle range
+\end{DoxyVerb}
+ \Hypertarget{classspatial_partitioning_1_1_quad_tree_spatial_partitioning_acbff149ebdd44c2978dcaeac49a9a554}\label{classspatial_partitioning_1_1_quad_tree_spatial_partitioning_acbff149ebdd44c2978dcaeac49a9a554} 
+\index{spatialPartitioning.QuadTreeSpatialPartitioning@{spatialPartitioning.QuadTreeSpatialPartitioning}!get\_entities\_near\_entity@{get\_entities\_near\_entity}}
+\index{get\_entities\_near\_entity@{get\_entities\_near\_entity}!spatialPartitioning.QuadTreeSpatialPartitioning@{spatialPartitioning.QuadTreeSpatialPartitioning}}
+\doxysubsubsection{\texorpdfstring{get\_entities\_near\_entity()}{get\_entities\_near\_entity()}}
+{\footnotesize\ttfamily spatial\+Partitioning.\+Quad\+Tree\+Spatial\+Partitioning.\+get\+\_\+entities\+\_\+near\+\_\+entity (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{entity }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Renvoie les entités qui sont dans le rectangle qui englobe l'entité
+\end{DoxyVerb}
+ \Hypertarget{classspatial_partitioning_1_1_quad_tree_spatial_partitioning_a2e1add1e10d03a60194711b18c7d8811}\label{classspatial_partitioning_1_1_quad_tree_spatial_partitioning_a2e1add1e10d03a60194711b18c7d8811} 
+\index{spatialPartitioning.QuadTreeSpatialPartitioning@{spatialPartitioning.QuadTreeSpatialPartitioning}!get\_entities\_near\_point@{get\_entities\_near\_point}}
+\index{get\_entities\_near\_point@{get\_entities\_near\_point}!spatialPartitioning.QuadTreeSpatialPartitioning@{spatialPartitioning.QuadTreeSpatialPartitioning}}
+\doxysubsubsection{\texorpdfstring{get\_entities\_near\_point()}{get\_entities\_near\_point()}}
+{\footnotesize\ttfamily spatial\+Partitioning.\+Quad\+Tree\+Spatial\+Partitioning.\+get\+\_\+entities\+\_\+near\+\_\+point (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{x,  }\item[{}]{y,  }\item[{}]{w,  }\item[{}]{h }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Renvoie les entités qui sont dans le rectangle (x, y, w, h)
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classspatial_partitioning_1_1_quad_tree_spatial_partitioning_af91e4ee0d719865e80e3f5ea6a5d9840}\label{classspatial_partitioning_1_1_quad_tree_spatial_partitioning_af91e4ee0d719865e80e3f5ea6a5d9840} 
+\index{spatialPartitioning.QuadTreeSpatialPartitioning@{spatialPartitioning.QuadTreeSpatialPartitioning}!quadtree@{quadtree}}
+\index{quadtree@{quadtree}!spatialPartitioning.QuadTreeSpatialPartitioning@{spatialPartitioning.QuadTreeSpatialPartitioning}}
+\doxysubsubsection{\texorpdfstring{quadtree}{quadtree}}
+{\footnotesize\ttfamily spatial\+Partitioning.\+Quad\+Tree\+Spatial\+Partitioning.\+quadtree}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+drafts/\+Collisions\+Handling/\mbox{\hyperlink{spatial_partitioning_8py}{spatial\+Partitioning.\+py}}\end{DoxyCompactItemize}

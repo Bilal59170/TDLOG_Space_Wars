@@ -1,0 +1,153 @@
+\doxysection{spatial\+Partitioning.\+Quad\+Tree Class Reference}
+\hypertarget{classspatial_partitioning_1_1_quad_tree}{}\label{classspatial_partitioning_1_1_quad_tree}\index{spatialPartitioning.QuadTree@{spatialPartitioning.QuadTree}}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classspatial_partitioning_1_1_quad_tree_a514cc85ff5bb9271511fc94149d3d5cb}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, \mbox{\hyperlink{classspatial_partitioning_1_1_quad_tree_a4f5f77b36971c58271c92af0a5f59dbc}{boundary}}, \mbox{\hyperlink{classspatial_partitioning_1_1_quad_tree_ab016e2a1f34d5dcc70af227141c3b0c9}{capacity}})
+\item 
+\mbox{\hyperlink{classspatial_partitioning_1_1_quad_tree_ad675e93e8f2ab95d48b3cf599c395a95}{insert}} (self, entity)
+\item 
+\mbox{\hyperlink{classspatial_partitioning_1_1_quad_tree_af8ea06216ec7da999de3046518649719}{subdivide}} (self)
+\item 
+\mbox{\hyperlink{classspatial_partitioning_1_1_quad_tree_ad39080b6de235bebc2a50e72b44b4cab}{query}} (self, range)
+\item 
+\mbox{\hyperlink{classspatial_partitioning_1_1_quad_tree_a2f53437668021230ec69f35bbe678c5d}{query\+\_\+near\+\_\+entity}} (self, entity)
+\item 
+\mbox{\hyperlink{classspatial_partitioning_1_1_quad_tree_a66a9351d2ff940c96ffd1f858fc3f812}{query\+\_\+near\+\_\+point}} (self, x, y, w, h)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classspatial_partitioning_1_1_quad_tree_a4f5f77b36971c58271c92af0a5f59dbc}{boundary}}
+\item 
+\mbox{\hyperlink{classspatial_partitioning_1_1_quad_tree_ab016e2a1f34d5dcc70af227141c3b0c9}{capacity}}
+\item 
+\mbox{\hyperlink{classspatial_partitioning_1_1_quad_tree_afb76c853695f32e0a38f86f3372cbd34}{entities}}
+\item 
+\mbox{\hyperlink{classspatial_partitioning_1_1_quad_tree_ab21411c595e0fcf6ee0ef49b4ec6ace3}{divided}}
+\item 
+\mbox{\hyperlink{classspatial_partitioning_1_1_quad_tree_a43a759a906fc1a1fe7c1144ae006c967}{northwest}}
+\item 
+\mbox{\hyperlink{classspatial_partitioning_1_1_quad_tree_a31b2d1fd103ba9560e1233889b114996}{northeast}}
+\item 
+\mbox{\hyperlink{classspatial_partitioning_1_1_quad_tree_a02ef64b0359c92a2912b5b684629fc4b}{southwest}}
+\item 
+\mbox{\hyperlink{classspatial_partitioning_1_1_quad_tree_a362950f3497e948a875cd41d2f3406bd}{southeast}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}QuadTree pour le partitionnement spatial des entités du jeu
+On utilise un arbre pour stocker les entités dans des cellules de la grille
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classspatial_partitioning_1_1_quad_tree_a514cc85ff5bb9271511fc94149d3d5cb}\label{classspatial_partitioning_1_1_quad_tree_a514cc85ff5bb9271511fc94149d3d5cb} 
+\index{spatialPartitioning.QuadTree@{spatialPartitioning.QuadTree}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!spatialPartitioning.QuadTree@{spatialPartitioning.QuadTree}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily spatial\+Partitioning.\+Quad\+Tree.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{boundary,  }\item[{}]{capacity }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}boundary : rectangle qui représente la zone couverte par le quadtree
+capacity : nombre maximum d'entités dans une cellule
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classspatial_partitioning_1_1_quad_tree_ad675e93e8f2ab95d48b3cf599c395a95}\label{classspatial_partitioning_1_1_quad_tree_ad675e93e8f2ab95d48b3cf599c395a95} 
+\index{spatialPartitioning.QuadTree@{spatialPartitioning.QuadTree}!insert@{insert}}
+\index{insert@{insert}!spatialPartitioning.QuadTree@{spatialPartitioning.QuadTree}}
+\doxysubsubsection{\texorpdfstring{insert()}{insert()}}
+{\footnotesize\ttfamily spatial\+Partitioning.\+Quad\+Tree.\+insert (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{entity }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Ajoute une entité dans le quadtree
+\end{DoxyVerb}
+ \Hypertarget{classspatial_partitioning_1_1_quad_tree_ad39080b6de235bebc2a50e72b44b4cab}\label{classspatial_partitioning_1_1_quad_tree_ad39080b6de235bebc2a50e72b44b4cab} 
+\index{spatialPartitioning.QuadTree@{spatialPartitioning.QuadTree}!query@{query}}
+\index{query@{query}!spatialPartitioning.QuadTree@{spatialPartitioning.QuadTree}}
+\doxysubsubsection{\texorpdfstring{query()}{query()}}
+{\footnotesize\ttfamily spatial\+Partitioning.\+Quad\+Tree.\+query (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{range }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Renvoie les entités qui sont dans le rectangle range
+\end{DoxyVerb}
+ \Hypertarget{classspatial_partitioning_1_1_quad_tree_a2f53437668021230ec69f35bbe678c5d}\label{classspatial_partitioning_1_1_quad_tree_a2f53437668021230ec69f35bbe678c5d} 
+\index{spatialPartitioning.QuadTree@{spatialPartitioning.QuadTree}!query\_near\_entity@{query\_near\_entity}}
+\index{query\_near\_entity@{query\_near\_entity}!spatialPartitioning.QuadTree@{spatialPartitioning.QuadTree}}
+\doxysubsubsection{\texorpdfstring{query\_near\_entity()}{query\_near\_entity()}}
+{\footnotesize\ttfamily spatial\+Partitioning.\+Quad\+Tree.\+query\+\_\+near\+\_\+entity (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{entity }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Renvoie les entités qui sont dans le rectangle qui englobe l'entité
+\end{DoxyVerb}
+ \Hypertarget{classspatial_partitioning_1_1_quad_tree_a66a9351d2ff940c96ffd1f858fc3f812}\label{classspatial_partitioning_1_1_quad_tree_a66a9351d2ff940c96ffd1f858fc3f812} 
+\index{spatialPartitioning.QuadTree@{spatialPartitioning.QuadTree}!query\_near\_point@{query\_near\_point}}
+\index{query\_near\_point@{query\_near\_point}!spatialPartitioning.QuadTree@{spatialPartitioning.QuadTree}}
+\doxysubsubsection{\texorpdfstring{query\_near\_point()}{query\_near\_point()}}
+{\footnotesize\ttfamily spatial\+Partitioning.\+Quad\+Tree.\+query\+\_\+near\+\_\+point (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{x,  }\item[{}]{y,  }\item[{}]{w,  }\item[{}]{h }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Renvoie les entités qui sont dans le rectangle (x, y, w, h)
+\end{DoxyVerb}
+ \Hypertarget{classspatial_partitioning_1_1_quad_tree_af8ea06216ec7da999de3046518649719}\label{classspatial_partitioning_1_1_quad_tree_af8ea06216ec7da999de3046518649719} 
+\index{spatialPartitioning.QuadTree@{spatialPartitioning.QuadTree}!subdivide@{subdivide}}
+\index{subdivide@{subdivide}!spatialPartitioning.QuadTree@{spatialPartitioning.QuadTree}}
+\doxysubsubsection{\texorpdfstring{subdivide()}{subdivide()}}
+{\footnotesize\ttfamily spatial\+Partitioning.\+Quad\+Tree.\+subdivide (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Divise le quadtree en 4 sous-quadtrees
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classspatial_partitioning_1_1_quad_tree_a4f5f77b36971c58271c92af0a5f59dbc}\label{classspatial_partitioning_1_1_quad_tree_a4f5f77b36971c58271c92af0a5f59dbc} 
+\index{spatialPartitioning.QuadTree@{spatialPartitioning.QuadTree}!boundary@{boundary}}
+\index{boundary@{boundary}!spatialPartitioning.QuadTree@{spatialPartitioning.QuadTree}}
+\doxysubsubsection{\texorpdfstring{boundary}{boundary}}
+{\footnotesize\ttfamily spatial\+Partitioning.\+Quad\+Tree.\+boundary}
+
+\Hypertarget{classspatial_partitioning_1_1_quad_tree_ab016e2a1f34d5dcc70af227141c3b0c9}\label{classspatial_partitioning_1_1_quad_tree_ab016e2a1f34d5dcc70af227141c3b0c9} 
+\index{spatialPartitioning.QuadTree@{spatialPartitioning.QuadTree}!capacity@{capacity}}
+\index{capacity@{capacity}!spatialPartitioning.QuadTree@{spatialPartitioning.QuadTree}}
+\doxysubsubsection{\texorpdfstring{capacity}{capacity}}
+{\footnotesize\ttfamily spatial\+Partitioning.\+Quad\+Tree.\+capacity}
+
+\Hypertarget{classspatial_partitioning_1_1_quad_tree_ab21411c595e0fcf6ee0ef49b4ec6ace3}\label{classspatial_partitioning_1_1_quad_tree_ab21411c595e0fcf6ee0ef49b4ec6ace3} 
+\index{spatialPartitioning.QuadTree@{spatialPartitioning.QuadTree}!divided@{divided}}
+\index{divided@{divided}!spatialPartitioning.QuadTree@{spatialPartitioning.QuadTree}}
+\doxysubsubsection{\texorpdfstring{divided}{divided}}
+{\footnotesize\ttfamily spatial\+Partitioning.\+Quad\+Tree.\+divided}
+
+\Hypertarget{classspatial_partitioning_1_1_quad_tree_afb76c853695f32e0a38f86f3372cbd34}\label{classspatial_partitioning_1_1_quad_tree_afb76c853695f32e0a38f86f3372cbd34} 
+\index{spatialPartitioning.QuadTree@{spatialPartitioning.QuadTree}!entities@{entities}}
+\index{entities@{entities}!spatialPartitioning.QuadTree@{spatialPartitioning.QuadTree}}
+\doxysubsubsection{\texorpdfstring{entities}{entities}}
+{\footnotesize\ttfamily spatial\+Partitioning.\+Quad\+Tree.\+entities}
+
+\Hypertarget{classspatial_partitioning_1_1_quad_tree_a31b2d1fd103ba9560e1233889b114996}\label{classspatial_partitioning_1_1_quad_tree_a31b2d1fd103ba9560e1233889b114996} 
+\index{spatialPartitioning.QuadTree@{spatialPartitioning.QuadTree}!northeast@{northeast}}
+\index{northeast@{northeast}!spatialPartitioning.QuadTree@{spatialPartitioning.QuadTree}}
+\doxysubsubsection{\texorpdfstring{northeast}{northeast}}
+{\footnotesize\ttfamily spatial\+Partitioning.\+Quad\+Tree.\+northeast}
+
+\Hypertarget{classspatial_partitioning_1_1_quad_tree_a43a759a906fc1a1fe7c1144ae006c967}\label{classspatial_partitioning_1_1_quad_tree_a43a759a906fc1a1fe7c1144ae006c967} 
+\index{spatialPartitioning.QuadTree@{spatialPartitioning.QuadTree}!northwest@{northwest}}
+\index{northwest@{northwest}!spatialPartitioning.QuadTree@{spatialPartitioning.QuadTree}}
+\doxysubsubsection{\texorpdfstring{northwest}{northwest}}
+{\footnotesize\ttfamily spatial\+Partitioning.\+Quad\+Tree.\+northwest}
+
+\Hypertarget{classspatial_partitioning_1_1_quad_tree_a362950f3497e948a875cd41d2f3406bd}\label{classspatial_partitioning_1_1_quad_tree_a362950f3497e948a875cd41d2f3406bd} 
+\index{spatialPartitioning.QuadTree@{spatialPartitioning.QuadTree}!southeast@{southeast}}
+\index{southeast@{southeast}!spatialPartitioning.QuadTree@{spatialPartitioning.QuadTree}}
+\doxysubsubsection{\texorpdfstring{southeast}{southeast}}
+{\footnotesize\ttfamily spatial\+Partitioning.\+Quad\+Tree.\+southeast}
+
+\Hypertarget{classspatial_partitioning_1_1_quad_tree_a02ef64b0359c92a2912b5b684629fc4b}\label{classspatial_partitioning_1_1_quad_tree_a02ef64b0359c92a2912b5b684629fc4b} 
+\index{spatialPartitioning.QuadTree@{spatialPartitioning.QuadTree}!southwest@{southwest}}
+\index{southwest@{southwest}!spatialPartitioning.QuadTree@{spatialPartitioning.QuadTree}}
+\doxysubsubsection{\texorpdfstring{southwest}{southwest}}
+{\footnotesize\ttfamily spatial\+Partitioning.\+Quad\+Tree.\+southwest}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+drafts/\+Collisions\+Handling/\mbox{\hyperlink{spatial_partitioning_8py}{spatial\+Partitioning.\+py}}\end{DoxyCompactItemize}

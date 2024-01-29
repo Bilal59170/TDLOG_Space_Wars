@@ -1,0 +1,171 @@
+\doxysection{game\+\_\+engine.\+entity.\+Entity Class Reference}
+\hypertarget{classgame__engine_1_1entity_1_1_entity}{}\label{classgame__engine_1_1entity_1_1_entity}\index{game\_engine.entity.Entity@{game\_engine.entity.Entity}}
+
+
+Inheritance diagram for game\+\_\+engine.\+entity.\+Entity\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classgame__engine_1_1entity_1_1_entity__inherit__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classgame__engine_1_1entity_1_1_entity_aa9adfb3ce0c4a802abbb203c6869952a}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, \mbox{\hyperlink{classgame__engine_1_1entity_1_1_entity_af815a3e2a6b5ad8368966f5005379d90}{pos}}, \mbox{\hyperlink{classgame__engine_1_1entity_1_1_entity_af2c22bdff5334a7b717f53f6fd162aca}{game\+\_\+state}}, \mbox{\hyperlink{classgame__engine_1_1entity_1_1_entity_a0ee597df74b23e9da461a8d02406f8e9}{speed}}=np.\+array(\mbox{[}0, 0\mbox{]}))
+\item 
+\mbox{\hyperlink{classgame__engine_1_1entity_1_1_entity_af815a3e2a6b5ad8368966f5005379d90}{pos}} (self)
+\item 
+\mbox{\hyperlink{classgame__engine_1_1entity_1_1_entity_ad8675f8320858638971d07383477ffd5}{pos}} (self, pos)
+\item 
+\mbox{\hyperlink{classgame__engine_1_1entity_1_1_entity_aef049cd6315fa3c702f37d485f49497d}{screen\+\_\+pos}} (self)
+\item 
+\mbox{\hyperlink{classgame__engine_1_1entity_1_1_entity_afdc2015e106fc1da39fdd1592db4fb5d}{tick}} (self)
+\item 
+\mbox{\hyperlink{classgame__engine_1_1entity_1_1_entity_a7991de2777ae67728cb6349bd870f313}{screen\+\_\+x}} (self)
+\item 
+\mbox{\hyperlink{classgame__engine_1_1entity_1_1_entity_acd44ad2c9a5d58fe8c5c169821b957bf}{screen\+\_\+y}} (self)
+\item 
+\mbox{\hyperlink{classgame__engine_1_1entity_1_1_entity_a67f5a4dd48c4f4aa19d4b55d00c2720e}{x}} (self)
+\item 
+\mbox{\hyperlink{classgame__engine_1_1entity_1_1_entity_a439be568bc74156524d56d1c20495a59}{y}} (self)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classgame__engine_1_1entity_1_1_entity_a0ee597df74b23e9da461a8d02406f8e9}{speed}}
+\item 
+\mbox{\hyperlink{classgame__engine_1_1entity_1_1_entity_af2c22bdff5334a7b717f53f6fd162aca}{game\+\_\+state}}
+\item 
+\mbox{\hyperlink{classgame__engine_1_1entity_1_1_entity_a7a10c36ae48751b8f1f37058e9a3c616}{camera}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classgame__engine_1_1entity_1_1_entity_a6e2833bd589cc3e962a440ce69aa4b45}{\+\_\+pos}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}Classe entité
+=> Justification :
+    - Gestion de la position
+        => Pour l'affichage à l'écran (screen_pos)
+        => Pour le multijoueur
+        => Permet de travailler avec les coordonnées de l'entité sans se soucier de leur provenance 
+            => compabilité de ce que l'on a développé avec les éléments à rajouter
+    - Gestion de la vitesse
+        => Permet, pour le multijoueur, d'estimer la position de l'entité à un instant t à partir de sa position ainsi que sa vitesse à un instant t-1
+        => Actualisation de la position à chaque tick en fonction de la vitesse
+
+=> Fonctionnalités majeures:
+    - pos => Position sur la carte de l'objet
+    - speed => Vitesse de l'objet
+    - screen_pos => Position de l'objet à l'écran
+    - tick => Actualisation de la position selon la vitesse
+
+=> Fonctionnalités mineures:
+    - x, y => Coordonnées x et y de l'objet sur la carte
+    - screen_x, screen_y => Coordonnées x et y de l'objet à l'écran\end{DoxyVerb}
+ 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classgame__engine_1_1entity_1_1_entity_aa9adfb3ce0c4a802abbb203c6869952a}\label{classgame__engine_1_1entity_1_1_entity_aa9adfb3ce0c4a802abbb203c6869952a} 
+\index{game\_engine.entity.Entity@{game\_engine.entity.Entity}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!game\_engine.entity.Entity@{game\_engine.entity.Entity}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily game\+\_\+engine.\+entity.\+Entity.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{pos,  }\item[{}]{game\+\_\+state,  }\item[{}]{speed = {\ttfamily np.array(\mbox{[}0,~0\mbox{]})} }\end{DoxyParamCaption})}
+
+
+
+Reimplemented in \mbox{\hyperlink{classenemies_1_1_enemy_a04630a74b4cd4a5961af2b5682cc37ae}{enemies.\+Enemy}}, \mbox{\hyperlink{classgame__engine_1_1sprites_1_1_image_a1369400d9dd1d77d1c0f5f33aa3d8671}{game\+\_\+engine.\+sprites.\+Image}}, \mbox{\hyperlink{classgame__engine_1_1sprites_1_1_circle_af28226f4ea01f5466c6be69a61c817a2}{game\+\_\+engine.\+sprites.\+Circle}}, \mbox{\hyperlink{classgame__engine_1_1sprites_1_1_label_aaf8447a9bfa4a2dbf8f26701d3f9db15}{game\+\_\+engine.\+sprites.\+Label}}, \mbox{\hyperlink{classgame__engine_1_1sprites_1_1_polygon_aca22695450e9c16858f1becef43ac7e1}{game\+\_\+engine.\+sprites.\+Polygon}}, and \mbox{\hyperlink{classprojectiles_1_1_projectile_ac38269b2978df25f7dabec3b2261b99d}{projectiles.\+Projectile}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classgame__engine_1_1entity_1_1_entity_af815a3e2a6b5ad8368966f5005379d90}\label{classgame__engine_1_1entity_1_1_entity_af815a3e2a6b5ad8368966f5005379d90} 
+\index{game\_engine.entity.Entity@{game\_engine.entity.Entity}!pos@{pos}}
+\index{pos@{pos}!game\_engine.entity.Entity@{game\_engine.entity.Entity}}
+\doxysubsubsection{\texorpdfstring{pos()}{pos()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily game\+\_\+engine.\+entity.\+Entity.\+pos (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+\Hypertarget{classgame__engine_1_1entity_1_1_entity_ad8675f8320858638971d07383477ffd5}\label{classgame__engine_1_1entity_1_1_entity_ad8675f8320858638971d07383477ffd5} 
+\index{game\_engine.entity.Entity@{game\_engine.entity.Entity}!pos@{pos}}
+\index{pos@{pos}!game\_engine.entity.Entity@{game\_engine.entity.Entity}}
+\doxysubsubsection{\texorpdfstring{pos()}{pos()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily game\+\_\+engine.\+entity.\+Entity.\+pos (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{pos }\end{DoxyParamCaption})}
+
+\Hypertarget{classgame__engine_1_1entity_1_1_entity_aef049cd6315fa3c702f37d485f49497d}\label{classgame__engine_1_1entity_1_1_entity_aef049cd6315fa3c702f37d485f49497d} 
+\index{game\_engine.entity.Entity@{game\_engine.entity.Entity}!screen\_pos@{screen\_pos}}
+\index{screen\_pos@{screen\_pos}!game\_engine.entity.Entity@{game\_engine.entity.Entity}}
+\doxysubsubsection{\texorpdfstring{screen\_pos()}{screen\_pos()}}
+{\footnotesize\ttfamily game\+\_\+engine.\+entity.\+Entity.\+screen\+\_\+pos (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Position à l'écran de l'entité. La carte étant torique, on doit prendre en compte les cas où l'entité est en dehors de l'écran.
+\end{DoxyVerb}
+ \Hypertarget{classgame__engine_1_1entity_1_1_entity_a7991de2777ae67728cb6349bd870f313}\label{classgame__engine_1_1entity_1_1_entity_a7991de2777ae67728cb6349bd870f313} 
+\index{game\_engine.entity.Entity@{game\_engine.entity.Entity}!screen\_x@{screen\_x}}
+\index{screen\_x@{screen\_x}!game\_engine.entity.Entity@{game\_engine.entity.Entity}}
+\doxysubsubsection{\texorpdfstring{screen\_x()}{screen\_x()}}
+{\footnotesize\ttfamily game\+\_\+engine.\+entity.\+Entity.\+screen\+\_\+x (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+\Hypertarget{classgame__engine_1_1entity_1_1_entity_acd44ad2c9a5d58fe8c5c169821b957bf}\label{classgame__engine_1_1entity_1_1_entity_acd44ad2c9a5d58fe8c5c169821b957bf} 
+\index{game\_engine.entity.Entity@{game\_engine.entity.Entity}!screen\_y@{screen\_y}}
+\index{screen\_y@{screen\_y}!game\_engine.entity.Entity@{game\_engine.entity.Entity}}
+\doxysubsubsection{\texorpdfstring{screen\_y()}{screen\_y()}}
+{\footnotesize\ttfamily game\+\_\+engine.\+entity.\+Entity.\+screen\+\_\+y (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+\Hypertarget{classgame__engine_1_1entity_1_1_entity_afdc2015e106fc1da39fdd1592db4fb5d}\label{classgame__engine_1_1entity_1_1_entity_afdc2015e106fc1da39fdd1592db4fb5d} 
+\index{game\_engine.entity.Entity@{game\_engine.entity.Entity}!tick@{tick}}
+\index{tick@{tick}!game\_engine.entity.Entity@{game\_engine.entity.Entity}}
+\doxysubsubsection{\texorpdfstring{tick()}{tick()}}
+{\footnotesize\ttfamily game\+\_\+engine.\+entity.\+Entity.\+tick (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Reimplemented in \mbox{\hyperlink{classgame__engine_1_1sprites_1_1_image_a608b5bcf8c2ba8d47dcc7dbe93ee8728}{game\+\_\+engine.\+sprites.\+Image}}, \mbox{\hyperlink{classenemies_1_1_enemy_afd28d928eaf5258d3107dedae443699a}{enemies.\+Enemy}}, and \mbox{\hyperlink{classprojectiles_1_1_projectile_a3d383329e08c1dde041fcdfb224e5b9a}{projectiles.\+Projectile}}.
+
+\Hypertarget{classgame__engine_1_1entity_1_1_entity_a67f5a4dd48c4f4aa19d4b55d00c2720e}\label{classgame__engine_1_1entity_1_1_entity_a67f5a4dd48c4f4aa19d4b55d00c2720e} 
+\index{game\_engine.entity.Entity@{game\_engine.entity.Entity}!x@{x}}
+\index{x@{x}!game\_engine.entity.Entity@{game\_engine.entity.Entity}}
+\doxysubsubsection{\texorpdfstring{x()}{x()}}
+{\footnotesize\ttfamily game\+\_\+engine.\+entity.\+Entity.\+x (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+\Hypertarget{classgame__engine_1_1entity_1_1_entity_a439be568bc74156524d56d1c20495a59}\label{classgame__engine_1_1entity_1_1_entity_a439be568bc74156524d56d1c20495a59} 
+\index{game\_engine.entity.Entity@{game\_engine.entity.Entity}!y@{y}}
+\index{y@{y}!game\_engine.entity.Entity@{game\_engine.entity.Entity}}
+\doxysubsubsection{\texorpdfstring{y()}{y()}}
+{\footnotesize\ttfamily game\+\_\+engine.\+entity.\+Entity.\+y (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classgame__engine_1_1entity_1_1_entity_a6e2833bd589cc3e962a440ce69aa4b45}\label{classgame__engine_1_1entity_1_1_entity_a6e2833bd589cc3e962a440ce69aa4b45} 
+\index{game\_engine.entity.Entity@{game\_engine.entity.Entity}!\_pos@{\_pos}}
+\index{\_pos@{\_pos}!game\_engine.entity.Entity@{game\_engine.entity.Entity}}
+\doxysubsubsection{\texorpdfstring{\_pos}{\_pos}}
+{\footnotesize\ttfamily game\+\_\+engine.\+entity.\+Entity.\+\_\+pos\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{classgame__engine_1_1entity_1_1_entity_a7a10c36ae48751b8f1f37058e9a3c616}\label{classgame__engine_1_1entity_1_1_entity_a7a10c36ae48751b8f1f37058e9a3c616} 
+\index{game\_engine.entity.Entity@{game\_engine.entity.Entity}!camera@{camera}}
+\index{camera@{camera}!game\_engine.entity.Entity@{game\_engine.entity.Entity}}
+\doxysubsubsection{\texorpdfstring{camera}{camera}}
+{\footnotesize\ttfamily game\+\_\+engine.\+entity.\+Entity.\+camera}
+
+\Hypertarget{classgame__engine_1_1entity_1_1_entity_af2c22bdff5334a7b717f53f6fd162aca}\label{classgame__engine_1_1entity_1_1_entity_af2c22bdff5334a7b717f53f6fd162aca} 
+\index{game\_engine.entity.Entity@{game\_engine.entity.Entity}!game\_state@{game\_state}}
+\index{game\_state@{game\_state}!game\_engine.entity.Entity@{game\_engine.entity.Entity}}
+\doxysubsubsection{\texorpdfstring{game\_state}{game\_state}}
+{\footnotesize\ttfamily game\+\_\+engine.\+entity.\+Entity.\+game\+\_\+state}
+
+\Hypertarget{classgame__engine_1_1entity_1_1_entity_a0ee597df74b23e9da461a8d02406f8e9}\label{classgame__engine_1_1entity_1_1_entity_a0ee597df74b23e9da461a8d02406f8e9} 
+\index{game\_engine.entity.Entity@{game\_engine.entity.Entity}!speed@{speed}}
+\index{speed@{speed}!game\_engine.entity.Entity@{game\_engine.entity.Entity}}
+\doxysubsubsection{\texorpdfstring{speed}{speed}}
+{\footnotesize\ttfamily game\+\_\+engine.\+entity.\+Entity.\+speed}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+game\+\_\+engine/\mbox{\hyperlink{entity_8py}{entity.\+py}}\end{DoxyCompactItemize}

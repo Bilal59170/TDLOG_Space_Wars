@@ -1,0 +1,586 @@
+\doxysection{game.\+Game Class Reference}
+\hypertarget{classgame_1_1_game}{}\label{classgame_1_1_game}\index{game.Game@{game.Game}}
+
+
+Classe principale du jeu.  
+
+
+
+
+Inheritance diagram for game.\+Game\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=344pt]{classgame_1_1_game__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for game.\+Game\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=344pt]{classgame_1_1_game__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classgame_1_1_game_a971890cfb124e987a739ea53a48413b6}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, profile=False)
+\item 
+\mbox{\hyperlink{classgame_1_1_game_abe06f009af5d27b96ce1813ecbf76291}{add\+\_\+score}} (self, \mbox{\hyperlink{classgame_1_1_game_a9fc3de11ce2917dc19d326e1bb1bec48}{score}})
+\begin{DoxyCompactList}\small\item\em Fonction qui ajoute un score au score actuel. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classgame_1_1_game_a6063d8939d6b07853ab625b1941bcb22}{add\+\_\+entity}} (self, object)
+\begin{DoxyCompactList}\small\item\em Fonction qui ajoute un objet à la liste d\textquotesingle{}entités. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classgame_1_1_game_aa0136525f2a99f57503990ad3286a231}{remove\+\_\+entity}} (self, object)
+\begin{DoxyCompactList}\small\item\em Fonction qui supprime un objet de la liste d\textquotesingle{}entités. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classgame_1_1_game_a6827381eb6e683f3a0834ec8d13b9a85}{update\+\_\+speed}} (self)
+\begin{DoxyCompactList}\small\item\em Fonction qui met à jour la vitesse du joueur en fonction des touches du clavier. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classgame_1_1_game_a93e72ed9a8788ed024e011b0ad77e6fa}{display}} (self)
+\begin{DoxyCompactList}\small\item\em Fonction qui affiche la fenêtre de jeu. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classgame_1_1_game_aaf7e57006ee041ee4cf857091c498e21}{hurt\+\_\+animation}} (self)
+\begin{DoxyCompactList}\small\item\em Fonction qui gère l\textquotesingle{}animation de blessure du joueur. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classgame_1_1_game_af7941081c2a4eeee281651896f32c01f}{new\+\_\+projectile}} (self)
+\begin{DoxyCompactList}\small\item\em Fonction qui gère le lancement de projectiles. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classgame_1_1_game_a21e159d75a7ff75ae079f8f3c73ccba6}{update}} (self, \texorpdfstring{$\ast$}{*}other)
+\begin{DoxyCompactList}\small\item\em Fonction qui met à jour les entités et l\textquotesingle{}affichage. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classgame_1_1_game_a8090301290a0e2c225360b3fef43a20c}{run}} (self)
+\begin{DoxyCompactList}\small\item\em Fonction qui lance la boucle de jeu. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classgame_1_1_game_a8624d5ce35b2a400cfa2c50b84bd3546}{on\+\_\+close}} (self)
+\begin{DoxyCompactList}\small\item\em Fonction qui gère la fermeture de la fenêtre. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classgame_1_1_game_af3354d7e40e5601e9f44a8bde75f036c}{on\+\_\+resize}} (self, width, height)
+\begin{DoxyCompactList}\small\item\em Fonction qui gère le redimensionnement de la fenêtre. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classgame_1_1_game_ab6bf1baeff1fe22e7d911dc4d1565be7}{get\+\_\+screen\+\_\+pixels}} (self)
+\begin{DoxyCompactList}\small\item\em Fonction qui récupère les pixels de l\textquotesingle{}écran. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classgame_1_1_game_a7626ed62e7bdebc7ab553119187c0be1}{reset}} (self)
+\begin{DoxyCompactList}\small\item\em Fonction qui réinitialise le jeu une fois la partie terminée après avoir cliqué sur le bouton "{}\+Rejouer"{}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classgame_1_1_game_events}{game.\+Game\+Events}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classgame_1_1_game_events_a636b0cde8d2af5e6cb9dd36053500c60}{on\+\_\+draw}} (self, function)
+\begin{DoxyCompactList}\small\item\em Fonction qui permet d\textquotesingle{}ajouter une fonction à appeler à chaque affichage. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classgame_1_1_game_events_a4aaa283a69d85726293f693bad778244}{handle\+\_\+events}} (self)
+\begin{DoxyCompactList}\small\item\em Fonction qui gère les événements, appelée à chaque tick, dans la boucle de jeu. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classgame_1_1_game_a0ac2283a7e3ec0e1929573c9300c0fab}{window}}
+\begin{DoxyCompactList}\small\item\em Fenêtre de jeu. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classgame_1_1_game_a418def7d7a7c92e81f2ef23bc2c4f351}{win\+\_\+size}}
+\item 
+\mbox{\hyperlink{classgame_1_1_game_a06f9807458345ea3a138e68e67a6b17b}{batch}}
+\begin{DoxyCompactList}\small\item\em Batch d\textquotesingle{}objets. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classgame_1_1_game_a9d98aa82a913dc840e15050e609e5460}{game\+\_\+ended}}
+\item 
+\mbox{\hyperlink{classgame_1_1_game_ae0028a774ce5049cb9a7b6ba5fa9c39a}{tick}}
+\item 
+\mbox{\hyperlink{classgame_1_1_game_aa74058cd901e99867879c88b98d7c178}{map\+\_\+size}}
+\begin{DoxyCompactList}\small\item\em Taille de la carte. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classgame_1_1_game_a97494c644972764b729d559c08e3494f}{camera}}
+\begin{DoxyCompactList}\small\item\em Caméra. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classgame_1_1_game_a7959dcaf853251950c9415b225db2939}{player}}
+\begin{DoxyCompactList}\small\item\em Joueur. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classgame_1_1_game_a9fc3de11ce2917dc19d326e1bb1bec48}{score}}
+\begin{DoxyCompactList}\small\item\em Score. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classgame_1_1_game_aea36514ec75a36489572d1e38a9cfedf}{final\+\_\+player\+\_\+pos}}
+\item 
+\mbox{\hyperlink{classgame_1_1_game_a2821f2eabb6f63f552b6f947451b5a7b}{player\+\_\+dead}}
+\item 
+\mbox{\hyperlink{classgame_1_1_game_a076a3e2cdc435d31403171bef1749623}{asteroids}}
+\begin{DoxyCompactList}\small\item\em Liste d\textquotesingle{}astéroïdes. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classgame_1_1_game_a4ef43be23aaf135fa4605aa9de6cf922}{enemies}}
+\begin{DoxyCompactList}\small\item\em Liste d\textquotesingle{}ennemis. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classgame_1_1_game_aa05d69a6aee91cb3954f73d2453cbb6a}{entities}}
+\begin{DoxyCompactList}\small\item\em Liste d\textquotesingle{}entités. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classgame_1_1_game_a6c9a941234c79983edd2d99dd63bc89d}{time}}
+\item 
+\mbox{\hyperlink{classgame_1_1_game_aca93ab5f8f23ef2071e987dd5658c2ae}{old\+\_\+time}}
+\item 
+\mbox{\hyperlink{classgame_1_1_game_ad71d000d0b9af4b3cdaf7ea609c05a17}{tick\+\_\+time}}
+\item 
+\mbox{\hyperlink{classgame_1_1_game_a90b008bb2ec0f31f1a2aad8c4453e3ae}{keys}}
+\begin{DoxyCompactList}\small\item\em Gestion des touches du clavier. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classgame_1_1_game_aaccfe3b72a9241846b8329919638fccb}{mousebuttons}}
+\item 
+\mbox{\hyperlink{classgame_1_1_game_a7a66f5f572433af967ed0d5d7ae29cbd}{mouse\+\_\+x}}
+\item 
+\mbox{\hyperlink{classgame_1_1_game_af584b7d13bd8ab518134aef8ee3d8a2a}{mouse\+\_\+y}}
+\item 
+\mbox{\hyperlink{classgame_1_1_game_acb6fc7454e2f0e5276a1e07802fa3c70}{profiling}}
+\item 
+\mbox{\hyperlink{classgame_1_1_game_a60ce974ab7777b2a93964e6b6c548c8b}{death\+\_\+menu\+\_\+batch}}
+\item 
+\mbox{\hyperlink{classgame_1_1_game_add5fa217d5a507d6e3abc2d37c9fb0dc}{score\+\_\+steps}}
+\item 
+\mbox{\hyperlink{classgame_1_1_game_a242a1baf6d8a31375a12baeedcfbd883}{step}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes inherited from \mbox{\hyperlink{classgame_1_1_game_events}{game.\+Game\+Events}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classgame_1_1_game_events_a4ea7563626cd4994d3d5444a9274f931}{number}}
+\item 
+\mbox{\hyperlink{classgame_1_1_game_events_a32a4c8d9371bf33d04934a339b0fc0b5}{object1}}
+\item 
+\mbox{\hyperlink{classgame_1_1_game_events_a783c061e10eb57d3c521491fdd63b236}{object2}}
+\item 
+\mbox{\hyperlink{classgame_1_1_game_events_a1dad4e80c9d48b4f667e9ae33c111a5d}{sym}}
+\item 
+\mbox{\hyperlink{classgame_1_1_game_events_aa550ff04d50e0364778b7bfa69ab0fe6}{each}}
+\item 
+\mbox{\hyperlink{classgame_1_1_game_events_a3ac6bb0d944b534002493e5f56a6627a}{on\+\_\+collide}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{classgame_1_1_game_ae4389240f195b45e81ce3e73257c1ef3}{time}} = 0
+\item 
+int \mbox{\hyperlink{classgame_1_1_game_ad9b96207db08c0c2a3919203359912eb}{ticks}} = 0
+\item 
+list \mbox{\hyperlink{classgame_1_1_game_a974263bff5af08076d8aac844f7786ab}{score\+\_\+steps}} = \mbox{[}2000, 10000, 50000\mbox{]}
+\item 
+int \mbox{\hyperlink{classgame_1_1_game_ae1b6c68a07c3967b91fc1e2b66236ea4}{step}} = 0
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classgame_1_1_game_aabf8a8a4d63c6479be1a491bbf4421d1}{\+\_\+on\+\_\+draw}}
+\item 
+\mbox{\hyperlink{classgame_1_1_game_af7f517754784ce02c48a6cf237fc4b66}{\+\_\+on\+\_\+collide}}
+\item 
+\mbox{\hyperlink{classgame_1_1_game_a74039e585108832e4220ec928881a959}{\+\_\+each}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{classgame_1_1_game_events}{game.\+Game\+Events}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classgame_1_1_game_events_a77da63593e9c6c086968e3b9fb544004}{\+\_\+each}}
+\begin{DoxyCompactList}\small\item\em Liste des fonctions à appeler à chaque x ticks \mbox{[}(n\+\_\+ticks, function)\mbox{]}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classgame_1_1_game_events_a1eb0194cded7f171118736b2eb607882}{\+\_\+on\+\_\+collide}}
+\begin{DoxyCompactList}\small\item\em Liste des fonctions à appeler à chaque collision \mbox{[}(object1, object2, sym, function)\mbox{]}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classgame_1_1_game_events_a113c01cfb6469f3dfb9b3bd881f7f03b}{\+\_\+on\+\_\+draw}}
+\begin{DoxyCompactList}\small\item\em Liste des fonctions à appeler à chaque affichage. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Classe principale du jeu. 
+
+Attributs \+:
+\begin{DoxyItemize}
+\item endgame \+: booléen qui indique si la partie est terminée
+\item map \+: instance de la classe Map
+\item player \+: instance de la classe Ship
+\item asteroids \+: liste d\textquotesingle{}instances de la classe Asteroid
+\item ennemies \+: liste d\textquotesingle{}instances de la classe Ennemy
+\item entities \+: liste d\textquotesingle{}instances de la classe Entity
+\item batch \+: batch d\textquotesingle{}objets
+\item time \+: ticks de jeu
+\item window \+: fenêtre pyglet
+\end{DoxyItemize}
+
+Méthodes \+:
+\begin{DoxyItemize}
+\item remove \+: supprime un objet de la liste d\textquotesingle{}entités
+\item display \+: affiche la fenêtre de jeu
+\item update \+: met à jour les entités
+\item run \+: lance la boucle de jeu
+\end{DoxyItemize}
+
+Méthodes de gestion des événements \+:
+\begin{DoxyItemize}
+\item on\+\_\+close \+: ferme la fenêtre de jeu
+\item on\+\_\+key\+\_\+press \+: gère les événements liés aux touches du clavier 
+\end{DoxyItemize}
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classgame_1_1_game_a971890cfb124e987a739ea53a48413b6}\label{classgame_1_1_game_a971890cfb124e987a739ea53a48413b6} 
+\index{game.Game@{game.Game}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!game.Game@{game.Game}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily game.\+Game.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{profile = {\ttfamily False} }\end{DoxyParamCaption})}
+
+
+
+Reimplemented from \mbox{\hyperlink{classgame_1_1_game_events_a91ab95ed8260ed8752fec3a2df504883}{game.\+Game\+Events}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classgame_1_1_game_a6063d8939d6b07853ab625b1941bcb22}\label{classgame_1_1_game_a6063d8939d6b07853ab625b1941bcb22} 
+\index{game.Game@{game.Game}!add\_entity@{add\_entity}}
+\index{add\_entity@{add\_entity}!game.Game@{game.Game}}
+\doxysubsubsection{\texorpdfstring{add\_entity()}{add\_entity()}}
+{\footnotesize\ttfamily game.\+Game.\+add\+\_\+entity (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{object }\end{DoxyParamCaption})}
+
+
+
+Fonction qui ajoute un objet à la liste d\textquotesingle{}entités. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em object} & Entité à ajouter \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classgame_1_1_game_abe06f009af5d27b96ce1813ecbf76291}\label{classgame_1_1_game_abe06f009af5d27b96ce1813ecbf76291} 
+\index{game.Game@{game.Game}!add\_score@{add\_score}}
+\index{add\_score@{add\_score}!game.Game@{game.Game}}
+\doxysubsubsection{\texorpdfstring{add\_score()}{add\_score()}}
+{\footnotesize\ttfamily game.\+Game.\+add\+\_\+score (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{score }\end{DoxyParamCaption})}
+
+
+
+Fonction qui ajoute un score au score actuel. 
+
+\Hypertarget{classgame_1_1_game_a93e72ed9a8788ed024e011b0ad77e6fa}\label{classgame_1_1_game_a93e72ed9a8788ed024e011b0ad77e6fa} 
+\index{game.Game@{game.Game}!display@{display}}
+\index{display@{display}!game.Game@{game.Game}}
+\doxysubsubsection{\texorpdfstring{display()}{display()}}
+{\footnotesize\ttfamily game.\+Game.\+display (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Fonction qui affiche la fenêtre de jeu. 
+
+\Hypertarget{classgame_1_1_game_ab6bf1baeff1fe22e7d911dc4d1565be7}\label{classgame_1_1_game_ab6bf1baeff1fe22e7d911dc4d1565be7} 
+\index{game.Game@{game.Game}!get\_screen\_pixels@{get\_screen\_pixels}}
+\index{get\_screen\_pixels@{get\_screen\_pixels}!game.Game@{game.Game}}
+\doxysubsubsection{\texorpdfstring{get\_screen\_pixels()}{get\_screen\_pixels()}}
+{\footnotesize\ttfamily game.\+Game.\+get\+\_\+screen\+\_\+pixels (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Fonction qui récupère les pixels de l\textquotesingle{}écran. 
+
+\Hypertarget{classgame_1_1_game_aaf7e57006ee041ee4cf857091c498e21}\label{classgame_1_1_game_aaf7e57006ee041ee4cf857091c498e21} 
+\index{game.Game@{game.Game}!hurt\_animation@{hurt\_animation}}
+\index{hurt\_animation@{hurt\_animation}!game.Game@{game.Game}}
+\doxysubsubsection{\texorpdfstring{hurt\_animation()}{hurt\_animation()}}
+{\footnotesize\ttfamily game.\+Game.\+hurt\+\_\+animation (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Fonction qui gère l\textquotesingle{}animation de blessure du joueur. 
+
+\Hypertarget{classgame_1_1_game_af7941081c2a4eeee281651896f32c01f}\label{classgame_1_1_game_af7941081c2a4eeee281651896f32c01f} 
+\index{game.Game@{game.Game}!new\_projectile@{new\_projectile}}
+\index{new\_projectile@{new\_projectile}!game.Game@{game.Game}}
+\doxysubsubsection{\texorpdfstring{new\_projectile()}{new\_projectile()}}
+{\footnotesize\ttfamily game.\+Game.\+new\+\_\+projectile (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Fonction qui gère le lancement de projectiles. 
+
+\Hypertarget{classgame_1_1_game_a8624d5ce35b2a400cfa2c50b84bd3546}\label{classgame_1_1_game_a8624d5ce35b2a400cfa2c50b84bd3546} 
+\index{game.Game@{game.Game}!on\_close@{on\_close}}
+\index{on\_close@{on\_close}!game.Game@{game.Game}}
+\doxysubsubsection{\texorpdfstring{on\_close()}{on\_close()}}
+{\footnotesize\ttfamily game.\+Game.\+on\+\_\+close (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Fonction qui gère la fermeture de la fenêtre. 
+
+\Hypertarget{classgame_1_1_game_af3354d7e40e5601e9f44a8bde75f036c}\label{classgame_1_1_game_af3354d7e40e5601e9f44a8bde75f036c} 
+\index{game.Game@{game.Game}!on\_resize@{on\_resize}}
+\index{on\_resize@{on\_resize}!game.Game@{game.Game}}
+\doxysubsubsection{\texorpdfstring{on\_resize()}{on\_resize()}}
+{\footnotesize\ttfamily game.\+Game.\+on\+\_\+resize (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{width,  }\item[{}]{height }\end{DoxyParamCaption})}
+
+
+
+Fonction qui gère le redimensionnement de la fenêtre. 
+
+\Hypertarget{classgame_1_1_game_aa0136525f2a99f57503990ad3286a231}\label{classgame_1_1_game_aa0136525f2a99f57503990ad3286a231} 
+\index{game.Game@{game.Game}!remove\_entity@{remove\_entity}}
+\index{remove\_entity@{remove\_entity}!game.Game@{game.Game}}
+\doxysubsubsection{\texorpdfstring{remove\_entity()}{remove\_entity()}}
+{\footnotesize\ttfamily game.\+Game.\+remove\+\_\+entity (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{object }\end{DoxyParamCaption})}
+
+
+
+Fonction qui supprime un objet de la liste d\textquotesingle{}entités. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em object} & Entité à supprimer \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classgame_1_1_game_a7626ed62e7bdebc7ab553119187c0be1}\label{classgame_1_1_game_a7626ed62e7bdebc7ab553119187c0be1} 
+\index{game.Game@{game.Game}!reset@{reset}}
+\index{reset@{reset}!game.Game@{game.Game}}
+\doxysubsubsection{\texorpdfstring{reset()}{reset()}}
+{\footnotesize\ttfamily game.\+Game.\+reset (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Fonction qui réinitialise le jeu une fois la partie terminée après avoir cliqué sur le bouton "{}\+Rejouer"{}. 
+
+\Hypertarget{classgame_1_1_game_a8090301290a0e2c225360b3fef43a20c}\label{classgame_1_1_game_a8090301290a0e2c225360b3fef43a20c} 
+\index{game.Game@{game.Game}!run@{run}}
+\index{run@{run}!game.Game@{game.Game}}
+\doxysubsubsection{\texorpdfstring{run()}{run()}}
+{\footnotesize\ttfamily game.\+Game.\+run (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Fonction qui lance la boucle de jeu. 
+
+\Hypertarget{classgame_1_1_game_a21e159d75a7ff75ae079f8f3c73ccba6}\label{classgame_1_1_game_a21e159d75a7ff75ae079f8f3c73ccba6} 
+\index{game.Game@{game.Game}!update@{update}}
+\index{update@{update}!game.Game@{game.Game}}
+\doxysubsubsection{\texorpdfstring{update()}{update()}}
+{\footnotesize\ttfamily game.\+Game.\+update (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{\texorpdfstring{$\ast$}{*}}]{other }\end{DoxyParamCaption})}
+
+
+
+Fonction qui met à jour les entités et l\textquotesingle{}affichage. 
+
+\Hypertarget{classgame_1_1_game_a6827381eb6e683f3a0834ec8d13b9a85}\label{classgame_1_1_game_a6827381eb6e683f3a0834ec8d13b9a85} 
+\index{game.Game@{game.Game}!update\_speed@{update\_speed}}
+\index{update\_speed@{update\_speed}!game.Game@{game.Game}}
+\doxysubsubsection{\texorpdfstring{update\_speed()}{update\_speed()}}
+{\footnotesize\ttfamily game.\+Game.\+update\+\_\+speed (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Fonction qui met à jour la vitesse du joueur en fonction des touches du clavier. 
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classgame_1_1_game_a74039e585108832e4220ec928881a959}\label{classgame_1_1_game_a74039e585108832e4220ec928881a959} 
+\index{game.Game@{game.Game}!\_each@{\_each}}
+\index{\_each@{\_each}!game.Game@{game.Game}}
+\doxysubsubsection{\texorpdfstring{\_each}{\_each}}
+{\footnotesize\ttfamily game.\+Game.\+\_\+each\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{classgame_1_1_game_af7f517754784ce02c48a6cf237fc4b66}\label{classgame_1_1_game_af7f517754784ce02c48a6cf237fc4b66} 
+\index{game.Game@{game.Game}!\_on\_collide@{\_on\_collide}}
+\index{\_on\_collide@{\_on\_collide}!game.Game@{game.Game}}
+\doxysubsubsection{\texorpdfstring{\_on\_collide}{\_on\_collide}}
+{\footnotesize\ttfamily game.\+Game.\+\_\+on\+\_\+collide\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{classgame_1_1_game_aabf8a8a4d63c6479be1a491bbf4421d1}\label{classgame_1_1_game_aabf8a8a4d63c6479be1a491bbf4421d1} 
+\index{game.Game@{game.Game}!\_on\_draw@{\_on\_draw}}
+\index{\_on\_draw@{\_on\_draw}!game.Game@{game.Game}}
+\doxysubsubsection{\texorpdfstring{\_on\_draw}{\_on\_draw}}
+{\footnotesize\ttfamily game.\+Game.\+\_\+on\+\_\+draw\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{classgame_1_1_game_a076a3e2cdc435d31403171bef1749623}\label{classgame_1_1_game_a076a3e2cdc435d31403171bef1749623} 
+\index{game.Game@{game.Game}!asteroids@{asteroids}}
+\index{asteroids@{asteroids}!game.Game@{game.Game}}
+\doxysubsubsection{\texorpdfstring{asteroids}{asteroids}}
+{\footnotesize\ttfamily game.\+Game.\+asteroids}
+
+
+
+Liste d\textquotesingle{}astéroïdes. 
+
+\Hypertarget{classgame_1_1_game_a06f9807458345ea3a138e68e67a6b17b}\label{classgame_1_1_game_a06f9807458345ea3a138e68e67a6b17b} 
+\index{game.Game@{game.Game}!batch@{batch}}
+\index{batch@{batch}!game.Game@{game.Game}}
+\doxysubsubsection{\texorpdfstring{batch}{batch}}
+{\footnotesize\ttfamily game.\+Game.\+batch}
+
+
+
+Batch d\textquotesingle{}objets. 
+
+\Hypertarget{classgame_1_1_game_a97494c644972764b729d559c08e3494f}\label{classgame_1_1_game_a97494c644972764b729d559c08e3494f} 
+\index{game.Game@{game.Game}!camera@{camera}}
+\index{camera@{camera}!game.Game@{game.Game}}
+\doxysubsubsection{\texorpdfstring{camera}{camera}}
+{\footnotesize\ttfamily game.\+Game.\+camera}
+
+
+
+Caméra. 
+
+\Hypertarget{classgame_1_1_game_a60ce974ab7777b2a93964e6b6c548c8b}\label{classgame_1_1_game_a60ce974ab7777b2a93964e6b6c548c8b} 
+\index{game.Game@{game.Game}!death\_menu\_batch@{death\_menu\_batch}}
+\index{death\_menu\_batch@{death\_menu\_batch}!game.Game@{game.Game}}
+\doxysubsubsection{\texorpdfstring{death\_menu\_batch}{death\_menu\_batch}}
+{\footnotesize\ttfamily game.\+Game.\+death\+\_\+menu\+\_\+batch}
+
+\Hypertarget{classgame_1_1_game_a4ef43be23aaf135fa4605aa9de6cf922}\label{classgame_1_1_game_a4ef43be23aaf135fa4605aa9de6cf922} 
+\index{game.Game@{game.Game}!enemies@{enemies}}
+\index{enemies@{enemies}!game.Game@{game.Game}}
+\doxysubsubsection{\texorpdfstring{enemies}{enemies}}
+{\footnotesize\ttfamily game.\+Game.\+enemies}
+
+
+
+Liste d\textquotesingle{}ennemis. 
+
+\Hypertarget{classgame_1_1_game_aa05d69a6aee91cb3954f73d2453cbb6a}\label{classgame_1_1_game_aa05d69a6aee91cb3954f73d2453cbb6a} 
+\index{game.Game@{game.Game}!entities@{entities}}
+\index{entities@{entities}!game.Game@{game.Game}}
+\doxysubsubsection{\texorpdfstring{entities}{entities}}
+{\footnotesize\ttfamily game.\+Game.\+entities}
+
+
+
+Liste d\textquotesingle{}entités. 
+
+\Hypertarget{classgame_1_1_game_aea36514ec75a36489572d1e38a9cfedf}\label{classgame_1_1_game_aea36514ec75a36489572d1e38a9cfedf} 
+\index{game.Game@{game.Game}!final\_player\_pos@{final\_player\_pos}}
+\index{final\_player\_pos@{final\_player\_pos}!game.Game@{game.Game}}
+\doxysubsubsection{\texorpdfstring{final\_player\_pos}{final\_player\_pos}}
+{\footnotesize\ttfamily game.\+Game.\+final\+\_\+player\+\_\+pos}
+
+\Hypertarget{classgame_1_1_game_a9d98aa82a913dc840e15050e609e5460}\label{classgame_1_1_game_a9d98aa82a913dc840e15050e609e5460} 
+\index{game.Game@{game.Game}!game\_ended@{game\_ended}}
+\index{game\_ended@{game\_ended}!game.Game@{game.Game}}
+\doxysubsubsection{\texorpdfstring{game\_ended}{game\_ended}}
+{\footnotesize\ttfamily game.\+Game.\+game\+\_\+ended}
+
+\Hypertarget{classgame_1_1_game_a90b008bb2ec0f31f1a2aad8c4453e3ae}\label{classgame_1_1_game_a90b008bb2ec0f31f1a2aad8c4453e3ae} 
+\index{game.Game@{game.Game}!keys@{keys}}
+\index{keys@{keys}!game.Game@{game.Game}}
+\doxysubsubsection{\texorpdfstring{keys}{keys}}
+{\footnotesize\ttfamily game.\+Game.\+keys}
+
+
+
+Gestion des touches du clavier. 
+
+\Hypertarget{classgame_1_1_game_aa74058cd901e99867879c88b98d7c178}\label{classgame_1_1_game_aa74058cd901e99867879c88b98d7c178} 
+\index{game.Game@{game.Game}!map\_size@{map\_size}}
+\index{map\_size@{map\_size}!game.Game@{game.Game}}
+\doxysubsubsection{\texorpdfstring{map\_size}{map\_size}}
+{\footnotesize\ttfamily game.\+Game.\+map\+\_\+size}
+
+
+
+Taille de la carte. 
+
+\Hypertarget{classgame_1_1_game_a7a66f5f572433af967ed0d5d7ae29cbd}\label{classgame_1_1_game_a7a66f5f572433af967ed0d5d7ae29cbd} 
+\index{game.Game@{game.Game}!mouse\_x@{mouse\_x}}
+\index{mouse\_x@{mouse\_x}!game.Game@{game.Game}}
+\doxysubsubsection{\texorpdfstring{mouse\_x}{mouse\_x}}
+{\footnotesize\ttfamily game.\+Game.\+mouse\+\_\+x}
+
+\Hypertarget{classgame_1_1_game_af584b7d13bd8ab518134aef8ee3d8a2a}\label{classgame_1_1_game_af584b7d13bd8ab518134aef8ee3d8a2a} 
+\index{game.Game@{game.Game}!mouse\_y@{mouse\_y}}
+\index{mouse\_y@{mouse\_y}!game.Game@{game.Game}}
+\doxysubsubsection{\texorpdfstring{mouse\_y}{mouse\_y}}
+{\footnotesize\ttfamily game.\+Game.\+mouse\+\_\+y}
+
+\Hypertarget{classgame_1_1_game_aaccfe3b72a9241846b8329919638fccb}\label{classgame_1_1_game_aaccfe3b72a9241846b8329919638fccb} 
+\index{game.Game@{game.Game}!mousebuttons@{mousebuttons}}
+\index{mousebuttons@{mousebuttons}!game.Game@{game.Game}}
+\doxysubsubsection{\texorpdfstring{mousebuttons}{mousebuttons}}
+{\footnotesize\ttfamily game.\+Game.\+mousebuttons}
+
+\Hypertarget{classgame_1_1_game_aca93ab5f8f23ef2071e987dd5658c2ae}\label{classgame_1_1_game_aca93ab5f8f23ef2071e987dd5658c2ae} 
+\index{game.Game@{game.Game}!old\_time@{old\_time}}
+\index{old\_time@{old\_time}!game.Game@{game.Game}}
+\doxysubsubsection{\texorpdfstring{old\_time}{old\_time}}
+{\footnotesize\ttfamily game.\+Game.\+old\+\_\+time}
+
+\Hypertarget{classgame_1_1_game_a7959dcaf853251950c9415b225db2939}\label{classgame_1_1_game_a7959dcaf853251950c9415b225db2939} 
+\index{game.Game@{game.Game}!player@{player}}
+\index{player@{player}!game.Game@{game.Game}}
+\doxysubsubsection{\texorpdfstring{player}{player}}
+{\footnotesize\ttfamily game.\+Game.\+player}
+
+
+
+Joueur. 
+
+\Hypertarget{classgame_1_1_game_a2821f2eabb6f63f552b6f947451b5a7b}\label{classgame_1_1_game_a2821f2eabb6f63f552b6f947451b5a7b} 
+\index{game.Game@{game.Game}!player\_dead@{player\_dead}}
+\index{player\_dead@{player\_dead}!game.Game@{game.Game}}
+\doxysubsubsection{\texorpdfstring{player\_dead}{player\_dead}}
+{\footnotesize\ttfamily game.\+Game.\+player\+\_\+dead}
+
+\Hypertarget{classgame_1_1_game_acb6fc7454e2f0e5276a1e07802fa3c70}\label{classgame_1_1_game_acb6fc7454e2f0e5276a1e07802fa3c70} 
+\index{game.Game@{game.Game}!profiling@{profiling}}
+\index{profiling@{profiling}!game.Game@{game.Game}}
+\doxysubsubsection{\texorpdfstring{profiling}{profiling}}
+{\footnotesize\ttfamily game.\+Game.\+profiling}
+
+\Hypertarget{classgame_1_1_game_a9fc3de11ce2917dc19d326e1bb1bec48}\label{classgame_1_1_game_a9fc3de11ce2917dc19d326e1bb1bec48} 
+\index{game.Game@{game.Game}!score@{score}}
+\index{score@{score}!game.Game@{game.Game}}
+\doxysubsubsection{\texorpdfstring{score}{score}}
+{\footnotesize\ttfamily game.\+Game.\+score}
+
+
+
+Score. 
+
+\Hypertarget{classgame_1_1_game_a974263bff5af08076d8aac844f7786ab}\label{classgame_1_1_game_a974263bff5af08076d8aac844f7786ab} 
+\index{game.Game@{game.Game}!score\_steps@{score\_steps}}
+\index{score\_steps@{score\_steps}!game.Game@{game.Game}}
+\doxysubsubsection{\texorpdfstring{score\_steps}{score\_steps}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily list game.\+Game.\+score\+\_\+steps = \mbox{[}2000, 10000, 50000\mbox{]}\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classgame_1_1_game_add5fa217d5a507d6e3abc2d37c9fb0dc}\label{classgame_1_1_game_add5fa217d5a507d6e3abc2d37c9fb0dc} 
+\index{game.Game@{game.Game}!score\_steps@{score\_steps}}
+\index{score\_steps@{score\_steps}!game.Game@{game.Game}}
+\doxysubsubsection{\texorpdfstring{score\_steps}{score\_steps}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily game.\+Game.\+score\+\_\+steps}
+
+\Hypertarget{classgame_1_1_game_ae1b6c68a07c3967b91fc1e2b66236ea4}\label{classgame_1_1_game_ae1b6c68a07c3967b91fc1e2b66236ea4} 
+\index{game.Game@{game.Game}!step@{step}}
+\index{step@{step}!game.Game@{game.Game}}
+\doxysubsubsection{\texorpdfstring{step}{step}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily int game.\+Game.\+step = 0\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classgame_1_1_game_a242a1baf6d8a31375a12baeedcfbd883}\label{classgame_1_1_game_a242a1baf6d8a31375a12baeedcfbd883} 
+\index{game.Game@{game.Game}!step@{step}}
+\index{step@{step}!game.Game@{game.Game}}
+\doxysubsubsection{\texorpdfstring{step}{step}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily game.\+Game.\+step}
+
+\Hypertarget{classgame_1_1_game_ae0028a774ce5049cb9a7b6ba5fa9c39a}\label{classgame_1_1_game_ae0028a774ce5049cb9a7b6ba5fa9c39a} 
+\index{game.Game@{game.Game}!tick@{tick}}
+\index{tick@{tick}!game.Game@{game.Game}}
+\doxysubsubsection{\texorpdfstring{tick}{tick}}
+{\footnotesize\ttfamily game.\+Game.\+tick}
+
+\Hypertarget{classgame_1_1_game_ad71d000d0b9af4b3cdaf7ea609c05a17}\label{classgame_1_1_game_ad71d000d0b9af4b3cdaf7ea609c05a17} 
+\index{game.Game@{game.Game}!tick\_time@{tick\_time}}
+\index{tick\_time@{tick\_time}!game.Game@{game.Game}}
+\doxysubsubsection{\texorpdfstring{tick\_time}{tick\_time}}
+{\footnotesize\ttfamily game.\+Game.\+tick\+\_\+time}
+
+\Hypertarget{classgame_1_1_game_ad9b96207db08c0c2a3919203359912eb}\label{classgame_1_1_game_ad9b96207db08c0c2a3919203359912eb} 
+\index{game.Game@{game.Game}!ticks@{ticks}}
+\index{ticks@{ticks}!game.Game@{game.Game}}
+\doxysubsubsection{\texorpdfstring{ticks}{ticks}}
+{\footnotesize\ttfamily int game.\+Game.\+ticks = 0\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classgame_1_1_game_ae4389240f195b45e81ce3e73257c1ef3}\label{classgame_1_1_game_ae4389240f195b45e81ce3e73257c1ef3} 
+\index{game.Game@{game.Game}!time@{time}}
+\index{time@{time}!game.Game@{game.Game}}
+\doxysubsubsection{\texorpdfstring{time}{time}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily int game.\+Game.\+time = 0\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classgame_1_1_game_a6c9a941234c79983edd2d99dd63bc89d}\label{classgame_1_1_game_a6c9a941234c79983edd2d99dd63bc89d} 
+\index{game.Game@{game.Game}!time@{time}}
+\index{time@{time}!game.Game@{game.Game}}
+\doxysubsubsection{\texorpdfstring{time}{time}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily game.\+Game.\+time}
+
+\Hypertarget{classgame_1_1_game_a418def7d7a7c92e81f2ef23bc2c4f351}\label{classgame_1_1_game_a418def7d7a7c92e81f2ef23bc2c4f351} 
+\index{game.Game@{game.Game}!win\_size@{win\_size}}
+\index{win\_size@{win\_size}!game.Game@{game.Game}}
+\doxysubsubsection{\texorpdfstring{win\_size}{win\_size}}
+{\footnotesize\ttfamily game.\+Game.\+win\+\_\+size}
+
+\Hypertarget{classgame_1_1_game_a0ac2283a7e3ec0e1929573c9300c0fab}\label{classgame_1_1_game_a0ac2283a7e3ec0e1929573c9300c0fab} 
+\index{game.Game@{game.Game}!window@{window}}
+\index{window@{window}!game.Game@{game.Game}}
+\doxysubsubsection{\texorpdfstring{window}{window}}
+{\footnotesize\ttfamily game.\+Game.\+window}
+
+
+
+Fenêtre de jeu. 
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{game_8py}{game.\+py}}\end{DoxyCompactItemize}

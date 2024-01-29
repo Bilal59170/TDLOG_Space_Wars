@@ -1,4 +1,4 @@
-# TDLOG_Space_Wars
+# TDLOG_pied.io
 
 **Caractéristique du jeu**
 
@@ -17,6 +17,7 @@ En fonction de l’avancement du projet, on pourra être amenés à explorer que
 
 
 
+**Utilisation de la documentation doxygen**
 
-
+Dans ce projet, afin de mieux communiquer et d'avoir une vue globale sur les objets que l'on manipule, nous avons intégré une documentation Doxygen.
 

@@ -1,0 +1,114 @@
+\doxysection{game\+\_\+engine.\+collisions Namespace Reference}
+\hypertarget{namespacegame__engine_1_1collisions}{}\label{namespacegame__engine_1_1collisions}\index{game\_engine.collisions@{game\_engine.collisions}}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespacegame__engine_1_1collisions_a0d0b14a11e2155819ef378a7c33d0eaa}{line\+Line\+Crossing}} (np.\+ndarray line\+Start1, np.\+ndarray line\+End1, np.\+ndarray line\+Start2, np.\+ndarray line\+End2)
+\item 
+\mbox{\hyperlink{namespacegame__engine_1_1collisions_af169e4a98276b3fbf96461726a837213}{line\+Circle\+Crossing}} (np.\+ndarray line\+Start, np.\+ndarray line\+End, np.\+ndarray circle\+Center, float circle\+Radius)
+\item 
+\mbox{\hyperlink{namespacegame__engine_1_1collisions_aaf12ccf346746dac61d2fb5c74bf13f9}{polygon\+Circle\+Crossing}} (np.\+ndarray polygon\+Vertices, np.\+ndarray circle\+Center, float circle\+Radius)
+\item 
+\mbox{\hyperlink{namespacegame__engine_1_1collisions_a3f4e534e445e926609d4cd2b11401b88}{polygon\+Polygon\+Crossing}} (np.\+ndarray polygon\+Vertices1, np.\+ndarray polygon\+Vertices2)
+\item 
+bool \mbox{\hyperlink{namespacegame__engine_1_1collisions_a161e8eda48b906f9842e0ea33ead8c44}{polygon\+Polygon\+Crossing\+Optimized}} (np.\+ndarray polygon\+Vertices1, np.\+ndarray polygon\+Vertices2)
+\item 
+\mbox{\hyperlink{namespacegame__engine_1_1collisions_a2427dab94fc7cb34505ef626a5acf4c5}{polygon\+Polygon\+Crossing\+Vectorized}} (np.\+ndarray polygon\+Vertices1, np.\+ndarray polygon\+Vertices2)
+\item 
+\mbox{\hyperlink{namespacegame__engine_1_1collisions_a3392fc17f55dbdfbbb87071ea7e3bb99}{is\+\_\+point\+\_\+in\+\_\+polygon}} (point, polygon)
+\item 
+\mbox{\hyperlink{namespacegame__engine_1_1collisions_ac77f9c1b1e2e0e56e66d3dd007c67812}{circle\+Circle\+Collision}} (np.\+ndarray circle\+Center1, float circle\+Radius1, np.\+ndarray circle\+Center2, float circle\+Radius2)
+\item 
+\mbox{\hyperlink{namespacegame__engine_1_1collisions_a83fd6f1dc44f68c9faa604455e60d172}{does\+\_\+polygons\+\_\+collide}} (polygon\+Vertices1, polygon\+Vertices2)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+x \mbox{\hyperlink{namespacegame__engine_1_1collisions_a9e60142b2faeef80f5ba41fcf43759dc}{njit}} = lambda x
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}Gestion des collisions => - Collisions ligne - ligne
+                          - Collisions ligne - cercle
+                          - Collisions polygone - cercle
+                          - Collisions cercle - cercle
+                          - Collisions polygone - polygone\end{DoxyVerb}
+ 
+
+\doxysubsection{Function Documentation}
+\Hypertarget{namespacegame__engine_1_1collisions_ac77f9c1b1e2e0e56e66d3dd007c67812}\label{namespacegame__engine_1_1collisions_ac77f9c1b1e2e0e56e66d3dd007c67812} 
+\index{game\_engine.collisions@{game\_engine.collisions}!circleCircleCollision@{circleCircleCollision}}
+\index{circleCircleCollision@{circleCircleCollision}!game\_engine.collisions@{game\_engine.collisions}}
+\doxysubsubsection{\texorpdfstring{circleCircleCollision()}{circleCircleCollision()}}
+{\footnotesize\ttfamily game\+\_\+engine.\+collisions.\+circle\+Circle\+Collision (\begin{DoxyParamCaption}\item[{np.\+ndarray}]{circle\+Center1,  }\item[{float}]{circle\+Radius1,  }\item[{np.\+ndarray}]{circle\+Center2,  }\item[{float}]{circle\+Radius2 }\end{DoxyParamCaption})}
+
+\Hypertarget{namespacegame__engine_1_1collisions_a83fd6f1dc44f68c9faa604455e60d172}\label{namespacegame__engine_1_1collisions_a83fd6f1dc44f68c9faa604455e60d172} 
+\index{game\_engine.collisions@{game\_engine.collisions}!does\_polygons\_collide@{does\_polygons\_collide}}
+\index{does\_polygons\_collide@{does\_polygons\_collide}!game\_engine.collisions@{game\_engine.collisions}}
+\doxysubsubsection{\texorpdfstring{does\_polygons\_collide()}{does\_polygons\_collide()}}
+{\footnotesize\ttfamily game\+\_\+engine.\+collisions.\+does\+\_\+polygons\+\_\+collide (\begin{DoxyParamCaption}\item[{}]{polygon\+Vertices1,  }\item[{}]{polygon\+Vertices2 }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Fonction qui teste si deux polygones se superposent
+\end{DoxyVerb}
+ \Hypertarget{namespacegame__engine_1_1collisions_a3392fc17f55dbdfbbb87071ea7e3bb99}\label{namespacegame__engine_1_1collisions_a3392fc17f55dbdfbbb87071ea7e3bb99} 
+\index{game\_engine.collisions@{game\_engine.collisions}!is\_point\_in\_polygon@{is\_point\_in\_polygon}}
+\index{is\_point\_in\_polygon@{is\_point\_in\_polygon}!game\_engine.collisions@{game\_engine.collisions}}
+\doxysubsubsection{\texorpdfstring{is\_point\_in\_polygon()}{is\_point\_in\_polygon()}}
+{\footnotesize\ttfamily game\+\_\+engine.\+collisions.\+is\+\_\+point\+\_\+in\+\_\+polygon (\begin{DoxyParamCaption}\item[{}]{point,  }\item[{}]{polygon }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Fonction qui teste si un point est dans un polygone
+\end{DoxyVerb}
+ \Hypertarget{namespacegame__engine_1_1collisions_af169e4a98276b3fbf96461726a837213}\label{namespacegame__engine_1_1collisions_af169e4a98276b3fbf96461726a837213} 
+\index{game\_engine.collisions@{game\_engine.collisions}!lineCircleCrossing@{lineCircleCrossing}}
+\index{lineCircleCrossing@{lineCircleCrossing}!game\_engine.collisions@{game\_engine.collisions}}
+\doxysubsubsection{\texorpdfstring{lineCircleCrossing()}{lineCircleCrossing()}}
+{\footnotesize\ttfamily game\+\_\+engine.\+collisions.\+line\+Circle\+Crossing (\begin{DoxyParamCaption}\item[{np.\+ndarray}]{line\+Start,  }\item[{np.\+ndarray}]{line\+End,  }\item[{np.\+ndarray}]{circle\+Center,  }\item[{float}]{circle\+Radius }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Fonction qui teste si une droite et un cercle se croisent
+\end{DoxyVerb}
+ \Hypertarget{namespacegame__engine_1_1collisions_a0d0b14a11e2155819ef378a7c33d0eaa}\label{namespacegame__engine_1_1collisions_a0d0b14a11e2155819ef378a7c33d0eaa} 
+\index{game\_engine.collisions@{game\_engine.collisions}!lineLineCrossing@{lineLineCrossing}}
+\index{lineLineCrossing@{lineLineCrossing}!game\_engine.collisions@{game\_engine.collisions}}
+\doxysubsubsection{\texorpdfstring{lineLineCrossing()}{lineLineCrossing()}}
+{\footnotesize\ttfamily game\+\_\+engine.\+collisions.\+line\+Line\+Crossing (\begin{DoxyParamCaption}\item[{np.\+ndarray}]{line\+Start1,  }\item[{np.\+ndarray}]{line\+End1,  }\item[{np.\+ndarray}]{line\+Start2,  }\item[{np.\+ndarray}]{line\+End2 }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Fonction qui teste si deux droites se croisent
+\end{DoxyVerb}
+ \Hypertarget{namespacegame__engine_1_1collisions_aaf12ccf346746dac61d2fb5c74bf13f9}\label{namespacegame__engine_1_1collisions_aaf12ccf346746dac61d2fb5c74bf13f9} 
+\index{game\_engine.collisions@{game\_engine.collisions}!polygonCircleCrossing@{polygonCircleCrossing}}
+\index{polygonCircleCrossing@{polygonCircleCrossing}!game\_engine.collisions@{game\_engine.collisions}}
+\doxysubsubsection{\texorpdfstring{polygonCircleCrossing()}{polygonCircleCrossing()}}
+{\footnotesize\ttfamily game\+\_\+engine.\+collisions.\+polygon\+Circle\+Crossing (\begin{DoxyParamCaption}\item[{np.\+ndarray}]{polygon\+Vertices,  }\item[{np.\+ndarray}]{circle\+Center,  }\item[{float}]{circle\+Radius }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Fonction qui teste si un polygone et un cercle se croisent
+\end{DoxyVerb}
+ \Hypertarget{namespacegame__engine_1_1collisions_a3f4e534e445e926609d4cd2b11401b88}\label{namespacegame__engine_1_1collisions_a3f4e534e445e926609d4cd2b11401b88} 
+\index{game\_engine.collisions@{game\_engine.collisions}!polygonPolygonCrossing@{polygonPolygonCrossing}}
+\index{polygonPolygonCrossing@{polygonPolygonCrossing}!game\_engine.collisions@{game\_engine.collisions}}
+\doxysubsubsection{\texorpdfstring{polygonPolygonCrossing()}{polygonPolygonCrossing()}}
+{\footnotesize\ttfamily game\+\_\+engine.\+collisions.\+polygon\+Polygon\+Crossing (\begin{DoxyParamCaption}\item[{np.\+ndarray}]{polygon\+Vertices1,  }\item[{np.\+ndarray}]{polygon\+Vertices2 }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Fonction qui teste si deux polygones se croisent
+\end{DoxyVerb}
+ \Hypertarget{namespacegame__engine_1_1collisions_a161e8eda48b906f9842e0ea33ead8c44}\label{namespacegame__engine_1_1collisions_a161e8eda48b906f9842e0ea33ead8c44} 
+\index{game\_engine.collisions@{game\_engine.collisions}!polygonPolygonCrossingOptimized@{polygonPolygonCrossingOptimized}}
+\index{polygonPolygonCrossingOptimized@{polygonPolygonCrossingOptimized}!game\_engine.collisions@{game\_engine.collisions}}
+\doxysubsubsection{\texorpdfstring{polygonPolygonCrossingOptimized()}{polygonPolygonCrossingOptimized()}}
+{\footnotesize\ttfamily  bool game\+\_\+engine.\+collisions.\+polygon\+Polygon\+Crossing\+Optimized (\begin{DoxyParamCaption}\item[{np.\+ndarray}]{polygon\+Vertices1,  }\item[{np.\+ndarray}]{polygon\+Vertices2 }\end{DoxyParamCaption})}
+
+\Hypertarget{namespacegame__engine_1_1collisions_a2427dab94fc7cb34505ef626a5acf4c5}\label{namespacegame__engine_1_1collisions_a2427dab94fc7cb34505ef626a5acf4c5} 
+\index{game\_engine.collisions@{game\_engine.collisions}!polygonPolygonCrossingVectorized@{polygonPolygonCrossingVectorized}}
+\index{polygonPolygonCrossingVectorized@{polygonPolygonCrossingVectorized}!game\_engine.collisions@{game\_engine.collisions}}
+\doxysubsubsection{\texorpdfstring{polygonPolygonCrossingVectorized()}{polygonPolygonCrossingVectorized()}}
+{\footnotesize\ttfamily game\+\_\+engine.\+collisions.\+polygon\+Polygon\+Crossing\+Vectorized (\begin{DoxyParamCaption}\item[{np.\+ndarray}]{polygon\+Vertices1,  }\item[{np.\+ndarray}]{polygon\+Vertices2 }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Variable Documentation}
+\Hypertarget{namespacegame__engine_1_1collisions_a9e60142b2faeef80f5ba41fcf43759dc}\label{namespacegame__engine_1_1collisions_a9e60142b2faeef80f5ba41fcf43759dc} 
+\index{game\_engine.collisions@{game\_engine.collisions}!njit@{njit}}
+\index{njit@{njit}!game\_engine.collisions@{game\_engine.collisions}}
+\doxysubsubsection{\texorpdfstring{njit}{njit}}
+{\footnotesize\ttfamily x game\+\_\+engine.\+collisions.\+njit = lambda x}
+

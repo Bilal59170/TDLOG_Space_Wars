@@ -1,0 +1,120 @@
+\doxysection{spatial\+Partitioning.\+Grid\+Spatial\+Partitioning Class Reference}
+\hypertarget{classspatial_partitioning_1_1_grid_spatial_partitioning}{}\label{classspatial_partitioning_1_1_grid_spatial_partitioning}\index{spatialPartitioning.GridSpatialPartitioning@{spatialPartitioning.GridSpatialPartitioning}}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classspatial_partitioning_1_1_grid_spatial_partitioning_a21b05b0e47c002b89fd4bec09e58e0a5}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, \mbox{\hyperlink{classspatial_partitioning_1_1_grid_spatial_partitioning_ae9e1740f23a63f90ac74dc7b03b2bc30}{grid\+\_\+size}})
+\item 
+\mbox{\hyperlink{classspatial_partitioning_1_1_grid_spatial_partitioning_a2c5fec6ce545ebe8369ce337c7ece2d6}{add}} (self, entity)
+\item 
+\mbox{\hyperlink{classspatial_partitioning_1_1_grid_spatial_partitioning_afb90719bdb5227f1452ba40d68097336}{get\+\_\+grid\+\_\+coords}} (self, x, y)
+\item 
+\mbox{\hyperlink{classspatial_partitioning_1_1_grid_spatial_partitioning_a8f5f79fd787ae9bc887a723234eb6298}{get\+\_\+entities\+\_\+in\+\_\+cell}} (self, x, y)
+\item 
+\mbox{\hyperlink{classspatial_partitioning_1_1_grid_spatial_partitioning_acffd5dc3904247531b781d09e3658fef}{get\+\_\+entities\+\_\+in\+\_\+cell\+\_\+and\+\_\+neighbours}} (self, x, y)
+\item 
+\mbox{\hyperlink{classspatial_partitioning_1_1_grid_spatial_partitioning_ad616a45e13cec1f47843924cdce167c6}{get\+\_\+entities\+\_\+near\+\_\+entity}} (self, entity)
+\item 
+\mbox{\hyperlink{classspatial_partitioning_1_1_grid_spatial_partitioning_ad469f2a247039453508bb3138ffc9d3f}{get\+\_\+entities\+\_\+near\+\_\+point}} (self, x, y)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classspatial_partitioning_1_1_grid_spatial_partitioning_ae9e1740f23a63f90ac74dc7b03b2bc30}{grid\+\_\+size}}
+\item 
+\mbox{\hyperlink{classspatial_partitioning_1_1_grid_spatial_partitioning_afedbe6fa78e122cff004c9a08eed7eff}{grid}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}Classe qui permet le partitionnement spatial des entités du jeu dans un maillage éparse (sparse grid)
+On utilise une table de hachage pour stocker les entités dans des cellules de la grille
+
+Fonctionnement : 
+- On initialise la grille avec une taille de cellule donnée
+- On ajoute les entités dans la grille
+- On peut récupérer les entités qui sont dans une cellule donnée
+- On peut récupérer les entités qui sont dans une cellule donnée et qui sont proches d'une entité donnée
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classspatial_partitioning_1_1_grid_spatial_partitioning_a21b05b0e47c002b89fd4bec09e58e0a5}\label{classspatial_partitioning_1_1_grid_spatial_partitioning_a21b05b0e47c002b89fd4bec09e58e0a5} 
+\index{spatialPartitioning.GridSpatialPartitioning@{spatialPartitioning.GridSpatialPartitioning}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!spatialPartitioning.GridSpatialPartitioning@{spatialPartitioning.GridSpatialPartitioning}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily spatial\+Partitioning.\+Grid\+Spatial\+Partitioning.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{grid\+\_\+size }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}grid_size : taille d'une cellule de la grille
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classspatial_partitioning_1_1_grid_spatial_partitioning_a2c5fec6ce545ebe8369ce337c7ece2d6}\label{classspatial_partitioning_1_1_grid_spatial_partitioning_a2c5fec6ce545ebe8369ce337c7ece2d6} 
+\index{spatialPartitioning.GridSpatialPartitioning@{spatialPartitioning.GridSpatialPartitioning}!add@{add}}
+\index{add@{add}!spatialPartitioning.GridSpatialPartitioning@{spatialPartitioning.GridSpatialPartitioning}}
+\doxysubsubsection{\texorpdfstring{add()}{add()}}
+{\footnotesize\ttfamily spatial\+Partitioning.\+Grid\+Spatial\+Partitioning.\+add (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{entity }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Ajoute une entité dans la grille
+\end{DoxyVerb}
+ \Hypertarget{classspatial_partitioning_1_1_grid_spatial_partitioning_a8f5f79fd787ae9bc887a723234eb6298}\label{classspatial_partitioning_1_1_grid_spatial_partitioning_a8f5f79fd787ae9bc887a723234eb6298} 
+\index{spatialPartitioning.GridSpatialPartitioning@{spatialPartitioning.GridSpatialPartitioning}!get\_entities\_in\_cell@{get\_entities\_in\_cell}}
+\index{get\_entities\_in\_cell@{get\_entities\_in\_cell}!spatialPartitioning.GridSpatialPartitioning@{spatialPartitioning.GridSpatialPartitioning}}
+\doxysubsubsection{\texorpdfstring{get\_entities\_in\_cell()}{get\_entities\_in\_cell()}}
+{\footnotesize\ttfamily spatial\+Partitioning.\+Grid\+Spatial\+Partitioning.\+get\+\_\+entities\+\_\+in\+\_\+cell (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{x,  }\item[{}]{y }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Renvoie les entités qui sont dans la cellule (x, y)
+\end{DoxyVerb}
+ \Hypertarget{classspatial_partitioning_1_1_grid_spatial_partitioning_acffd5dc3904247531b781d09e3658fef}\label{classspatial_partitioning_1_1_grid_spatial_partitioning_acffd5dc3904247531b781d09e3658fef} 
+\index{spatialPartitioning.GridSpatialPartitioning@{spatialPartitioning.GridSpatialPartitioning}!get\_entities\_in\_cell\_and\_neighbours@{get\_entities\_in\_cell\_and\_neighbours}}
+\index{get\_entities\_in\_cell\_and\_neighbours@{get\_entities\_in\_cell\_and\_neighbours}!spatialPartitioning.GridSpatialPartitioning@{spatialPartitioning.GridSpatialPartitioning}}
+\doxysubsubsection{\texorpdfstring{get\_entities\_in\_cell\_and\_neighbours()}{get\_entities\_in\_cell\_and\_neighbours()}}
+{\footnotesize\ttfamily spatial\+Partitioning.\+Grid\+Spatial\+Partitioning.\+get\+\_\+entities\+\_\+in\+\_\+cell\+\_\+and\+\_\+neighbours (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{x,  }\item[{}]{y }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Renvoie les entités qui sont dans la cellule (x, y) et dans les cellules voisines
+\end{DoxyVerb}
+ \Hypertarget{classspatial_partitioning_1_1_grid_spatial_partitioning_ad616a45e13cec1f47843924cdce167c6}\label{classspatial_partitioning_1_1_grid_spatial_partitioning_ad616a45e13cec1f47843924cdce167c6} 
+\index{spatialPartitioning.GridSpatialPartitioning@{spatialPartitioning.GridSpatialPartitioning}!get\_entities\_near\_entity@{get\_entities\_near\_entity}}
+\index{get\_entities\_near\_entity@{get\_entities\_near\_entity}!spatialPartitioning.GridSpatialPartitioning@{spatialPartitioning.GridSpatialPartitioning}}
+\doxysubsubsection{\texorpdfstring{get\_entities\_near\_entity()}{get\_entities\_near\_entity()}}
+{\footnotesize\ttfamily spatial\+Partitioning.\+Grid\+Spatial\+Partitioning.\+get\+\_\+entities\+\_\+near\+\_\+entity (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{entity }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Renvoie les entités qui sont dans la cellule de l'entité et dans les cellules voisines
+\end{DoxyVerb}
+ \Hypertarget{classspatial_partitioning_1_1_grid_spatial_partitioning_ad469f2a247039453508bb3138ffc9d3f}\label{classspatial_partitioning_1_1_grid_spatial_partitioning_ad469f2a247039453508bb3138ffc9d3f} 
+\index{spatialPartitioning.GridSpatialPartitioning@{spatialPartitioning.GridSpatialPartitioning}!get\_entities\_near\_point@{get\_entities\_near\_point}}
+\index{get\_entities\_near\_point@{get\_entities\_near\_point}!spatialPartitioning.GridSpatialPartitioning@{spatialPartitioning.GridSpatialPartitioning}}
+\doxysubsubsection{\texorpdfstring{get\_entities\_near\_point()}{get\_entities\_near\_point()}}
+{\footnotesize\ttfamily spatial\+Partitioning.\+Grid\+Spatial\+Partitioning.\+get\+\_\+entities\+\_\+near\+\_\+point (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{x,  }\item[{}]{y }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Renvoie les entités qui sont dans la cellule du point et dans les cellules voisines
+\end{DoxyVerb}
+ \Hypertarget{classspatial_partitioning_1_1_grid_spatial_partitioning_afb90719bdb5227f1452ba40d68097336}\label{classspatial_partitioning_1_1_grid_spatial_partitioning_afb90719bdb5227f1452ba40d68097336} 
+\index{spatialPartitioning.GridSpatialPartitioning@{spatialPartitioning.GridSpatialPartitioning}!get\_grid\_coords@{get\_grid\_coords}}
+\index{get\_grid\_coords@{get\_grid\_coords}!spatialPartitioning.GridSpatialPartitioning@{spatialPartitioning.GridSpatialPartitioning}}
+\doxysubsubsection{\texorpdfstring{get\_grid\_coords()}{get\_grid\_coords()}}
+{\footnotesize\ttfamily spatial\+Partitioning.\+Grid\+Spatial\+Partitioning.\+get\+\_\+grid\+\_\+coords (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{x,  }\item[{}]{y }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Renvoie les coordonnées de la cellule dans laquelle se trouve le point (x, y)
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classspatial_partitioning_1_1_grid_spatial_partitioning_afedbe6fa78e122cff004c9a08eed7eff}\label{classspatial_partitioning_1_1_grid_spatial_partitioning_afedbe6fa78e122cff004c9a08eed7eff} 
+\index{spatialPartitioning.GridSpatialPartitioning@{spatialPartitioning.GridSpatialPartitioning}!grid@{grid}}
+\index{grid@{grid}!spatialPartitioning.GridSpatialPartitioning@{spatialPartitioning.GridSpatialPartitioning}}
+\doxysubsubsection{\texorpdfstring{grid}{grid}}
+{\footnotesize\ttfamily spatial\+Partitioning.\+Grid\+Spatial\+Partitioning.\+grid}
+
+\Hypertarget{classspatial_partitioning_1_1_grid_spatial_partitioning_ae9e1740f23a63f90ac74dc7b03b2bc30}\label{classspatial_partitioning_1_1_grid_spatial_partitioning_ae9e1740f23a63f90ac74dc7b03b2bc30} 
+\index{spatialPartitioning.GridSpatialPartitioning@{spatialPartitioning.GridSpatialPartitioning}!grid\_size@{grid\_size}}
+\index{grid\_size@{grid\_size}!spatialPartitioning.GridSpatialPartitioning@{spatialPartitioning.GridSpatialPartitioning}}
+\doxysubsubsection{\texorpdfstring{grid\_size}{grid\_size}}
+{\footnotesize\ttfamily spatial\+Partitioning.\+Grid\+Spatial\+Partitioning.\+grid\+\_\+size}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+drafts/\+Collisions\+Handling/\mbox{\hyperlink{spatial_partitioning_8py}{spatial\+Partitioning.\+py}}\end{DoxyCompactItemize}

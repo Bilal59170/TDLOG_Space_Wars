@@ -1,0 +1,13 @@
+<map id="asteroids.Asteroid" name="asteroids.Asteroid">
+<area shape="rect" id="Node000001" title=" " alt="" coords="169,81,295,108"/>
+<area shape="rect" id="Node000003" href="$classasteroids_1_1_big_asteroid.html" title=" " alt="" coords="357,5,502,32"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="272,72,342,42,376,30,378,35,344,46,274,77"/>
+<area shape="rect" id="Node000004" href="$classasteroids_1_1_master_asteroid.html" title=" " alt="" coords="346,56,512,83"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="309,82,345,77,346,83,310,87"/>
+<area shape="rect" id="Node000005" href="$classasteroids_1_1_medium_asteroid.html" title=" " alt="" coords="343,107,515,133"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="310,102,343,106,342,112,309,107"/>
+<area shape="rect" id="Node000006" href="$classasteroids_1_1_small_asteroid.html" title=" " alt="" coords="350,157,509,184"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="274,112,344,143,378,154,376,159,342,148,272,117"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,81,121,108"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="136,92,168,92,168,97,136,97"/>
+</map>

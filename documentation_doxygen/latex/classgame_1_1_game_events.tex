@@ -1,0 +1,179 @@
+\doxysection{game.\+Game\+Events Class Reference}
+\hypertarget{classgame_1_1_game_events}{}\label{classgame_1_1_game_events}\index{game.GameEvents@{game.GameEvents}}
+
+
+Cette classe gère les événements du jeu.  
+
+
+
+
+Inheritance diagram for game.\+Game\+Events\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=179pt]{classgame_1_1_game_events__inherit__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classgame_1_1_game_events_a91ab95ed8260ed8752fec3a2df504883}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self)
+\item 
+\mbox{\hyperlink{classgame_1_1_game_events_a636b0cde8d2af5e6cb9dd36053500c60}{on\+\_\+draw}} (self, function)
+\begin{DoxyCompactList}\small\item\em Fonction qui permet d\textquotesingle{}ajouter une fonction à appeler à chaque affichage. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classgame_1_1_game_events_a4aaa283a69d85726293f693bad778244}{handle\+\_\+events}} (self)
+\begin{DoxyCompactList}\small\item\em Fonction qui gère les événements, appelée à chaque tick, dans la boucle de jeu. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classgame_1_1_game_events_a4ea7563626cd4994d3d5444a9274f931}{number}}
+\item 
+\mbox{\hyperlink{classgame_1_1_game_events_a32a4c8d9371bf33d04934a339b0fc0b5}{object1}}
+\item 
+\mbox{\hyperlink{classgame_1_1_game_events_a783c061e10eb57d3c521491fdd63b236}{object2}}
+\item 
+\mbox{\hyperlink{classgame_1_1_game_events_a1dad4e80c9d48b4f667e9ae33c111a5d}{sym}}
+\item 
+\mbox{\hyperlink{classgame_1_1_game_events_aa550ff04d50e0364778b7bfa69ab0fe6}{each}}
+\item 
+\mbox{\hyperlink{classgame_1_1_game_events_a3ac6bb0d944b534002493e5f56a6627a}{on\+\_\+collide}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classgame_1_1_game_events_a77da63593e9c6c086968e3b9fb544004}{\+\_\+each}}
+\begin{DoxyCompactList}\small\item\em Liste des fonctions à appeler à chaque x ticks \mbox{[}(n\+\_\+ticks, function)\mbox{]}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classgame_1_1_game_events_a1eb0194cded7f171118736b2eb607882}{\+\_\+on\+\_\+collide}}
+\begin{DoxyCompactList}\small\item\em Liste des fonctions à appeler à chaque collision \mbox{[}(object1, object2, sym, function)\mbox{]}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classgame_1_1_game_events_a113c01cfb6469f3dfb9b3bd881f7f03b}{\+\_\+on\+\_\+draw}}
+\begin{DoxyCompactList}\small\item\em Liste des fonctions à appeler à chaque affichage. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Cette classe gère les événements du jeu. 
+
+Notamment \+:
+\begin{DoxyItemize}
+\item Les fonctions à appeler à chaque x ticks =\texorpdfstring{$>$}{>} fonction each
+\item Les fonctions à appeler à chaque collision =\texorpdfstring{$>$}{>} fonction on\+\_\+collide
+\end{DoxyItemize}
+
+Exemple d\textquotesingle{}utilisation \+: game = Game() @game.each(10) def my\+\_\+function(game)\+: print("{}\+Appelée tous les 10 ticks"{}) @game.on\+\_\+collide(\+Asteroid, Ship) def my\+\_\+function(game, asteroid, ship)\+: print("{}\+Appelée à chaque collision entre un astéroïde et un vaisseau"{})
+
+@game.on\+\_\+collide(Asteroid, Asteroid, sym=True) def my\+\_\+function(game, asteroid1, asteroid2)\+: print("{}\+Appelée à chaque collision entre deux astéroïdes"{})
+
+Comportement (pas passer trop de temps dessus)\+: @game.each(10) =\texorpdfstring{$>$}{>} Initialise une classe each qui prend en paramètre le nombre de ticks entre chaque appel de la fonction def ... =\texorpdfstring{$>$}{>} Appelle la fonction {\bfseries{call}} de l\textquotesingle{}instance de classe each avec en paramètre la fonction à appeler 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classgame_1_1_game_events_a91ab95ed8260ed8752fec3a2df504883}\label{classgame_1_1_game_events_a91ab95ed8260ed8752fec3a2df504883} 
+\index{game.GameEvents@{game.GameEvents}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!game.GameEvents@{game.GameEvents}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily game.\+Game\+Events.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Reimplemented in \mbox{\hyperlink{classgame_1_1_game_a971890cfb124e987a739ea53a48413b6}{game.\+Game}}.
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classgame_1_1_game_events_a4aaa283a69d85726293f693bad778244}\label{classgame_1_1_game_events_a4aaa283a69d85726293f693bad778244} 
+\index{game.GameEvents@{game.GameEvents}!handle\_events@{handle\_events}}
+\index{handle\_events@{handle\_events}!game.GameEvents@{game.GameEvents}}
+\doxysubsubsection{\texorpdfstring{handle\_events()}{handle\_events()}}
+{\footnotesize\ttfamily game.\+Game\+Events.\+handle\+\_\+events (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Fonction qui gère les événements, appelée à chaque tick, dans la boucle de jeu. 
+
+\Hypertarget{classgame_1_1_game_events_a636b0cde8d2af5e6cb9dd36053500c60}\label{classgame_1_1_game_events_a636b0cde8d2af5e6cb9dd36053500c60} 
+\index{game.GameEvents@{game.GameEvents}!on\_draw@{on\_draw}}
+\index{on\_draw@{on\_draw}!game.GameEvents@{game.GameEvents}}
+\doxysubsubsection{\texorpdfstring{on\_draw()}{on\_draw()}}
+{\footnotesize\ttfamily game.\+Game\+Events.\+on\+\_\+draw (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{function }\end{DoxyParamCaption})}
+
+
+
+Fonction qui permet d\textquotesingle{}ajouter une fonction à appeler à chaque affichage. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em function} & Fonction à appeler \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classgame_1_1_game_events_a77da63593e9c6c086968e3b9fb544004}\label{classgame_1_1_game_events_a77da63593e9c6c086968e3b9fb544004} 
+\index{game.GameEvents@{game.GameEvents}!\_each@{\_each}}
+\index{\_each@{\_each}!game.GameEvents@{game.GameEvents}}
+\doxysubsubsection{\texorpdfstring{\_each}{\_each}}
+{\footnotesize\ttfamily game.\+Game\+Events.\+\_\+each\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Liste des fonctions à appeler à chaque x ticks \mbox{[}(n\+\_\+ticks, function)\mbox{]}. 
+
+\Hypertarget{classgame_1_1_game_events_a1eb0194cded7f171118736b2eb607882}\label{classgame_1_1_game_events_a1eb0194cded7f171118736b2eb607882} 
+\index{game.GameEvents@{game.GameEvents}!\_on\_collide@{\_on\_collide}}
+\index{\_on\_collide@{\_on\_collide}!game.GameEvents@{game.GameEvents}}
+\doxysubsubsection{\texorpdfstring{\_on\_collide}{\_on\_collide}}
+{\footnotesize\ttfamily game.\+Game\+Events.\+\_\+on\+\_\+collide\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Liste des fonctions à appeler à chaque collision \mbox{[}(object1, object2, sym, function)\mbox{]}. 
+
+\Hypertarget{classgame_1_1_game_events_a113c01cfb6469f3dfb9b3bd881f7f03b}\label{classgame_1_1_game_events_a113c01cfb6469f3dfb9b3bd881f7f03b} 
+\index{game.GameEvents@{game.GameEvents}!\_on\_draw@{\_on\_draw}}
+\index{\_on\_draw@{\_on\_draw}!game.GameEvents@{game.GameEvents}}
+\doxysubsubsection{\texorpdfstring{\_on\_draw}{\_on\_draw}}
+{\footnotesize\ttfamily game.\+Game\+Events.\+\_\+on\+\_\+draw\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Liste des fonctions à appeler à chaque affichage. 
+
+\Hypertarget{classgame_1_1_game_events_aa550ff04d50e0364778b7bfa69ab0fe6}\label{classgame_1_1_game_events_aa550ff04d50e0364778b7bfa69ab0fe6} 
+\index{game.GameEvents@{game.GameEvents}!each@{each}}
+\index{each@{each}!game.GameEvents@{game.GameEvents}}
+\doxysubsubsection{\texorpdfstring{each}{each}}
+{\footnotesize\ttfamily game.\+Game\+Events.\+each}
+
+\Hypertarget{classgame_1_1_game_events_a4ea7563626cd4994d3d5444a9274f931}\label{classgame_1_1_game_events_a4ea7563626cd4994d3d5444a9274f931} 
+\index{game.GameEvents@{game.GameEvents}!number@{number}}
+\index{number@{number}!game.GameEvents@{game.GameEvents}}
+\doxysubsubsection{\texorpdfstring{number}{number}}
+{\footnotesize\ttfamily game.\+Game\+Events.\+number}
+
+\Hypertarget{classgame_1_1_game_events_a32a4c8d9371bf33d04934a339b0fc0b5}\label{classgame_1_1_game_events_a32a4c8d9371bf33d04934a339b0fc0b5} 
+\index{game.GameEvents@{game.GameEvents}!object1@{object1}}
+\index{object1@{object1}!game.GameEvents@{game.GameEvents}}
+\doxysubsubsection{\texorpdfstring{object1}{object1}}
+{\footnotesize\ttfamily game.\+Game\+Events.\+object1}
+
+\Hypertarget{classgame_1_1_game_events_a783c061e10eb57d3c521491fdd63b236}\label{classgame_1_1_game_events_a783c061e10eb57d3c521491fdd63b236} 
+\index{game.GameEvents@{game.GameEvents}!object2@{object2}}
+\index{object2@{object2}!game.GameEvents@{game.GameEvents}}
+\doxysubsubsection{\texorpdfstring{object2}{object2}}
+{\footnotesize\ttfamily game.\+Game\+Events.\+object2}
+
+\Hypertarget{classgame_1_1_game_events_a3ac6bb0d944b534002493e5f56a6627a}\label{classgame_1_1_game_events_a3ac6bb0d944b534002493e5f56a6627a} 
+\index{game.GameEvents@{game.GameEvents}!on\_collide@{on\_collide}}
+\index{on\_collide@{on\_collide}!game.GameEvents@{game.GameEvents}}
+\doxysubsubsection{\texorpdfstring{on\_collide}{on\_collide}}
+{\footnotesize\ttfamily game.\+Game\+Events.\+on\+\_\+collide}
+
+\Hypertarget{classgame_1_1_game_events_a1dad4e80c9d48b4f667e9ae33c111a5d}\label{classgame_1_1_game_events_a1dad4e80c9d48b4f667e9ae33c111a5d} 
+\index{game.GameEvents@{game.GameEvents}!sym@{sym}}
+\index{sym@{sym}!game.GameEvents@{game.GameEvents}}
+\doxysubsubsection{\texorpdfstring{sym}{sym}}
+{\footnotesize\ttfamily game.\+Game\+Events.\+sym}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{game_8py}{game.\+py}}\end{DoxyCompactItemize}

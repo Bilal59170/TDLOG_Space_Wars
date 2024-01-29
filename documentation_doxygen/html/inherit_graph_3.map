@@ -1,0 +1,21 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="Node000000" href="$classgame__engine_1_1entity_1_1_entity.html" title=" " alt="" coords="12,107,185,133"/>
+<area shape="rect" id="Node000001" href="$classgame__engine_1_1sprites_1_1_circle.html" title=" " alt="" coords="247,107,425,133"/>
+<area shape="poly" id="edge1_Node000000_Node000001" title=" " alt="" coords="200,117,246,117,246,123,200,123"/>
+<area shape="rect" id="Node000005" href="$classgame__engine_1_1sprites_1_1_image.html" title=" " alt="" coords="246,56,426,83"/>
+<area shape="poly" id="edge4_Node000000_Node000005" title=" " alt="" coords="178,100,269,81,271,86,179,106"/>
+<area shape="rect" id="Node000008" href="$classgame__engine_1_1sprites_1_1_label.html" title=" " alt="" coords="248,157,424,184"/>
+<area shape="poly" id="edge5_Node000000_Node000008" title=" " alt="" coords="179,134,271,154,269,159,178,140"/>
+<area shape="rect" id="Node000006" href="$classgame__engine_1_1sprites_1_1_polygon.html" title=" " alt="" coords="240,5,432,32"/>
+<area shape="poly" id="edge6_Node000000_Node000006" title=" " alt="" coords="179,98,190,92,205,80,213,68,223,55,238,42,263,30,265,35,241,46,227,58,218,71,209,84,193,97,181,103"/>
+<area shape="rect" id="Node000002" href="$classprojectiles_1_1_projectile.html" title=" " alt="" coords="480,107,618,133"/>
+<area shape="poly" id="edge2_Node000001_Node000002" title=" " alt="" coords="440,117,480,117,480,123,440,123"/>
+<area shape="rect" id="Node000003" href="$classprojectiles_1_1_small_bullet.html" title=" " alt="" coords="666,107,817,133"/>
+<area shape="poly" id="edge3_Node000002_Node000003" title=" " alt="" coords="634,117,666,117,666,123,634,123"/>
+<area shape="rect" id="Node000007" href="$classenemies_1_1_enemy.html" title=" " alt="" coords="492,5,607,32"/>
+<area shape="poly" id="edge7_Node000006_Node000007" title=" " alt="" coords="447,16,491,16,491,21,447,21"/>
+<area shape="rect" id="Node000004" href="$classgame__engine_1_1sprites_1_1_sprites.html" title=" " alt="" coords="5,56,192,83"/>
+<area shape="poly" id="edge8_Node000004_Node000001" title=" " alt="" coords="179,84,271,103,269,109,178,89"/>
+<area shape="poly" id="edge9_Node000004_Node000005" title=" " alt="" coords="207,67,245,67,245,72,207,72"/>
+<area shape="poly" id="edge10_Node000004_Node000006" title=" " alt="" coords="178,50,269,30,271,35,179,55"/>
+</map>

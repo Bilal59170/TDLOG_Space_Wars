@@ -1,0 +1,1 @@
+Pour ouvrir la documentation : Ouvrir le fichier index.html dans le dossier "html"

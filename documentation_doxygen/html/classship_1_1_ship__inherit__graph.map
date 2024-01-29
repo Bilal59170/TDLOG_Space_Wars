@@ -1,0 +1,7 @@
+<map id="ship.Ship" name="ship.Ship">
+<area shape="rect" id="Node000001" title=" " alt="" coords="110,80,185,107"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,5,117,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="89,40,134,78,131,82,85,44"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="140,5,329,32"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="210,44,164,82,161,78,206,40"/>
+</map>

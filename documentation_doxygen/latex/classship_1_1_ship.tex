@@ -1,0 +1,378 @@
+\doxysection{ship.\+Ship Class Reference}
+\hypertarget{classship_1_1_ship}{}\label{classship_1_1_ship}\index{ship.Ship@{ship.Ship}}
+
+
+Inheritance diagram for ship.\+Ship\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=322pt]{classship_1_1_ship__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for ship.\+Ship\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=322pt]{classship_1_1_ship__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classship_1_1_ship_a26230ef982c3de1a423ef0586465f42d}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, pos, game\+\_\+state, step=0)
+\item 
+\mbox{\hyperlink{classship_1_1_ship_a6224901cab057d6e6c4abbe73fe060bd}{HP}} (self)
+\item 
+\mbox{\hyperlink{classship_1_1_ship_a11c57f62ab6f512fcb9869a6680d7538}{HP}} (self, HP)
+\item 
+\mbox{\hyperlink{classship_1_1_ship_aa0db2b62ba5caaeb387981abe3a6852a}{die}} (self)
+\item 
+\mbox{\hyperlink{classship_1_1_ship_a3b1aba25eb32f8bc1b3328078a7d3242}{get\+\_\+angle\+\_\+mouse}} (self)
+\item 
+\mbox{\hyperlink{classship_1_1_ship_af4cd90bb77a92129052c98d32db422ea}{border}} (self)
+\item 
+\mbox{\hyperlink{classship_1_1_ship_ac8a0803cf8628ccd8669b68d09abcfee}{throw\+\_\+projectile}} (self)
+\item 
+\mbox{\hyperlink{classship_1_1_ship_ab7550db9c1475666a69f71ceae426002}{draw}} (self, batch=None)
+\item 
+\mbox{\hyperlink{classship_1_1_ship_ada6b8b95fca8bb55b87a9aff2a12b9df}{tick}} (self)
+\item 
+\mbox{\hyperlink{classship_1_1_ship_a973cd3d07ad5ffe6cdb2fb249e6cd4db}{update\+\_\+step}} (self)
+\item 
+\mbox{\hyperlink{classship_1_1_ship_a4a7a5b6a0faed30fdf9b4a35ebc60775}{shoot}} (self)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classship_1_1_ship_afc2bf37af03386d057e7085da053f9d1}{size\+\_\+step}}
+\item 
+\mbox{\hyperlink{classship_1_1_ship_af8ced6d38063e52781d7b56ffc459334}{acceleration}}
+\item 
+\mbox{\hyperlink{classship_1_1_ship_ae6f36d7f50ba0ef70cfdf7dfa9ee1b10}{max\+\_\+speed}}
+\item 
+\mbox{\hyperlink{classship_1_1_ship_a56018652b1aa27faaee48526493bca12}{bullet\+\_\+speed}}
+\item 
+\mbox{\hyperlink{classship_1_1_ship_ada451bb53d3c44ba56c8dcc80acc8ded}{max\+\_\+\+HP}}
+\item 
+\mbox{\hyperlink{classship_1_1_ship_aa4a5da595273a8e51953def0a94b10a7}{xp}}
+\item 
+\mbox{\hyperlink{classship_1_1_ship_adcb3df231d52df8cbafd8a05f9f016b9}{level}}
+\item 
+\mbox{\hyperlink{classship_1_1_ship_a44f7bfe9f37d77ee70eb5fc2726590e7}{reload}}
+\item 
+\mbox{\hyperlink{classship_1_1_ship_a804aac614f246427b03a3a78dd60a797}{state}}
+\item 
+\mbox{\hyperlink{classship_1_1_ship_a113dfe778ec5b05b32086de743578f36}{is\+\_\+invicible}}
+\item 
+\mbox{\hyperlink{classship_1_1_ship_a5c2b1c8bad2c4365c1913584509e5dd5}{timer\+\_\+invicible}}
+\item 
+\mbox{\hyperlink{classship_1_1_ship_aab0329d4f3b18d635c36a57bf5db615c}{theta}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+tuple \mbox{\hyperlink{classship_1_1_ship_a69cd64970a55ea2c97d7b0f0a79e150a}{ship\+\_\+color}} = (255,0,0)
+\item 
+tuple \mbox{\hyperlink{classship_1_1_ship_a917ade94fb04403103782115bd772446}{bar\+\_\+grey}} = (128, 128, 128)
+\item 
+tuple \mbox{\hyperlink{classship_1_1_ship_a6f47eaf399646fa6d9e10ad4ecd6d6e5}{bar\+\_\+color}} = \mbox{\hyperlink{classship_1_1_ship_a69cd64970a55ea2c97d7b0f0a79e150a}{ship\+\_\+color}}
+\item 
+int \mbox{\hyperlink{classship_1_1_ship_a5609c908cea9635b802a8117ccd95879}{bar\+Width\+Factor}} = .\+8
+\item 
+int \mbox{\hyperlink{classship_1_1_ship_ab748488980dc8476a1164f3243119ef0}{bar\+Height}} = 16
+\item 
+int \mbox{\hyperlink{classship_1_1_ship_a2a9ab89acbd2152b63f7a8d649674c71}{bar\+Spacing}} = 2
+\item 
+int \mbox{\hyperlink{classship_1_1_ship_a62d767b632f616e4b0c35402660aefa5}{barwidth}} = 50
+\item 
+bool \mbox{\hyperlink{classship_1_1_ship_a5d5c73fd7ed5652c8f2e0d60cfa0ee33}{is\+\_\+invicible}} = False
+\item 
+int \mbox{\hyperlink{classship_1_1_ship_ad3f6418f5f8ff53d8d307bd10eb28fe8}{timer\+\_\+invicible}} = 0
+\item 
+int \mbox{\hyperlink{classship_1_1_ship_a21919ca06e74ae4f111e6cd0e0b7cd5c}{invicible\+\_\+time}} = 1
+\item 
+int \mbox{\hyperlink{classship_1_1_ship_a073db043cb804622ad52191ac1abad06}{size}} = 10
+\item 
+list \mbox{\hyperlink{classship_1_1_ship_a4c28fa41da9471a9e76df63c1ef94a86}{reload\+\_\+speeds}} = \mbox{[}4, 4, 3, 3\mbox{]}
+\item 
+list \mbox{\hyperlink{classship_1_1_ship_aff55e5558dae045773516c7b2e8496bb}{size\+\_\+levels}} = \mbox{[}6, 8, 10, 12\mbox{]}
+\item 
+list \mbox{\hyperlink{classship_1_1_ship_a04fc35a3fbcb84e256feb20b88e6a310}{damage\+\_\+levels}} = \mbox{[}5, 10, 15, 20\mbox{]}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classship_1_1_ship_ae1a53ca864e0159b7fa9eca364b02706}{\+\_\+vertices}}
+\item 
+\mbox{\hyperlink{classship_1_1_ship_a46d13742c8eb582741cd36baa620149c}{\+\_\+\+HP}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb} Classe du vaisseau principal \end{DoxyVerb}
+
+
+\begin{DoxyVerb}size = 10 # Taille du vaisseau
+acceleration = config.SHIP_ACCELERATION
+max_speed = config.SHIP_MAX_SPEED
+bullet_speed = 20
+max_HP = 1000
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classship_1_1_ship_a26230ef982c3de1a423ef0586465f42d}\label{classship_1_1_ship_a26230ef982c3de1a423ef0586465f42d} 
+\index{ship.Ship@{ship.Ship}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!ship.Ship@{ship.Ship}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily ship.\+Ship.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{pos,  }\item[{}]{game\+\_\+state,  }\item[{}]{step = {\ttfamily 0} }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classship_1_1_ship_af4cd90bb77a92129052c98d32db422ea}\label{classship_1_1_ship_af4cd90bb77a92129052c98d32db422ea} 
+\index{ship.Ship@{ship.Ship}!border@{border}}
+\index{border@{border}!ship.Ship@{ship.Ship}}
+\doxysubsubsection{\texorpdfstring{border()}{border()}}
+{\footnotesize\ttfamily ship.\+Ship.\+border (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+\Hypertarget{classship_1_1_ship_aa0db2b62ba5caaeb387981abe3a6852a}\label{classship_1_1_ship_aa0db2b62ba5caaeb387981abe3a6852a} 
+\index{ship.Ship@{ship.Ship}!die@{die}}
+\index{die@{die}!ship.Ship@{ship.Ship}}
+\doxysubsubsection{\texorpdfstring{die()}{die()}}
+{\footnotesize\ttfamily ship.\+Ship.\+die (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Fonction de mort du vaisseau. On enregistre la dernière position du vaisseau 
+puis on le supprime de l'instance de jeu. Avec la position enregistrée, on 
+met une animation sur son lieu de mort.
+\end{DoxyVerb}
+ \Hypertarget{classship_1_1_ship_ab7550db9c1475666a69f71ceae426002}\label{classship_1_1_ship_ab7550db9c1475666a69f71ceae426002} 
+\index{ship.Ship@{ship.Ship}!draw@{draw}}
+\index{draw@{draw}!ship.Ship@{ship.Ship}}
+\doxysubsubsection{\texorpdfstring{draw()}{draw()}}
+{\footnotesize\ttfamily ship.\+Ship.\+draw (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{batch = {\ttfamily None} }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Dessine l'astéroïde\end{DoxyVerb}
+ \Hypertarget{classship_1_1_ship_a3b1aba25eb32f8bc1b3328078a7d3242}\label{classship_1_1_ship_a3b1aba25eb32f8bc1b3328078a7d3242} 
+\index{ship.Ship@{ship.Ship}!get\_angle\_mouse@{get\_angle\_mouse}}
+\index{get\_angle\_mouse@{get\_angle\_mouse}!ship.Ship@{ship.Ship}}
+\doxysubsubsection{\texorpdfstring{get\_angle\_mouse()}{get\_angle\_mouse()}}
+{\footnotesize\ttfamily ship.\+Ship.\+get\+\_\+angle\+\_\+mouse (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Fonction qui donne l'angle entre la position du vaisseau et celle d'un
+point (x,y)\end{DoxyVerb}
+ \Hypertarget{classship_1_1_ship_a6224901cab057d6e6c4abbe73fe060bd}\label{classship_1_1_ship_a6224901cab057d6e6c4abbe73fe060bd} 
+\index{ship.Ship@{ship.Ship}!HP@{HP}}
+\index{HP@{HP}!ship.Ship@{ship.Ship}}
+\doxysubsubsection{\texorpdfstring{HP()}{HP()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily ship.\+Ship.\+HP (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+\Hypertarget{classship_1_1_ship_a11c57f62ab6f512fcb9869a6680d7538}\label{classship_1_1_ship_a11c57f62ab6f512fcb9869a6680d7538} 
+\index{ship.Ship@{ship.Ship}!HP@{HP}}
+\index{HP@{HP}!ship.Ship@{ship.Ship}}
+\doxysubsubsection{\texorpdfstring{HP()}{HP()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily ship.\+Ship.\+HP (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{HP }\end{DoxyParamCaption})}
+
+\Hypertarget{classship_1_1_ship_a4a7a5b6a0faed30fdf9b4a35ebc60775}\label{classship_1_1_ship_a4a7a5b6a0faed30fdf9b4a35ebc60775} 
+\index{ship.Ship@{ship.Ship}!shoot@{shoot}}
+\index{shoot@{shoot}!ship.Ship@{ship.Ship}}
+\doxysubsubsection{\texorpdfstring{shoot()}{shoot()}}
+{\footnotesize\ttfamily ship.\+Ship.\+shoot (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+\Hypertarget{classship_1_1_ship_ac8a0803cf8628ccd8669b68d09abcfee}\label{classship_1_1_ship_ac8a0803cf8628ccd8669b68d09abcfee} 
+\index{ship.Ship@{ship.Ship}!throw\_projectile@{throw\_projectile}}
+\index{throw\_projectile@{throw\_projectile}!ship.Ship@{ship.Ship}}
+\doxysubsubsection{\texorpdfstring{throw\_projectile()}{throw\_projectile()}}
+{\footnotesize\ttfamily ship.\+Ship.\+throw\+\_\+projectile (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+\Hypertarget{classship_1_1_ship_ada6b8b95fca8bb55b87a9aff2a12b9df}\label{classship_1_1_ship_ada6b8b95fca8bb55b87a9aff2a12b9df} 
+\index{ship.Ship@{ship.Ship}!tick@{tick}}
+\index{tick@{tick}!ship.Ship@{ship.Ship}}
+\doxysubsubsection{\texorpdfstring{tick()}{tick()}}
+{\footnotesize\ttfamily ship.\+Ship.\+tick (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Fonction qui met à jour la position en fonction de la vitesse\end{DoxyVerb}
+ \Hypertarget{classship_1_1_ship_a973cd3d07ad5ffe6cdb2fb249e6cd4db}\label{classship_1_1_ship_a973cd3d07ad5ffe6cdb2fb249e6cd4db} 
+\index{ship.Ship@{ship.Ship}!update\_step@{update\_step}}
+\index{update\_step@{update\_step}!ship.Ship@{ship.Ship}}
+\doxysubsubsection{\texorpdfstring{update\_step()}{update\_step()}}
+{\footnotesize\ttfamily ship.\+Ship.\+update\+\_\+step (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classship_1_1_ship_a46d13742c8eb582741cd36baa620149c}\label{classship_1_1_ship_a46d13742c8eb582741cd36baa620149c} 
+\index{ship.Ship@{ship.Ship}!\_HP@{\_HP}}
+\index{\_HP@{\_HP}!ship.Ship@{ship.Ship}}
+\doxysubsubsection{\texorpdfstring{\_HP}{\_HP}}
+{\footnotesize\ttfamily ship.\+Ship.\+\_\+\+HP\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{classship_1_1_ship_ae1a53ca864e0159b7fa9eca364b02706}\label{classship_1_1_ship_ae1a53ca864e0159b7fa9eca364b02706} 
+\index{ship.Ship@{ship.Ship}!\_vertices@{\_vertices}}
+\index{\_vertices@{\_vertices}!ship.Ship@{ship.Ship}}
+\doxysubsubsection{\texorpdfstring{\_vertices}{\_vertices}}
+{\footnotesize\ttfamily ship.\+Ship.\+\_\+vertices\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{classship_1_1_ship_af8ced6d38063e52781d7b56ffc459334}\label{classship_1_1_ship_af8ced6d38063e52781d7b56ffc459334} 
+\index{ship.Ship@{ship.Ship}!acceleration@{acceleration}}
+\index{acceleration@{acceleration}!ship.Ship@{ship.Ship}}
+\doxysubsubsection{\texorpdfstring{acceleration}{acceleration}}
+{\footnotesize\ttfamily ship.\+Ship.\+acceleration}
+
+\Hypertarget{classship_1_1_ship_a6f47eaf399646fa6d9e10ad4ecd6d6e5}\label{classship_1_1_ship_a6f47eaf399646fa6d9e10ad4ecd6d6e5} 
+\index{ship.Ship@{ship.Ship}!bar\_color@{bar\_color}}
+\index{bar\_color@{bar\_color}!ship.Ship@{ship.Ship}}
+\doxysubsubsection{\texorpdfstring{bar\_color}{bar\_color}}
+{\footnotesize\ttfamily tuple ship.\+Ship.\+bar\+\_\+color = \mbox{\hyperlink{classship_1_1_ship_a69cd64970a55ea2c97d7b0f0a79e150a}{ship\+\_\+color}}\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classship_1_1_ship_a917ade94fb04403103782115bd772446}\label{classship_1_1_ship_a917ade94fb04403103782115bd772446} 
+\index{ship.Ship@{ship.Ship}!bar\_grey@{bar\_grey}}
+\index{bar\_grey@{bar\_grey}!ship.Ship@{ship.Ship}}
+\doxysubsubsection{\texorpdfstring{bar\_grey}{bar\_grey}}
+{\footnotesize\ttfamily tuple ship.\+Ship.\+bar\+\_\+grey = (128, 128, 128)\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classship_1_1_ship_ab748488980dc8476a1164f3243119ef0}\label{classship_1_1_ship_ab748488980dc8476a1164f3243119ef0} 
+\index{ship.Ship@{ship.Ship}!barHeight@{barHeight}}
+\index{barHeight@{barHeight}!ship.Ship@{ship.Ship}}
+\doxysubsubsection{\texorpdfstring{barHeight}{barHeight}}
+{\footnotesize\ttfamily int ship.\+Ship.\+bar\+Height = 16\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classship_1_1_ship_a2a9ab89acbd2152b63f7a8d649674c71}\label{classship_1_1_ship_a2a9ab89acbd2152b63f7a8d649674c71} 
+\index{ship.Ship@{ship.Ship}!barSpacing@{barSpacing}}
+\index{barSpacing@{barSpacing}!ship.Ship@{ship.Ship}}
+\doxysubsubsection{\texorpdfstring{barSpacing}{barSpacing}}
+{\footnotesize\ttfamily int ship.\+Ship.\+bar\+Spacing = 2\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classship_1_1_ship_a62d767b632f616e4b0c35402660aefa5}\label{classship_1_1_ship_a62d767b632f616e4b0c35402660aefa5} 
+\index{ship.Ship@{ship.Ship}!barwidth@{barwidth}}
+\index{barwidth@{barwidth}!ship.Ship@{ship.Ship}}
+\doxysubsubsection{\texorpdfstring{barwidth}{barwidth}}
+{\footnotesize\ttfamily int ship.\+Ship.\+barwidth = 50\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classship_1_1_ship_a5609c908cea9635b802a8117ccd95879}\label{classship_1_1_ship_a5609c908cea9635b802a8117ccd95879} 
+\index{ship.Ship@{ship.Ship}!barWidthFactor@{barWidthFactor}}
+\index{barWidthFactor@{barWidthFactor}!ship.Ship@{ship.Ship}}
+\doxysubsubsection{\texorpdfstring{barWidthFactor}{barWidthFactor}}
+{\footnotesize\ttfamily int ship.\+Ship.\+bar\+Width\+Factor = .\+8\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classship_1_1_ship_a56018652b1aa27faaee48526493bca12}\label{classship_1_1_ship_a56018652b1aa27faaee48526493bca12} 
+\index{ship.Ship@{ship.Ship}!bullet\_speed@{bullet\_speed}}
+\index{bullet\_speed@{bullet\_speed}!ship.Ship@{ship.Ship}}
+\doxysubsubsection{\texorpdfstring{bullet\_speed}{bullet\_speed}}
+{\footnotesize\ttfamily ship.\+Ship.\+bullet\+\_\+speed}
+
+\Hypertarget{classship_1_1_ship_a04fc35a3fbcb84e256feb20b88e6a310}\label{classship_1_1_ship_a04fc35a3fbcb84e256feb20b88e6a310} 
+\index{ship.Ship@{ship.Ship}!damage\_levels@{damage\_levels}}
+\index{damage\_levels@{damage\_levels}!ship.Ship@{ship.Ship}}
+\doxysubsubsection{\texorpdfstring{damage\_levels}{damage\_levels}}
+{\footnotesize\ttfamily list ship.\+Ship.\+damage\+\_\+levels = \mbox{[}5, 10, 15, 20\mbox{]}\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classship_1_1_ship_a21919ca06e74ae4f111e6cd0e0b7cd5c}\label{classship_1_1_ship_a21919ca06e74ae4f111e6cd0e0b7cd5c} 
+\index{ship.Ship@{ship.Ship}!invicible\_time@{invicible\_time}}
+\index{invicible\_time@{invicible\_time}!ship.Ship@{ship.Ship}}
+\doxysubsubsection{\texorpdfstring{invicible\_time}{invicible\_time}}
+{\footnotesize\ttfamily int ship.\+Ship.\+invicible\+\_\+time = 1\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classship_1_1_ship_a5d5c73fd7ed5652c8f2e0d60cfa0ee33}\label{classship_1_1_ship_a5d5c73fd7ed5652c8f2e0d60cfa0ee33} 
+\index{ship.Ship@{ship.Ship}!is\_invicible@{is\_invicible}}
+\index{is\_invicible@{is\_invicible}!ship.Ship@{ship.Ship}}
+\doxysubsubsection{\texorpdfstring{is\_invicible}{is\_invicible}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily bool ship.\+Ship.\+is\+\_\+invicible = False\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classship_1_1_ship_a113dfe778ec5b05b32086de743578f36}\label{classship_1_1_ship_a113dfe778ec5b05b32086de743578f36} 
+\index{ship.Ship@{ship.Ship}!is\_invicible@{is\_invicible}}
+\index{is\_invicible@{is\_invicible}!ship.Ship@{ship.Ship}}
+\doxysubsubsection{\texorpdfstring{is\_invicible}{is\_invicible}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily ship.\+Ship.\+is\+\_\+invicible}
+
+\Hypertarget{classship_1_1_ship_adcb3df231d52df8cbafd8a05f9f016b9}\label{classship_1_1_ship_adcb3df231d52df8cbafd8a05f9f016b9} 
+\index{ship.Ship@{ship.Ship}!level@{level}}
+\index{level@{level}!ship.Ship@{ship.Ship}}
+\doxysubsubsection{\texorpdfstring{level}{level}}
+{\footnotesize\ttfamily ship.\+Ship.\+level}
+
+\Hypertarget{classship_1_1_ship_ada451bb53d3c44ba56c8dcc80acc8ded}\label{classship_1_1_ship_ada451bb53d3c44ba56c8dcc80acc8ded} 
+\index{ship.Ship@{ship.Ship}!max\_HP@{max\_HP}}
+\index{max\_HP@{max\_HP}!ship.Ship@{ship.Ship}}
+\doxysubsubsection{\texorpdfstring{max\_HP}{max\_HP}}
+{\footnotesize\ttfamily ship.\+Ship.\+max\+\_\+\+HP}
+
+\Hypertarget{classship_1_1_ship_ae6f36d7f50ba0ef70cfdf7dfa9ee1b10}\label{classship_1_1_ship_ae6f36d7f50ba0ef70cfdf7dfa9ee1b10} 
+\index{ship.Ship@{ship.Ship}!max\_speed@{max\_speed}}
+\index{max\_speed@{max\_speed}!ship.Ship@{ship.Ship}}
+\doxysubsubsection{\texorpdfstring{max\_speed}{max\_speed}}
+{\footnotesize\ttfamily ship.\+Ship.\+max\+\_\+speed}
+
+\Hypertarget{classship_1_1_ship_a44f7bfe9f37d77ee70eb5fc2726590e7}\label{classship_1_1_ship_a44f7bfe9f37d77ee70eb5fc2726590e7} 
+\index{ship.Ship@{ship.Ship}!reload@{reload}}
+\index{reload@{reload}!ship.Ship@{ship.Ship}}
+\doxysubsubsection{\texorpdfstring{reload}{reload}}
+{\footnotesize\ttfamily ship.\+Ship.\+reload}
+
+\Hypertarget{classship_1_1_ship_a4c28fa41da9471a9e76df63c1ef94a86}\label{classship_1_1_ship_a4c28fa41da9471a9e76df63c1ef94a86} 
+\index{ship.Ship@{ship.Ship}!reload\_speeds@{reload\_speeds}}
+\index{reload\_speeds@{reload\_speeds}!ship.Ship@{ship.Ship}}
+\doxysubsubsection{\texorpdfstring{reload\_speeds}{reload\_speeds}}
+{\footnotesize\ttfamily list ship.\+Ship.\+reload\+\_\+speeds = \mbox{[}4, 4, 3, 3\mbox{]}\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classship_1_1_ship_a69cd64970a55ea2c97d7b0f0a79e150a}\label{classship_1_1_ship_a69cd64970a55ea2c97d7b0f0a79e150a} 
+\index{ship.Ship@{ship.Ship}!ship\_color@{ship\_color}}
+\index{ship\_color@{ship\_color}!ship.Ship@{ship.Ship}}
+\doxysubsubsection{\texorpdfstring{ship\_color}{ship\_color}}
+{\footnotesize\ttfamily tuple ship.\+Ship.\+ship\+\_\+color = (255,0,0)\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classship_1_1_ship_a073db043cb804622ad52191ac1abad06}\label{classship_1_1_ship_a073db043cb804622ad52191ac1abad06} 
+\index{ship.Ship@{ship.Ship}!size@{size}}
+\index{size@{size}!ship.Ship@{ship.Ship}}
+\doxysubsubsection{\texorpdfstring{size}{size}}
+{\footnotesize\ttfamily int ship.\+Ship.\+size = 10\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classship_1_1_ship_aff55e5558dae045773516c7b2e8496bb}\label{classship_1_1_ship_aff55e5558dae045773516c7b2e8496bb} 
+\index{ship.Ship@{ship.Ship}!size\_levels@{size\_levels}}
+\index{size\_levels@{size\_levels}!ship.Ship@{ship.Ship}}
+\doxysubsubsection{\texorpdfstring{size\_levels}{size\_levels}}
+{\footnotesize\ttfamily list ship.\+Ship.\+size\+\_\+levels = \mbox{[}6, 8, 10, 12\mbox{]}\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classship_1_1_ship_afc2bf37af03386d057e7085da053f9d1}\label{classship_1_1_ship_afc2bf37af03386d057e7085da053f9d1} 
+\index{ship.Ship@{ship.Ship}!size\_step@{size\_step}}
+\index{size\_step@{size\_step}!ship.Ship@{ship.Ship}}
+\doxysubsubsection{\texorpdfstring{size\_step}{size\_step}}
+{\footnotesize\ttfamily ship.\+Ship.\+size\+\_\+step}
+
+\Hypertarget{classship_1_1_ship_a804aac614f246427b03a3a78dd60a797}\label{classship_1_1_ship_a804aac614f246427b03a3a78dd60a797} 
+\index{ship.Ship@{ship.Ship}!state@{state}}
+\index{state@{state}!ship.Ship@{ship.Ship}}
+\doxysubsubsection{\texorpdfstring{state}{state}}
+{\footnotesize\ttfamily ship.\+Ship.\+state}
+
+\Hypertarget{classship_1_1_ship_aab0329d4f3b18d635c36a57bf5db615c}\label{classship_1_1_ship_aab0329d4f3b18d635c36a57bf5db615c} 
+\index{ship.Ship@{ship.Ship}!theta@{theta}}
+\index{theta@{theta}!ship.Ship@{ship.Ship}}
+\doxysubsubsection{\texorpdfstring{theta}{theta}}
+{\footnotesize\ttfamily ship.\+Ship.\+theta}
+
+\Hypertarget{classship_1_1_ship_ad3f6418f5f8ff53d8d307bd10eb28fe8}\label{classship_1_1_ship_ad3f6418f5f8ff53d8d307bd10eb28fe8} 
+\index{ship.Ship@{ship.Ship}!timer\_invicible@{timer\_invicible}}
+\index{timer\_invicible@{timer\_invicible}!ship.Ship@{ship.Ship}}
+\doxysubsubsection{\texorpdfstring{timer\_invicible}{timer\_invicible}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily int ship.\+Ship.\+timer\+\_\+invicible = 0\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classship_1_1_ship_a5c2b1c8bad2c4365c1913584509e5dd5}\label{classship_1_1_ship_a5c2b1c8bad2c4365c1913584509e5dd5} 
+\index{ship.Ship@{ship.Ship}!timer\_invicible@{timer\_invicible}}
+\index{timer\_invicible@{timer\_invicible}!ship.Ship@{ship.Ship}}
+\doxysubsubsection{\texorpdfstring{timer\_invicible}{timer\_invicible}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily ship.\+Ship.\+timer\+\_\+invicible}
+
+\Hypertarget{classship_1_1_ship_aa4a5da595273a8e51953def0a94b10a7}\label{classship_1_1_ship_aa4a5da595273a8e51953def0a94b10a7} 
+\index{ship.Ship@{ship.Ship}!xp@{xp}}
+\index{xp@{xp}!ship.Ship@{ship.Ship}}
+\doxysubsubsection{\texorpdfstring{xp}{xp}}
+{\footnotesize\ttfamily ship.\+Ship.\+xp}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+game\+\_\+objects/\mbox{\hyperlink{ship_8py}{ship.\+py}}\end{DoxyCompactItemize}
