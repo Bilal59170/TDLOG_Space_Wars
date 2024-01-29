@@ -21,3 +21,8 @@ En fonction de l’avancement du projet, on pourra être amenés à explorer que
 
 Dans ce projet, afin de mieux communiquer et d'avoir une vue globale sur les objets que l'on manipule, nous avons intégré une documentation Doxygen.
 
+
+
+**Lancement du jeu**
+
+Il suffit d'executer le fichier main du projet
