@@ -47,7 +47,8 @@ class Entity:
     @property
     def screen_pos(self):
         """
-        Position à l'écran de l'entité. La carte étant torique, on doit prendre en compte les cas où l'entité est en dehors de l'écran.
+        Position à l'écran de l'entité. La carte étant torique (i.e qu'on apparaît à gauche de la map si on sort par la droite), 
+        on doit prendre en compte les cas où l'entité est en dehors de l'écran.
         """
 
         # Position de l'entité sur la carte

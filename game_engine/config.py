@@ -6,7 +6,7 @@ import numpy as np
 # ----- Constantes de jeu -----
 
 FPS = 60
-TPS = 2 * FPS
+TPS = 2 * FPS #Tick per second
 FRAME_TIME = 1 / FPS
 TICK_TIME = 1 / TPS
 
@@ -19,9 +19,8 @@ ASTEROID_FRICTION = .99
 
 SPEED_FACTOR = 1
 
-FULLSCREEN = False
+FULLSCREEN = False #tentative pour mettre le jeu en plein écran. Problèmes de caméra d'où le False
 WIN_SIZE = np.array([1280, 720])
-# WIN_SIZE = np.array([1920, 1080])
 MAP_SIZE = WIN_SIZE * 2
 BACKGROUND_COLOR = [204/255,204/255,204/255]
 

@@ -28,9 +28,8 @@ import pyglet
 
 class Projectile(Circle):
 
-    #damage = 5
+
     mass = 1
-    #size = 10
     damage_levels = [10, 20, 50, 100]
     size_levels = [6, 8, 10, 12]
 
@@ -54,6 +53,8 @@ class Projectile(Circle):
 
 
     def is_out(self, x_min, x_max, y_min, y_max):
+        """Dis si le projectile est en dehors d'une certaine zone. Permet de supprimer l'entité projectile lorsqu'elle 
+            est en dehors de la carte (contrairement aux vaisseaux, ils ne réapparaissent pas de l'autre côté de la carte)"""
         x, y = self._pos
         if x < x_min or x > x_max or y < y_min or y > y_max:
             return True

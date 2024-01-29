@@ -18,13 +18,7 @@ class Ship(sprites.Polygon, pyglet.event.EventDispatcher):
     """ Classe du vaisseau principal """
 
     
-    """
-    size = 10 # Taille du vaisseau
-    acceleration = config.SHIP_ACCELERATION
-    max_speed = config.SHIP_MAX_SPEED
-    bullet_speed = 20
-    max_HP = 1000
-    """
+
     ship_color = (255,0,0)
     
     bar_grey = (128, 128, 128)  # Gris de la barre de vie
@@ -33,22 +27,23 @@ class Ship(sprites.Polygon, pyglet.event.EventDispatcher):
     barHeight = 16              # Largeur de la barre de vie
     barSpacing = 2              # Largeur de la bordure
     barwidth = 50               # Longueur de la barre de vie
-    is_invicible = False
-    timer_invicible = 0
-    invicible_time = 1          #In seconds
-    size = 10
+    is_invicible = False        # Statut d'invincibilité. Obtenu pendant une durée invicible_time quand le joueur touche un astéroïde
+    timer_invicible = 0         # Chronometre qui mesure le temps d'invincibilité en seconde
+    invicible_time = 1          # La durée d'invincibilité, en seconde
+    size = 10                   # Taille du vaisseau: distance des trois sommets par rapport au centre
 
     reload_speeds = [4, 4, 3, 3]
     size_levels = [6, 8, 10, 12]
     damage_levels = [5, 10, 15, 20]
 
     def __init__(self, pos, game_state, step=0):
-        self.size_step = 10 # Taille du vaisseau
+        self.size_step = 10 
         self.acceleration = config.SHIP_ACCELERATION
         self.max_speed = config.SHIP_MAX_SPEED
         self.bullet_speed = 20
         self.max_HP = 2000
 
+        #3 Sommets du triangle
         V1 = np.array([0, Ship.size])
         V2 = - Ship.size * np.array([np.cos(np.pi / 6), np.sin(np.pi / 6)])
         V3 = Ship.size * np.array([np.cos(np.pi / 6), np.sin(np.pi / 6)])
@@ -79,9 +74,8 @@ class Ship(sprites.Polygon, pyglet.event.EventDispatcher):
 
     def die(self):
         """
-        Fonction de mort du vaisseau. On enregistre la dernière position du vaisseau 
-        puis on le supprime de l'instance de jeu. Avec la position enregistrée, on 
-        met une animation sur son lieu de mort.
+        Fonction de mort du vaisseau. On enregistre la dernière position du vaisseau pour le rendre immobile ensuite
+        . Avec la position enregistrée, on met une animation sur son lieu de mort (cf game).
         """
         print("MORT DU VAISSEAU")
         self.game_state.player_dead = "Dead"
@@ -99,6 +93,9 @@ class Ship(sprites.Polygon, pyglet.event.EventDispatcher):
     
     @property
     def border(self):
+        """Fonction qui sert à gérer les mouvements de la caméra. Exemple: is_border[UP] = True signifie que 
+            le vaisseau est trop haut par rapport à la carte pour être au centre de la caméra. Cf game l.480 
+            pour voir l'utilisation dans camera"""
         is_border = {'UP': True, 'RIGHT': True,'DOWN': True,'LEFT': True}
         is_border['UP'] = (self.pos[1] - config.WIN_SIZE[1]/2) <= 0
         is_border['DOWN'] = (self.pos[1] + config.WIN_SIZE[1]/2) >= config.MAP_SIZE[1]
@@ -120,7 +117,7 @@ class Ship(sprites.Polygon, pyglet.event.EventDispatcher):
         super().draw(batch=batch)
 
         if self.state == "Alive":
-
+            """Dessine la barre de vie"""
             draw_filled_bar(
                 pos = (self.screen_pos[0], self.screen_pos[1]-self.size_step-self.barHeight),
                 width = self.barwidth, 
@@ -148,6 +145,7 @@ class Ship(sprites.Polygon, pyglet.event.EventDispatcher):
 
 
     def update_step(self):
+        """Mise à jour de la vitesse du vaisseau. On met une acceleration non nulle."""
         self.level += 1
         self.size_step *= 1.5
         self.max_speed *= 1.2

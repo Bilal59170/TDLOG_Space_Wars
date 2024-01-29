@@ -12,17 +12,6 @@ from UI import draw_filled_bar
 from time import time
 
 class Enemy(Polygon):
-    """
-    size = 20
-    acceleration = 0.1
-    max_speed = 2
-    engage_radius = 200
-    caution_radius = 400
-    projectile_speed = 15
-    reload_speed = 10
-
-    fill_color = (255, 0, 0)
-    """
     edge_color = (0, 0, 0)   # Couleur du bord
     lineWidth = 5               # Taille de bord
 
@@ -31,10 +20,6 @@ class Enemy(Polygon):
     barWidthFactor = .8         # Longueur de la barre de vie (en % de la taille de l'ennemi)
     barHeight = 16              # Largeur de la barre de vie
     barSpacing = 2              # Largeur de la bordure
-    """
-    ressources = 100             # XP donnée en tuant l'ennemi
-    max_HP = 100
-    """
     max_HP_levels = [200, 500, 2000, 4000]
     ressources_levels = [100, 200, 500, 1000]
     size_levels = [20, 30, 40, 50]
@@ -47,7 +32,7 @@ class Enemy(Polygon):
     caution_radius_levels = [400, 500, 500, 450]
     fill_color_levels = [(255, 0, 0), (0, 255, 0), (0, 0, 255), (255, 255, 255)]
 
-    #def __init__(self, pos, size, acceleration, max_speed, engage_radius, caution_radius, game_state, speed=np.array([0,0])):
+
     def __init__(self, pos, game_state, speed=np.array([0,0]), level=0):
         self.reload = self.reload_speed_levels[level]
         self.level = level
@@ -92,7 +77,7 @@ class Enemy(Polygon):
 
     def die(self):
         """
-        Fonction de mort de l'astéroïde
+        Fonction de mort de l'ennemi
         """
         try:
             self.alive = False
@@ -102,7 +87,7 @@ class Enemy(Polygon):
             pass
 
     def draw(self, batch=None):
-        """Dessine l'astéroïde"""
+        """Dessine l'ennemi"""
         super().draw(batch=batch)
         
         draw_filled_bar(
@@ -129,7 +114,9 @@ class Enemy(Polygon):
         return p
     
     def close_in_and_out(self, player):
-        
+        ''' Fonction qui précise le déplacement de l'ennemi par rapport au joueur . Si l'ennemi est à une distance 
+            trop élevée (distance_player > self.engage_radius), il se rapproche du joueur. Si l'ennemi est trop proche
+            du joueur(distance_player < self.caution_radius), il s'éloigne.'''
         self.aim_at(player)
 
         t = time() - self.old_time
@@ -158,6 +145,8 @@ class Enemy(Polygon):
         self.close_in_and_out(self.game_state.player)
 
     def shoot(self, player):
+        '''Fonction de tir de l'ennemi sur le joueur: dès que l'ennemi est à une distance entre les deux rayons définis 
+            dans close_in_and_out, il tire sur le joueur.'''
         P = None
         r = np.linalg.norm(self.pos - player.pos)
         if r <= self.caution_radius and r >= self.engage_radius:

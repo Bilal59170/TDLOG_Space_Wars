@@ -81,7 +81,7 @@ class Asteroid(sprites.Polygon):
         super().draw(batch=batch)
 
         if self._HP < self.max_HP:
-            
+            """Dessine la barre de vie"""
             draw_filled_bar(
                 pos = (self.screen_pos[0], self.screen_pos[1]-self.size-self.barHeight),
                 width = self.size*2*self.barWidthFactor,
