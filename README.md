@@ -25,4 +25,4 @@ Dans ce projet, afin de mieux communiquer et d'avoir une vue globale sur les obj
 
 **Lancement du jeu**
 
-Il suffit d'executer le fichier main du projet
+Il suffit d'executer le fichier main du projet après avoir téléchargé les librairies appropriées. Ces dernières sont numpy, pyglet 1.5, matplotlib et shapely.
